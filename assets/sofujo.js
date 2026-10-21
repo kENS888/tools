@@ -3,7 +3,7 @@
 var $=function(id){return document.getElementById(id)};
 var KEY='shorui_v1',SKEY='sofujo_v1',HKEY='sofujo_hist_v1',DHKEY='shorui_hist_v1',INKEY='sofujo_in';
 var DOCN={q:'見積書',n:'納品書',i:'請求書',r:'領収書',o:'発注書'};
-var QK=['請求書','見積書','納品書','領収書','発注書','注文請書','契約書','資料'];
+var QK=['請求書','見積書','納品書','領収書','発注書','契約書','資料'];
 var MEMO=[['ご返送のお願い','お手数ですが、ご署名・ご捺印のうえ、1部をご返送くださいますようお願い申し上げます。'],
  ['返信用封筒を同封','返信用封筒を同封しておりますので、ご利用ください。'],
  ['原本の送付','原本をお送りいたしますので、お手元で保管くださいますようお願いいたします。'],
@@ -90,7 +90,7 @@ function build(){
 }
 function drawRows(){
  $('rows').innerHTML=S.rows.map(function(r,i){var uo=UNITS.every(function(u){return u[0]!==r.u});return '<div class="sfr" data-i="'+i+'"><span class="idx">'+(i+1)+'</span>'+
- '<input type="text" data-k="n" value="'+esc(r.n)+'" placeholder="書類名(例：請求書)" aria-label="書類名" list="dlDoc" autocomplete="off">'+
+ '<input type="text" data-k="n" value="'+esc(r.n)+'" placeholder="書類名" aria-label="書類名" list="dlDoc" autocomplete="off">'+
  '<input type="text" class="num" inputmode="numeric" data-k="q" value="'+esc(r.q)+'" aria-label="数量">'+
  '<select data-k="u" aria-label="単位">'+UNITS.map(function(u){return '<option value="'+u[0]+'"'+(u[0]===r.u||(uo&&u[0]==='部')?' selected':'')+'>'+u[1]+'</option>'}).join('')+'</select>'+
  '<button type="button" class="ib" data-act="del" aria-label="この書類を削除"'+(S.rows.length>1?'':' style="visibility:hidden"')+'>×</button></div>'}).join('');
@@ -140,7 +140,7 @@ function render(){
  var m=S.memo.trim();$('memoSum').textContent=m?m.replace(/\s+/g,' ').slice(0,24)+(m.length>24?'…':''):'ご返送のお願い・返信用封筒など';$('memoSum').className='ms'+(m?' on':'');
  if(m&&!render.mo){$('memoBox').open=true}render.mo=1;
  var rs=named();$('barV').textContent=rs.length?rs[0].n+(rs.length>1?' ほか'+(rs.length-1)+'点':''):'未入力';
- $('pvChip').textContent=FX()?'FAX':'郵送';
+ $('pvChip').textContent=FX()?'FAX':'郵送';var ap=faxPages(S.rows,'');$('pages').placeholder=ap?'自動：'+ap+'枚':'書類を「枚」で入れると自動';
  $('paperHost').innerHTML=docHTML();fit();
  $('meSt').textContent=ME.from?'保存済み：'+ME.from.slice(0,14):'未入力';
  recentUI();save();
@@ -165,7 +165,7 @@ function record(){if(!keep||!hasContent())return;var it={id:Date.now(),at:today(
  try{localStorage.setItem(HKEY,JSON.stringify(l.slice(0,30)))}catch(_){}histUI()}
 function histUI(){var h=hist(),to={},ps={},dn={};
  docHist().concat(h).forEach(function(x){if(x.to)to[x.to]=1});h.forEach(function(x){if(x.person)ps[x.person]=1;(x.doc.rows||[]).forEach(function(r){if(r.n)dn[r.n]=1})});
- QK.forEach(function(n){dn[n]=1});
+ QK.concat(['注文請書','注文書','見積書(控)','納品書(控)','契約書(2部)']).forEach(function(n){dn[n]=1});
  var o=function(m){return Object.keys(m).map(function(v){return '<option value="'+esc(v)+'">'}).join('')};
  $('dlTo').innerHTML=o(to);$('dlPs').innerHTML=o(ps);$('dlDoc').innerHTML=o(dn);
  $('histBtn').hidden=!h.length;$('histN').textContent=h.length?'('+h.length+'件)':'';$('hq').hidden=h.length<=6;drawHist()}
@@ -186,7 +186,7 @@ function bind(){
  $('ttl').onchange=function(){if(FX())S.ttlF=this.value;else S.ttlP=this.value;upd()};
  $('greet').onchange=function(){S.greet=this.value;upd()};
  $('wareki').onchange=function(){S.wareki=this.checked;upd()};
- $('mode').onclick=function(e){var b=e.target.closest('[data-v]');if(!b||b.dataset.v===S.mode)return;S.mode=b.dataset.v;upd();
+ $('mode').onclick=function(e){var b=e.target.closest('[data-v]');if(!b||b.dataset.v===S.mode)return;S.mode=b.dataset.v;var fr=FX()?'部':'枚',tu=FX()?'枚':'部';S.rows.forEach(function(r){if(r.u===fr)r.u=tu});drawRows();upd();
   if(FX()&&!S.tofax)setTimeout(function(){$('tofax').focus()},50)};
  $('rows').addEventListener('input',function(e){var t=e.target,k=t.dataset.k,it=t.closest('.sfr');if(!k||!it||k==='u')return;
   if(k==='q')t.value=t.value.replace(/[０-９]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-0xFEE0)}).replace(/[^0-9]/g,'');
@@ -197,7 +197,7 @@ function bind(){
  $('qk').onclick=function(e){var b=e.target.closest('[data-n]');if(!b)return;var n=b.dataset.n,i=-1;
   for(var j=0;j<S.rows.length;j++)if(!S.rows[j].n.trim()){i=j;break}
   if(n&&S.rows.some(function(r){return r.n.trim()===n})){toast(n+'はもう入っています');return}
-  if(i<0){S.rows.push({n:n,q:'1',u:'部'});i=S.rows.length-1}else S.rows[i].n=n;
+  if(i<0){S.rows.push({n:n,q:'1',u:FX()?'枚':'部'});i=S.rows.length-1}else S.rows[i].n=n;
   drawRows();upd();var ins=document.querySelectorAll('#rows input[data-k="'+(n?'q':'n')+'"]');if(!n&&ins[i])ins[i].focus()};
  $('memoBox').addEventListener('click',function(e){var b=e.target.closest('[data-m]');if(!b)return;var t=MEMO[+b.dataset.m][1];
   if(S.memo.indexOf(t)>=0){toast('もう入っています');return}S.memo=(S.memo.trim()?S.memo.replace(/\s+$/,'')+'\n':'')+t;$('memo').value=S.memo;upd()});
