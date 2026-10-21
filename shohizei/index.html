@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>消費税計算｜税込⇔税抜を10%・8%で計算、早見表つき【無料】</title>
+<link rel="canonical" href="https://shigoto-keisan.com/shohizei/">
+<meta name="description" content="税抜金額から税込金額、税込金額から税抜金額と消費税額を、10%・軽減税率8%で計算。10%と8%が混在する場合の合計、端数処理(切り捨て・四捨五入・切り上げ)にも対応。税込・税抜の早見表つき。登録不要・無料。">
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"消費税計算(税込・税抜)","url":"https://shigoto-keisan.com/shohizei/","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"isAccessibleForFree":true,"inLanguage":"ja","description":"税抜金額から税込金額を、税込金額から税抜金額と消費税額を、無料・登録不要で計算できるWebツールです。税率は10%と軽減税率8%に対応し、両方が混在する場合も税率ごとに計算して合計します。","featureList":["税抜金額から税込金額と消費税額を計算(10%は×1.1、8%は×1.08)","税込金額から税抜金額と消費税額を計算(消費税＝税込×10/110、8%は×8/108)","10%と8%が混在する場合は、税率ごとに計算して合計","端数処理(切り捨て・四捨五入・切り上げ)を選べる","計算した金額のまま請求書を作成できる","入力内容はブラウザ内だけで処理され、サーバーに送信されない"],"dateModified":"2026-10-22","publisher":{"@type":"Organization","name":"しごと計算ラボ","url":"https://shigoto-keisan.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"しごと計算ラボ","item":"https://shigoto-keisan.com/"},{"@type":"ListItem","position":2,"name":"消費税計算(税込・税抜)","item":"https://shigoto-keisan.com/shohizei/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"税込金額はどう計算する？","acceptedAnswer":{"@type":"Answer","text":"税抜金額に1.1をかけます(軽減税率8%なら1.08)。たとえば税抜10,000円なら、税込は11,000円(消費税1,000円)です。"}},{"@type":"Question","name":"税込金額から税抜金額はどう計算する？","acceptedAnswer":{"@type":"Answer","text":"税込金額を1.1で割ります(8%なら1.08)。このツールでは、税込金額×10/110(8%は×8/108)で消費税額を出して端数を処理し、税込金額から引いて税抜金額を求めています。たとえば税込11,000円なら、税抜10,000円・消費税1,000円です。"}},{"@type":"Question","name":"税込から税抜にすると、元の金額と1円ずれるのはなぜ？","acceptedAnswer":{"@type":"Answer","text":"消費税額の1円未満を処理するためです。たとえば税込1,000円の消費税は90.90…円で、切り捨てると90円、税抜は910円になります。910円に1.1をかけると1,001円となり、1円ずれます。計算の誤りではありません。"}},{"@type":"Question","name":"1円未満の端数は、切り捨て・四捨五入・切り上げのどれ？","acceptedAnswer":{"@type":"Answer","text":"法律で決まっておらず、事業者が選べます。一般には切り捨てが多く使われています。ただしインボイス(適格請求書)では、1枚の請求書につき税率ごとに1回だけ端数処理をします。品目ごとに端数処理して合計することは認められていません。"}},{"@type":"Question","name":"軽減税率8%の対象は？","acceptedAnswer":{"@type":"Answer","text":"酒類と外食を除く飲食料品と、週2回以上発行される新聞の定期購読料が対象です。テイクアウトや宅配は8%、店内での飲食やケータリングは10%です。"}},{"@type":"Question","name":"10%と8%の品目が混ざる場合は？","acceptedAnswer":{"@type":"Answer","text":"税率で「10%と8%が混在」を選び、税率ごとの合計金額を入れてください。税率ごとに消費税を計算して端数処理し、最後に合計します。"}},{"@type":"Question","name":"消費税10%の内訳は？","acceptedAnswer":{"@type":"Answer","text":"国の消費税が7.8%、地方消費税が2.2%です。軽減税率8%の場合は、国が6.24%、地方が1.76%です。"}},{"@type":"Question","name":"値札や広告は税込で表示しないといけない？","acceptedAnswer":{"@type":"Answer","text":"消費者に販売する商品・サービスの値札や広告は、税込価格の表示(総額表示)が義務です。事業者同士の取引は対象外のため、見積書や請求書は税抜表示でも構いません。"}}]}]}</script>
+<style>
+:root{--bg:#f4f6f9;--card:#fff;--fg:#14171f;--sub:#5b6474;--line:#e3e7ee;--acc:#a21caf;--acc2:#fbeafd;--neg:#c2410c;--sh:0 1px 2px rgba(16,24,40,.05),0 8px 24px rgba(16,24,40,.06)}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--card:#171b22;--fg:#e8ecf2;--sub:#9aa4b2;--line:#262c36;--acc:#f0abfc;--acc2:#35123a;--neg:#fb923c;--sh:none}}
+[hidden]{display:none!important}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.7 system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;-webkit-font-smoothing:antialiased}
+header{position:relative;overflow:hidden;background:radial-gradient(circle at 1px 1px,rgba(255,255,255,.13) 1px,transparent 0) 0 0/22px 22px,linear-gradient(135deg,#701a75,#a21caf 60%,#e879f9);color:#fff;padding:22px 16px 64px}
+header .in{position:relative;z-index:1;max-width:760px;margin:0 auto}
+header .deco{position:absolute;right:max(16px,calc(50% - 520px));top:16px;width:150px;height:140px;pointer-events:none}
+header .deco .pg{fill:rgba(255,255,255,.1);stroke:rgba(255,255,255,.35);stroke-width:1.2}
+header .deco .ln{stroke:rgba(255,255,255,.45);stroke-width:2.5;stroke-linecap:round}
+header .deco .acc{fill:none;stroke:rgba(255,255,255,.85);stroke-width:4;stroke-linecap:round}
+header .deco .dot{fill:rgba(255,255,255,.4)}
+@media (max-width:980px){header .deco{display:none}}
+.crumb{font-size:.78rem;opacity:.8}.crumb a{color:#fff;text-decoration:none}
+header h1{margin:4px 0 0;font-size:1.5rem;letter-spacing:.02em}
+header p{margin:6px 0 0;opacity:.88;font-size:.92rem}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.badges span{font-size:.75rem;background:rgba(255,255,255,.15);padding:3px 10px;border-radius:99px}
+main{position:relative;z-index:1;max-width:760px;margin:-44px auto 0;padding:0 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh);padding:20px;margin-bottom:16px}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--bg);border-radius:12px;padding:4px;margin-bottom:12px;gap:2px}
+.seg button{border:0;background:none;color:var(--sub);padding:10px 4px;border-radius:9px;font:inherit;font-size:.92rem;font-weight:700;cursor:pointer;line-height:1.35}
+.seg button.on{background:var(--card);color:var(--acc);box-shadow:var(--sh)}
+label.f{display:block;font-size:.82rem;color:var(--sub);margin:12px 0 4px;font-weight:600}
+input[type=text],select{width:100%;padding:10px 12px;font-size:1rem;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--fg);font-family:inherit}
+.yen{position:relative}
+.yen input{text-align:right;font-variant-numeric:tabular-nums;font-size:1.15rem;font-weight:700;padding-right:36px}
+.yen::after{content:"円";position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--sub);font-size:.9rem;pointer-events:none}
+input:focus,select:focus{outline:2px solid var(--acc);outline-offset:1px;border-color:transparent}
+.ins{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.ins.mix{grid-template-columns:1fr 1fr 1fr}
+.big{padding:18px 18px 14px;border-radius:14px;background:var(--acc2);margin-top:18px}
+.big .l{font-size:.88rem;color:var(--sub);font-weight:600}
+.big .v{font-size:2rem;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums;line-height:1.35;margin:2px 0}
+.big .s{font-size:.9rem;color:var(--fg);font-variant-numeric:tabular-nums}
+.big .w{font-size:.8rem;color:var(--sub);margin-top:4px}
+.big .mini{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.big .mini button{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:99px;padding:6px 12px;font:inherit;font-size:.8rem;font-weight:600;cursor:pointer}
+.big .mini button.p{border-color:var(--acc);color:var(--acc)}
+.opts{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.9rem}
+.opts select{width:auto}
+table.r{width:100%;border-collapse:collapse;margin-top:4px;font-size:.93rem}
+table.r td,table.r th{padding:8px 4px;border-bottom:1px solid var(--line);text-align:left}
+table.r th{font-size:.8rem;color:var(--sub);font-weight:600}
+table.r .n{text-align:right;font-variant-numeric:tabular-nums}
+table.r tr.cur td{color:var(--acc);font-weight:700}
+.tt{font-size:.82rem;color:var(--sub);font-weight:700;margin:14px 0 0}
+.ad{min-height:100px;border:1px dashed var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--sub);font-size:.75rem;margin:20px 0}
+h2{font-size:1.1rem;margin:4px 0 10px}
+.note{font-size:.82rem;color:var(--sub)}
+.hy{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.hyt{width:100%;border-collapse:collapse;font-size:.86rem;font-variant-numeric:tabular-nums}
+.hyt caption{text-align:left;font-weight:700;font-size:.88rem;margin-bottom:4px}
+.hyt td,.hyt th{border:1px solid var(--line);padding:5px 8px;text-align:right}
+.hyt th{background:var(--bg);font-size:.8rem}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#14171f;color:#fff;padding:10px 18px;border-radius:99px;font-size:.9rem;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+.toast.on{opacity:1}
+footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40px}footer a{color:inherit}
+@media (max-width:560px){.ins,.ins.mix,.hy{grid-template-columns:1fr}.big .v{font-size:1.6rem}header h1{font-size:1.3rem}.card{padding:16px}}
+</style>
+</head>
+<body>
+<header><div class="in">
+ <div class="crumb"><a href="/">しごと計算ラボ</a> › 消費税計算</div>
+ <h1>消費税計算(税込・税抜)</h1>
+ <p>税抜から税込、税込から税抜と消費税額を計算します。10%・8%、両方の混在にも対応。</p>
+ <div class="badges"><span>無料・登録不要</span><span>軽減税率8%に対応</span><span>端数処理を選べる</span></div>
+</div>
+<svg class="deco" viewBox="0 0 150 140" aria-hidden="true"><rect class="pg" x="22" y="10" width="106" height="124" rx="12"/><rect class="pg" x="36" y="24" width="78" height="26" rx="5"/><g class="dot"><circle cx="48" cy="70" r="5"/><circle cx="75" cy="70" r="5"/><circle cx="102" cy="70" r="5"/><circle cx="48" cy="94" r="5"/><circle cx="75" cy="94" r="5"/><circle cx="48" cy="118" r="5"/><circle cx="75" cy="118" r="5"/></g><path class="acc" d="M112 88l-16 32"/><circle class="acc" cx="97" cy="92" r="4"/><circle class="acc" cx="111" cy="116" r="4"/><path class="ln" d="M96 37h12"/></svg>
+</header>
+
+<main>
+<div class="card">
+ <div class="seg" role="tablist">
+  <button id="tEx" class="on" type="button">税抜 → 税込</button>
+  <button id="tIn" type="button">税込 → 税抜</button>
+ </div>
+
+ <div class="ins" id="ins">
+  <div id="aBox"><label class="f" for="amt" id="amtL">税抜金額</label><div class="yen"><input id="amt" type="text" inputmode="numeric" autocomplete="off" value="10,000" placeholder="0"></div></div>
+  <div id="m10" hidden><label class="f" for="a10" id="a10L">10%の対象(税抜)</label><div class="yen"><input id="a10" type="text" inputmode="numeric" autocomplete="off" value="10,000" placeholder="0"></div></div>
+  <div id="m8" hidden><label class="f" for="a8" id="a8L">8%の対象(税抜)</label><div class="yen"><input id="a8" type="text" inputmode="numeric" autocomplete="off" value="5,000" placeholder="0"></div></div>
+  <div><label class="f" for="rate">消費税率</label><select id="rate">
+   <option value="10">10%(標準税率)</option>
+   <option value="8">8%(軽減税率)</option>
+   <option value="mix">10%と8%が混在</option>
+  </select></div>
+ </div>
+
+ <div class="big" aria-live="polite"><div class="l" id="rL"></div><div class="v" id="rV">-</div><div class="s" id="rS"></div><div class="w" id="rW" hidden></div>
+  <div class="mini"><button type="button" id="copy">結果をコピー</button><button type="button" id="share">この条件のURLをコピー</button><button type="button" class="p" id="toInv">この金額で請求書を作る →</button></div>
+ </div>
+
+ <details class="more" id="detBox"><summary>くわしく見る<span class="ms" id="detSum"></span></summary>
+  <div class="opts"><span>1円未満の端数</span><select id="rnd" aria-label="端数処理"><option value="floor">切り捨て</option><option value="round">四捨五入</option><option value="ceil">切り上げ</option></select></div>
+  <table class="r" id="res"></table>
+  <p class="tt">端数処理による違い(消費税額)</p>
+  <table class="r" id="cmp"></table>
+ </details>
+</div>
+
+<div class="ad">広告</div>
+
+<div class="card">
+ <section class="tldr" aria-label="このツールについて">
+  <h2 class="sec-t">消費税計算ツールでできること</h2>
+  <p class="lead">税抜金額から税込金額を、税込金額から税抜金額と消費税額を、無料・登録不要で計算できるWebツールです。税率は10%と軽減税率8%に対応し、両方が混在する場合も税率ごとに計算して合計します。</p>
+  <ul class="feat"><li>税抜金額から税込金額と消費税額を計算(10%は×1.1、8%は×1.08)</li><li>税込金額から税抜金額と消費税額を計算(消費税＝税込×10/110、8%は×8/108)</li><li>10%と8%が混在する場合は、税率ごとに計算して合計</li><li>端数処理(切り捨て・四捨五入・切り上げ)を選べる</li><li>計算した金額のまま請求書を作成できる</li><li>入力内容はブラウザ内だけで処理され、サーバーに送信されない</li></ul>
+  <p class="upd">最終更新日：<time datetime="2026-10-22">2026年10月22日</time> ／ 運営：しごと計算ラボ</p>
+ </section>
+
+ <h2 class="sec-t">使い方</h2>
+ <ol class="steps">
+  <li><b>向きを選ぶ</b>税抜から税込を出すか、税込から税抜を出すかを選びます。</li>
+  <li><b>金額を入れる</b>金額と税率を入れると、すぐに答えが出ます。10%と8%が混ざる場合は「混在」を選びます。</li>
+  <li><b>端数を確認</b>「くわしく見る」で端数処理を変えたり、違いを比べたりできます。</li>
+  <li><b>コピーして使う</b>結果をコピーするか、そのまま請求書を作れます。</li>
+ </ol>
+
+ <h2 class="sec-t">計算方法</h2>
+ <ul>
+  <li>税抜 → 税込：<b>税抜金額 × 1.1</b>(8%は × 1.08)</li>
+  <li>税込 → 税抜：<b>消費税額 ＝ 税込金額 × 10/110</b>(8%は × 8/108)、税抜金額 ＝ 税込金額 − 消費税額</li>
+  <li>1円未満の端数は、初期設定では切り捨てです</li>
+  <li>10%と8%が混在する場合は、税率ごとに合計してから消費税を計算し、端数処理します(インボイス制度のルール)</li>
+ </ul>
+
+ <h2 class="sec-t">消費税の早見表</h2>
+ <div class="hy">
+  <table class="hyt"><caption>税抜 → 税込</caption><thead><tr><th>税抜</th><th>税込(10%)</th><th>税込(8%)</th></tr></thead><tbody><tr><td>100円</td><td>110円</td><td>108円</td></tr><tr><td>500円</td><td>550円</td><td>540円</td></tr><tr><td>1,000円</td><td>1,100円</td><td>1,080円</td></tr><tr><td>2,000円</td><td>2,200円</td><td>2,160円</td></tr><tr><td>3,000円</td><td>3,300円</td><td>3,240円</td></tr><tr><td>5,000円</td><td>5,500円</td><td>5,400円</td></tr><tr><td>10,000円</td><td>11,000円</td><td>10,800円</td></tr><tr><td>20,000円</td><td>22,000円</td><td>21,600円</td></tr><tr><td>30,000円</td><td>33,000円</td><td>32,400円</td></tr><tr><td>50,000円</td><td>55,000円</td><td>54,000円</td></tr><tr><td>100,000円</td><td>110,000円</td><td>108,000円</td></tr><tr><td>300,000円</td><td>330,000円</td><td>324,000円</td></tr><tr><td>500,000円</td><td>550,000円</td><td>540,000円</td></tr><tr><td>1,000,000円</td><td>1,100,000円</td><td>1,080,000円</td></tr></tbody></table>
+  <table class="hyt"><caption>税込 → 税抜(端数切り捨て)</caption><thead><tr><th>税込</th><th>税抜(10%)</th><th>税抜(8%)</th></tr></thead><tbody><tr><td>100円</td><td>91円</td><td>93円</td></tr><tr><td>500円</td><td>455円</td><td>463円</td></tr><tr><td>1,000円</td><td>910円</td><td>926円</td></tr><tr><td>3,000円</td><td>2,728円</td><td>2,778円</td></tr><tr><td>5,000円</td><td>4,546円</td><td>4,630円</td></tr><tr><td>10,000円</td><td>9,091円</td><td>9,260円</td></tr><tr><td>30,000円</td><td>27,273円</td><td>27,778円</td></tr><tr><td>50,000円</td><td>45,455円</td><td>46,297円</td></tr><tr><td>100,000円</td><td>90,910円</td><td>92,593円</td></tr><tr><td>110,000円</td><td>100,000円</td><td>101,852円</td></tr><tr><td>300,000円</td><td>272,728円</td><td>277,778円</td></tr><tr><td>1,000,000円</td><td>909,091円</td><td>925,926円</td></tr></tbody></table>
+ </div>
+
+ <h2 class="sec-t">よくある質問</h2>
+ <div class="faq">
+ <details><summary><span>税込金額はどう計算する？</span></summary><p>税抜金額に1.1をかけます(軽減税率8%なら1.08)。たとえば税抜10,000円なら、税込は11,000円(消費税1,000円)です。</p></details>
+ <details><summary><span>税込金額から税抜金額はどう計算する？</span></summary><p>税込金額を1.1で割ります(8%なら1.08)。このツールでは、税込金額×10/110(8%は×8/108)で消費税額を出して端数を処理し、税込金額から引いて税抜金額を求めています。たとえば税込11,000円なら、税抜10,000円・消費税1,000円です。</p></details>
+ <details><summary><span>税込から税抜にすると、元の金額と1円ずれるのはなぜ？</span></summary><p>消費税額の1円未満を処理するためです。たとえば税込1,000円の消費税は90.90…円で、切り捨てると90円、税抜は910円になります。910円に1.1をかけると1,001円となり、1円ずれます。計算の誤りではありません。</p></details>
+ <details><summary><span>1円未満の端数は、切り捨て・四捨五入・切り上げのどれ？</span></summary><p>法律で決まっておらず、事業者が選べます。一般には切り捨てが多く使われています。ただしインボイス(適格請求書)では、1枚の請求書につき税率ごとに1回だけ端数処理をします。品目ごとに端数処理して合計することは認められていません。</p></details>
+ <details><summary><span>軽減税率8%の対象は？</span></summary><p>酒類と外食を除く飲食料品と、週2回以上発行される新聞の定期購読料が対象です。テイクアウトや宅配は8%、店内での飲食やケータリングは10%です。</p></details>
+ <details><summary><span>10%と8%の品目が混ざる場合は？</span></summary><p>税率で「10%と8%が混在」を選び、税率ごとの合計金額を入れてください。税率ごとに消費税を計算して端数処理し、最後に合計します。</p></details>
+ <details><summary><span>消費税10%の内訳は？</span></summary><p>国の消費税が7.8%、地方消費税が2.2%です。軽減税率8%の場合は、国が6.24%、地方が1.76%です。</p></details>
+ <details><summary><span>値札や広告は税込で表示しないといけない？</span></summary><p>消費者に販売する商品・サービスの値札や広告は、税込価格の表示(総額表示)が義務です。事業者同士の取引は対象外のため、見積書や請求書は税抜表示でも構いません。</p></details>
+ </div>
+ <p class="note">※出典：国税庁「消費税の軽減税率制度」「インボイス制度」「総額表示の義務付け」に関する資料。個別の取引の扱いは、国税庁の資料や税理士にご確認ください。</p>
+</div>
+
+<div class="card"><div class="sharebox" style="border:0;padding:0;margin:0 0 18px"><h2>このツールをシェア</h2><p>お仕事仲間や、同じように事務作業をする方に教えていただけるとうれしいです。</p><div class="sbtns" data-share></div></div><h2>関連ツール</h2><div class="rel"><a href="/seikyusho/" style="--c:#4f46e5"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 7.5l3 4 3-4M12 11.5v6.5M9.2 13h5.6M9.2 15.6h5.6"/></svg></span><span><b>請求書 作成</b><span class="d">インボイス対応、源泉徴収・振込手数料にも対応</span></span></a><a href="/mitsumori/" style="--c:#0d8a7f"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span><span><b>見積書 作成</b><span class="d">請求書・領収書にワンクリックで切り替え</span></span></a><a href="/nohinsho/" style="--c:#0377b3"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span><span><b>納品書 作成</b><span class="d">見積書の内容からそのまま作成</span></span></a><a href="/ryoshusho/" style="--c:#d9540f"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18l-2.5-1.5L14 21l-2-1.5L10 21l-2.5-1.5L5 21z"/><path d="M9 11l2 2 4-4"/></svg></span><span><b>領収書 作成</b><span class="d">収入印紙の要否を自動で判定</span></span></a><a href="/hacchusho/" style="--c:#be123c"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6v3H9z"/><path d="M15 4.5h3a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1h3"/><path d="M9 12h6M9 16h4"/></svg></span><span><b>発注書・注文書 作成</b><span class="d">外注先・仕入先に仕事を頼むときに</span></span></a><a href="/sofujo/" style="--c:#16803c"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span><b>送付状 作成</b><span class="d">郵送・FAXで送るときに。時候の挨拶も自動</span></span></a><a href="/gensen/" style="--c:#2554d8"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></svg></span><span><b>源泉徴収税 計算</b><span class="d">手取りからの逆算、請求書PDFまで</span></span></a><a href="/eigyobi/" style="--c:#6d28d9"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4M8 13.5h.01M12 13.5h.01M16 13.5h.01M8 17h.01M12 17h.01"/><circle cx="16" cy="17" r="1.6"/></svg></span><span><b>営業日・支払期日 計算</b><span class="d">月末締め翌月末払いなどの支払日を、土日祝を除いて計算</span></span></a></div></div>
+
+<div class="ad">広告</div>
+</main>
+<footer><a href="/">しごと計算ラボ</a> ・ <a href="/privacy/">プライバシーポリシー</a> ・ <a href="/contact/">お問い合わせ</a><br>© しごと計算ラボ</footer>
+<div class="toast" id="toast"></div>
+
+<script id="core">
+// m: 'floor'切り捨て / 'round'四捨五入 / 'ceil'切り上げ
+function rnd(v,m){v=Math.round(v*1e6)/1e6;return m==='ceil'?Math.ceil(v):m==='round'?Math.round(v):Math.floor(v)}
+// dir: 'ex'=税抜から税込 / 'in'=税込から税抜。rate: 10 または 8(%)
+function one(amt,rate,dir,m){
+ amt=Math.max(0,Math.floor(amt||0));
+ var tax=dir==='in'?rnd(amt*rate/(100+rate),m):rnd(amt*rate/100,m);
+ var ex=dir==='in'?amt-tax:amt;
+ return {rate:rate,ex:ex,tax:tax,inc:ex+tax};
+}
+// 税率ごとに合計してから端数処理(インボイスのルール)。parts:[{amt,rate}]
+function calc(parts,dir,m){
+ var rows=parts.map(function(p){return one(p.amt,p.rate,dir,m)}),t={ex:0,tax:0,inc:0};
+ rows.forEach(function(r){t.ex+=r.ex;t.tax+=r.tax;t.inc+=r.inc});
+ return {rows:rows,ex:t.ex,tax:t.tax,inc:t.inc};
+}
+// 税込から求めた税抜額に、もう一度税率をかけたときの税込額(1円ずれの確認用)
+function back(r,m){return r.ex+rnd(r.ex*r.rate/100,m)}
+if(typeof module!=='undefined')module.exports={rnd:rnd,one:one,calc:calc,back:back};
+</script>
+<script>
+var $=function(id){return document.getElementById(id)};
+var dir='ex',last,CFG='shohizei_cfg';
+var RN={floor:'切り捨て',round:'四捨五入',ceil:'切り上げ'};
+function f(n){return n.toLocaleString('ja-JP')}
+function yen(n){return f(n)+'円'}
+function num(s){var v=parseInt(String(s||'').replace(/[０-９]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-65248)}).replace(/[^0-9]/g,''),10)||0;return Math.min(v,99999999999)}
+function toast(m){var t=$('toast');t.textContent=m;t.className='toast on';clearTimeout(toast._t);toast._t=setTimeout(function(){t.className='toast'},1800)}
+function copyText(t,msg){
+ function fb(){var a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy')}catch(_){}document.body.removeChild(a);if(ok)toast(msg);else window.prompt('コピーしてください',t)}
+ if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(function(){toast(msg)},fb)}else fb();
+}
+function rate(){return $('rate').value}
+function parts(){var r=rate();if(r==='mix')return [{amt:num($('a10').value),rate:10},{amt:num($('a8').value),rate:8}];return [{amt:num($('amt').value),rate:+r}]}
+function render(){
+ var r=rate(),mix=r==='mix',m=$('rnd').value,ex=dir==='ex',w=ex?'税抜':'税込',o=ex?'税込':'税抜';
+ $('aBox').hidden=mix;$('m10').hidden=!mix;$('m8').hidden=!mix;$('ins').className='ins'+(mix?' mix':'');
+ $('amtL').textContent=w+'金額';$('a10L').textContent='10%の対象('+w+')';$('a8L').textContent='8%の対象('+w+')';
+ var c=calc(parts(),dir,m);last=c;
+ if(mix){var a=c.rows[0],b=c.rows[1];
+  $('rL').textContent='10%の対象 '+yen(ex?a.ex:a.inc)+'＋8%の対象 '+yen(ex?b.ex:b.inc)+'('+w+')の場合、'+o+'合計は';
+  $('rV').textContent=yen(ex?c.inc:c.ex);
+  $('rS').textContent='消費税 '+yen(c.tax)+'(10%：'+yen(a.tax)+'、8%：'+yen(b.tax)+')'+(ex?'':' ／ 税込合計 '+yen(c.inc));
+ }else{var x=c.rows[0];
+  $('rL').textContent=w+' '+yen(ex?x.ex:x.inc)+'(消費税'+x.rate+'%)の場合、'+o+'は';
+  $('rV').textContent=yen(ex?x.inc:x.ex);
+  $('rS').textContent='消費税 '+yen(x.tax)+(ex?'':' ／ 税込 '+yen(x.inc));
+ }
+ // 税込→税抜で、元に戻すと1円ずれる場合の説明
+ var gap=!ex&&c.rows.filter(function(q){return back(q,m)!==q.inc});
+ if(gap&&gap.length){var q=gap[0];$('rW').hidden=false;$('rW').textContent='※税抜'+yen(q.ex)+'に'+q.rate+'%をかけると'+yen(back(q,m))+'になり、元の金額と'+Math.abs(back(q,m)-q.inc)+'円ずれます(端数処理のため。よくある質問を参照)'}else $('rW').hidden=true;
+ // 内訳
+ var h='<tr><th></th><th class="n">税抜</th><th class="n">消費税</th><th class="n">税込</th></tr>';
+ c.rows.forEach(function(q){h+='<tr><td>'+q.rate+'%</td><td class="n">'+yen(q.ex)+'</td><td class="n">'+yen(q.tax)+'</td><td class="n">'+yen(q.inc)+'</td></tr>'});
+ if(mix)h+='<tr><td><b>合計</b></td><td class="n"><b>'+yen(c.ex)+'</b></td><td class="n"><b>'+yen(c.tax)+'</b></td><td class="n"><b>'+yen(c.inc)+'</b></td></tr>';
+ $('res').innerHTML=h;
+ var k='<tr><th>端数処理</th><th class="n">消費税</th><th class="n">'+o+'</th></tr>';
+ ['floor','round','ceil'].forEach(function(mm){var cc=calc(parts(),dir,mm);k+='<tr'+(mm===m?' class="cur"':'')+'><td>'+RN[mm]+'</td><td class="n">'+yen(cc.tax)+'</td><td class="n">'+yen(ex?cc.inc:cc.ex)+'</td></tr>'});
+ $('cmp').innerHTML=k;
+ $('detSum').textContent='端数：'+RN[m];$('detSum').className='ms'+(m!=='floor'?' on':'');
+}
+function fmt(el){var p=el.selectionStart,l=el.value.length,v=num(el.value);el.value=v?f(v):'';try{var q=Math.max(0,p+el.value.length-l);el.setSelectionRange(q,q)}catch(_){}}
+['amt','a10','a8'].forEach(function(id){var el=$(id);el.addEventListener('input',function(){fmt(el);render()});el.addEventListener('focus',function(){var t=this;setTimeout(function(){try{t.select()}catch(_){}},0)})});
+$('rate').addEventListener('change',render);
+$('rnd').addEventListener('change',function(){try{localStorage.setItem(CFG,JSON.stringify({rnd:this.value}))}catch(_){}render()});
+function setDir(d){dir=d;$('tEx').className=d==='ex'?'on':'';$('tIn').className=d==='in'?'on':'';render()}
+$('tEx').onclick=function(){setDir('ex')};$('tIn').onclick=function(){setDir('in')};
+$('copy').onclick=function(){var c=last,t=c.rows.map(function(q){return (c.rows.length>1?'【'+q.rate+'%】':'消費税率 '+q.rate+'%\n')+'税抜 '+yen(q.ex)+' ／ 消費税 '+yen(q.tax)+' ／ 税込 '+yen(q.inc)}).join('\n');
+ if(c.rows.length>1)t+='\n【合計】税抜 '+yen(c.ex)+' ／ 消費税 '+yen(c.tax)+' ／ 税込 '+yen(c.inc);
+ t+='\n(端数：'+RN[$('rnd').value]+')';copyText(t,'結果をコピーしました')};
+$('share').onclick=function(){var q=new URLSearchParams({m:dir,r:rate(),d:$('rnd').value});
+ if(rate()==='mix'){q.set('a',num($('a10').value));q.set('b',num($('a8').value))}else q.set('a',num($('amt').value));
+ copyText(location.origin+location.pathname+'?'+q.toString(),'URLをコピーしました')};
+$('toInv').onclick=function(){var p=parts().filter(function(x){return x.amt});if(!p.length)p=[{amt:0,rate:10}];
+ var doc={incl:dir==='in',rnd:$('rnd').value,rows:p.map(function(x){return {n:'',q:'1',u:'式',p:x.amt?String(x.amt):'',r:String(x.rate),xr:'',nw:false}})};
+ try{sessionStorage.setItem('shorui_v1',JSON.stringify({doc:doc,me:{}}))}catch(_){}location.href='/seikyusho/'};
+(function(){
+ try{var cf=JSON.parse(localStorage.getItem(CFG)||'{}');if(RN[cf.rnd])$('rnd').value=cf.rnd}catch(_){}
+ var q=new URLSearchParams(location.search);
+ if(RN[q.get('d')])$('rnd').value=q.get('d');
+ if(['10','8','mix'].indexOf(q.get('r'))>=0)$('rate').value=q.get('r');
+ if(q.has('a')){var a=num(q.get('a'));if(q.get('r')==='mix')$('a10').value=a?f(a):'';else $('amt').value=a?f(a):''}
+ if(q.has('b')){var b=num(q.get('b'));$('a8').value=b?f(b):''}
+ setDir(q.get('m')==='in'?'in':'ex');
+})();
+</script>
+<script src="/assets/share.js" defer></script>
+</body>
+</html>
