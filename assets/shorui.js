@@ -116,6 +116,7 @@ function build(){
  '<div class="acts"><button type="button" class="btn p" id="pdf1">PDFをダウンロード</button><button type="button" class="btn" id="print1">印刷</button><button type="button" class="btn" id="reset">新しく作る</button></div>'+
  '<a class="next" id="next"></a>'+
  '<div class="share" id="shareAsk" hidden><b>PDFができました</b><span>便利だと思ったら、お仕事仲間にシェアしていただけるとうれしいです。</span><div class="sbtns" data-share></div></div>'+
+ '<a class="next" id="toSf" href="/sofujo/">郵送・FAXで送るなら、送付状も作る →</a>'+
  '</div>'+
 
  '<div class="pv" id="pv"><div class="card"><div class="pvh"><h2>プレビュー <span class="pv-chip">'+T[TYPE].n+'</span></h2><span class="note"><span class="dot"></span>入力するとすぐに反映されます</span></div>'+
@@ -277,6 +278,8 @@ function bind(){
  function carry(){try{sessionStorage.setItem(KEY,JSON.stringify({doc:S,me:ME}))}catch(_){}}
  [].forEach.call(document.querySelectorAll('.types a'),function(a){a.addEventListener('click',carry)});
  $('next').addEventListener('click',carry);
+ // 送付状へ：宛名と書類名を引き継ぐ
+ $('toSf').addEventListener('click',function(){try{sessionStorage.setItem('sofujo_in',JSON.stringify({to:S.to,hon:S.hon,rows:[{n:T[TYPE].n,q:'1',u:'部'}]}))}catch(_){}});
  $('sw').onclick=function(e){var c=e.target.dataset.c;if(!c)return;ME.color=c;sw();upd()};
  function sw(){[].forEach.call($('sw').children,function(b){b.className=b.dataset.c===ME.color?'on':''})}sw();
  function ink(){$('inkImg').hidden=!ME.ink;$('inkDel').hidden=!ME.ink;if(ME.ink)$('inkImg').src=ME.ink}ink();
@@ -316,8 +319,8 @@ function doPdf(){if(busy)return;busy=true;var bs=[$('pdf1'),$('pdf2'),$('pdf3')]
  Promise.all([load('/assets/vendor/html2canvas.min.js'),load('/assets/vendor/jspdf.umd.min.js')]).then(function(){return (document.fonts?document.fonts.ready:Promise.resolve())}).then(function(){
   return html2canvas(box.firstChild,{scale:3,backgroundColor:'#ffffff',logging:false,useCORS:true})}).then(function(cv){
   var pdf=new window.jspdf.jsPDF({unit:'mm',format:'a4',compress:true});pdf.addImage(cv.toDataURL('image/jpeg',0.92),'JPEG',0,0,210,297);
-  pdf.setProperties({title:nm});pdf.save(nm.replace(/[\\/:*?"<>|]/g,'')+'.pdf');end();record();toast('PDFを保存しました');$('shareAsk').hidden=false;$('shareAsk').scrollIntoView({behavior:'smooth',block:'center'})}).catch(function(){end();toast('PDFを作れませんでした。「印刷」からお試しください')})}
-function doPrint(){record();var html=docHTML(last),nm=T[TYPE].n+(S.no?'_'+S.no:'')+(S.to?'_'+S.to:'');
+  pdf.setProperties({title:nm});pdf.save(nm.replace(/[\\/:*?"<>|]/g,'')+'.pdf');end();record();$('toSf').classList.add('on');toast('PDFを保存しました');$('shareAsk').hidden=false;$('shareAsk').scrollIntoView({behavior:'smooth',block:'center'})}).catch(function(){end();toast('PDFを作れませんでした。「印刷」からお試しください')})}
+function doPrint(){record();$('toSf').classList.add('on');var html=docHTML(last),nm=T[TYPE].n+(S.no?'_'+S.no:'')+(S.to?'_'+S.to:'');
  var inFrame=false;try{inFrame=window.self!==window.top}catch(_){inFrame=true}
  if(!inFrame){$('prt').innerHTML=html;var tt=document.title;document.title=nm;window.print();setTimeout(function(){document.title=tt;$('prt').innerHTML=''},800);return}
  var w=window.open('','_blank');if(!w){toast('ポップアップを許可してください');return}
