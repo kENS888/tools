@@ -68,10 +68,9 @@ h2{font-size:1.1rem;margin:4px 0 10px}
 footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40px}footer a{color:inherit}
 .seg button{display:flex;align-items:center;justify-content:center;gap:6px}
 .seg .ico{width:18px;height:18px}
-.pick{display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"cs ce" "ks ke";gap:8px 14px;margin:16px 0 8px;align-items:start}
-.pick .cs{grid-area:cs}.pick .ce{grid-area:ce}.pick .ks{grid-area:ks}.pick .ke{grid-area:ke}
-@media (min-width:700px){.pick .chip{cursor:default}}
-@media (max-width:699px){.pick{grid-template-areas:"cs ce" "k k";gap:8px}.pick .ks,.pick .ke{grid-area:k}.pick .cal.off{display:none}}
+.pick{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;margin:16px 0 8px}
+.pick .arw{width:20px;height:20px;fill:none;stroke:var(--sub);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mons.n2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .chip{border:2px solid var(--line);background:var(--card);color:var(--fg);border-radius:12px;padding:6px 12px;font:inherit;text-align:left;cursor:pointer;min-width:0}
 .chip span{display:block;font-size:.72rem;color:var(--sub);font-weight:700}
 .chip b{display:block;font-size:1.05rem;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -113,7 +112,7 @@ footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40p
 .bm{font-weight:700;min-width:2.6em}
 .bt{position:relative;height:22px;border-radius:6px;background:var(--card);border:1px solid var(--line);overflow:hidden}
 .bt i{position:absolute;top:0;bottom:0;background:var(--acc);opacity:.85}
-.bt em{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:.72rem;font-weight:700;color:var(--fg);text-shadow:0 0 3px var(--card),0 0 3px var(--card)}
+.bt em{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-style:normal;font-size:.7rem;font-weight:700;color:var(--fg);background:var(--card);padding:0 6px;border-radius:4px;line-height:1.5;white-space:nowrap}
 .bv{font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
 @media (max-width:560px){.who>div{padding:12px}.who b{font-size:.88rem}.who>div>span:last-child{font-size:.76rem}.pl{padding:3px 8px}.big .fx{gap:4px}.cal{padding:8px 2px 4px}.dg button.d{height:48px}.chip b{font-size:.98rem}}
 header .hint{display:inline-block;margin-top:10px;color:#fff;font-size:.82rem;font-weight:700;text-decoration:underline;text-underline-offset:3px}
@@ -156,10 +155,14 @@ header .hint{display:inline-block;margin-top:10px;color:#fff;font-size:.82rem;fo
  <label class="f" for="amt" id="amtL">月額</label><div class="yen"><input id="amt" type="text" inputmode="numeric" autocomplete="off" value="100,000" placeholder="0"></div>
 
  <div class="pick">
-  <button type="button" class="chip cs" id="cS"><span>開始日</span><b id="cSv">-</b></button>
-  <button type="button" class="chip ce" id="cE"><span>終了日</span><b id="cEv">-</b></button>
-  <div class="cal ks" id="kS"><div class="cnav"><button type="button" data-nav="s,-1" aria-label="前の月"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" data-nav="s,1" aria-label="次の月"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div><div class="mons" id="monS"></div><p class="leg">開始日を選んでください</p></div>
-  <div class="cal ke" id="kE"><div class="cnav"><button type="button" data-nav="e,-1" aria-label="前の月"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" data-nav="e,1" aria-label="次の月"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div><div class="mons" id="monE"></div><p class="leg">数字＝<b>その日を終了日にした時の金額</b></p></div>
+  <button type="button" class="chip" id="cS"><span>開始日</span><b id="cSv">-</b></button>
+  <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  <button type="button" class="chip" id="cE"><span>終了日</span><b id="cEv">-</b></button>
+ </div>
+ <div class="cal">
+  <div class="cnav"><button type="button" id="prev" aria-label="前の月"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" id="next" aria-label="次の月"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
+  <div class="mons" id="mons"></div>
+  <p class="leg" id="leg"></p>
  </div>
 
  <div class="big" aria-live="polite">
@@ -219,7 +222,7 @@ header .hint{display:inline-block;margin-top:10px;color:#fff;font-size:.82rem;fo
  <ol class="steps">
   <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><b>種類を選ぶ</b>家賃・利用料か、給与か。</li>
   <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 12h8"/></svg><b>月額を入れる</b>家賃・利用料なら月額、給与なら月給。</li>
-  <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4M9 15h6"/></svg><b>カレンダーで選ぶ</b>開始日と終了日をタップ。日付の下に、その日までの金額が出ます。</li>
+  <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4M9 15h6"/></svg><b>カレンダーで選ぶ</b>日付をタップすると終了日が変わり、開始日より前を押すと開始日が変わります。開始日を後ろにずらす時は「開始日」を押してから。</li>
   <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h6"/><circle cx="18" cy="16" r="3"/></svg><b>割り方を合わせる</b>契約書や就業規則に合わせて「くわしく見る」で変更。</li>
  </ol>
 
@@ -357,40 +360,40 @@ function syncOpts(){var c=C[mode],pay=mode==='pay';
 }
 // 休み(給与の所定労働日で数える時だけ薄く表示)
 function bizMode(){return mode==='pay'&&(C.pay.basis==='biz'||C.pay.basis==='n')}
-// ---- カレンダー(開始日用・終了日用で独立。スマホはチップで切り替え) ----
-var vS,vE;
-function month(k,vw){
+// ---- カレンダー(1つ。開始日より前を押すと開始日、それ以外は終了日。「開始日」を押した時だけ次の1回で開始日を選ぶ) ----
+var view;
+function month(vw){
  var y=vw.getUTCFullYear(),m=vw.getUTCMonth()+1,ld=HIWARI.lastDay(y,m),w0=vw.getUTCDay(),hol=B.holidays(y),bz=bizMode(),st=S.getTime(),en=E.getTime();
- var h='<div class="mt">'+y+'年'+m+'月</div><div class="dw">';
+ var h='<div class="mon"><div class="mt">'+y+'年'+m+'月</div><div class="dw">';
  for(var i=0;i<7;i++)h+='<span'+(i===0?' class="su"':i===6?' class="sa"':'')+'>'+WD[i]+'</span>';
  h+='</div><div class="dg">';
  for(i=0;i<w0;i++)h+='<span></span>';
  for(var d=1;d<=ld;d++){
-  var t=B.D(y,m,d),tt=t.getTime(),wd=t.getUTCDay(),hn=hol[B.key(t)],cls=['d'],p='',v=null,dis=k==='e'&&tt<st;
+  var t=B.D(y,m,d),tt=t.getTime(),wd=t.getUTCDay(),hn=hol[B.key(t)],cls=['d'],p='',v=null;
   if(wd===0||hn)cls.push('su');else if(wd===6)cls.push('sa');
   if(bz&&(wd===0||wd===6||hn))cls.push('off');
   if(tt===st)cls.push('st');if(tt===en)cls.push('en');if(tt>st&&tt<en)cls.push('in');
-  if(k==='e'&&!dis){v=calc(S,t).total;p='<i>'+short(v)+'</i>'}
+  if(act==='e'&&tt>=st){v=calc(S,t).total;p='<i>'+short(v)+'</i>'}
   var lab=y+'年'+m+'月'+d+'日'+(hn?'('+hn+')':'')+(v!==null?'、ここまでで'+yen(v):'');
-  h+='<button type="button" class="'+cls.join(' ')+'" data-k="'+k+'" data-t="'+B.key(t)+'" aria-label="'+esc(lab)+'"'+(hn?' title="'+esc(hn)+'"':'')+(dis?' disabled':'')+'><b>'+d+'</b>'+p+'</button>';
+  h+='<button type="button" class="'+cls.join(' ')+'" data-t="'+B.key(t)+'" aria-label="'+esc(lab)+'"'+(hn?' title="'+esc(hn)+'"':'')+'><b>'+d+'</b>'+p+'</button>';
  }
- return h+'</div>';
+ return h+'</div></div>';
 }
 function drawCal(){
- $('monS').innerHTML=month('s',vS);$('monE').innerHTML=month('e',vE);
- var w=wide.matches;$('cS').className='chip cs'+(!w&&act==='s'?' on':'');$('cE').className='chip ce'+(!w&&act==='e'?' on':'');
- $('kS').className='cal ks'+(act==='s'?'':' off');$('kE').className='cal ke'+(act==='e'?'':' off');
+ var n=wide.matches?2:1,h='';for(var i=0;i<n;i++)h+=month(addM(view,i));
+ $('mons').innerHTML=h;$('mons').className='mons n'+n;
+ $('cS').className='chip'+(act==='s'?' on':'');$('cE').className='chip'+(act==='e'?' on':'');
  $('cSv').textContent=sl(S);$('cEv').textContent=sl(E);
+ $('leg').innerHTML=act==='s'?'<b>新しい開始日</b>をタップしてください':'数字＝<b>その日を終了日にした時の金額</b>';
 }
-document.querySelector('.pick').addEventListener('click',function(ev){
- var n=ev.target.closest('button[data-nav]');
- if(n){var a=n.dataset.nav.split(',');if(a[0]==='s')vS=addM(vS,+a[1]);else vE=addM(vE,+a[1]);drawCal();return}
- var b=ev.target.closest('button[data-t]');if(!b||b.disabled)return;var t=B.parse(b.dataset.t);
- if(b.dataset.k==='s'){S=t;if(E<S||endAuto){E=eom(S);vE=som(E)}if(!wide.matches)act='e'}
+$('mons').addEventListener('click',function(ev){var b=ev.target.closest('button[data-t]');if(!b)return;var t=B.parse(b.dataset.t);
+ if(act==='s'||t<S){S=t;if(E<S||endAuto)E=eom(S);act='e'}
  else{E=t;endAuto=false}
  render()});
-$('cS').onclick=function(){act='s';render()};
-$('cE').onclick=function(){act='e';render()};
+$('cS').onclick=function(){act=act==='s'?'e':'s';if(act==='s')view=som(S);render()};
+$('cE').onclick=function(){act='e';view=wide.matches&&som(E)>som(S)?addM(som(E),-1):som(E);render()};
+$('prev').onclick=function(){view=addM(view,-1);drawCal()};
+$('next').onclick=function(){view=addM(view,1);drawCal()};
 if(wide.addEventListener)wide.addEventListener('change',drawCal);
 // ---- 結果 ----
 function how(q,o){
@@ -477,7 +480,7 @@ $('toInv').onclick=function(){var r=last.r;
  var s=B.parse(q.get('s')||''),e=B.parse(q.get('e')||'');
  S=s&&s.getUTCFullYear()>=2000&&s.getUTCFullYear()<=2099?s:todayD();
  if(e&&e>=S&&B.days(S,e)<=3660){E=e;endAuto=false}else E=eom(S);
- vS=som(S);vE=som(E);
+ view=som(S);
  setMode(m);
 })();
 </script>
