@@ -29,6 +29,7 @@ th{background:var(--bg)}
 td a{color:var(--acc);font-weight:700}
 .note{font-size:.8rem;color:var(--sub)}
 footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40px}footer a{color:inherit}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#14171f;color:#fff;padding:10px 18px;border-radius:99px;font-size:.9rem;opacity:0;transition:opacity .2s;pointer-events:none}.toast.on{opacity:1}
 @media (max-width:520px){header h1{font-size:1.3rem}.card{padding:16px}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[
@@ -50,8 +51,8 @@ footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40p
 <body>
 <header><div class="in">
  <a class="brand" href="/">しごと計算ラボ</a>
- <h1>見積書・請求書・領収書の作成と、源泉徴収の計算が無料でできるツール集</h1>
- <p>フリーランス・個人事業主・小さな会社の事務作業を、ブラウザだけで。</p>
+ <h1>仕事の書類と計算を、<br>もっと手軽に。</h1>
+ <p>見積書・請求書・領収書の作成から、源泉徴収の計算まで。フリーランス・個人事業主・小さな会社のための無料ツールです。</p>
  <div class="badges"><span>無料・登録不要</span><span>入力はサーバーに送信されません</span><span>スマホでPDF保存</span><span>インボイス対応</span></div>
 </div></header>
 <main>
@@ -87,9 +88,11 @@ footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40p
   <details><summary><span>入力した内容は安全？</span></summary><p>入力内容はお使いのブラウザの中だけで処理・保存され、サーバーには送信されません。</p></details>
   <details><summary><span>計算の根拠は？</span></summary><p>消費税はインボイス制度のルール(税率ごとに合計して1回だけ端数処理)、源泉徴収税・印紙税は国税庁が公表している税率に基づいています。</p></details>
  </div>
+ <div class="sharebox"><h2 class="sec-t">しごと計算ラボをシェア</h2><p>お仕事仲間に教えていただけるとうれしいです。</p><div class="sbtns" data-share></div></div>
  <p class="note">最終更新日：<time datetime="2026-10-21">2026年10月21日</time> ／ ツールは順次追加していきます。</p>
 </div>
 </main>
 <footer><a href="/">しごと計算ラボ</a> ・ <a href="/privacy/">プライバシーポリシー</a> ・ <a href="/contact/">お問い合わせ</a><br>© しごと計算ラボ</footer>
+<script src="/assets/share.js" defer></script>
 </body>
 </html>

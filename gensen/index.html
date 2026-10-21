@@ -137,7 +137,8 @@ footer a{color:inherit}footer{text-align:center;font-size:.78rem;color:var(--sub
   <div class="w"><label class="f" for="memo">備考</label><textarea id="memo" rows="2" placeholder="振込手数料は貴社にてご負担ください。"></textarea></div>
  </div>
  <p class="note">あなたの情報(氏名・登録番号・住所・振込先)はこの端末にだけ保存されます。</p>
- <div class="acts"><button class="btn p" id="print" type="button">印刷 / PDFで保存</button></div>
+ <div class="acts"><button class="btn p" id="print" type="button">印刷 / PDFで保存</button><button class="btn" id="toShorui" type="button">請求書作成ツールで開く →</button></div>
+ <p class="note">「請求書作成ツールで開く」を押すと、この内容のまま、プレビュー付きの請求書作成ツールに移ります。PDFの直接ダウンロード、見積書・領収書への切り替え、印影の画像なども使えます。</p>
  <p class="note">PDFにするには、印刷画面で送信先を「PDFに保存」にしてください。日付やURLが印字される場合は、「ヘッダーとフッター」のチェックを外してください。</p>
 </div>
 
@@ -171,7 +172,7 @@ footer a{color:inherit}footer{text-align:center;font-size:.78rem;color:var(--sub
  <p class="note">※一般的な報酬・料金(所得税法204条1項1号・2号など)を想定しています。司法書士、外交員、ホステスなどへの報酬は計算方法が異なります。最終的な判断は国税庁の資料や税理士にご確認ください。</p>
 </div>
 
-<div class="card"><h2>関連ツール</h2><div class="rel"><a href="/mitsumori/" style="--c:#0d8a7f"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span><span><b>見積書 作成</b><span class="d">請求書・領収書にワンクリックで切り替え</span></span></a><a href="/nohinsho/" style="--c:#0377b3"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span><span><b>納品書 作成</b><span class="d">見積書の内容からそのまま作成</span></span></a><a href="/seikyusho/" style="--c:#4f46e5"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 7.5l3 4 3-4M12 11.5v6.5M9.2 13h5.6M9.2 15.6h5.6"/></svg></span><span><b>請求書 作成</b><span class="d">インボイス対応、源泉徴収・振込手数料にも対応</span></span></a><a href="/ryoshusho/" style="--c:#d9540f"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18l-2.5-1.5L14 21l-2-1.5L10 21l-2.5-1.5L5 21z"/><path d="M9 11l2 2 4-4"/></svg></span><span><b>領収書 作成</b><span class="d">収入印紙の要否を自動で判定</span></span></a></div></div>
+<div class="card"><div class="sharebox" style="border:0;padding:0;margin:0 0 18px"><h2>このツールをシェア</h2><p>お仕事仲間や、同じようにフリーランスで働く方に教えていただけるとうれしいです。</p><div class="sbtns" data-share></div></div><h2>関連ツール</h2><div class="rel"><a href="/mitsumori/" style="--c:#0d8a7f"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span><span><b>見積書 作成</b><span class="d">請求書・領収書にワンクリックで切り替え</span></span></a><a href="/nohinsho/" style="--c:#0377b3"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span><span><b>納品書 作成</b><span class="d">見積書の内容からそのまま作成</span></span></a><a href="/seikyusho/" style="--c:#4f46e5"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 7.5l3 4 3-4M12 11.5v6.5M9.2 13h5.6M9.2 15.6h5.6"/></svg></span><span><b>請求書 作成</b><span class="d">インボイス対応、源泉徴収・振込手数料にも対応</span></span></a><a href="/ryoshusho/" style="--c:#d9540f"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18l-2.5-1.5L14 21l-2-1.5L10 21l-2.5-1.5L5 21z"/><path d="M9 11l2 2 4-4"/></svg></span><span><b>領収書 作成</b><span class="d">収入印紙の要否を自動で判定</span></span></a></div></div>
 
 <div class="ad">広告</div>
 </main>
@@ -273,6 +274,12 @@ function invHTML(){var c=last.c,o=opt(),RL={'10':'10%','8':'8%※','0':'対象�
  '<table class="sumt">'+s+'</table>'+(c.by['8']?'<p style="font-size:9pt">※は軽減税率対象</p>':'')+
  '<p>お支払期限：'+fmtD($('due').value)+'<br>お振込先：'+esc($('bank').value)+'</p>'+
  ($('memo').value?'<div class="box">備考：'+esc($('memo').value)+'</div>':'')+'</div>'}
+$('toShorui').onclick=function(){var o=opt(),it=last.it.filter(function(i){return i.amt||i.name});
+ var doc={to:$('to').value.replace(/\s*(御中|様)\s*$/,''),hon:/様\s*$/.test($('to').value)?'様':'御中',subj:$('subj').value,no:$('no').value,date:$('date').value,due:$('due').value,memo:$('memo').value,
+  incl:false,rnd:o.rnd,noTax:!o.add,wOn:o.wOn,feeOn:!!o.fee,fee:String(o.fee||440),
+  rows:(it.length?it:[{name:'',amt:0,rate:'10',on:true}]).map(function(i){return {n:i.name||'',q:'1',u:'式',p:i.amt?String(i.amt):'',r:i.rate||'10',xr:'',nw:!i.on}})};
+ var me={from:$('from').value,regno:$('regno').value,addr:$('addr').value,bank:$('bank').value};
+ try{sessionStorage.setItem('shorui_v1',JSON.stringify({doc:doc,me:me}))}catch(_){}location.href='/seikyusho/'};
 $('print').onclick=function(){var html=invHTML();$('inv').innerHTML=html;
  var inFrame=false;try{inFrame=window.self!==window.top}catch(_){inFrame=true}
  var ttl=document.title;document.title='請求書'+($('no').value?'_'+$('no').value:'');
@@ -290,5 +297,6 @@ $('print').onclick=function(){var html=invHTML();$('inv').innerHTML=html;
  if(q.get('n'))$('net').value=num(q.get('n')).toLocaleString('ja-JP');
  drawRows();setMode(q.get('m')==='rev'?'rev':'fwd');})();
 </script>
+<script src="/assets/share.js" defer></script>
 </body>
 </html>

@@ -22,9 +22,10 @@ function blank(){return {to:'',hon:'御中',subj:'',no:today().replace(/-/g,'')+
  incl:false,rnd:'floor',noTax:false,wOn:false,feeOn:false,fee:'440',wareki:false,reiss:false,rows:[{n:'',q:'1',u:'式',p:'',r:'10',xr:'',nw:false}]}}
 var S=blank(),ME={from:'',regno:'',addr:'',tel:'',bank:'',ink:'',color:'navy'},keep=true;
 var TYPE=document.body.dataset.type||'q';
-try{var sv=JSON.parse(localStorage.getItem(KEY)||'null');if(sv){if(sv.me)ME=Object.assign(ME,sv.me);if(sv.doc)S=Object.assign(blank(),sv.doc);if(sv.keep===false)keep=false}}catch(_){}
+var restored=false;
+try{var sv=JSON.parse(localStorage.getItem(KEY)||'null');if(sv){if(sv.me)ME=Object.assign(ME,sv.me);if(sv.doc){S=Object.assign(blank(),sv.doc);restored=!!(S.to||S.rows.some(function(r){return r.n||r.p}))}if(sv.keep===false)keep=false}}catch(_){}
 // 保存をオフにしている時も、書類の種類を切り替える間だけは内容を引き継ぐ
-try{var ss=JSON.parse(sessionStorage.getItem(KEY)||'null');if(ss){S=Object.assign(blank(),ss.doc);ME=Object.assign(ME,ss.me)}}catch(_){}
+try{var ss=JSON.parse(sessionStorage.getItem(KEY)||'null');if(ss){S=Object.assign(blank(),ss.doc);ME=Object.assign(ME,ss.me);restored=false}}catch(_){}
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function z2h(s){return String(s||'').replace(/[０-９．，－]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-0xFEE0)}).replace(/[−ー‐]/g,'-')}
@@ -47,6 +48,7 @@ function CK(id,lbl,note,show){return '<label class="ck"'+(show?' data-show="'+sh
 function build(){
  var h='<div class="app"><div class="card fm">'+
  '<nav class="types" aria-label="書類の種類">'+ORDER.map(function(k){return '<a href="'+T[k].url+'" data-type="'+k+'"'+(k===TYPE?' class="on" aria-current="page"':'')+'>'+ico(k)+T[k].n+'<small>'+T[k].s+'</small></a>'}).join('')+'</nav>'+
+ (restored?'<div class="restore" id="restore"><span>前回の入力内容を表示しています</span><button type="button" id="restoreNew">新しく作る</button></div>':'')+
  '<p class="hint">入力した内容はそのままで、書類の種類だけを切り替えられます。</p>'+
 
  '<section class="sec"><div class="sh"><span class="n">1</span><h2>宛先と書類の情報</h2></div>'+
@@ -86,6 +88,7 @@ function build(){
  '<textarea id="memo" rows="3" placeholder="お振込手数料は貴社にてご負担をお願いいたします。"></textarea></section>'+
  '<div class="acts"><button type="button" class="btn p" id="pdf1">PDFをダウンロード</button><button type="button" class="btn" id="print1">印刷</button><button type="button" class="btn" id="reset">新しく作る</button></div>'+
  '<a class="next" id="next"></a>'+
+ '<div class="share" id="shareAsk" hidden><b>PDFができました</b><span>便利だと思ったら、お仕事仲間にシェアしていただけるとうれしいです。</span><div class="sbtns" data-share></div></div>'+
  '</div>'+
 
  '<div class="pv" id="pv"><div class="card"><div class="pvh"><h2>プレビュー <span class="pv-chip">'+T[TYPE].n+'</span></h2><span class="note"><span class="dot"></span>入力するとすぐに反映されます</span></div>'+
@@ -218,7 +221,9 @@ function bind(){
  $('inkBtn').onclick=function(){$('inkFile').click()};
  $('inkDel').onclick=function(){ME.ink='';ink();upd()};
  $('inkFile').onchange=function(){var f=this.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){var im=new Image();im.onload=function(){ME.ink=cleanInk(im);ink();upd()};im.src=rd.result};rd.readAsDataURL(f);this.value=''};
- $('reset').onclick=function(){if(!confirm('宛先・明細・備考を消して、新しい書類を作りますか？\n(あなたの情報はそのまま残ります)'))return;S=blank();try{sessionStorage.removeItem(KEY)}catch(_){}save();location.reload()};
+ function fresh(){S=blank();try{sessionStorage.removeItem(KEY)}catch(_){}save();location.reload()}
+ $('reset').onclick=function(){if(confirm('宛先・明細・備考を消して、新しい書類を作りますか？\n(あなたの情報はそのまま残ります)'))fresh()};
+ if($('restoreNew'))$('restoreNew').onclick=fresh;
  $('print1').onclick=$('print2').onclick=doPrint;
  $('pdf1').onclick=$('pdf2').onclick=$('pdf3').onclick=doPdf;
  $('toPv').onclick=function(){$('pv').scrollIntoView({behavior:'smooth'})};
@@ -240,7 +245,7 @@ function doPdf(){if(busy)return;busy=true;var bs=[$('pdf1'),$('pdf2'),$('pdf3')]
  Promise.all([load('/assets/vendor/html2canvas.min.js'),load('/assets/vendor/jspdf.umd.min.js')]).then(function(){return (document.fonts?document.fonts.ready:Promise.resolve())}).then(function(){
   return html2canvas(box.firstChild,{scale:3,backgroundColor:'#ffffff',logging:false,useCORS:true})}).then(function(cv){
   var pdf=new window.jspdf.jsPDF({unit:'mm',format:'a4',compress:true});pdf.addImage(cv.toDataURL('image/jpeg',0.92),'JPEG',0,0,210,297);
-  pdf.setProperties({title:nm});pdf.save(nm.replace(/[\\/:*?"<>|]/g,'')+'.pdf');end();toast('PDFを保存しました')}).catch(function(){end();toast('PDFを作れませんでした。「印刷」からお試しください')})}
+  pdf.setProperties({title:nm});pdf.save(nm.replace(/[\\/:*?"<>|]/g,'')+'.pdf');end();toast('PDFを保存しました');$('shareAsk').hidden=false;$('shareAsk').scrollIntoView({behavior:'smooth',block:'center'})}).catch(function(){end();toast('PDFを作れませんでした。「印刷」からお試しください')})}
 function doPrint(){var html=docHTML(last),nm=T[TYPE].n+(S.no?'_'+S.no:'')+(S.to?'_'+S.to:'');
  var inFrame=false;try{inFrame=window.self!==window.top}catch(_){inFrame=true}
  if(!inFrame){$('prt').innerHTML=html;var tt=document.title;document.title=nm;window.print();setTimeout(function(){document.title=tt;$('prt').innerHTML=''},800);return}
@@ -248,7 +253,7 @@ function doPrint(){var html=docHTML(last),nm=T[TYPE].n+(S.no?'_'+S.no:'')+(S.to?
  var css=[].map.call(document.querySelectorAll('link[rel=stylesheet]'),function(l){return '<link rel="stylesheet" href="'+l.href+'">'}).join('');
  w.document.write('<!doctype html><meta charset="utf-8"><title>'+esc(nm)+'</title>'+css+'<body><div id="prt">'+html+'</div><script>onload=function(){setTimeout(print,200)}<\/script>');w.document.close()}
 
-build();drawRows();bind();render();
+build();drawRows();bind();render();if(window.SKShare)SKShare();
 try{sessionStorage.removeItem(KEY)}catch(_){}
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
 })();
