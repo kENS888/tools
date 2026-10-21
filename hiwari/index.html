@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="/assets/site.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"日割り計算(家賃・利用料・給与)","url":"https://shigoto-keisan.com/hiwari/","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"isAccessibleForFree":true,"inLanguage":"ja","description":"月額と期間(開始日・終了日)から、家賃・利用料・給与の日割り額を無料・登録不要で計算できるWebツールです。月の途中の入居・解約や、入社・退職した月の給与に使えます。","featureList":["家賃・利用料の日割り：月額 ÷ その月の日数 × 利用日数(30日で割る・年額÷365日にも対応)","給与の日割り：月給 ÷ その月の所定労働日数(土日祝休み) × 出勤日数(暦日・30日・日数の指定にも対応)","「働いた日数分を払う」と「休んだ日数分を引く(欠勤控除)」を切り替えられる","月をまたぐ期間は月ごとに分けて計算し、1か月まるごとの月は満額","端数処理(切り捨て・四捨五入・切り上げ)を選べる","計算した金額のまま請求書を作成できる","入力内容はブラウザ内だけで処理され、サーバーに送信されない"],"dateModified":"2026-10-22","publisher":{"@type":"Organization","name":"しごと計算ラボ","url":"https://shigoto-keisan.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"しごと計算ラボ","item":"https://shigoto-keisan.com/"},{"@type":"ListItem","position":2,"name":"日割り計算(家賃・利用料・給与)","item":"https://shigoto-keisan.com/hiwari/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"家賃の日割りはどう計算する？","acceptedAnswer":{"@type":"Answer","text":"月額の家賃をその月の日数で割り、住んだ日数をかけます。たとえば家賃90,000円で11月15日に入居した場合、90,000円 ÷ 30日 × 16日 ＝ 48,000円です。"}},{"@type":"Question","name":"その月の日数で割るのと、30日で割るのはどちらが正しい？","acceptedAnswer":{"@type":"Answer","text":"法律では決まっておらず、契約書の定めに従います。その月の日数で割る方法が多いですが、30日で割る方法や、年額を365日で割る方法もあります。契約書に書かれていない場合は、相手に確認してください。"}},{"@type":"Question","name":"入居日や退去日はその日も数える？","acceptedAnswer":{"@type":"Answer","text":"一般的には、開始日と終了日の両方を含めて数えます。このツールも両方を含めます。11月15日〜11月30日なら16日間です。"}},{"@type":"Question","name":"給与の日割りはどう計算する？","acceptedAnswer":{"@type":"Answer","text":"会社の就業規則(賃金規程)の定めに従います。よく使われるのは、月給 ÷ その月の所定労働日数 × 出勤日数です。たとえば月給300,000円で2026年11月16日に入社した場合、11月の所定労働日数は19日(土日祝休み)、出勤日は10日なので、300,000円 ÷ 19日 × 10日 ＝ 157,894円(1円未満切り捨て)です。"}},{"@type":"Question","name":"「働いた日数分を払う」と「休んだ日数分を引く」で金額が違うのはなぜ？","acceptedAnswer":{"@type":"Answer","text":"割る日数が、その月の実際の日数と違う場合に差が出ます。たとえば月給300,000円を30日で割る会社で、31日ある10月に16日間在籍した場合、働いた日数分を払うと300,000円 ÷ 30日 × 16日 ＝ 160,000円、休んだ15日分を引くと300,000円 − 300,000円 ÷ 30日 × 15日 ＝ 150,000円です。どちらを使うかは就業規則で確認してください。"}},{"@type":"Question","name":"月平均所定労働日数で割る場合は？","acceptedAnswer":{"@type":"Answer","text":"「くわしく見る」の「割る日数」で「日数を指定」を選び、月平均所定労働日数(年間の所定労働日数 ÷ 12)を入れてください。出勤日数は土日祝を除いて数えます。"}},{"@type":"Question","name":"1円未満の端数はどうする？","acceptedAnswer":{"@type":"Answer","text":"決まりはなく、契約書や賃金規程によります。一般には切り捨てが多く使われています。このツールの初期設定も切り捨てです。"}},{"@type":"Question","name":"月をまたぐ期間はどう計算する？","acceptedAnswer":{"@type":"Answer","text":"月ごとに分けて計算し、合計します。1か月まるごとの月は満額、月の途中から・途中までの月だけを日割りにします。"}}]}]}</script>
 <style>
-:root{--bg:#f4f6f9;--card:#fff;--fg:#14171f;--sub:#5b6474;--line:#e3e7ee;--acc:#b45309;--acc2:#fef3c7;--neg:#c2410c;--sh:0 1px 2px rgba(16,24,40,.05),0 8px 24px rgba(16,24,40,.06)}
-@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--card:#171b22;--fg:#e8ecf2;--sub:#9aa4b2;--line:#262c36;--acc:#fbbf24;--acc2:#3a2a0a;--neg:#fb923c;--sh:none}}
+:root{--bg:#f4f6f9;--card:#fff;--fg:#14171f;--sub:#5b6474;--line:#e3e7ee;--acc:#b45309;--acc2:#fef3c7;--neg:#c2410c;--on:#fff;--sh:0 1px 2px rgba(16,24,40,.05),0 8px 24px rgba(16,24,40,.06)}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--card:#171b22;--fg:#e8ecf2;--sub:#9aa4b2;--line:#262c36;--acc:#fbbf24;--acc2:#3a2a0a;--neg:#fb923c;--on:#1c1305;--sh:none}}
 [hidden]{display:none!important}
 :root{color-scheme:light dark}
 *{box-sizing:border-box}
@@ -35,14 +35,10 @@ main{position:relative;z-index:1;max-width:760px;margin:-44px auto 0;padding:0 1
 .seg button.on{background:var(--card);color:var(--acc);box-shadow:var(--sh)}
 label.f{display:block;font-size:.82rem;color:var(--sub);margin:12px 0 4px;font-weight:600}
 input[type=text],input[type=date],select{width:100%;min-width:0;padding:10px 12px;font-size:1rem;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--fg);font-family:inherit}
-input[type=date]{min-height:46px;-webkit-appearance:none;appearance:none}
 .yen{position:relative}
 .yen input{text-align:right;font-variant-numeric:tabular-nums;font-size:1.15rem;font-weight:700;padding-right:36px}
 .yen::after{content:"円";position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--sub);font-size:.9rem;pointer-events:none}
 input:focus,select:focus{outline:2px solid var(--acc);outline-offset:1px;border-color:transparent}
-.ins{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
-.ins>div{min-width:0}
-.ins .w2{grid-column:1/-1}
 .big{padding:18px 18px 14px;border-radius:14px;background:var(--acc2);margin-top:18px}
 .big .l{font-size:.88rem;color:var(--sub);font-weight:600}
 .big .v{font-size:2rem;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums;line-height:1.35;margin:2px 0}
@@ -70,6 +66,54 @@ h2{font-size:1.1rem;margin:4px 0 10px}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#14171f;color:#fff;padding:10px 18px;border-radius:99px;font-size:.9rem;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
 .toast.on{opacity:1}
 footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40px}footer a{color:inherit}
+.seg button{display:flex;align-items:center;justify-content:center;gap:6px}
+.seg .ico{width:18px;height:18px}
+.pick{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;margin:16px 0 8px}
+.pick .arw{width:20px;height:20px;fill:none;stroke:var(--sub);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.chip{border:2px solid var(--line);background:var(--card);color:var(--fg);border-radius:12px;padding:6px 12px;font:inherit;text-align:left;cursor:pointer;min-width:0}
+.chip span{display:block;font-size:.72rem;color:var(--sub);font-weight:700}
+.chip b{display:block;font-size:1.05rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.chip.on{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc2)}
+.chip.on span{color:var(--acc)}
+.cal{position:relative;border:1px solid var(--line);border-radius:14px;padding:10px 8px 6px}
+.cnav{position:absolute;left:4px;right:4px;top:6px;display:flex;justify-content:space-between;pointer-events:none}
+.cnav button{pointer-events:auto;width:36px;height:36px;border:0;border-radius:10px;background:none;color:var(--fg);cursor:pointer;display:grid;place-items:center}
+.cnav button:hover{background:var(--bg)}
+.cnav svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.mons.n2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.mt{text-align:center;font-weight:800;font-size:.95rem;line-height:24px;margin:2px 0 6px}
+.dw,.dg{display:grid;grid-template-columns:repeat(7,1fr)}
+.dw span{text-align:center;font-size:.72rem;color:var(--sub);font-weight:700;padding-bottom:4px}
+.dw .su{color:#dc2626}.dw .sa{color:#2563eb}
+.dg button.d{position:relative;border:0;background:none;color:var(--fg);font:inherit;height:50px;padding:4px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;cursor:pointer;border-radius:10px;min-width:0}
+.dg button.d b{font-size:.92rem;font-weight:700;line-height:1.25}
+.dg button.d i{font-style:normal;font-size:.62rem;letter-spacing:-.03em;color:var(--sub);font-variant-numeric:tabular-nums;line-height:1.3;margin-top:2px;white-space:nowrap}
+.dg button.d:hover{background:var(--bg)}
+.dg .su b{color:#dc2626}.dg .sa b{color:#2563eb}
+.dg .off{opacity:.45}
+.dg button.d.in{background:var(--acc2);border-radius:0}
+.dg .in i{color:var(--fg)}
+.dg button.d.st,.dg button.d.en{background:var(--acc);opacity:1}
+.dg .st b,.dg .en b,.dg .st i,.dg .en i{color:var(--on)!important}
+.dg .en i{font-weight:800}
+.dg .st{border-radius:10px 0 0 10px}.dg .en{border-radius:0 10px 10px 0}.dg .st.en{border-radius:10px}
+.leg{margin:6px 4px 2px;font-size:.78rem;color:var(--sub);text-align:center}
+.leg b{color:var(--acc)}
+.big .fx{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:8px 0 2px}
+.pl{display:inline-flex;flex-direction:column;align-items:center;background:var(--card);border-radius:10px;padding:4px 10px;line-height:1.3;border:1px solid var(--line)}
+.pl b{font-size:.95rem;font-variant-numeric:tabular-nums}
+.pl small{font-size:.68rem;color:var(--sub)}
+.pl.k{border-color:var(--acc)}.pl.k b{color:var(--acc)}
+.pl.m b{color:var(--neg)}
+.op{font-weight:800;color:var(--sub);font-size:1.05rem}
+.bars{margin-top:10px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:6px 8px;font-size:.82rem}
+.bar{display:contents}
+.bm{font-weight:700;min-width:2.6em}
+.bt{position:relative;height:22px;border-radius:6px;background:var(--card);border:1px solid var(--line);overflow:hidden}
+.bt i{position:absolute;top:0;bottom:0;background:var(--acc);opacity:.85}
+.bt em{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:.72rem;font-weight:700;color:var(--fg);text-shadow:0 0 3px var(--card),0 0 3px var(--card)}
+.bv{font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+@media (max-width:560px){.pl{padding:3px 8px}.big .fx{gap:4px}.cal{padding:8px 2px 4px}.dg button.d{height:48px}.chip b{font-size:.98rem}}
 @media (max-width:560px){.big .v{font-size:1.6rem}header h1{font-size:1.3rem}.card{padding:16px}.opts{grid-template-columns:1fr;gap:2px}.opts>span{font-size:.8rem;color:var(--sub);margin-top:6px}}
 </style>
 </head>
@@ -86,17 +130,28 @@ footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40p
 <main>
 <div class="card">
  <div class="seg" role="tablist">
-  <button id="tFee" class="on" type="button">家賃・利用料</button>
-  <button id="tPay" type="button">給与</button>
+  <button id="tFee" class="on" type="button"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>家賃・利用料</button>
+  <button id="tPay" type="button"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/><path d="M7 6V4.5A1.5 1.5 0 0 1 8.5 3h7A1.5 1.5 0 0 1 17 4.5V6"/></svg>給与</button>
  </div>
 
- <div class="ins">
-  <div class="w2"><label class="f" for="amt" id="amtL">月額</label><div class="yen"><input id="amt" type="text" inputmode="numeric" autocomplete="off" value="100,000" placeholder="0"></div></div>
-  <div><label class="f" for="d1" id="d1L">開始日</label><input id="d1" type="date"></div>
-  <div><label class="f" for="d2" id="d2L">終了日</label><input id="d2" type="date"></div>
+ <label class="f" for="amt" id="amtL">月額</label><div class="yen"><input id="amt" type="text" inputmode="numeric" autocomplete="off" value="100,000" placeholder="0"></div>
+
+ <div class="pick">
+  <button type="button" class="chip" id="cS"><span>開始日</span><b id="cSv">-</b></button>
+  <svg class="arw" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  <button type="button" class="chip" id="cE"><span>終了日</span><b id="cEv">-</b></button>
+ </div>
+ <div class="cal" id="cal">
+  <div class="cnav"><button type="button" id="prev" aria-label="前の月"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" id="next" aria-label="次の月"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
+  <div class="mons" id="mons"></div>
+  <p class="leg" id="leg"></p>
  </div>
 
- <div class="big" aria-live="polite"><div class="l" id="rL"></div><div class="v" id="rV">-</div><div class="s" id="rS"></div><div class="w" id="rW" hidden></div>
+ <div class="big" aria-live="polite">
+  <div class="l" id="rL"></div><div class="v" id="rV">-</div>
+  <div class="fx" id="fx"></div>
+  <div class="bars" id="bars"></div>
+  <div class="w" id="rW" hidden></div>
   <div class="mini"><button type="button" id="copy">結果をコピー</button><button type="button" id="share">この条件のURLをコピー</button><button type="button" class="p" id="toInv">この金額で請求書を作る →</button></div>
  </div>
 
@@ -127,10 +182,10 @@ footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40p
 
  <h2 class="sec-t">使い方</h2>
  <ol class="steps">
-  <li><b>種類を選ぶ</b>家賃・利用料か、給与かを選びます。</li>
-  <li><b>月額と期間を入れる</b>月額と、開始日・終了日を入れると、すぐに日割り額が出ます。終了日は最初は月末です。</li>
-  <li><b>割り方を合わせる</b>契約書や就業規則に合わせて、「くわしく見る」で割る日数や端数処理を変えます。</li>
-  <li><b>コピーして使う</b>結果をコピーするか、そのまま請求書を作れます。</li>
+  <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><b>種類を選ぶ</b>家賃・利用料か、給与か。</li>
+  <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 12h8"/></svg><b>月額を入れる</b>家賃・利用料なら月額、給与なら月給。</li>
+  <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4M9 15h6"/></svg><b>カレンダーで選ぶ</b>開始日と終了日をタップ。日付の下に、その日までの金額が出ます。</li>
+  <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h6"/><circle cx="18" cy="16" r="3"/></svg><b>割り方を合わせる</b>契約書や就業規則に合わせて「くわしく見る」で変更。</li>
  </ol>
 
  <h2 class="sec-t">計算方法</h2>
@@ -227,14 +282,17 @@ if(typeof module!=='undefined')module.exports=HIWARI;
 </script>
 <script>
 var $=function(id){return document.getElementById(id)};
-var mode='fee',last,CK='hiwari_cfg',endAuto=true;
+var B=BIZ,mode='fee',last,CK='hiwari_cfg',S,E,act='e',view,endAuto=true;
 var AMT={fee:'100,000',pay:'300,000'};
 var DEF={fee:{basis:'cal',rnd:'floor'},pay:{basis:'biz',meth:'add',n:'20',rnd:'floor'}};
 var C=JSON.parse(JSON.stringify(DEF));
 var RN={floor:'切り捨て',round:'四捨五入',ceil:'切り上げ'};
 var BN={fee:{cal:'その月の日数',d30:'30日',y365:'年額÷365日'},pay:{biz:'所定労働日数',cal:'その月の日数',d30:'30日',n:'指定した日数'}};
+var WD='日月火水木金土';
+var wide=window.matchMedia?window.matchMedia('(min-width:700px)'):{matches:false};
 function f(n){return n.toLocaleString('ja-JP')}
 function yen(n){return f(n)+'円'}
+function short(n){return n>=1e6?(Math.floor(n/1000)/10).toLocaleString('ja-JP')+'万':f(n)}
 function num(s){var v=parseInt(String(s||'').replace(/[０-９]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-65248)}).replace(/[^0-9]/g,''),10)||0;return Math.min(v,99999999999)}
 function dec(s){var v=parseFloat(String(s||'').replace(/[０-９．]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-65248)}));return v>0&&v<=31?Math.round(v*100)/100:0}
 function toast(m){var t=$('toast');t.textContent=m;t.className='toast on';clearTimeout(toast._t);toast._t=setTimeout(function(){t.className='toast'},1800)}
@@ -242,21 +300,63 @@ function copyText(t,msg){
  function fb(){var a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy')}catch(_){}document.body.removeChild(a);if(ok)toast(msg);else window.prompt('コピーしてください',t)}
  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(function(){toast(msg)},fb)}else fb();
 }
-function pad(n){return ('0'+n).slice(-2)}
-function today(){var t=new Date();return t.getFullYear()+'-'+pad(t.getMonth()+1)+'-'+pad(t.getDate())}
-function eomOf(s){var t=BIZ.parse(s);if(!t)return '';var y=t.getUTCFullYear(),m=t.getUTCMonth()+1;return y+'-'+pad(m)+'-'+pad(HIWARI.lastDay(y,m))}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function todayD(){var t=new Date();return B.D(t.getFullYear(),t.getMonth()+1,t.getDate())}
+function eom(t){var y=t.getUTCFullYear(),m=t.getUTCMonth()+1;return B.D(y,m,HIWARI.lastDay(y,m))}
+function som(t){return B.D(t.getUTCFullYear(),t.getUTCMonth()+1,1)}
+function addM(t,n){return B.D(t.getUTCFullYear(),t.getUTCMonth()+1+n,1)}
 function md(t){return (t.getUTCMonth()+1)+'月'+t.getUTCDate()+'日'}
 function ymd(t){return t.getUTCFullYear()+'年'+md(t)}
+function sl(t){return (t.getUTCMonth()+1)+'/'+t.getUTCDate()+'('+WD[t.getUTCDay()]+')'}
 function range(a,b){return ymd(a)+'〜'+(a.getUTCFullYear()===b.getUTCFullYear()?md(b):ymd(b))}
 function save(){try{localStorage.setItem(CK,JSON.stringify(C))}catch(_){}}
 function load(){try{var s=JSON.parse(localStorage.getItem(CK)||'{}');['fee','pay'].forEach(function(k){if(s[k])Object.assign(C[k],s[k])})}catch(_){}}
+function opts(){var c=C[mode];return {amt:num($('amt').value),mode:mode,basis:c.basis,n:dec(c.n)||20,meth:c.meth,rnd:c.rnd}}
+function calc(a,b){var o=opts();o.a=a;o.b=b;return HIWARI.calc(o)}
 function syncOpts(){var c=C[mode],pay=mode==='pay';
  $('bFee').hidden=pay;$('bPay').hidden=!pay;$('mL').hidden=!pay;$('meth').hidden=!pay;
  if(pay){$('bPay').value=c.basis;$('meth').value=c.meth;$('nDays').value=c.n}else $('bFee').value=c.basis;
  var nOn=pay&&c.basis==='n';$('nL').hidden=!nOn;$('nBox').hidden=!nOn;
  $('rnd').value=c.rnd;$('rnL').textContent=pay&&c.meth==='sub'?'引く金額の端数':'1円未満の端数';
 }
-// 1か月分の式の説明
+// 休み(給与の所定労働日で数える時だけ薄く表示)
+function bizMode(){return mode==='pay'&&(C.pay.basis==='biz'||C.pay.basis==='n')}
+// ---- カレンダー ----
+function drawCal(){
+ var n=wide.matches?2:1,h='',bz=bizMode(),st=S.getTime(),en=E.getTime();
+ for(var i=0;i<n;i++){
+  var f=addM(view,i),y=f.getUTCFullYear(),m=f.getUTCMonth()+1,ld=HIWARI.lastDay(y,m),w0=f.getUTCDay(),hol=B.holidays(y);
+  h+='<div class="mon"><div class="mt">'+y+'年'+m+'月</div><div class="dw">';
+  for(var k=0;k<7;k++)h+='<span'+(k===0?' class="su"':k===6?' class="sa"':'')+'>'+WD[k]+'</span>';
+  h+='</div><div class="dg">';
+  for(k=0;k<w0;k++)h+='<span></span>';
+  for(var d=1;d<=ld;d++){
+   var t=B.D(y,m,d),tt=t.getTime(),wd=t.getUTCDay(),hn=hol[B.key(t)],cls=['d'];
+   if(wd===0||hn)cls.push('su');else if(wd===6)cls.push('sa');
+   if(bz&&(wd===0||wd===6||hn))cls.push('off');
+   if(tt===st)cls.push('st');if(tt===en)cls.push('en');if(tt>st&&tt<en)cls.push('in');
+   var p='';
+   var v=tt>=st?calc(S,t).total:null;if(v!==null)p='<i>'+short(v)+'</i>';
+   var lab=y+'年'+m+'月'+d+'日'+(hn?'('+hn+')':'')+(v!==null?'、ここまでで'+yen(v):'');
+   h+='<button type="button" class="'+cls.join(' ')+'" data-t="'+B.key(t)+'" aria-label="'+esc(lab)+'"'+(hn?' title="'+esc(hn)+'"':'')+'><b>'+d+'</b>'+p+'</button>';
+  }
+  h+='</div></div>';
+ }
+ $('mons').innerHTML=h;$('mons').className='mons n'+n;
+ $('cS').className='chip'+(act==='s'?' on':'');$('cE').className='chip'+(act==='e'?' on':'');
+ $('cSv').textContent=sl(S);$('cEv').textContent=sl(E);
+ $('leg').innerHTML=act==='s'?'<b>開始日</b>をタップしてください':'数字＝<b>その日を終了日にした時の金額</b>';
+}
+$('mons').addEventListener('click',function(ev){var b=ev.target.closest('button[data-t]');if(!b)return;var t=B.parse(b.dataset.t);
+ if(act==='s'||t<S){S=t;if(E<S||endAuto)E=eom(S);act='e'}
+ else{E=t;endAuto=false}
+ render()});
+$('cS').onclick=function(){act='s';view=som(S);render()};
+$('cE').onclick=function(){act='e';view=wide.matches&&som(E)>som(S)?addM(som(E),-1):som(E);render()};
+$('prev').onclick=function(){view=addM(view,-1);drawCal()};
+$('next').onclick=function(){view=addM(view,1);drawCal()};
+if(wide.addEventListener)wide.addEventListener('change',drawCal);
+// ---- 結果 ----
 function how(q,o){
  var M=q.m+'月',a=yen(o.amt);
  if(q.full)return M+'は1か月分のため満額';
@@ -264,49 +364,54 @@ function how(q,o){
   if(o.basis==='y365')return a+' × 12 ÷ 365日 × '+q.use+'日';
   return a+' ÷ '+q.base+'日'+(o.basis==='cal'?'('+M+'の日数)':'')+' × '+q.use+'日';
  }
- var W=o.basis==='biz'||o.basis==='n'?'出勤':'在籍',U=o.basis==='biz'||o.basis==='n'?'所定労働日':'日数';
+ var bz=o.basis==='biz'||o.basis==='n',W=bz?'出勤':'在籍',U=bz?'所定労働日':'日数';
  var baseTxt=o.basis==='d30'?'30日':o.basis==='n'?q.base+'日(指定)':q.base+'日('+M+'の'+U+')';
  if(o.meth==='sub')return a+' − '+yen(q.ded)+'('+a+' ÷ '+baseTxt+' × 欠勤'+q.off+'日)';
  return a+' ÷ '+baseTxt+' × '+W+q.use+'日';
 }
+function pill(v,s,k){return '<span class="pl'+(k?' '+k:'')+'"><b>'+v+'</b><small>'+s+'</small></span>'}
+function op(s){return '<span class="op">'+s+'</span>'}
+function fx(q,o){
+ var M=q.m+'月',A=pill(yen(o.amt),mode==='pay'?'月給':'月額');
+ if(q.full)return A+op('＝')+pill('満額',M+'まるごと','k');
+ if(mode==='fee'){
+  if(o.basis==='y365')return A+op('×')+pill('12','か月')+op('÷')+pill('365日','1年')+op('×')+pill(q.use+'日','使った日数','k');
+  return A+op('÷')+pill(q.base+'日',o.basis==='cal'?M+'の日数':'固定')+op('×')+pill(q.use+'日','使った日数','k');
+ }
+ var bz=o.basis==='biz'||o.basis==='n',base=pill(q.base+'日',o.basis==='d30'?'固定':o.basis==='n'?'指定':M+(bz?'の所定労働日':'の日数'));
+ if(o.meth==='sub')return A+op('−')+pill(yen(q.ded),'欠勤'+q.off+'日分','m');
+ return A+op('÷')+base+op('×')+pill(q.use+'日',bz?'出勤日':'在籍日','k');
+}
 function render(){
  var pay=mode==='pay',c=C[mode];
  $('amtL').textContent=pay?'月給':'月額';
- $('d1L').textContent=pay?'開始日(入社日など)':'開始日(入居・利用開始)';
- $('d2L').textContent=pay?'終了日(退職日など)':'終了日(退去・解約)';
  $('toInv').hidden=pay;
- var a=BIZ.parse($('d1').value),b=BIZ.parse($('d2').value);
- var bad=!a||!b||a.getUTCFullYear()<1900||b.getUTCFullYear()>2200;
- var sum=[BN[mode][c.basis]];if(pay)sum.push(c.meth==='sub'?'欠勤控除':'');sum.push('端数：'+RN[c.rnd]);
- var chg=JSON.stringify(c)!==JSON.stringify(DEF[mode]);
- $('detSum').textContent=sum.filter(Boolean).join('／');$('detSum').className='ms'+(chg?' on':'');
- if(bad){last=null;$('rL').textContent='開始日と終了日を入れてください';$('rV').textContent='-';$('rS').textContent='';$('rW').hidden=true;$('res').innerHTML='';return}
- if(Math.abs(BIZ.days(a,b))>3660){last=null;$('rL').textContent='期間は10年以内で入れてください';$('rV').textContent='-';$('rS').textContent='';$('rW').hidden=true;$('res').innerHTML='';return}
- var o={amt:num($('amt').value),a:a,b:b,mode:mode,basis:c.basis,n:dec(c.n)||20,meth:c.meth,rnd:c.rnd};
- var r=HIWARI.calc(o);last={r:r,o:o};
- var one=r.rows.length===1,q0=r.rows[0];
- $('rL').textContent=range(r.a,r.b)+'('+r.days+'日間)の'+(one?(pay?'日割り給与':'日割り額'):'合計')+'は';
+ var sum=[BN[mode][c.basis]];if(pay&&c.meth==='sub')sum.push('欠勤控除');sum.push('端数：'+RN[c.rnd]);
+ $('detSum').textContent=sum.join('／');$('detSum').className='ms'+(JSON.stringify(c)!==JSON.stringify(DEF[mode])?' on':'');
+ drawCal();
+ var o=opts(),r=calc(S,E);o.a=S;o.b=E;last={r:r,o:o};
+ var one=r.rows.length===1;
+ $('rL').textContent=sl(r.a)+'〜'+sl(r.b)+'('+r.days+'日間)の'+(one?(pay?'日割り給与':'日割り額'):'合計');
  $('rV').textContent=yen(r.total);
- if(one)$('rS').textContent=how(q0,o);
- else if(r.rows.length<=4)$('rS').textContent=r.rows.map(function(q){return q.m+'月 '+yen(q.v)+(q.full?'':'(日割り)')}).join(' ＋ ');
- else $('rS').textContent='日割り '+r.part.length+'か月分 ＋ 満額 '+(r.rows.length-r.part.length)+'か月分(内訳は「くわしく見る」)';
- var w='';
- if(a>b)w='※開始日と終了日が逆だったため、入れ替えて計算しました';
- else if(pay&&(c.basis==='biz'||c.basis==='n')&&r.part.length)w='※出勤日は土日祝を除いて数えています';
+ $('fx').innerHTML=one?fx(r.rows[0],o):'';$('fx').hidden=!one;
+ // 月ごとのバー(その月のどこからどこまでか)
+ var bz=bizMode(),h='';
+ if(r.rows.length<=6)r.rows.forEach(function(q){var l=(q.from.getUTCDate()-1)/q.md*100,w=q.days/q.md*100;
+  h+='<div class="bar"><span class="bm">'+(r.a.getUTCFullYear()!==r.b.getUTCFullYear()?q.y+'年':'')+q.m+'月</span><span class="bt"><i style="left:'+l.toFixed(2)+'%;width:'+w.toFixed(2)+'%"></i><em>'+(q.full?'まるごと':q.from.getUTCDate()+'〜'+q.to.getUTCDate()+'日')+'</em></span><span class="bv">'+yen(q.v)+'</span></div>'});
+ else h='<p class="w">日割り '+r.part.length+'か月分 ＋ 満額 '+(r.rows.length-r.part.length)+'か月分(内訳は「くわしく見る」)</p>';
+ $('bars').innerHTML=h;
+ var w=bz&&r.part.length?'※出勤日は土日祝(カレンダーの薄い日)を除いて数えます':'';
  $('rW').hidden=!w;$('rW').textContent=w;
- // 内訳
- var h='<tr><th>月・期間</th><th class="n">金額</th></tr>',bz=pay&&(c.basis==='biz'||c.basis==='n');
+ var t='<tr><th>月・期間</th><th class="n">金額</th></tr>';
  r.rows.forEach(function(q){var dd=bz?'出勤'+q.use+'日 / 所定'+q.all+'日':q.days+'日間';
-  h+='<tr><td><b>'+q.y+'年'+q.m+'月</b> '+md(q.from)+'〜'+md(q.to)+'('+dd+')<div class="x">'+how(q,o)+'</div></td><td class="n">'+yen(q.v)+'</td></tr>'});
- if(!one)h+='<tr><td><b>合計</b></td><td class="n"><b>'+yen(r.total)+'</b></td></tr>';
- $('res').innerHTML=h;
+  t+='<tr><td><b>'+q.y+'年'+q.m+'月</b> '+md(q.from)+'〜'+md(q.to)+'('+dd+')<div class="x">'+how(q,o)+'</div></td><td class="n">'+yen(q.v)+'</td></tr>'});
+ if(!one)t+='<tr><td><b>合計</b></td><td class="n"><b>'+yen(r.total)+'</b></td></tr>';
+ $('res').innerHTML=t;
 }
 function fmt(el){var p=el.selectionStart,l=el.value.length,v=num(el.value);el.value=v?f(v):'';try{var q=Math.max(0,p+el.value.length-l);el.setSelectionRange(q,q)}catch(_){}}
 var amtEl=$('amt');
 amtEl.addEventListener('input',function(){fmt(amtEl);AMT[mode]=amtEl.value;render()});
 amtEl.addEventListener('focus',function(){var t=this;setTimeout(function(){try{t.select()}catch(_){}},0)});
-$('d1').addEventListener('change',function(){if(endAuto){var e=eomOf(this.value);if(e)$('d2').value=e}render()});
-$('d2').addEventListener('change',function(){endAuto=false;render()});
 function opt(k,v){C[mode][k]=v;save();syncOpts();render()}
 $('bFee').addEventListener('change',function(){opt('basis',this.value)});
 $('bPay').addEventListener('change',function(){opt('basis',this.value)});
@@ -315,17 +420,16 @@ $('rnd').addEventListener('change',function(){opt('rnd',this.value)});
 $('nDays').addEventListener('input',function(){C.pay.n=this.value;save();render()});
 function setMode(m){mode=m;$('tFee').className=m==='fee'?'on':'';$('tPay').className=m==='pay'?'on':'';amtEl.value=AMT[m];syncOpts();render()}
 $('tFee').onclick=function(){setMode('fee')};$('tPay').onclick=function(){setMode('pay')};
-$('copy').onclick=function(){if(!last){toast('先に日付を入れてください');return}var r=last.r,o=last.o;
+$('copy').onclick=function(){var r=last.r,o=last.o;
  var t='日割り計算('+(mode==='pay'?'月給':'月額')+' '+yen(o.amt)+')\n'+range(r.a,r.b)+'('+r.days+'日間)\n';
  t+=r.rows.map(function(q){return q.y+'年'+q.m+'月('+md(q.from)+'〜'+md(q.to)+')：'+how(q,o)+(q.full?' '+yen(q.v):' ＝ '+yen(q.v))}).join('\n');
  t+='\n合計 '+yen(r.total)+'(端数：'+RN[o.rnd]+')';copyText(t,'結果をコピーしました')};
-$('share').onclick=function(){var c=C[mode],q=new URLSearchParams({t:mode,a:num(amtEl.value),s:$('d1').value,e:$('d2').value,k:c.basis,d:c.rnd});
+$('share').onclick=function(){var c=C[mode],q=new URLSearchParams({t:mode,a:num(amtEl.value),s:B.key(S),e:B.key(E),k:c.basis,d:c.rnd});
  if(mode==='pay'){q.set('h',c.meth);if(c.basis==='n')q.set('n',dec(c.n)||20)}
  copyText(location.origin+location.pathname+'?'+q.toString(),'URLをコピーしました')};
-$('toInv').onclick=function(){if(!last){toast('先に日付を入れてください');return}var r=last.r;
+$('toInv').onclick=function(){var r=last.r;
  var rows=r.rows.map(function(q){return {n:q.y+'年'+q.m+'月分'+(q.full?'':'('+(q.from.getUTCMonth()+1)+'/'+q.from.getUTCDate()+'〜'+(q.to.getUTCMonth()+1)+'/'+q.to.getUTCDate()+' 日割り)'),q:'1',u:'式',p:String(q.v),r:'10',xr:'',nw:false}});
- var doc={incl:true,rnd:C.fee.rnd,rows:rows};
- try{sessionStorage.setItem('shorui_v1',JSON.stringify({doc:doc,me:{}}))}catch(_){}location.href='/seikyusho/'};
+ try{sessionStorage.setItem('shorui_v1',JSON.stringify({doc:{incl:true,rnd:C.fee.rnd,rows:rows},me:{}}))}catch(_){}location.href='/seikyusho/'};
 (function(){
  load();
  var q=new URLSearchParams(location.search),m=q.get('t')==='pay'?'pay':'fee';
@@ -334,9 +438,10 @@ $('toInv').onclick=function(){if(!last){toast('先に日付を入れてくださ
  if(m==='pay'&&(q.get('h')==='add'||q.get('h')==='sub'))C.pay.meth=q.get('h');
  if(m==='pay'&&dec(q.get('n')))C.pay.n=String(dec(q.get('n')));
  if(q.has('a')){var a=num(q.get('a'));AMT[m]=a?f(a):''}
- var s=BIZ.parse(q.get('s')||'')?q.get('s'):today(),e=BIZ.parse(q.get('e')||'')?q.get('e'):eomOf(s);
- if(q.get('e')&&BIZ.parse(q.get('e')))endAuto=false;
- $('d1').value=s;$('d2').value=e;
+ var s=B.parse(q.get('s')||''),e=B.parse(q.get('e')||'');
+ S=s&&s.getUTCFullYear()>=2000&&s.getUTCFullYear()<=2099?s:todayD();
+ if(e&&e>=S&&B.days(S,e)<=3660){E=e;endAuto=false}else E=eom(S);
+ view=som(S);
  setMode(m);
 })();
 </script>
