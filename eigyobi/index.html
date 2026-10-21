@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>営業日・支払期日 計算｜月末締め翌月末払い・〇営業日後・営業日数【土日祝を除く・無料】</title>
+<link rel="canonical" href="https://shigoto-keisan.com/eigyobi/">
+<meta name="description" content="「月末締め翌月末払い」「20日締め翌月10日払い」などの支払期日を、土日祝・年末年始を除いて自動計算。〇営業日後・〇営業日前の日付、期間の営業日数も分かります。今後12か月の支払予定表、祝日一覧つき。登録不要・無料。">
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"営業日・支払期日 計算","url":"https://shigoto-keisan.com/eigyobi/","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"isAccessibleForFree":true,"inLanguage":"ja","description":"取引条件(締め日・支払日)から支払期日を、土日・祝日・年末年始を除いて計算できる無料のWebツールです。〇営業日後・〇営業日前の日付や、期間の営業日数も計算できます。","featureList":["「月末締め翌月末払い」「20日締め翌月10日払い」などの支払期日を計算","支払日が土日祝のときの前営業日・翌営業日への調整","今後12か月分の締め日・支払日の一覧","〇営業日後・〇営業日前の日付を計算","2つの日付の間の営業日数・暦日数を計算","2020〜2099年の祝日(振替休日・国民の休日を含む)、年末年始、独自の休日に対応","入力内容はブラウザ内だけで処理され、サーバーに送信されない"],"dateModified":"2026-10-21","publisher":{"@type":"Organization","name":"しごと計算ラボ","url":"https://shigoto-keisan.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"しごと計算ラボ","item":"https://shigoto-keisan.com/"},{"@type":"ListItem","position":2,"name":"営業日・支払期日 計算","item":"https://shigoto-keisan.com/eigyobi/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"「月末締め翌月末払い」とは？","acceptedAnswer":{"@type":"Answer","text":"その月の末日までの取引をまとめて請求し、翌月の末日に支払う条件です。たとえば10月中の取引は10月31日に締め、11月30日に支払います。"}},{"@type":"Question","name":"支払日が土日祝の場合、前と後どちらにずらす？","acceptedAnswer":{"@type":"Answer","text":"契約で決めた方に従います。決めていない場合は、前営業日に支払う会社が多いです。このツールでは「前営業日」「翌営業日」「ずらさない」を切り替えられます。"}},{"@type":"Question","name":"20日締めの場合、21日の取引はいつ締めになる？","acceptedAnswer":{"@type":"Answer","text":"翌月20日の締めになります。締め日を過ぎた取引は次の締めに入るためです。"}},{"@type":"Question","name":"「3営業日後」は当日を含む？","acceptedAnswer":{"@type":"Answer","text":"一般的には含めず、翌営業日を1日目として数えます。月曜日の3営業日後は木曜日です。当日を含める場合は「起算日を1日目として数える」にチェックしてください。"}},{"@type":"Question","name":"営業日とは何日のこと？","acceptedAnswer":{"@type":"Answer","text":"一般的には、土曜日・日曜日・祝日・年末年始を除いた日です。会社によって休日は違うため、「休日の設定」で土曜日や年末年始、独自の休日を変えられます。"}},{"@type":"Question","name":"年末年始はいつからいつまで休み？","acceptedAnswer":{"@type":"Answer","text":"銀行は12月31日〜1月3日が休業日です。官公庁や多くの会社は12月29日〜1月3日を休みにしています。初期設定は、振込に合わせて銀行の休業日にしています。"}},{"@type":"Question","name":"祝日は何年まで対応している？","acceptedAnswer":{"@type":"Answer","text":"2020年〜2099年に対応しています。祝日法に基づいて計算しており、振替休日と国民の休日も含みます。2028年以降の春分の日・秋分の日は計算による予定日で、前年2月の官報で正式に決まります。"}},{"@type":"Question","name":"2026年の営業日は何日？","acceptedAnswer":{"@type":"Answer","text":"土日・祝日と銀行の休業日(12月31日〜1月3日)を除くと、2026年は242日です。年末年始を12月29日〜1月3日にすると240日です。「営業日数」タブで期間を指定すると、月ごとの営業日数も分かります。"}}]}]}</script>
+<style>
+:root{--bg:#f4f6f9;--card:#fff;--fg:#14171f;--sub:#5b6474;--line:#e3e7ee;--acc:#6d28d9;--acc2:#f1ebff;--neg:#c2410c;--offbg:#f3f4f6;--holfg:#dc2626;--sh:0 1px 2px rgba(16,24,40,.05),0 8px 24px rgba(16,24,40,.06)}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--card:#171b22;--fg:#e8ecf2;--sub:#9aa4b2;--line:#262c36;--acc:#c4b5fd;--acc2:#251a3d;--neg:#fb923c;--offbg:#11151b;--holfg:#f87171;--sh:none}}
+[hidden]{display:none!important}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.7 system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;-webkit-font-smoothing:antialiased}
+header{position:relative;overflow:hidden;background:radial-gradient(circle at 1px 1px,rgba(255,255,255,.13) 1px,transparent 0) 0 0/22px 22px,linear-gradient(135deg,#4c1d95,#6d28d9 60%,#a78bfa);color:#fff;padding:22px 16px 64px}
+header .in{position:relative;z-index:1;max-width:760px;margin:0 auto}
+header .deco{position:absolute;right:max(16px,calc(50% - 520px));top:16px;width:150px;height:140px;pointer-events:none}
+header .deco .pg{fill:rgba(255,255,255,.1);stroke:rgba(255,255,255,.35);stroke-width:1.2}
+header .deco .ln{stroke:rgba(255,255,255,.45);stroke-width:2.5;stroke-linecap:round}
+header .deco .acc{fill:rgba(255,255,255,.85)}
+header .deco .dot{fill:rgba(255,255,255,.4)}
+@media (max-width:980px){header .deco{display:none}}
+.crumb{font-size:.78rem;opacity:.8}.crumb a{color:#fff;text-decoration:none}
+header h1{margin:4px 0 0;font-size:1.5rem;letter-spacing:.02em}
+header p{margin:6px 0 0;opacity:.88;font-size:.92rem}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.badges span{font-size:.75rem;background:rgba(255,255,255,.15);padding:3px 10px;border-radius:99px}
+main{position:relative;z-index:1;max-width:760px;margin:-44px auto 0;padding:0 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh);padding:20px;margin-bottom:16px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);background:var(--bg);border-radius:12px;padding:4px;margin-bottom:12px;gap:2px}
+.seg button{border:0;background:none;color:var(--sub);padding:10px 4px;border-radius:9px;font:inherit;font-size:.9rem;font-weight:700;cursor:pointer;line-height:1.35}
+.seg button small{display:block;font-weight:500;font-size:.68rem;opacity:.85}
+.seg button.on{background:var(--card);color:var(--acc);box-shadow:var(--sh)}
+label.f{display:block;font-size:.82rem;color:var(--sub);margin:12px 0 4px;font-weight:600}
+input[type=text],input[type=date],input[type=number],select,textarea{width:100%;padding:10px 12px;font-size:1rem;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--fg);font-family:inherit}
+input[type=number]{text-align:right}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:1px;border-color:transparent}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.inl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.inl select,.inl input{width:auto;flex:1;min-width:90px}
+.inl .t{color:var(--sub);font-size:.9rem;white-space:nowrap}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 4px}
+.chips button{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:99px;padding:5px 11px;font:inherit;font-size:.8rem;cursor:pointer}
+.chips button:hover,.chips button.on{border-color:var(--acc);color:var(--acc);background:var(--acc2)}
+.radio{display:flex;gap:6px;flex-wrap:wrap}
+.radio label{flex:1;min-width:110px;display:flex;gap:6px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:.88rem;cursor:pointer}
+.radio label:has(input:checked){border-color:var(--acc);background:var(--acc2)}
+.ckb{display:flex;gap:14px;flex-wrap:wrap;font-size:.9rem}
+.ckb label{display:flex;gap:5px;align-items:center}
+.big{padding:16px;border-radius:12px;background:var(--acc2);margin-top:16px}
+.big .l{font-size:.85rem;color:var(--sub);font-weight:600}
+.big .v{font-size:1.8rem;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums;line-height:1.35}
+.big .s{font-size:.85rem;color:var(--sub)}
+.warn{color:var(--neg);font-weight:600}
+table.r{width:100%;border-collapse:collapse;margin-top:8px;font-size:.93rem}
+table.r td,table.r th{padding:8px 4px;border-bottom:1px solid var(--line);text-align:left}
+table.r th{font-size:.8rem;color:var(--sub);font-weight:600}
+table.r td.n{text-align:right;font-variant-numeric:tabular-nums}
+.mv{font-size:.75rem;color:var(--neg);white-space:nowrap}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.btn{flex:1;min-width:140px;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:inherit;font-weight:600;cursor:pointer}
+.btn.p{background:var(--acc);border-color:var(--acc);color:#fff}
+@media (prefers-color-scheme:dark){.btn.p{color:#1b1030}}
+details.cfg{margin-top:16px;border:1px solid var(--line);border-radius:12px;padding:0 14px}
+details.cfg summary{cursor:pointer;font-weight:700;padding:11px 0;font-size:.92rem}
+details.cfg summary .note{font-weight:400}
+details.cfg .body{padding:0 0 14px}
+/* カレンダー */
+.calw{margin-top:16px}
+.calh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.calh b{font-size:1rem}
+.calh button{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:8px;width:34px;height:30px;cursor:pointer;font-size:1rem}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;font-size:.82rem;text-align:center}
+.cal .w{font-size:.72rem;color:var(--sub);font-weight:700;padding:2px 0}
+.cal .w.su,.cal .d.hol{color:var(--holfg)}
+.cal .d{border-radius:8px;padding:5px 0 3px;min-height:44px;font-variant-numeric:tabular-nums;border:1px solid transparent;line-height:1.25}
+.cal .d small{display:block;font-size:.58rem;opacity:.9;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding:0 2px}
+.cal .d.off{background:var(--offbg);color:var(--sub)}
+.cal .d.off.hol{color:var(--holfg)}
+.cal .d.res{background:var(--acc);color:#fff;font-weight:800}
+@media (prefers-color-scheme:dark){.cal .d.res{color:#1b1030}}
+.cal .d.mark{border-color:var(--acc)}
+.cal .d.rng{box-shadow:inset 0 -3px 0 var(--acc2)}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.72rem;color:var(--sub);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.ad{min-height:100px;border:1px dashed var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--sub);font-size:.75rem;margin:20px 0}
+h2{font-size:1.1rem;margin:4px 0 10px}
+.note{font-size:.82rem;color:var(--sub)}
+.holt{width:100%;border-collapse:collapse;font-size:.88rem}
+.holt td,.holt th{border:1px solid var(--line);padding:5px 8px;text-align:left}
+.holt th{background:var(--bg)}
+.hols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#14171f;color:#fff;padding:10px 18px;border-radius:99px;font-size:.9rem;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+.toast.on{opacity:1}
+footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40px}footer a{color:inherit}
+@media (max-width:560px){.grid2,.hols{grid-template-columns:1fr}.big .v{font-size:1.45rem}header h1{font-size:1.3rem}.card{padding:16px}.cal .d small{display:none}.cal .d{min-height:34px}}
+</style>
+</head>
+<body>
+<header><div class="in">
+ <div class="crumb"><a href="/">しごと計算ラボ</a> › 営業日・支払期日 計算</div>
+ <h1>営業日・支払期日 計算</h1>
+ <p>「月末締め翌月末払い」などの支払期日や、〇営業日後の日付を、土日祝・年末年始を除いて計算します。</p>
+ <div class="badges"><span>無料・登録不要</span><span>祝日・振替休日に自動対応</span><span>今後12か月の支払予定表</span></div>
+</div>
+<svg class="deco" viewBox="0 0 150 140" aria-hidden="true"><rect class="pg" x="14" y="22" width="122" height="108" rx="10"/><path class="ln" d="M14 48h122M44 12v20M106 12v20"/><g class="dot"><circle cx="34" cy="66" r="4"/><circle cx="58" cy="66" r="4"/><circle cx="82" cy="66" r="4"/><circle cx="106" cy="66" r="4"/><circle cx="34" cy="88" r="4"/><circle cx="58" cy="88" r="4"/><circle cx="106" cy="88" r="4"/><circle cx="34" cy="110" r="4"/><circle cx="58" cy="110" r="4"/><circle cx="82" cy="110" r="4"/></g><circle class="acc" cx="82" cy="88" r="9"/><circle class="acc" cx="116" cy="110" r="5" opacity=".5"/></svg>
+</header>
+
+<main>
+<div class="card">
+ <div class="seg" role="tablist">
+  <button id="tPay" class="on" type="button">支払期日<small>締め・支払日から</small></button>
+  <button id="tBiz" type="button">〇営業日後<small>前にも対応</small></button>
+  <button id="tCnt" type="button">営業日数<small>2つの日付の間</small></button>
+ </div>
+
+ <div id="payBox">
+  <label class="f">よく使う条件</label>
+  <div class="chips" id="presets">
+   <button type="button" data-p="0,m,1,0">月末締め翌月末払い</button>
+   <button type="button" data-p="0,m,2,0">月末締め翌々月末払い</button>
+   <button type="button" data-p="0,m,1,10">月末締め翌月10日払い</button>
+   <button type="button" data-p="0,m,1,25">月末締め翌月25日払い</button>
+   <button type="button" data-p="20,m,1,10">20日締め翌月10日払い</button>
+   <button type="button" data-p="20,m,1,0">20日締め翌月末払い</button>
+   <button type="button" data-p="15,m,0,0">15日締め当月末払い</button>
+   <button type="button" data-p="25,m,1,0">25日締め翌月末払い</button>
+  </div>
+  <div class="grid2">
+   <div><label class="f" for="pBase">基準日(納品日・請求日など)</label><input id="pBase" type="date" min="2020-01-01" max="2099-12-31"></div>
+   <div><label class="f" for="pClose">締め日</label><select id="pClose"></select></div>
+  </div>
+  <label class="f">支払日</label>
+  <div class="radio"><label><input type="radio" name="pType" value="m" checked>〇か月後の〇日</label><label><input type="radio" name="pType" value="d">締め日から〇日後</label></div>
+  <div class="inl" id="pMBox" style="margin-top:8px"><select id="pMon" aria-label="何か月後"><option value="0">当月</option><option value="1" selected>翌月</option><option value="2">翌々月</option><option value="3">3か月後</option><option value="4">4か月後</option></select><span class="t">の</span><select id="pDay" aria-label="支払日"></select><span class="t">払い</span></div>
+  <div class="inl" id="pDBox" style="margin-top:8px" hidden><span class="t">締め日から</span><input id="pDays" type="number" min="0" max="365" value="60" inputmode="numeric"><span class="t">日後</span></div>
+  <label class="f">支払日が休み(土日祝など)のとき</label>
+  <div class="radio"><label><input type="radio" name="pAdj" value="prev" checked>前営業日</label><label><input type="radio" name="pAdj" value="next">翌営業日</label><label><input type="radio" name="pAdj" value="none">ずらさない</label></div>
+ </div>
+
+ <div id="bizBox" hidden>
+  <div class="grid2">
+   <div><label class="f" for="bStart">起算日</label><input id="bStart" type="date" min="2020-01-01" max="2099-12-31"></div>
+   <div><label class="f" for="bN">営業日数</label><div class="inl"><input id="bN" type="number" min="0" max="2000" value="5" inputmode="numeric"><span class="t">営業日</span><select id="bDir" aria-label="後・前"><option value="1">後</option><option value="-1">前</option></select></div></div>
+  </div>
+  <div class="ckb" style="margin-top:10px"><label><input type="checkbox" id="bInc">起算日を1日目として数える</label></div>
+  <p class="note">一般的には起算日を含めず、翌営業日を1日目として数えます(例：月曜日の3営業日後は木曜日)。</p>
+ </div>
+
+ <div id="cntBox" hidden>
+  <div class="grid2">
+   <div><label class="f" for="cFrom">開始日</label><input id="cFrom" type="date" min="2020-01-01" max="2099-12-31"></div>
+   <div><label class="f" for="cTo">終了日</label><input id="cTo" type="date" min="2020-01-01" max="2099-12-31"></div>
+  </div>
+  <p class="note">開始日と終了日の両方を含めて数えます。</p>
+ </div>
+
+ <details class="cfg" id="cfgBox"><summary>休日の設定 <span class="note" id="cfgSum"></span></summary><div class="body">
+  <div class="ckb"><label><input type="checkbox" id="kSat" checked>土曜日</label><label><input type="checkbox" id="kSun" checked>日曜日</label><label><input type="checkbox" id="kHol" checked>祝日・振替休日</label></div>
+  <label class="f" for="kNy">年末年始</label>
+  <select id="kNy"><option value="bank">12月31日〜1月3日(銀行の休業日)</option><option value="gov">12月29日〜1月3日(官公庁・多くの会社)</option><option value="none">休みにしない</option></select>
+  <label class="f" for="kEx">会社独自の休日(1行に1日。例：2026-08-13)</label>
+  <textarea id="kEx" rows="3" placeholder="2026-08-13&#10;2026-08-14"></textarea>
+  <p class="note">設定はこの端末にだけ保存され、3つのタブで共通です。</p>
+ </div></details>
+
+ <div class="big"><div class="l" id="rL">支払期日</div><div class="v" id="rV">-</div><div class="s" id="rS"></div></div>
+ <table class="r" id="res"></table>
+
+ <div class="calw">
+  <div class="calh"><button type="button" id="cPrev" aria-label="前の月">‹</button><b id="cTitle"></b><button type="button" id="cNext" aria-label="次の月">›</button></div>
+  <div class="cal" id="cal"></div>
+  <div class="legend"><span><i style="background:var(--acc)"></i>結果の日</span><span><i style="border:1px solid var(--acc)"></i>締め日・起算日</span><span><i style="background:var(--offbg);border:1px solid var(--line)"></i>休み</span></div>
+ </div>
+
+ <div id="schBox">
+  <h2 style="margin-top:18px">今後12か月の支払予定</h2>
+  <table class="r" id="sch"></table>
+ </div>
+
+ <div class="acts">
+  <button class="btn p" id="copy" type="button">結果をコピー</button>
+  <button class="btn" id="share" type="button">この条件のURLをコピー</button>
+ </div>
+</div>
+
+<div class="ad">広告</div>
+
+<div class="card">
+ <section class="tldr" aria-label="このツールについて">
+  <h2 class="sec-t">営業日・支払期日 計算ツールでできること</h2>
+  <p class="lead">取引条件(締め日・支払日)から支払期日を、土日・祝日・年末年始を除いて計算できる無料のWebツールです。〇営業日後・〇営業日前の日付や、期間の営業日数も計算できます。</p>
+  <ul class="feat"><li>「月末締め翌月末払い」「20日締め翌月10日払い」などの支払期日を計算</li><li>支払日が土日祝のときの前営業日・翌営業日への調整</li><li>今後12か月分の締め日・支払日の一覧(コピーしてExcelに貼り付け可能)</li><li>〇営業日後・〇営業日前の日付を計算</li><li>2つの日付の間の営業日数・暦日数を計算</li><li>2020〜2099年の祝日(振替休日・国民の休日を含む)、年末年始、独自の休日に対応</li><li>入力内容はブラウザ内だけで処理され、サーバーに送信されない</li></ul>
+  <p class="upd">最終更新日：<time datetime="2026-10-21">2026年10月21日</time> ／ 運営：しごと計算ラボ</p>
+ </section>
+
+ <h2 class="sec-t">使い方</h2>
+ <ol class="steps">
+  <li><b>タブを選ぶ</b>支払期日、〇営業日後、営業日数のどれを知りたいかを選びます。</li>
+  <li><b>条件を入れる</b>支払期日なら、よく使う条件のボタンを押すか、締め日と支払日を選びます。</li>
+  <li><b>休日を確認</b>土曜や年末年始、会社独自の休みは「休日の設定」で変えられます。</li>
+  <li><b>コピーして使う</b>結果や12か月の支払予定はコピーして、メールやExcelに貼り付けられます。</li>
+ </ol>
+
+ <h2 class="sec-t">計算方法</h2>
+ <ul>
+  <li><b>締め日</b>：基準日がその月の締め日以前なら当月、過ぎていれば翌月の締め日が対象です(例：20日締めで21日の取引は翌月20日締め)</li>
+  <li><b>支払日</b>：締め日の月から「〇か月後」の指定日です。31日がない月の「末日」は、その月の最終日になります</li>
+  <li><b>休日の調整</b>：支払日が休みなら、前営業日(または翌営業日)にずらします</li>
+  <li><b>営業日</b>：土日・祝日・年末年始・指定した休日以外の日です</li>
+  <li><b>祝日</b>：「国民の祝日に関する法律」に基づき計算しています。春分の日・秋分の日は、国立天文台の計算方法による値です。2028年以降の春分・秋分は、前年2月の官報で正式に決まります</li>
+ </ul>
+
+ <h2 class="sec-t">2026年・2027年の祝日一覧</h2>
+ <div class="hols"><table class="holt"><tr><th colspan="2">2026年</th></tr><tr><td>1月1日(木)</td><td>元日</td></tr><tr><td>1月12日(月)</td><td>成人の日</td></tr><tr><td>2月11日(水)</td><td>建国記念の日</td></tr><tr><td>2月23日(月)</td><td>天皇誕生日</td></tr><tr><td>3月20日(金)</td><td>春分の日</td></tr><tr><td>4月29日(水)</td><td>昭和の日</td></tr><tr><td>5月3日(日)</td><td>憲法記念日</td></tr><tr><td>5月4日(月)</td><td>みどりの日</td></tr><tr><td>5月5日(火)</td><td>こどもの日</td></tr><tr><td>5月6日(水)</td><td>振替休日</td></tr><tr><td>7月20日(月)</td><td>海の日</td></tr><tr><td>8月11日(火)</td><td>山の日</td></tr><tr><td>9月21日(月)</td><td>敬老の日</td></tr><tr><td>9月22日(火)</td><td>国民の休日</td></tr><tr><td>9月23日(水)</td><td>秋分の日</td></tr><tr><td>10月12日(月)</td><td>スポーツの日</td></tr><tr><td>11月3日(火)</td><td>文化の日</td></tr><tr><td>11月23日(月)</td><td>勤労感謝の日</td></tr></table><table class="holt"><tr><th colspan="2">2027年</th></tr><tr><td>1月1日(金)</td><td>元日</td></tr><tr><td>1月11日(月)</td><td>成人の日</td></tr><tr><td>2月11日(木)</td><td>建国記念の日</td></tr><tr><td>2月23日(火)</td><td>天皇誕生日</td></tr><tr><td>3月21日(日)</td><td>春分の日</td></tr><tr><td>3月22日(月)</td><td>振替休日</td></tr><tr><td>4月29日(木)</td><td>昭和の日</td></tr><tr><td>5月3日(月)</td><td>憲法記念日</td></tr><tr><td>5月4日(火)</td><td>みどりの日</td></tr><tr><td>5月5日(水)</td><td>こどもの日</td></tr><tr><td>7月19日(月)</td><td>海の日</td></tr><tr><td>8月11日(水)</td><td>山の日</td></tr><tr><td>9月20日(月)</td><td>敬老の日</td></tr><tr><td>9月23日(木)</td><td>秋分の日</td></tr><tr><td>10月11日(月)</td><td>スポーツの日</td></tr><tr><td>11月3日(水)</td><td>文化の日</td></tr><tr><td>11月23日(火)</td><td>勤労感謝の日</td></tr></table></div>
+ <p class="note">出典：内閣府「国民の祝日について」。2020年と2021年は東京オリンピック・パラリンピックに伴い、海の日・スポーツの日・山の日が移動しています(このツールの計算に反映済み)。</p>
+
+ <h2 class="sec-t">よくある質問</h2>
+ <div class="faq">
+ <details><summary><span>「月末締め翌月末払い」とは？</span></summary><p>その月の末日までの取引をまとめて請求し、翌月の末日に支払う条件です。たとえば10月中の取引は10月31日に締め、11月30日に支払います。</p></details>
+ <details><summary><span>支払日が土日祝の場合、前と後どちらにずらす？</span></summary><p>契約で決めた方に従います。決めていない場合は、前営業日に支払う会社が多いです。このツールでは「前営業日」「翌営業日」「ずらさない」を切り替えられます。</p></details>
+ <details><summary><span>20日締めの場合、21日の取引はいつ締めになる？</span></summary><p>翌月20日の締めになります。締め日を過ぎた取引は次の締めに入るためです。</p></details>
+ <details><summary><span>「3営業日後」は当日を含む？</span></summary><p>一般的には含めず、翌営業日を1日目として数えます。月曜日の3営業日後は木曜日です。当日を含める場合は「起算日を1日目として数える」にチェックしてください。</p></details>
+ <details><summary><span>営業日とは何日のこと？</span></summary><p>一般的には、土曜日・日曜日・祝日・年末年始を除いた日です。会社によって休日は違うため、「休日の設定」で土曜日や年末年始、独自の休日を変えられます。</p></details>
+ <details><summary><span>年末年始はいつからいつまで休み？</span></summary><p>銀行は12月31日〜1月3日が休業日です。官公庁や多くの会社は12月29日〜1月3日を休みにしています。初期設定は、振込に合わせて銀行の休業日にしています。</p></details>
+ <details><summary><span>祝日は何年まで対応している？</span></summary><p>2020年〜2099年に対応しています。祝日法に基づいて計算しており、振替休日と国民の休日も含みます。2028年以降の春分の日・秋分の日は計算による予定日で、前年2月の官報で正式に決まります。</p></details>
+ <details><summary><span>2026年の営業日は何日？</span></summary><p>土日・祝日と銀行の休業日(12月31日〜1月3日)を除くと、2026年は242日です。年末年始を12月29日〜1月3日にすると240日です。「営業日数」タブで期間を指定すると、月ごとの営業日数も分かります。</p></details>
+ </div>
+ <p class="note">※会社ごとの休日や、契約で決めた支払条件が優先されます。法律で定められた期限(下請代金の支払期日など)の判断は、所管官庁の資料や専門家にご確認ください。</p>
+</div>
+
+<div class="card"><div class="sharebox" style="border:0;padding:0;margin:0 0 18px"><h2>このツールをシェア</h2><p>経理や事務の仲間に教えていただけるとうれしいです。</p><div class="sbtns" data-share></div></div><h2>関連ツール</h2><div class="rel"><a href="/seikyusho/" style="--c:#4f46e5"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 7.5l3 4 3-4M12 11.5v6.5M9.2 13h5.6M9.2 15.6h5.6"/></svg></span><span><b>請求書 作成</b><span class="d">お支払期限を入れて、インボイス対応の請求書をPDFに</span></span></a><a href="/hacchusho/" style="--c:#be123c"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6v3H9z"/><path d="M15 4.5h3a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1h3"/><path d="M9 12h6M9 16h4"/></svg></span><span><b>発注書・注文書 作成</b><span class="d">納期・支払条件を書いた発注書を作成</span></span></a><a href="/gensen/" style="--c:#2554d8"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></svg></span><span><b>源泉徴収税 計算</b><span class="d">報酬の源泉徴収税と手取りを計算</span></span></a><a href="/mitsumori/" style="--c:#0d8a7f"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span><span><b>見積書 作成</b><span class="d">請求書・領収書にワンクリックで切り替え</span></span></a></div></div>
+
+<div class="ad">広告</div>
+</main>
+<footer><a href="/">しごと計算ラボ</a> ・ <a href="/privacy/">プライバシーポリシー</a> ・ <a href="/contact/">お問い合わせ</a><br>© しごと計算ラボ</footer>
+<div class="toast" id="toast"></div>
+
+<script id="core">
+// 営業日・支払期日 計算ロジック(テスト用に単体でも読み込める)
+var BIZ=(function(){
+ var MS=86400000;
+ function D(y,m,d){return new Date(Date.UTC(y,m-1,d))}
+ function key(t){return t.toISOString().slice(0,10)}
+ function parse(s){var m=/^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(s||'');if(!m)return null;var t=D(+m[1],+m[2],+m[3]);return key(t)===(m[1]+'-'+('0'+m[2]).slice(-2)+'-'+('0'+m[3]).slice(-2))?t:null}
+ function add(t,n){return new Date(t.getTime()+n*MS)}
+ function lastDay(y,m){return D(y,m+1,0).getUTCDate()}
+ function nthMon(y,m,n){var w=D(y,m,1).getUTCDay();return 1+((8-w)%7)+(n-1)*7}
+ function eq(y,spring){var x=(spring?20.8431:23.2488)+0.242194*(y-1980)-Math.floor((y-1980)/4);return Math.floor(x)}
+ var cache={};
+ // 2020〜2099年の祝日(祝日法に基づく計算。特例は2020・2021年の東京五輪の移動)
+ function holidays(y){
+  if(cache[y])return cache[y];
+  var h={};function s(m,d,n){h[key(D(y,m,d))]=n}
+  if(y<2020||y>2099){cache[y]=h;return h}
+  s(1,1,'元日');s(1,nthMon(y,1,2),'成人の日');s(2,11,'建国記念の日');s(2,23,'天皇誕生日');
+  s(3,eq(y,true),'春分の日');s(4,29,'昭和の日');s(5,3,'憲法記念日');s(5,4,'みどりの日');s(5,5,'こどもの日');
+  if(y===2020){s(7,23,'海の日');s(7,24,'スポーツの日');s(8,10,'山の日')}
+  else if(y===2021){s(7,22,'海の日');s(7,23,'スポーツの日');s(8,8,'山の日')}
+  else{s(7,nthMon(y,7,3),'海の日');s(8,11,'山の日');s(10,nthMon(y,10,2),'スポーツの日')}
+  s(9,nthMon(y,9,3),'敬老の日');s(9,eq(y,false),'秋分の日');s(11,3,'文化の日');s(11,23,'勤労感謝の日');
+  // 国民の休日(祝日に挟まれた平日)
+  var ks=Object.keys(h).sort();
+  ks.forEach(function(k){var t=parse(k),n2=key(add(t,2));if(h[n2]&&!h[key(add(t,1))])h[key(add(t,1))]='国民の休日'});
+  // 振替休日(日曜の祝日の後の、最初の祝日でない日)
+  Object.keys(h).sort().forEach(function(k){var t=parse(k);if(t.getUTCDay()===0&&h[k]!=='振替休日'){var u=add(t,1);while(h[key(u)])u=add(u,1);h[key(u)]='振替休日'}});
+  cache[y]=h;return h;
+ }
+ function holName(t){return holidays(t.getUTCFullYear())[key(t)]||''}
+ // cfg:{sat,sun,hol,ny:'none'|'bank'|'gov',extra:{'YYYY-MM-DD':1}}
+ function offReason(t,cfg){
+  var w=t.getUTCDay(),m=t.getUTCMonth()+1,d=t.getUTCDate();
+  if(cfg.extra&&cfg.extra[key(t)])return '指定の休日';
+  if(cfg.hol!==false){var n=holName(t);if(n)return n}
+  if(cfg.ny==='bank'&&((m===12&&d===31)||(m===1&&d<=3)))return '年末年始';
+  if(cfg.ny==='gov'&&((m===12&&d>=29)||(m===1&&d<=3)))return '年末年始';
+  if(w===0&&cfg.sun!==false)return '日曜';
+  if(w===6&&cfg.sat!==false)return '土曜';
+  return '';
+ }
+ function isOff(t,cfg){return !!offReason(t,cfg)}
+ // n営業日後(n<0なら前)。startCount=trueなら開始日(営業日なら)を1日目と数える
+ function addBiz(t,n,cfg,startCount){
+  if(n===0)return t;var dir=n>0?1:-1,left=Math.abs(n),u=t,g=0;
+  if(startCount&&!isOff(t,cfg)){left--;if(left===0)return t}
+  while(left>0&&g++<20000){u=add(u,dir);if(!isOff(u,cfg))left--}
+  return u;
+ }
+ // 期間(両端を含む)の営業日数など
+ function countBiz(a,b,cfg){
+  if(a>b){var x=a;a=b;b=x}
+  var biz=0,cal=0,off=[],u=a,g=0;
+  while(u<=b&&g++<40000){cal++;var r=offReason(u,cfg);if(r)off.push({d:u,r:r});else biz++;u=add(u,1)}
+  return {biz:biz,cal:cal,off:off};
+ }
+ function adjust(t,mode,cfg){var u=t,g=0;if(mode==='none')return t;var dir=mode==='prev'?-1:1;while(isOff(u,cfg)&&g++<400)u=add(u,dir);return u}
+ // 締め日(close:0=末日、1〜28)を基準日から求める
+ function closeOf(t,close){var y=t.getUTCFullYear(),m=t.getUTCMonth()+1;
+  if(close===0)return D(y,m,lastDay(y,m));
+  if(t.getUTCDate()<=close)return D(y,m,close);
+  return D(y,m+1,close)}
+ // rule:{close,type:'m'|'d',mon,day(0=末日),days,adj:'prev'|'next'|'none'}
+ function dueFromClose(c,rule,cfg){
+  var raw;
+  if(rule.type==='d')raw=add(c,rule.days||0);
+  else{var y=c.getUTCFullYear(),m=c.getUTCMonth()+1+(rule.mon||0),f=D(y,m,1);y=f.getUTCFullYear();m=f.getUTCMonth()+1;
+   raw=D(y,m,rule.day===0?lastDay(y,m):Math.min(rule.day,lastDay(y,m)))}
+  var due=adjust(raw,rule.adj,cfg);
+  return {close:c,raw:raw,due:due,moved:due.getTime()!==raw.getTime(),reason:offReason(raw,cfg),before:raw<c};
+ }
+ function due(t,rule,cfg){return dueFromClose(closeOf(t,rule.close),rule,cfg)}
+ // 基準日を含む締めから、n回分の支払予定
+ function schedule(t,rule,cfg,n){var out=[],c=closeOf(t,rule.close);
+  for(var i=0;i<n;i++){out.push(dueFromClose(c,rule,cfg));var y=c.getUTCFullYear(),m=c.getUTCMonth()+2,f=D(y,m,1);y=f.getUTCFullYear();m=f.getUTCMonth()+1;
+   c=D(y,m,rule.close===0?lastDay(y,m):rule.close)}
+  return out}
+ function days(a,b){return Math.round((b-a)/MS)}
+ return {D:D,key:key,parse:parse,add:add,days:days,holidays:holidays,holName:holName,offReason:offReason,isOff:isOff,addBiz:addBiz,countBiz:countBiz,adjust:adjust,closeOf:closeOf,due:due,schedule:schedule};
+})();
+if(typeof module!=='undefined')module.exports=BIZ;
+</script>
+<script>
+var B=BIZ,$=function(id){return document.getElementById(id)},mode='pay',calM=null,last=null;
+var WD=['日','月','火','水','木','金','土'];
+function fmt(t){return t.getUTCFullYear()+'年'+(t.getUTCMonth()+1)+'月'+t.getUTCDate()+'日('+WD[t.getUTCDay()]+')'}
+function fmtS(t){return (t.getUTCMonth()+1)+'/'+t.getUTCDate()+'('+WD[t.getUTCDay()]+')'}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function toast(m){var t=$('toast');t.textContent=m;t.className='toast on';clearTimeout(toast._t);toast._t=setTimeout(function(){t.className='toast'},1800)}
+function copyText(t,msg){
+ function fb(){var a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy')}catch(_){}document.body.removeChild(a);if(ok)toast(msg);else window.prompt('コピーしてください',t)}
+ if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(function(){toast(msg)},fb)}else fb();
+}
+function radio(n){var e=document.querySelector('input[name='+n+']:checked');return e?e.value:''}
+function setRadio(n,v){var e=document.querySelector('input[name='+n+'][value="'+v+'"]');if(e)e.checked=true}
+function pd(s){return B.parse(s)}
+function inRange(t){return t&&t.getUTCFullYear()>=2020&&t.getUTCFullYear()<=2099}
+// 選択肢
+(function(){var c='<option value="0">末日</option>',d='<option value="0">末日</option>';for(var i=1;i<=28;i++){c+='<option value="'+i+'">'+i+'日</option>';d+='<option value="'+i+'">'+i+'日</option>'}$('pClose').innerHTML=c;$('pDay').innerHTML=d})();
+// 休日設定
+function parseEx(){var o={},n=0;String($('kEx').value).split(/[\s,、]+/).forEach(function(s){var m=/^(\d{4})[-\/年.](\d{1,2})[-\/月.](\d{1,2})日?$/.exec(s);if(m){var t=B.parse(m[1]+'-'+('0'+m[2]).slice(-2)+'-'+('0'+m[3]).slice(-2));if(t){o[B.key(t)]=1;n++}}});return {o:o,n:n}}
+function cfg(){var ex=parseEx();return {sat:$('kSat').checked,sun:$('kSun').checked,hol:$('kHol').checked,ny:$('kNy').value,extra:ex.o,exN:ex.n}}
+function cfgSum(c){var a=[];if(c.sat)a.push('土');if(c.sun)a.push('日');if(c.hol)a.push('祝');if(c.ny!=='none')a.push('年末年始');if(c.exN)a.push('独自'+c.exN+'日');return '('+(a.length?a.join('・')+'が休み':'休みなし')+')'}
+var CK=['kSat','kSun','kHol','kNy','kEx'];
+function saveCfg(){try{var o={};CK.forEach(function(k){var e=$(k);o[k]=e.type==='checkbox'?e.checked:e.value});localStorage.setItem('eigyobi_cfg',JSON.stringify(o))}catch(_){}}
+function loadCfg(){try{var o=JSON.parse(localStorage.getItem('eigyobi_cfg')||'null');if(!o)return;CK.forEach(function(k){if(o[k]==null)return;var e=$(k);if(e.type==='checkbox')e.checked=!!o[k];else e.value=o[k]})}catch(_){}}
+function rule(){return {close:+$('pClose').value,type:radio('pType'),mon:+$('pMon').value,day:+$('pDay').value,days:Math.max(0,parseInt($('pDays').value,10)||0),adj:radio('pAdj')}}
+function ruleName(r){var c=r.close===0?'月末':r.close+'日';if(r.type==='d')return c+'締め・締め日から'+r.days+'日後払い';
+ var m=['当月','翌月','翌々月','3か月後の','4か月後の'][r.mon]||'';return c+'締め'+m+(r.day===0?'末':r.day+'日')+'払い'}
+function adjName(a){return a==='prev'?'休みなら前営業日':a==='next'?'休みなら翌営業日':'休みでもずらさない'}
+// カレンダー
+function drawCal(){if(!calM){$('cal').innerHTML='';$('cTitle').textContent='';return}
+ var c=cfg(),y=calM.y,m=calM.m,first=B.D(y,m,1),n=new Date(Date.UTC(y,m,0)).getUTCDate(),h='';
+ $('cTitle').textContent=y+'年'+m+'月';
+ WD.forEach(function(w,i){h+='<div class="w'+(i===0?' su':'')+'">'+w+'</div>'});
+ for(var i=0;i<first.getUTCDay();i++)h+='<div></div>';
+ for(var d=1;d<=n;d++){var t=B.D(y,m,d),k=B.key(t),r=B.offReason(t,c),hn=c.hol?B.holName(t):'',cls='d';
+  if(r)cls+=' off';if(hn||t.getUTCDay()===0)cls+=' hol';
+  if(last&&last.res&&k===last.res)cls+=' res';else if(last&&last.marks&&last.marks[k])cls+=' mark';
+  if(last&&last.rng&&k>=last.rng[0]&&k<=last.rng[1]&&!r)cls+=' rng';
+  var lab=r&&r!=='土曜'&&r!=='日曜'?r:'';
+  h+='<div class="'+cls+'"'+(lab?' title="'+esc(lab)+'"':'')+'>'+d+(lab?'<small>'+esc(lab)+'</small>':'')+'</div>'}
+ $('cal').innerHTML=h}
+function setCalTo(t){if(t)calM={y:t.getUTCFullYear(),m:t.getUTCMonth()+1}}
+function row(l,v){return '<tr><td>'+l+'</td><td class="n">'+v+'</td></tr>'}
+function render(){
+ var c=cfg();$('cfgSum').textContent=cfgSum(c);
+ $('payBox').hidden=mode!=='pay';$('bizBox').hidden=mode!=='biz';$('cntBox').hidden=mode!=='cnt';$('schBox').hidden=mode!=='pay';
+ $('pMBox').hidden=radio('pType')!=='m';$('pDBox').hidden=radio('pType')!=='d';
+ var h='',L='',V='-',S='';last={marks:{}};
+ if(mode==='pay'){var b=pd($('pBase').value),r=rule();L='支払期日 ― '+ruleName(r);
+  [].forEach.call($('presets').children,function(e){var p=e.dataset.p.split(',');e.className=(+p[0]===r.close&&p[1]===r.type&&+p[2]===r.mon&&+p[3]===r.day)?'on':''});
+  if(!inRange(b)){V='-';S='基準日は2020年〜2099年の日付を入れてください'}
+  else{var x=B.due(b,r,c);V=fmt(x.due);last.res=B.key(x.due);last.marks[B.key(x.close)]=1;last.text=ruleName(r)+'('+adjName(r.adj)+')\n基準日 '+fmt(b)+'\n締め日 '+fmt(x.close)+'\n支払期日 '+fmt(x.due);
+   S=x.moved?'本来の支払日 '+fmt(x.raw)+' が'+x.reason+'のため、'+(r.adj==='prev'?'前':'翌')+'営業日にずらしました':(x.reason?'支払日 '+fmt(x.raw)+' は'+x.reason+'です(ずらさない設定)':'');
+   if(x.before)S='<span class="warn">支払日が締め日より前になっています。条件を確認してください。</span>';
+   h=row('基準日',fmt(b))+row('締め日',fmt(x.close))+(x.moved?row('本来の支払日',fmt(x.raw)+' <span class="mv">'+esc(x.reason)+'</span>'):'')+row('支払期日',fmt(x.due))+row('基準日から',B.days(b,x.due)+'日後')+row('締め日から',B.days(x.close,x.due)+'日後');
+   var sc=B.schedule(b,r,c,12),sh='<tr><th>締め日</th><th>支払期日</th><th></th></tr>',st='締め日\t支払期日\n';
+   sc.forEach(function(s){sh+='<tr><td>'+fmt(s.close)+'</td><td>'+fmt(s.due)+'</td><td class="n">'+(s.moved?'<span class="mv">'+esc(s.reason)+'のため移動</span>':'')+'</td></tr>';st+=B.key(s.close)+'\t'+B.key(s.due)+'\n'});
+   $('sch').innerHTML=sh;last.sch=st;setCalTo(x.due)}}
+ else if(mode==='biz'){var s=pd($('bStart').value),n=Math.max(0,Math.min(2000,parseInt($('bN').value,10)||0)),dir=+$('bDir').value,inc=$('bInc').checked;
+  L=n+'営業日'+(dir>0?'後':'前');
+  if(!inRange(s)){S='起算日は2020年〜2099年の日付を入れてください'}
+  else{var t=B.addBiz(s,n*dir,c,inc);V=fmt(t);last.res=B.key(t);last.marks[B.key(s)]=1;
+   var a=dir>0?s:t,z=dir>0?t:s,cn=B.countBiz(a,z,c),offs=cn.off.filter(function(o){return o.r!=='土曜'&&o.r!=='日曜'});
+   S=(inc?'起算日を1日目として':'起算日の翌営業日を1日目として')+'数えています';
+   h=row('起算日',fmt(s)+(B.isOff(s,c)?' <span class="mv">'+esc(B.offReason(s,c))+'</span>':''))+row('結果',fmt(t))+row('暦日で',Math.abs(B.days(s,t))+'日'+(dir>0?'後':'前'))+row('間の休み',cn.off.length+'日'+(offs.length?'(うち祝日など '+offs.map(function(o){return fmtS(o.d)+' '+esc(o.r)}).join('、')+')':''));
+   last.rng=[B.key(a),B.key(z)];last.text='起算日 '+fmt(s)+' の'+n+'営業日'+(dir>0?'後':'前')+'：'+fmt(t);setCalTo(t)}}
+ else{var f=pd($('cFrom').value),e=pd($('cTo').value);L='営業日数';
+  if(!inRange(f)||!inRange(e)){S='開始日・終了日は2020年〜2099年の日付を入れてください'}
+  else{if(f>e){var tmp=f;f=e;e=tmp}var r2=B.countBiz(f,e,c),k={};r2.off.forEach(function(o){var g=o.r==='土曜'||o.r==='日曜'?'土日':o.r==='年末年始'?'年末年始':o.r==='指定の休日'?'独自の休日':'祝日・休日';k[g]=(k[g]||0)+1});
+   V=r2.biz+' 営業日';S=fmt(f)+' 〜 '+fmt(e)+'(両端を含む)';
+   h=row('営業日数',r2.biz+'日')+row('暦日数',r2.cal+'日')+row('休み',r2.off.length+'日'+(r2.off.length?'(内訳 '+Object.keys(k).map(function(g){return g+' '+k[g]+'日'}).join('、')+')':''));
+   var hl=r2.off.filter(function(o){return o.r!=='土曜'&&o.r!=='日曜'});
+   if(hl.length&&hl.length<=40)h+='<tr><td>期間中の祝日など</td><td>'+hl.map(function(o){return fmtS(o.d)+' '+esc(o.r)}).join('<br>')+'</td></tr>';
+   last.rng=[B.key(f),B.key(e)];last.marks[B.key(f)]=1;last.marks[B.key(e)]=1;last.text=fmt(f)+'〜'+fmt(e)+'\n営業日数 '+r2.biz+'日／暦日数 '+r2.cal+'日';
+   if(!calM||mode!==render._m)setCalTo(f)}}
+ render._m=mode;$('rL').textContent=L;$('rV').textContent=V;$('rS').innerHTML=S;$('res').innerHTML=h;drawCal();
+}
+function setMode(m){mode=m;['Pay','Biz','Cnt'].forEach(function(x){$('t'+x).className=x.toLowerCase()===m?'on':''});calM=null;render()}
+$('tPay').onclick=function(){setMode('pay')};$('tBiz').onclick=function(){setMode('biz')};$('tCnt').onclick=function(){setMode('cnt')};
+$('presets').addEventListener('click',function(e){var p=e.target.dataset&&e.target.dataset.p;if(!p)return;p=p.split(',');$('pClose').value=p[0];setRadio('pType',p[1]);$('pMon').value=p[2];$('pDay').value=p[3];calM=null;render()});
+document.querySelector('main').addEventListener('input',function(e){if(CK.indexOf(e.target.id)>=0)saveCfg();if(e.target.type!=='checkbox'&&e.target.tagName!=='SELECT'&&e.target.type!=='radio'){if(e.target.id!=='kEx')calM=null;render()}});
+document.querySelector('main').addEventListener('change',function(e){if(CK.indexOf(e.target.id)>=0)saveCfg();if(e.target.id!=='kEx'&&e.target.id.charAt(0)!=='k')calM=null;render()});
+$('cPrev').onclick=function(){if(!calM)return;calM.m--;if(calM.m<1){calM.m=12;calM.y--}drawCal()};
+$('cNext').onclick=function(){if(!calM)return;calM.m++;if(calM.m>12){calM.m=1;calM.y++}drawCal()};
+$('copy').onclick=function(){if(!last||!last.text){toast('先に日付を入れてください');return}copyText(last.text+(mode==='pay'&&last.sch?'\n\n今後12か月の支払予定\n'+last.sch:''),'結果をコピーしました')};
+$('share').onclick=function(){var q=new URLSearchParams({m:mode});
+ if(mode==='pay'){var r=rule();q.set('b',$('pBase').value);q.set('c',r.close);q.set('t',r.type);q.set('mo',r.mon);q.set('d',r.day);q.set('n',r.days);q.set('a',r.adj)}
+ else if(mode==='biz'){q.set('s',$('bStart').value);q.set('n',$('bN').value);q.set('dir',$('bDir').value);q.set('i',$('bInc').checked?1:0)}
+ else{q.set('f',$('cFrom').value);q.set('e',$('cTo').value)}
+ var c=cfg();q.set('k',(c.sat?1:0)+''+(c.sun?1:0)+(c.hol?1:0));q.set('ny',c.ny);
+ copyText(location.origin+location.pathname+'?'+q.toString(),'URLをコピーしました')};
+(function(){var t=new Date(),pad=function(n){return ('0'+n).slice(-2)},today=t.getFullYear()+'-'+pad(t.getMonth()+1)+'-'+pad(t.getDate());
+ $('pBase').value=today;$('bStart').value=today;$('cFrom').value=t.getFullYear()+'-'+pad(t.getMonth()+1)+'-01';
+ var e=new Date(t.getFullYear(),t.getMonth()+1,0);$('cTo').value=e.getFullYear()+'-'+pad(e.getMonth()+1)+'-'+pad(e.getDate());
+ $('pClose').value='0';$('pDay').value='0';loadCfg();
+ var q=new URLSearchParams(location.search),dv=function(k,id){var v=q.get(k);if(v&&B.parse(v))$(id).value=v},iv=function(k,id,lo,hi){var v=parseInt(q.get(k),10);if(!isNaN(v)&&v>=lo&&v<=hi)$(id).value=String(v)};
+ dv('b','pBase');iv('c','pClose',0,28);iv('mo','pMon',0,4);iv('d','pDay',0,28);if(q.get('t')==='d'||q.get('t')==='m')setRadio('pType',q.get('t'));if(['prev','next','none'].indexOf(q.get('a'))>=0)setRadio('pAdj',q.get('a'));
+ if(q.get('m')==='pay')iv('n','pDays',0,365);if(q.get('m')==='biz'){dv('s','bStart');iv('n','bN',0,2000);if(q.get('dir')==='-1')$('bDir').value='-1';if(q.get('i')==='1')$('bInc').checked=true}
+ dv('f','cFrom');dv('e','cTo');
+ var k=q.get('k');if(/^[01]{3}$/.test(k||'')){$('kSat').checked=k[0]==='1';$('kSun').checked=k[1]==='1';$('kHol').checked=k[2]==='1'}
+ if(['bank','gov','none'].indexOf(q.get('ny'))>=0)$('kNy').value=q.get('ny');
+ setMode(['pay','biz','cnt'].indexOf(q.get('m'))>=0?q.get('m'):'pay')})();
+</script>
+<script src="/assets/share.js" defer></script>
+</body>
+</html>
