@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>領収書 作成【無料・登録不要】収入印紙の要否を自動判定・PDF保存｜しごと計算ラボ</title>
+<link rel="canonical" href="https://shigoto-keisan.pages.dev/ryoshusho/">
+<meta name="description" content="領収書をブラウザだけで無料作成。収入印紙が必要か、いくら貼るかを自動で判定します。インボイス対応(登録番号・税率ごとの消費税額)、但し書き、支払方法、印影画像に対応。PDFで保存して電子で渡せば印紙は不要です。">
+<link rel="stylesheet" href="/assets/shorui.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"領収書 作成ツール","url":"https://shigoto-keisan.pages.dev/ryoshusho/","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"領収書に収入印紙はいくら必要？","acceptedAnswer":{"@type":"Answer","text":"売上代金の領収書は、税抜5万円未満なら不要、5万円以上100万円以下は200円、100万円超200万円以下は400円です。消費税額を区分して記載していれば、税抜金額で判定します。"}},{"@type":"Question","name":"PDFの領収書に収入印紙は必要？","acceptedAnswer":{"@type":"Answer","text":"PDFをメールで送るなど、電子データで渡す領収書は印紙税の課税文書に当たらないため、収入印紙は不要です。"}},{"@type":"Question","name":"クレジットカード払いの領収書に収入印紙は必要？","acceptedAnswer":{"@type":"Answer","text":"クレジットカードで支払われたことを領収書に記載すれば、印紙税はかかりません。"}}]}]}</script>
+</head>
+<body data-type="r">
+<header class="top"><div class="in">
+ <div class="crumb"><a href="/">しごと計算ラボ</a> › 領収書 作成</div>
+ <h1>領収書 作成ツール</h1>
+ <p>収入印紙が必要か、いくら貼るかを自動で判定。インボイス対応の領収書をPDFで保存できます。</p>
+ <div class="badges"><span>無料・登録不要</span><span>入力はサーバーに送信されません</span><span>収入印紙を自動判定</span></div>
+</div></header>
+
+<main class="wide">
+<div id="app"></div>
+<noscript><div class="card">このツールを使うにはJavaScriptを有効にしてください。</div></noscript>
+
+<div class="ad">広告</div>
+
+<div class="card info">
+ <h2>使い方</h2>
+ <ol>
+  <li>宛名・但し書き・お支払方法・渡し方を選ぶ。収入印紙の要否がすぐに表示されます</li>
+  <li>明細(品目・数量・単価)を入れる。消費税と合計は自動で計算されます</li>
+  <li>あなたの氏名・住所・登録番号を入れる(次回からは自動で入ります)</li>
+  <li>「印刷 / PDFで保存」を押して、印刷するかPDFに保存する</li>
+ </ol>
+
+ <h2>収入印紙の金額(売上代金の領収書)</h2>
+ <table>
+  <tr><th>記載金額(税抜)</th><th>印紙税額</th></tr>
+  <tr><td>5万円未満</td><td>不要</td></tr>
+  <tr><td>5万円以上 100万円以下</td><td>200円</td></tr>
+  <tr><td>100万円超 200万円以下</td><td>400円</td></tr>
+  <tr><td>200万円超 300万円以下</td><td>600円</td></tr>
+  <tr><td>300万円超 500万円以下</td><td>1,000円</td></tr>
+  <tr><td>500万円超 1,000万円以下</td><td>2,000円</td></tr>
+  <tr><td>1,000万円超 2,000万円以下</td><td>4,000円</td></tr>
+  <tr><td>2,000万円超 3,000万円以下</td><td>6,000円</td></tr>
+  <tr><td>3,000万円超 5,000万円以下</td><td>1万円</td></tr>
+  <tr><td>5,000万円超 1億円以下</td><td>2万円</td></tr>
+ </table>
+ <p class="note">1億円を超える場合は2万円〜20万円です。このツールは1億円超にも対応しています。出典：国税庁「印紙税額の一覧表」(第17号文書)</p>
+
+ <h2>よくある質問</h2>
+ <details><summary>税込55,000円の領収書に印紙は必要？</summary><p>消費税額を分けて書いていれば、税抜50,000円で判定するので200円の印紙が必要です。税込54,999円(税抜49,999円)なら不要です。このツールの領収書は消費税額を必ず記載するので、税抜金額で判定します。</p></details>
+ <details><summary>PDFの領収書なら印紙は不要？</summary><p>はい。PDFをメールで送るなど、電子データで渡す領収書は課税文書に当たらないため、収入印紙は不要です。「渡し方」で「PDFで送る」を選んでください。</p></details>
+ <details><summary>クレジットカード払いの場合は？</summary><p>クレジットカードで支払われたことを領収書に書けば、印紙税はかかりません。「お支払方法」で「クレジットカード」を選ぶと、自動で記載されます。</p></details>
+ <details><summary>印紙はどこに貼る？</summary><p>決まりはありませんが、左上や金額の近くに貼るのが一般的です。貼ったら、印紙と紙にまたがるように消印(押印や署名)をしてください。プレビューの点線の枠が目安です。</p></details>
+ <details><summary>但し書きは何と書けばいい？</summary><p>「お品代として」より、「ホームページ制作費として」のように具体的に書くのが望ましいとされています。</p></details>
+ <details><summary>個人が私物を売った時の領収書は？</summary><p>営業に関しない受取書(個人が私物を売った場合など)は、金額にかかわらず非課税です。</p></details>
+ <details><summary>宛名を空欄にしてもいい？</summary><p>小売業や飲食店など不特定多数を相手にする事業者は、宛名を省略した「適格簡易請求書」を発行できます。それ以外は宛名を書くのが基本です。</p></details>
+ <p class="note">※最終的な判断は国税庁の資料や税務署にご確認ください。</p>
+
+ <h2>関連ツール</h2>
+ <div class="rel">
+  <a href="/mitsumori/">見積書 作成<span>受注前の見積もりに</span></a>
+  <a href="/seikyusho/">請求書 作成<span>インボイス対応、PDF保存</span></a>
+  <a href="/gensen/">源泉徴収税 計算<span>手取りからの逆算にも対応</span></a>
+ </div>
+</div>
+
+<div class="ad">広告</div>
+</main>
+<footer class="ft"><a href="/">しごと計算ラボ</a> ・ <a href="/privacy/">プライバシーポリシー</a> ・ <a href="/contact/">お問い合わせ</a><br>© しごと計算ラボ</footer>
+<script id="core" src="/assets/shorui-core.js"></script>
+<script src="/assets/shorui.js"></script>
+</body>
+</html>
