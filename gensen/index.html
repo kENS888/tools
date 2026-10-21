@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>源泉徴収税 計算＆請求書作成｜報酬・料金・手取り逆算・インボイス対応【無料】</title>
+<meta name="description" content="フリーランス・個人事業主の報酬にかかる源泉徴収税(10.21%／100万円超20.42%)を自動計算。手取りからの逆算、軽減税率8%、振込手数料、インボイス対応の請求書作成・PDF保存まで。登録不要・無料。">
+<style>
+:root{--bg:#f4f6f9;--card:#fff;--fg:#14171f;--sub:#5b6474;--line:#e3e7ee;--acc:#2554d8;--acc2:#e9efff;--neg:#c2410c;--sh:0 1px 2px rgba(16,24,40,.05),0 8px 24px rgba(16,24,40,.06)}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--card:#171b22;--fg:#e8ecf2;--sub:#9aa4b2;--line:#262c36;--acc:#7c9cff;--acc2:#1c2540;--neg:#fb923c;--sh:none}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.7 system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header{background:linear-gradient(135deg,#1e3a8a,#2554d8 60%,#3b82f6);color:#fff;padding:28px 16px 64px}
+header .in{max-width:760px;margin:0 auto}
+header h1{margin:0;font-size:1.5rem;letter-spacing:.02em}
+header p{margin:6px 0 0;opacity:.85;font-size:.92rem}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.badges span{font-size:.75rem;background:rgba(255,255,255,.15);padding:3px 10px;border-radius:99px}
+main{max-width:760px;margin:-44px auto 0;padding:0 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh);padding:20px;margin-bottom:16px}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--bg);border-radius:10px;padding:4px;margin-bottom:16px}
+.seg button{border:0;background:none;color:var(--sub);padding:10px;border-radius:8px;font-size:.92rem;font-weight:600;cursor:pointer}
+.seg button.on{background:var(--card);color:var(--acc);box-shadow:var(--sh)}
+label.f{display:block;font-size:.82rem;color:var(--sub);margin:12px 0 4px;font-weight:600}
+input[type=text],input[type=date],select,textarea{width:100%;padding:10px 12px;font-size:1rem;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--fg);font-family:inherit}
+input.num{text-align:right;font-variant-numeric:tabular-nums}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:1px;border-color:transparent}
+.row{display:grid;grid-template-columns:1fr 120px 92px auto auto;gap:8px;align-items:center;margin-bottom:8px}
+.row input,.row select{padding:8px 10px}
+.chk{font-size:.75rem;color:var(--sub);white-space:nowrap;display:flex;gap:4px;align-items:center}
+.x{border:0;background:none;color:var(--sub);font-size:1.2rem;cursor:pointer;padding:4px 8px}
+.add{border:1px dashed var(--line);background:none;color:var(--acc);width:100%;padding:9px;border-radius:10px;cursor:pointer;font-weight:600}
+.opts{display:grid;gap:10px;margin-top:16px;font-size:.9rem}
+.opts>label{display:flex;gap:8px;align-items:flex-start}
+.sub{display:flex;gap:8px;align-items:center;margin-left:26px}
+.sub input,.sub select{max-width:160px}
+.big{display:flex;justify-content:space-between;align-items:baseline;padding:16px;border-radius:12px;background:var(--acc2);margin-top:16px}
+.big .l{font-size:.85rem;color:var(--sub);font-weight:600}
+.big .v{font-size:1.9rem;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums}
+table.r{width:100%;border-collapse:collapse;margin-top:8px;font-size:.95rem}
+table.r td{padding:9px 2px;border-bottom:1px solid var(--line)}
+table.r td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.neg{color:var(--neg)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.btn{flex:1;min-width:140px;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--fg);font-weight:600;cursor:pointer}
+.btn.p{background:var(--acc);border-color:var(--acc);color:#fff}
+.ad{min-height:100px;border:1px dashed var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--sub);font-size:.75rem;margin:20px 0}
+h2{font-size:1.1rem;margin:4px 0 10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.grid2 .w{grid-column:1/3}
+details{border-top:1px solid var(--line);padding:10px 0}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+.note{font-size:.82rem;color:var(--sub)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#14171f;color:#fff;padding:10px 18px;border-radius:99px;font-size:.9rem;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+footer a{color:inherit}footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40px}
+#inv{display:none}
+@media (max-width:560px){.row{grid-template-columns:1fr 110px auto}.row select{grid-column:1/2}.row .chk{grid-column:2/3}.grid2{grid-template-columns:1fr}.grid2 .w{grid-column:auto}.big .v{font-size:1.6rem}}
+@page{size:A4;margin:0}
+@media print{
+ body{background:#fff;color:#000}header,main,footer,.toast{display:none!important}
+ #inv{display:block!important}
+}
+.invp{padding:18mm 16mm;font-size:10.5pt;color:#000;background:#fff;font-family:"Hiragino Mincho ProN","Yu Mincho",serif}
+.invp h1{text-align:center;letter-spacing:.6em;font-size:20pt;margin:0 0 6mm;font-weight:600}
+.invp .meta{text-align:right;font-size:9.5pt}
+.invp .hd{display:flex;justify-content:space-between;gap:10mm;margin:6mm 0}
+.invp .to{font-size:14pt;border-bottom:1px solid #000;padding-bottom:2px;min-width:70mm}
+.invp .tot{display:flex;justify-content:space-between;font-size:15pt;font-weight:700;border-bottom:2px solid #000;padding:2mm 0;margin:4mm 0 6mm;max-width:100mm}
+.invp table{width:100%;border-collapse:collapse}
+.invp th{background:#eef1f6;font-weight:600}
+.invp td,.invp th{border:1px solid #888;padding:2mm 3mm}
+.invp .r{text-align:right;white-space:nowrap}
+.invp .sumt{width:60%;margin-left:auto;margin-top:4mm}
+.invp .box{border:1px solid #888;padding:3mm;margin-top:6mm;min-height:14mm;white-space:pre-wrap}
+</style>
+</head>
+<body>
+<header><div class="in">
+ <h1>源泉徴収税 計算＆請求書作成</h1>
+ <p>報酬・料金の源泉徴収税を自動計算。手取りからの逆算、インボイス対応の請求書まで。</p>
+ <div class="badges"><span>登録不要</span><span>入力はサーバーに送信されません</span><span>軽減税率・振込手数料に対応</span></div>
+</div></header>
+
+<main>
+<div class="card">
+ <div class="seg"><button id="tFwd" class="on" type="button">請求額から計算</button><button id="tRev" type="button">手取りから逆算</button></div>
+
+ <div id="fwdBox">
+  <label class="f">明細(税抜金額)</label>
+  <div id="rows"></div>
+  <button class="add" id="addRow" type="button">＋ 明細を追加</button>
+ </div>
+ <div id="revBox" hidden>
+  <label class="f" for="net">受け取りたい手取り額</label>
+  <input id="net" class="num" type="text" inputmode="numeric" placeholder="100,000">
+  <p class="note">税率10%・源泉対象の報酬1件として逆算します。</p>
+ </div>
+
+ <div class="opts">
+  <label><input type="checkbox" id="add" checked><span>消費税を請求する<br><span class="note">免税事業者で消費税を請求しない場合は外す</span></span></label>
+  <div class="sub" id="rndBox"><span class="note">端数処理</span><select id="rnd"><option value="floor">切り捨て</option><option value="round">四捨五入</option><option value="ceil">切り上げ</option></select></div>
+  <label><input type="checkbox" id="sep" checked><span>報酬と消費税を分けて記載する<br><span class="note">分けると源泉徴収は税抜額が基準になり、手取りが増えます</span></span></label>
+  <label><input type="checkbox" id="wOn" checked><span>源泉徴収を行う<br><span class="note">取引先が法人で源泉徴収の対象外の業務など、不要な場合は外す</span></span></label>
+  <label><input type="checkbox" id="feeOn"><span>振込手数料を差し引く(当方負担)</span></label>
+  <div class="sub" id="feeBox" hidden><input id="fee" class="num" type="text" inputmode="numeric" value="440"><span class="note">円</span></div>
+ </div>
+
+ <div class="big"><span class="l">お振込み額(手取り)</span><span class="v" id="pay">0 円</span></div>
+ <table class="r" id="res"></table>
+ <div class="acts">
+  <button class="btn" id="copy" type="button">結果をコピー</button>
+  <button class="btn" id="share" type="button">URLをコピー</button>
+  <button class="btn p" id="toInv" type="button">請求書を作る ↓</button>
+ </div>
+</div>
+
+<div class="ad">広告</div>
+
+<div class="card" id="invForm">
+ <h2>請求書を作成(印刷・PDF保存)</h2>
+ <p class="note">あなた(報酬を受け取る側)から、取引先(支払う側)に送る請求書です。登録番号を入れると、インボイス(適格請求書)の記載事項を満たす形式になります。</p>
+ <div class="grid2">
+  <div><label class="f" for="to">宛先</label><input id="to" type="text" placeholder="株式会社〇〇 御中"></div>
+  <div><label class="f" for="subj">件名</label><input id="subj" type="text" placeholder="〇〇制作費"></div>
+  <div><label class="f" for="no">請求書番号</label><input id="no" type="text" placeholder="2026-001"></div>
+  <div><label class="f" for="date">請求日</label><input id="date" type="date"></div>
+  <div><label class="f" for="from">あなたの氏名・屋号</label><input id="from" type="text" placeholder="山田 太郎"></div>
+  <div><label class="f" for="regno">登録番号(インボイス・任意)</label><input id="regno" type="text" placeholder="T1234567890123"></div>
+  <div><label class="f" for="addr">住所・連絡先(任意)</label><input id="addr" type="text" placeholder="東京都〇〇区… / mail@example.com"></div>
+  <div><label class="f" for="due">お支払期限</label><input id="due" type="date"></div>
+  <div class="w"><label class="f" for="bank">振込先</label><input id="bank" type="text" placeholder="〇〇銀行 〇〇支店 普通 1234567 ヤマダ タロウ"></div>
+  <div class="w"><label class="f" for="memo">備考</label><textarea id="memo" rows="2" placeholder="振込手数料は貴社にてご負担ください。"></textarea></div>
+ </div>
+ <p class="note">あなたの情報(氏名・登録番号・住所・振込先)はこの端末にだけ保存されます。</p>
+ <div class="acts"><button class="btn p" id="print" type="button">印刷 / PDFで保存</button></div>
+ <p class="note">PDFにするには、印刷画面で送信先を「PDFに保存」にしてください。日付やURLが印字される場合は、「ヘッダーとフッター」のチェックを外してください。</p>
+</div>
+
+<div class="card">
+ <h2>計算方法</h2>
+ <ul>
+  <li>支払金額100万円以下：<b>支払金額 × 10.21%</b></li>
+  <li>100万円超：<b>(支払金額 − 100万円) × 20.42% ＋ 102,100円</b></li>
+  <li>1円未満は切り捨て。10.21%は所得税10%に復興特別所得税(その2.1%)を加えた率です</li>
+  <li>報酬と消費税が区分されていれば税抜額、区分されていなければ税込額が基準です</li>
+  <li>消費税は、税率ごとに合計してから端数処理します(インボイス制度のルール)</li>
+ </ul>
+ <h2>よくある質問</h2>
+ <details><summary>手取りを10万円にするには、いくら請求すればいい？</summary><p>「手取りから逆算」に100000と入れると、必要な税抜請求額が分かります。</p></details>
+ <details><summary>源泉徴収税は誰が納めるの？</summary><p>報酬を支払う側(取引先)が差し引いて、原則として支払った月の翌月10日までに税務署へ納めます。受け取る側が自分で納める必要はありません。</p></details>
+ <details><summary>差し引かれた源泉徴収税は戻ってくる？</summary><p>確定申告で精算されます。1年間の所得税が源泉徴収された額より少なければ、差額が還付されます。</p></details>
+ <details><summary>消費税にも源泉徴収はかかる？</summary><p>請求書で報酬と消費税を分けて記載していれば、消費税部分にはかかりません。分けていない場合は、税込金額全体が対象になります。</p></details>
+ <details><summary>交通費・宿泊費にも源泉徴収はかかる？</summary><p>報酬と一緒に受け取る交通費などは、原則として対象です。支払者が交通機関やホテルへ直接支払った場合は対象外です。対象外にするときは、明細の「源泉」のチェックを外してください。</p></details>
+ <details><summary>取引先が個人の場合も源泉徴収される？</summary><p>給与を支払っていない個人などは源泉徴収義務者ではないため、源泉徴収されません。その場合は「源泉徴収を行う」のチェックを外してください。</p></details>
+ <details><summary>どんな仕事が源泉徴収の対象？</summary><p>原稿料、デザイン料、講演料、翻訳料、写真撮影料、通訳料、コンサルティング料などが代表例です。プログラミング(システム開発)は、一般的には対象外とされます。</p></details>
+ <details><summary>振込手数料は差し引いていい？</summary><p>本来は支払う側の負担が原則ですが、契約により受け取る側が負担する場合もあります。差し引く場合は「振込手数料を差し引く」をオンにしてください。</p></details>
+ <details><summary>軽減税率(8%)の品目がある場合は？</summary><p>明細ごとに税率(10%・8%・対象外)を選べます。請求書には税率ごとの合計と消費税額が記載されます。</p></details>
+ <p class="note">※一般的な報酬・料金(所得税法204条1項1号・2号など)を想定しています。司法書士、外交員、ホステスなどへの報酬は計算方法が異なります。最終的な判断は国税庁の資料や税理士にご確認ください。</p>
+</div>
+
+<div class="ad">広告</div>
+</main>
+<footer><a href="/">しごと計算ラボ</a> ・ <a href="/privacy/">プライバシーポリシー</a> ・ <a href="/contact/">お問い合わせ</a><br>© しごと計算ラボ</footer>
+<div class="toast" id="toast"></div>
+<div id="inv"></div>
+
+<script id="core">
+function wh(b){return b<=1000000?Math.floor(b*0.1021):Math.floor((b-1000000)*0.2042)+102100}
+function rnd(v,m){v=Math.round(v*1e6)/1e6;return m==='ceil'?Math.ceil(v):m==='round'?Math.round(v):Math.floor(v)}
+var RATES={'10':0.1,'8':0.08,'0':0};
+// items:[{name,amt,rate:'10'|'8'|'0',on}] opt:{add,sep,wOn,fee,rnd}
+function calcItems(items,opt){
+ var by={'10':0,'8':0,'0':0},tby={'10':0,'8':0,'0':0},sub=0;
+ items.forEach(function(i){var r=i.rate||'10';by[r]+=i.amt;sub+=i.amt;if(i.on)tby[r]+=i.amt});
+ var ctBy={'10':0,'8':0,'0':0},ct=0;
+ if(opt.add){['10','8'].forEach(function(r){ctBy[r]=rnd(by[r]*RATES[r],opt.rnd);ct+=ctBy[r]})}
+ var tgt=tby['10']+tby['8']+tby['0'];
+ var base=tgt;
+ if(opt.add&&!opt.sep)base+=rnd(tby['10']*0.1,opt.rnd)+rnd(tby['8']*0.08,opt.rnd);
+ var w=opt.wOn?wh(base):0, fee=opt.fee||0;
+ return {by:by,ctBy:ctBy,sub:sub,ct:ct,base:base,w:w,fee:fee,total:sub+ct,pay:sub+ct-w-fee};
+}
+function reverse(net,opt){
+ var lo=0,hi=net*2+(opt.fee||0)+10;
+ while(lo<hi){var m=Math.floor((lo+hi)/2);if(calcItems([{amt:m,rate:'10',on:true}],opt).pay>=net)hi=m;else lo=m+1}
+ return lo;
+}
+if(typeof module!=='undefined')module.exports={wh:wh,calcItems:calcItems,reverse:reverse};
+</script>
+<script>
+var $=function(id){return document.getElementById(id)};
+var mode='fwd',rows=[{name:'業務委託報酬',amt:100000,rate:'10',on:true}],last;
+function yen(n){return n.toLocaleString('ja-JP')+' 円'}
+function num(s){return parseInt(String(s||'').replace(/[^0-9]/g,''),10)||0}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function toast(m){var t=$('toast');t.textContent=m;t.className='toast on';clearTimeout(toast._t);toast._t=setTimeout(function(){t.className='toast'},1800)}
+function copyText(t,msg){
+ function fb(){var a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy')}catch(_){}document.body.removeChild(a);if(ok)toast(msg);else window.prompt('コピーしてください',t)}
+ if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(function(){toast(msg)},fb)}else fb();
+}
+function opt(){return {add:$('add').checked,sep:$('sep').checked,wOn:$('wOn').checked,fee:$('feeOn').checked?num($('fee').value):0,rnd:$('rnd').value}}
+function drawRows(){
+ $('rows').innerHTML=rows.map(function(r,i){return '<div class="row"><input type="text" data-i="'+i+'" data-k="name" value="'+esc(r.name)+'" placeholder="品目">'+
+ '<input type="text" class="num" inputmode="numeric" data-i="'+i+'" data-k="amt" value="'+(r.amt?r.amt.toLocaleString('ja-JP'):'')+'" placeholder="0">'+
+ '<select data-i="'+i+'" data-k="rate"><option value="10"'+(r.rate==='10'?' selected':'')+'>10%</option><option value="8"'+(r.rate==='8'?' selected':'')+'>8%</option><option value="0"'+(r.rate==='0'?' selected':'')+'>対象外</option></select>'+
+ '<label class="chk"><input type="checkbox" data-i="'+i+'" data-k="on" '+(r.on?'checked':'')+'>源泉</label>'+
+ (rows.length>1?'<button class="x" data-del="'+i+'" type="button" aria-label="削除">×</button>':'<span></span>')+'</div>'}).join('');
+}
+function items(){if(mode==='rev'){return [{name:'業務委託報酬',amt:reverse(num($('net').value),opt()),rate:'10',on:true}]}return rows}
+function render(){
+ $('rndBox').hidden=!$('add').checked;$('feeBox').hidden=!$('feeOn').checked;
+ var it=items(),c=calcItems(it,opt());last={it:it,c:c};
+ $('pay').textContent=yen(c.pay);
+ var h='<tr><td>報酬額(税抜)</td><td>'+yen(c.sub)+'</td></tr>';
+ if(c.ctBy['10'])h+='<tr><td>消費税(10%)</td><td>'+yen(c.ctBy['10'])+'</td></tr>';
+ if(c.ctBy['8'])h+='<tr><td>消費税(8%)</td><td>'+yen(c.ctBy['8'])+'</td></tr>';
+ h+='<tr><td>請求額(税込)</td><td>'+yen(c.total)+'</td></tr>';
+ if(opt().wOn)h+='<tr><td>源泉徴収の基準額</td><td>'+yen(c.base)+'</td></tr><tr><td>源泉徴収税額</td><td class="neg">− '+yen(c.w)+'</td></tr>';
+ if(c.fee)h+='<tr><td>振込手数料</td><td class="neg">− '+yen(c.fee)+'</td></tr>';
+ $('res').innerHTML=h;
+}
+$('rows').addEventListener('input',function(e){var t=e.target,i=t.dataset.i,k=t.dataset.k;if(i==null)return;
+ if(k==='amt'){rows[i].amt=num(t.value);var p=t.selectionStart,l=t.value.length;t.value=rows[i].amt?rows[i].amt.toLocaleString('ja-JP'):'';try{var q=Math.max(0,p+t.value.length-l);t.setSelectionRange(q,q)}catch(_){}}
+ else if(k==='on')rows[i].on=t.checked;else if(k==='rate')rows[i].rate=t.value;else rows[i].name=t.value;render()});
+$('rows').addEventListener('change',function(e){if(e.target.dataset.k==='rate'){rows[e.target.dataset.i].rate=e.target.value;render()}});
+$('rows').addEventListener('click',function(e){var d=e.target.dataset.del;if(d!=null){rows.splice(+d,1);drawRows();render()}});
+$('addRow').onclick=function(){rows.push({name:'',amt:0,rate:'10',on:true});drawRows();render()};
+function setMode(m){mode=m;$('tFwd').className=m==='fwd'?'on':'';$('tRev').className=m==='rev'?'on':'';$('fwdBox').hidden=m!=='fwd';$('revBox').hidden=m!=='rev';render()}
+$('tFwd').onclick=function(){setMode('fwd')};$('tRev').onclick=function(){setMode('rev')};
+function fmtInput(el){var v=num(el.value);el.value=v?v.toLocaleString('ja-JP'):''}
+$('net').addEventListener('input',function(){fmtInput(this);render()});
+$('fee').addEventListener('input',function(){fmtInput(this);render()});
+['add','sep','wOn','feeOn','rnd'].forEach(function(id){$(id).addEventListener('change',render)});
+$('copy').onclick=function(){var c=last.c,o=opt(),t='報酬額(税抜) '+yen(c.sub)+'\n消費税 '+yen(c.ct)+'\n請求額(税込) '+yen(c.total);
+ if(o.wOn)t+='\n源泉徴収税 −'+yen(c.w);if(c.fee)t+='\n振込手数料 −'+yen(c.fee);t+='\nお振込み額 '+yen(c.pay);copyText(t,'結果をコピーしました')};
+$('share').onclick=function(){var o=opt(),q=new URLSearchParams({m:mode,a:o.add?1:0,s:o.sep?1:0,w:o.wOn?1:0,f:o.fee,d:o.rnd});
+ if(mode==='rev')q.set('n',num($('net').value));else q.set('r',JSON.stringify(rows.map(function(r){return [r.name,r.amt,r.rate,r.on?1:0]})));
+ copyText(location.origin+location.pathname+'?'+q.toString(),'URLをコピーしました')};
+$('toInv').onclick=function(){$('invForm').scrollIntoView({behavior:'smooth'})};
+var KEEP=['from','regno','addr','bank','memo'];
+function save(){try{var o={};KEEP.forEach(function(k){o[k]=$(k).value});localStorage.setItem('gensen_inv',JSON.stringify(o))}catch(_){}}
+KEEP.forEach(function(k){$(k).addEventListener('input',save)});
+function fmtD(v){if(!v)return '';var p=v.split('-');return p[0]+'年'+(+p[1])+'月'+(+p[2])+'日'}
+function invHTML(){var c=last.c,o=opt(),RL={'10':'10%','8':'8%※','0':'対象外'};
+ var lines=last.it.filter(function(i){return i.amt}).map(function(i){return '<tr><td>'+esc(i.name)+'</td><td class="r">'+RL[i.rate||'10']+'</td><td class="r">'+yen(i.amt)+'</td></tr>'}).join('');
+ var s='<tr><td>小計(税抜)</td><td class="r">'+yen(c.sub)+'</td></tr>';
+ if(o.add){if(c.by['10'])s+='<tr><td>10%対象 '+yen(c.by['10'])+' 消費税</td><td class="r">'+yen(c.ctBy['10'])+'</td></tr>';
+  if(c.by['8'])s+='<tr><td>8%対象 '+yen(c.by['8'])+' 消費税</td><td class="r">'+yen(c.ctBy['8'])+'</td></tr>';}
+ s+='<tr><td>合計(税込)</td><td class="r">'+yen(c.total)+'</td></tr>';
+ if(o.wOn)s+='<tr><td>源泉徴収税</td><td class="r">−'+yen(c.w)+'</td></tr>';
+ if(c.fee)s+='<tr><td>振込手数料(当方負担)</td><td class="r">−'+yen(c.fee)+'</td></tr>';
+ s+='<tr><th>差引ご請求額</th><th class="r">'+yen(c.pay)+'</th></tr>';
+ return '<div class="invp"><h1>請求書</h1><div class="meta">'+($('no').value?'請求書番号：'+esc($('no').value)+'<br>':'')+'請求日：'+fmtD($('date').value)+'</div>'+
+ '<div class="hd"><div><div class="to">'+esc($('to').value)+'</div>'+($('subj').value?'<p>件名：'+esc($('subj').value)+'</p>':'')+'<p>下記のとおりご請求申し上げます。</p>'+
+ '<div class="tot"><span>ご請求金額</span><span>'+yen(c.pay)+'</span></div></div>'+
+ '<div style="text-align:right">'+esc($('from').value)+($('addr').value?'<br>'+esc($('addr').value):'')+($('regno').value?'<br>登録番号：'+esc($('regno').value):'')+'</div></div>'+
+ '<table><tr><th>品目</th><th>税率</th><th>金額(税抜)</th></tr>'+lines+'</table>'+
+ '<table class="sumt">'+s+'</table>'+(c.by['8']?'<p style="font-size:9pt">※は軽減税率対象</p>':'')+
+ '<p>お支払期限：'+fmtD($('due').value)+'<br>お振込先：'+esc($('bank').value)+'</p>'+
+ ($('memo').value?'<div class="box">備考：'+esc($('memo').value)+'</div>':'')+'</div>'}
+$('print').onclick=function(){var html=invHTML();$('inv').innerHTML=html;
+ var inFrame=false;try{inFrame=window.self!==window.top}catch(_){inFrame=true}
+ var ttl=document.title;document.title='請求書'+($('no').value?'_'+$('no').value:'');
+ if(!inFrame){window.print();setTimeout(function(){document.title=ttl},500);return}
+ document.title=ttl;var w=window.open('','_blank');if(!w){toast('ポップアップを許可してください');return}
+ w.document.write('<!doctype html><meta charset="utf-8"><title>請求書</title><style>@page{size:A4;margin:0}body{margin:0}'+document.querySelector('style').textContent.split('.invp{')[1].replace(/^/,'.invp{')+'</style><body>'+html+'<script>setTimeout(print,300)<\/script>');w.document.close()};
+(function(){var t=new Date(),pad=function(n){return ('0'+n).slice(-2)};$('date').value=t.getFullYear()+'-'+pad(t.getMonth()+1)+'-'+pad(t.getDate());
+ var e=new Date(t.getFullYear(),t.getMonth()+2,0);$('due').value=e.getFullYear()+'-'+pad(e.getMonth()+1)+'-'+pad(e.getDate());
+ try{var o=JSON.parse(localStorage.getItem('gensen_inv')||'{}');KEEP.forEach(function(k){if(o[k])$(k).value=o[k]})}catch(_){}
+ var q=new URLSearchParams(location.search);
+ [['a','add'],['s','sep'],['w','wOn']].forEach(function(p){if(q.has(p[0]))$(p[1]).checked=q.get(p[0])==='1'});
+ if(num(q.get('f'))){$('feeOn').checked=true;$('fee').value=num(q.get('f')).toLocaleString('ja-JP')}
+ if(['floor','round','ceil'].indexOf(q.get('d'))>=0)$('rnd').value=q.get('d');
+ if(q.get('r')){try{rows=JSON.parse(q.get('r')).slice(0,30).map(function(a){return {name:String(a[0]).slice(0,100),amt:num(a[1]),rate:['10','8','0'].indexOf(String(a[2]))>=0?String(a[2]):'10',on:!!a[3]}})}catch(_){}}
+ if(q.get('n'))$('net').value=num(q.get('n')).toLocaleString('ja-JP');
+ drawRows();setMode(q.get('m')==='rev'?'rev':'fwd');})();
+</script>
+</body>
+</html>
