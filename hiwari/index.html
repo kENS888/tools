@@ -114,7 +114,19 @@ footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40p
 .bt i{position:absolute;top:0;bottom:0;background:var(--acc);opacity:.85}
 .bt em{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-style:normal;font-size:.7rem;font-weight:700;color:var(--fg);background:var(--card);padding:0 6px;border-radius:4px;line-height:1.5;white-space:nowrap}
 .bv{font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
-@media (max-width:560px){.who>div{padding:12px}.who b{font-size:.88rem}.who>div>span:last-child{font-size:.76rem}.pl{padding:3px 8px}.big .fx{gap:4px}.cal{padding:8px 2px 4px}.dg button.d{height:48px}.chip b{font-size:.98rem}}
+.tshade{position:fixed;inset:0;z-index:60}
+.tring{position:absolute;z-index:61;border-radius:16px;box-shadow:0 0 0 3px var(--acc),0 0 0 9999px rgba(10,12,18,.55);pointer-events:none;transition:all .2s}
+.tbub{position:absolute;z-index:62;background:var(--card);color:var(--fg);border-radius:14px;padding:12px 14px;box-shadow:0 12px 40px rgba(0,0,0,.3);border:1px solid var(--line)}
+.tbub .th{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.75rem;font-weight:700;color:var(--acc)}
+.tbub .tx{border:0;background:none;color:var(--sub);font-size:1.3rem;line-height:1;cursor:pointer;padding:2px 4px}
+.tbub p{margin:6px 0 10px;font-size:.92rem;line-height:1.7}
+.tbub p b{color:var(--acc)}
+.tf{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.tn{font-size:.75rem;color:var(--sub);margin-right:auto}
+.tb0,.tb1{border-radius:99px;padding:7px 14px;font:inherit;font-size:.82rem;font-weight:700;cursor:pointer}
+.tb0{border:1px solid var(--line);background:var(--card);color:var(--fg)}
+.tb1{border:1px solid var(--acc);background:var(--acc);color:var(--on)}
+@media (max-width:560px){.who>button{padding:12px}.who b{font-size:.88rem}.who .ds{font-size:.76rem}.pl{padding:3px 8px}.big .fx{gap:4px}.cal{padding:8px 2px 4px}.dg button.d{height:48px}.chip b{font-size:.98rem}}
 header .hint{display:inline-block;margin-top:10px;color:#fff;font-size:.82rem;font-weight:700;text-decoration:underline;text-underline-offset:3px}
 .lead2{margin:4px 0 10px}
 .ex{border-radius:14px;background:var(--bg);padding:14px}
@@ -127,10 +139,12 @@ header .hint{display:inline-block;margin-top:10px;color:#fff;font-size:.82rem;fo
 .ex .fx{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .ex .note{margin:10px 0 0}
 .who{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:8px 0}
-.who>div{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--card)}
+.who>button{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--card);color:var(--fg);font:inherit;text-align:left;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;transition:border-color .15s,transform .15s}
+.who>button:hover{border-color:var(--acc);transform:translateY(-1px)}
+.who .go{margin-top:auto;padding-top:8px;font-size:.78rem;font-weight:700;color:var(--acc)}
 .who .wi{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--acc2);color:var(--acc);margin-bottom:6px}
 .who b{display:block;font-size:.95rem}
-.who>div>span:last-child{display:block;font-size:.82rem;color:var(--sub);line-height:1.6;margin-top:2px}
+.who .ds{display:block;font-size:.82rem;color:var(--sub);line-height:1.6;margin-top:2px}
 @media (max-width:560px){.big .v{font-size:1.6rem}header h1{font-size:1.3rem}.card{padding:16px}.opts{grid-template-columns:1fr;gap:2px}.opts>span{font-size:.8rem;color:var(--sub);margin-top:6px}}
 </style>
 </head>
@@ -210,12 +224,12 @@ header .hint{display:inline-block;margin-top:10px;color:#fff;font-size:.82rem;fo
 
  <h2 class="sec-t">こんな人・こんな時に</h2>
  <div class="who">
-  <div><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span><b>月の途中で引っ越す人</b><span>入居した月・退去する月の家賃がいくらになるか知りたい</span></div>
-  <div><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/><path d="M7 6V4.5A1.5 1.5 0 0 1 8.5 3h7A1.5 1.5 0 0 1 17 4.5V6"/></svg></span><b>月の途中で入社・退職した人</b><span>最初の月・最後の月の給料がいくらもらえるか知りたい</span></div>
-  <div><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 8h18"/><path d="M6 8l-3 6a3 3 0 0 0 6 0zM18 8l-3 6a3 3 0 0 0 6 0z"/></svg></span><b>会社の総務・経理の人</b><span>入社・退職した社員の給料や、欠勤した日の分を計算したい</span></div>
-  <div><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></span><b>大家さん・管理会社・お店</b><span>月の途中からの契約や解約で、請求する金額を出したい</span></div>
-  <div><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="11" rx="3"/><circle cx="8" cy="18" r="2"/><circle cx="16" cy="18" r="2"/></svg></span><b>駐車場・レンタル・習い事</b><span>月額のサービスを月の途中で始めた・やめた時の料金を確かめたい</span></div>
-  <div><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><b>何日にやめるか迷っている人</b><span>カレンダーで日付ごとの金額を見比べて、ちょうどいい日を選びたい</span></div>
+  <button type="button" data-sc="move"><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span><b>月の途中で引っ越す人</b><span class="ds">入居した月・退去する月の家賃がいくらになるか知りたい</span><span class="go">▶ 使い方を見る</span></button>
+  <button type="button" data-sc="job"><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/><path d="M7 6V4.5A1.5 1.5 0 0 1 8.5 3h7A1.5 1.5 0 0 1 17 4.5V6"/></svg></span><b>月の途中で入社・退職した人</b><span class="ds">最初の月・最後の月の給料がいくらもらえるか知りたい</span><span class="go">▶ 使い方を見る</span></button>
+  <button type="button" data-sc="hr"><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 8h18"/><path d="M6 8l-3 6a3 3 0 0 0 6 0zM18 8l-3 6a3 3 0 0 0 6 0z"/></svg></span><b>会社の総務・経理の人</b><span class="ds">入社・退職した社員の給料や、欠勤した日の分を計算したい</span><span class="go">▶ 使い方を見る</span></button>
+  <button type="button" data-sc="owner"><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></span><b>大家さん・管理会社・お店</b><span class="ds">月の途中からの契約や解約で、請求する金額を出したい</span><span class="go">▶ 使い方を見る</span></button>
+  <button type="button" data-sc="svc"><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="11" rx="3"/><circle cx="8" cy="18" r="2"/><circle cx="16" cy="18" r="2"/></svg></span><b>駐車場・レンタル・習い事</b><span class="ds">月額のサービスを月の途中で始めた・やめた時の料金を確かめたい</span><span class="go">▶ 使い方を見る</span></button>
+  <button type="button" data-sc="pick"><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><b>何日にやめるか迷っている人</b><span class="ds">カレンダーで日付ごとの金額を見比べて、ちょうどいい日を選びたい</span><span class="go">▶ 使い方を見る</span></button>
  </div>
 
  <h2 class="sec-t">使い方</h2>
@@ -482,6 +496,82 @@ $('toInv').onclick=function(){var r=last.r;
  if(e&&e>=S&&B.days(S,e)<=3660){E=e;endAuto=false}else E=eom(S);
  view=som(S);
  setMode(m);
+})();
+</script>
+<script>
+// ---- 「こんな人・こんな時に」のカードから、例を入れて使い方を案内する ----
+(function(){
+ function nm(d){var t=todayD();return B.D(t.getUTCFullYear(),t.getUTCMonth()+2,d)} // 来月のd日
+ function nmEnd(){return eom(nm(1))}
+ // tab, 金額, 開始日, 終了日, 手順[対象, 文]
+ var SC={
+  move:{t:'月の途中で引っ越す人',m:'fee',a:90000,s:function(){return nm(15)},e:nmEnd,steps:[
+   ['amt','家賃の<b>月額</b>を入れます。'],
+   ['cal','<b>入居する日</b>をタップ。日付の下の数字が、その日までの家賃です。退去する月は、月の初めから<b>退去日</b>までを選びます。'],
+   ['big','これが、その月に払う家賃です。']]},
+  job:{t:'月の途中で入社・退職した人',m:'pay',a:250000,s:function(){return nm(16)},e:nmEnd,steps:[
+   ['amt','<b>月給</b>を入れます。'],
+   ['cal','<b>入社日</b>をタップ。退職の時は、月の初めから<b>最後に働いた日</b>までを選びます。土日祝は薄く表示され、出勤日に数えません。'],
+   ['big','その月にもらえる給料の目安です。会社によって計算のしかたが違うので、正確な金額は会社のルールで確かめてください。']]},
+  hr:{t:'会社の総務・経理の人',m:'pay',a:300000,s:function(){return nm(1)},e:function(){return nm(20)},steps:[
+   ['amt','社員の<b>月給</b>を入れます。'],
+   ['cal','在籍していた期間を選びます。この例は、月の初めから<b>20日に退職</b>した場合です。'],
+   ['more','就業規則に合わせて、<b>割る日数</b>(所定労働日数・暦日・30日など)や<b>欠勤控除</b>の方式を切り替えられます。月ごとの内訳もここに出ます。']]},
+  owner:{t:'大家さん・管理会社・お店',m:'fee',a:80000,s:function(){return nm(10)},e:nmEnd,steps:[
+   ['amt','<b>月額</b>(家賃・利用料)を入れます。'],
+   ['cal','<b>契約の開始日</b>(解約の時は<b>終了日</b>)を選びます。'],
+   ['inv','計算した金額のまま、<b>請求書</b>を作れます。']]},
+  svc:{t:'駐車場・レンタル・習い事',m:'fee',a:12000,s:function(){return nm(1)},e:function(){return nm(18)},steps:[
+   ['amt','月額の<b>料金</b>を入れます。'],
+   ['cal','月の初めを開始日、<b>やめる日</b>を終了日にします。途中から始める時は、<b>始める日</b>を開始日にします。'],
+   ['big','その月に払う料金の目安です。30日で割るなど、決まりが違う時は「くわしく見る」で変えられます。']]},
+  pick:{t:'何日にやめるか迷っている人',m:'fee',a:90000,s:function(){return nm(1)},e:function(){return nm(20)},steps:[
+   ['cal','日付の下の数字は、<b>その日にやめた時の金額</b>です。見比べて、ちょうどいい日をタップしてください。'],
+   ['big','選んだ日の金額と、月ごとの内訳が出ます。']]}
+ };
+ var TG={amt:function(){return $('amt').parentNode},cal:function(){return document.querySelector('.cal')},big:function(){return document.querySelector('.big')},more:function(){return $('detBox')},inv:function(){return $('toInv')}};
+ var cur=null,i=0,saved=null,ring,bub,shade;
+ function snap(){return {mode:mode,AMT:JSON.parse(JSON.stringify(AMT)),S:S,E:E,endAuto:endAuto,view:view,act:act,det:$('detBox').open}}
+ function restore(s){AMT=s.AMT;S=s.S;E=s.E;endAuto=s.endAuto;view=s.view;act=s.act;$('detBox').open=s.det;setMode(s.mode)}
+ function el(tag,cls,html){var e=document.createElement(tag);e.className=cls;if(html)e.innerHTML=html;document.body.appendChild(e);return e}
+ function start(k){
+  var c=SC[k];if(!c)return;saved=snap();saved.y=window.scrollY;cur=c;i=0;
+  AMT[c.m]=f(c.a);S=c.s();E=c.e();endAuto=false;act='e';view=som(S);$('detBox').open=false;setMode(c.m);
+  shade=el('div','tshade');ring=el('div','tring');bub=el('div','tbub');bub.setAttribute('role','dialog');bub.setAttribute('aria-label','使い方：'+c.t);
+  shade.onclick=function(){};
+  document.addEventListener('keydown',key);window.addEventListener('resize',place);
+  show();
+ }
+ function key(e){if(e.key==='Escape')end(false)}
+ function show(){
+  var st=cur.steps[i],n=cur.steps.length,last=i===n-1;
+  if(st[0]==='more')$('detBox').open=true;
+  bub.innerHTML='<div class="th"><span>使い方の例：'+cur.t+'</span><button type="button" class="tx" aria-label="閉じる">×</button></div><p>'+st[1]+'</p>'+
+   '<div class="tf"><span class="tn">'+(i+1)+' / '+n+'</span>'+(i?'<button type="button" class="tb0">戻る</button>':'')+
+   (last?'<button type="button" class="tb0" data-r="1">元の入力に戻す</button><button type="button" class="tb1">この例のまま使う</button>':'<button type="button" class="tb1">次へ</button>')+'</div>';
+  bub.querySelector('.tx').onclick=function(){end(false)};
+  [].forEach.call(bub.querySelectorAll('.tb0'),function(b){b.onclick=b.dataset.r?function(){end(false)}:function(){i--;show()}});
+  bub.querySelector('.tb1').onclick=last?function(){end(true)}:function(){i++;show()};
+  var t=TG[st[0]]();t.scrollIntoView({block:'center'});place();
+  setTimeout(function(){try{bub.querySelector('.tb1').focus({preventScroll:true})}catch(_){}},0);
+ }
+ function place(){
+  if(!cur)return;var t=TG[cur.steps[i][0]](),r=t.getBoundingClientRect(),sx=window.scrollX,sy=window.scrollY,pad=6,vh=window.innerHeight,vw=document.documentElement.clientWidth;
+  ring.style.cssText='left:'+(r.left+sx-pad)+'px;top:'+(r.top+sy-pad)+'px;width:'+(r.width+pad*2)+'px;height:'+(r.height+pad*2)+'px';
+  var bw=Math.min(340,vw-24),bh=bub.offsetHeight,left=Math.max(12,Math.min(r.left+r.width/2-bw/2,vw-bw-12)),top;
+  if(r.bottom+pad+12+bh<=vh)top=r.bottom+pad+12;          // 下に置ける
+  else if(r.top-pad-12-bh>=0)top=r.top-pad-12-bh;         // 上に置ける
+  else top=vh-bh-12;                                      // 重ねて画面の下に
+  bub.style.cssText='width:'+bw+'px;left:'+(left+sx)+'px;top:'+(top+sy)+'px';
+ }
+ function end(keep){
+  if(!cur)return;cur=null;
+  [shade,ring,bub].forEach(function(e){if(e&&e.parentNode)e.parentNode.removeChild(e)});
+  document.removeEventListener('keydown',key);window.removeEventListener('resize',place);
+  if(keep){toast('この例の内容で計算しています');document.querySelector('.card').scrollIntoView({block:'start'})}
+  else{restore(saved);window.scrollTo(0,saved.y)}
+ }
+ [].forEach.call(document.querySelectorAll('.who [data-sc]'),function(b){b.onclick=function(){start(b.dataset.sc)}});
 })();
 </script>
 <script src="/assets/share.js" defer></script>
