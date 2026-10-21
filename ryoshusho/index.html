@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>領収書 作成【無料・登録不要】収入印紙の要否を自動判定・PDF保存｜しごと計算ラボ</title>
 <link rel="canonical" href="https://shigoto-keisan.pages.dev/ryoshusho/">
-<meta name="description" content="領収書をブラウザだけで無料作成。収入印紙が必要か、いくら貼るかを自動で判定します。インボイス対応(登録番号・税率ごとの消費税額)、但し書き、支払方法、印影画像に対応。PDFで保存して電子で渡せば印紙は不要です。">
+<meta name="description" content="領収書をブラウザだけで無料作成。収入印紙が必要か、いくら貼るかを自動で判定します。インボイス対応(登録番号・税率ごとの消費税額)、但し書き、支払方法、再発行、和暦、印影画像に対応。PDFで保存して電子で渡せば印紙は不要です。">
 <link rel="stylesheet" href="/assets/shorui.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"領収書 作成ツール","url":"https://shigoto-keisan.pages.dev/ryoshusho/","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"領収書に収入印紙はいくら必要？","acceptedAnswer":{"@type":"Answer","text":"売上代金の領収書は、税抜5万円未満なら不要、5万円以上100万円以下は200円、100万円超200万円以下は400円です。消費税額を区分して記載していれば、税抜金額で判定します。"}},{"@type":"Question","name":"PDFの領収書に収入印紙は必要？","acceptedAnswer":{"@type":"Answer","text":"PDFをメールで送るなど、電子データで渡す領収書は印紙税の課税文書に当たらないため、収入印紙は不要です。"}},{"@type":"Question","name":"クレジットカード払いの領収書に収入印紙は必要？","acceptedAnswer":{"@type":"Answer","text":"クレジットカードで支払われたことを領収書に記載すれば、印紙税はかかりません。"}}]}]}</script>
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "領収書 作成ツール", "url": "https://shigoto-keisan.pages.dev/ryoshusho/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "税込55,000円の領収書に印紙は必要？", "acceptedAnswer": {"@type": "Answer", "text": "消費税額を分けて書いていれば、税抜50,000円で判定するので200円の印紙が必要です。税込54,999円(税抜49,999円)なら不要です。このツールの領収書は消費税額を必ず記載するので、税抜金額で判定します。"}}, {"@type": "Question", "name": "PDFの領収書なら印紙は不要？", "acceptedAnswer": {"@type": "Answer", "text": "はい。PDFをメールで送るなど、電子データで渡す領収書は課税文書に当たらないため、収入印紙は不要です。「渡し方」で「PDFで送る」を選んでください。"}}, {"@type": "Question", "name": "クレジットカード払いの場合は？", "acceptedAnswer": {"@type": "Answer", "text": "クレジットカードで支払われたことを領収書に書けば、印紙税はかかりません。「お支払方法」で「クレジットカード」を選ぶと、自動で記載されます。"}}, {"@type": "Question", "name": "印紙はどこに貼る？", "acceptedAnswer": {"@type": "Answer", "text": "決まりはありませんが、左上や金額の近くに貼るのが一般的です。貼ったら、印紙と紙にまたがるように消印(押印や署名)をしてください。プレビューの点線の枠が目安です。"}}, {"@type": "Question", "name": "領収書を再発行したい", "acceptedAnswer": {"@type": "Answer", "text": "「「再発行」と表示する」をオンにすると、書類に再発行の表示が入ります。二重発行と誤解されないよう、元の領収書と同じ番号にしておくのがおすすめです。"}}, {"@type": "Question", "name": "但し書きは何と書けばいい？", "acceptedAnswer": {"@type": "Answer", "text": "「お品代として」より、「ホームページ制作費として」のように具体的に書くのが望ましいとされています。"}}, {"@type": "Question", "name": "個人が私物を売った時の領収書は？", "acceptedAnswer": {"@type": "Answer", "text": "営業に関しない受取書(個人が私物を売った場合など)は、金額にかかわらず非課税です。"}}, {"@type": "Question", "name": "宛名を空欄にしてもいい？", "acceptedAnswer": {"@type": "Answer", "text": "小売業や飲食店など不特定多数を相手にする事業者は、宛名を省略した「適格簡易請求書」を発行できます。それ以外は宛名を書くのが基本です。"}}]}]}</script>
 </head>
 <body data-type="r">
 <header class="top"><div class="in">
@@ -24,46 +25,14 @@
 <div class="ad">広告</div>
 
 <div class="card info">
- <h2>使い方</h2>
- <ol>
-  <li>宛名・但し書き・お支払方法・渡し方を選ぶ。収入印紙の要否がすぐに表示されます</li>
-  <li>明細(品目・数量・単価)を入れる。消費税と合計は自動で計算されます</li>
-  <li>あなたの氏名・住所・登録番号を入れる(次回からは自動で入ります)</li>
-  <li>「印刷 / PDFで保存」を押して、印刷するかPDFに保存する</li>
- </ol>
-
- <h2>収入印紙の金額(売上代金の領収書)</h2>
- <table>
-  <tr><th>記載金額(税抜)</th><th>印紙税額</th></tr>
-  <tr><td>5万円未満</td><td>不要</td></tr>
-  <tr><td>5万円以上 100万円以下</td><td>200円</td></tr>
-  <tr><td>100万円超 200万円以下</td><td>400円</td></tr>
-  <tr><td>200万円超 300万円以下</td><td>600円</td></tr>
-  <tr><td>300万円超 500万円以下</td><td>1,000円</td></tr>
-  <tr><td>500万円超 1,000万円以下</td><td>2,000円</td></tr>
-  <tr><td>1,000万円超 2,000万円以下</td><td>4,000円</td></tr>
-  <tr><td>2,000万円超 3,000万円以下</td><td>6,000円</td></tr>
-  <tr><td>3,000万円超 5,000万円以下</td><td>1万円</td></tr>
-  <tr><td>5,000万円超 1億円以下</td><td>2万円</td></tr>
- </table>
- <p class="note">1億円を超える場合は2万円〜20万円です。このツールは1億円超にも対応しています。出典：国税庁「印紙税額の一覧表」(第17号文書)</p>
-
- <h2>よくある質問</h2>
- <details><summary>税込55,000円の領収書に印紙は必要？</summary><p>消費税額を分けて書いていれば、税抜50,000円で判定するので200円の印紙が必要です。税込54,999円(税抜49,999円)なら不要です。このツールの領収書は消費税額を必ず記載するので、税抜金額で判定します。</p></details>
- <details><summary>PDFの領収書なら印紙は不要？</summary><p>はい。PDFをメールで送るなど、電子データで渡す領収書は課税文書に当たらないため、収入印紙は不要です。「渡し方」で「PDFで送る」を選んでください。</p></details>
- <details><summary>クレジットカード払いの場合は？</summary><p>クレジットカードで支払われたことを領収書に書けば、印紙税はかかりません。「お支払方法」で「クレジットカード」を選ぶと、自動で記載されます。</p></details>
- <details><summary>印紙はどこに貼る？</summary><p>決まりはありませんが、左上や金額の近くに貼るのが一般的です。貼ったら、印紙と紙にまたがるように消印(押印や署名)をしてください。プレビューの点線の枠が目安です。</p></details>
- <details><summary>但し書きは何と書けばいい？</summary><p>「お品代として」より、「ホームページ制作費として」のように具体的に書くのが望ましいとされています。</p></details>
- <details><summary>個人が私物を売った時の領収書は？</summary><p>営業に関しない受取書(個人が私物を売った場合など)は、金額にかかわらず非課税です。</p></details>
- <details><summary>宛名を空欄にしてもいい？</summary><p>小売業や飲食店など不特定多数を相手にする事業者は、宛名を省略した「適格簡易請求書」を発行できます。それ以外は宛名を書くのが基本です。</p></details>
+ <h2 class="sec-t">使い方</h2>
+ <ol class="steps"><li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg><b>宛名と但し書き</b>支払方法と渡し方を選ぶと、印紙の要否がすぐに分かります</li><li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg><b>明細</b>品目・数量・単価を入れると、消費税と合計は自動計算</li><li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><b>あなたの情報</b>登録番号などは次回から自動で入ります</li><li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><b>印刷・PDF保存</b>「印刷 / PDFで保存」で完成</li></ol>
+ <h2 class="sec-t">収入印紙の金額(売上代金の領収書)</h2><table><tr><th>記載金額(税抜)</th><th>印紙税額</th></tr><tr><td>5万円未満</td><td>不要</td></tr><tr><td>5万円以上 100万円以下</td><td>200円</td></tr><tr><td>100万円超 200万円以下</td><td>400円</td></tr><tr><td>200万円超 300万円以下</td><td>600円</td></tr><tr><td>300万円超 500万円以下</td><td>1,000円</td></tr><tr><td>500万円超 1,000万円以下</td><td>2,000円</td></tr><tr><td>1,000万円超 2,000万円以下</td><td>4,000円</td></tr><tr><td>2,000万円超 3,000万円以下</td><td>6,000円</td></tr><tr><td>3,000万円超 5,000万円以下</td><td>1万円</td></tr><tr><td>5,000万円超 1億円以下</td><td>2万円</td></tr></table><p class="note">1億円を超える場合は2万円〜20万円です。このツールは1億円超にも対応しています。出典：国税庁「印紙税額の一覧表」(第17号文書)</p>
+ <h2 class="sec-t">よくある質問</h2>
+ <div class="faq"><details><summary><span>税込55,000円の領収書に印紙は必要？</span></summary><p>消費税額を分けて書いていれば、税抜50,000円で判定するので200円の印紙が必要です。税込54,999円(税抜49,999円)なら不要です。このツールの領収書は消費税額を必ず記載するので、税抜金額で判定します。</p></details><details><summary><span>PDFの領収書なら印紙は不要？</span></summary><p>はい。PDFをメールで送るなど、電子データで渡す領収書は課税文書に当たらないため、収入印紙は不要です。「渡し方」で「PDFで送る」を選んでください。</p></details><details><summary><span>クレジットカード払いの場合は？</span></summary><p>クレジットカードで支払われたことを領収書に書けば、印紙税はかかりません。「お支払方法」で「クレジットカード」を選ぶと、自動で記載されます。</p></details><details><summary><span>印紙はどこに貼る？</span></summary><p>決まりはありませんが、左上や金額の近くに貼るのが一般的です。貼ったら、印紙と紙にまたがるように消印(押印や署名)をしてください。プレビューの点線の枠が目安です。</p></details><details><summary><span>領収書を再発行したい</span></summary><p>「「再発行」と表示する」をオンにすると、書類に再発行の表示が入ります。二重発行と誤解されないよう、元の領収書と同じ番号にしておくのがおすすめです。</p></details><details><summary><span>但し書きは何と書けばいい？</span></summary><p>「お品代として」より、「ホームページ制作費として」のように具体的に書くのが望ましいとされています。</p></details><details><summary><span>個人が私物を売った時の領収書は？</span></summary><p>営業に関しない受取書(個人が私物を売った場合など)は、金額にかかわらず非課税です。</p></details><details><summary><span>宛名を空欄にしてもいい？</span></summary><p>小売業や飲食店など不特定多数を相手にする事業者は、宛名を省略した「適格簡易請求書」を発行できます。それ以外は宛名を書くのが基本です。</p></details></div>
  <p class="note">※最終的な判断は国税庁の資料や税務署にご確認ください。</p>
-
- <h2>関連ツール</h2>
- <div class="rel">
-  <a href="/mitsumori/">見積書 作成<span>受注前の見積もりに</span></a>
-  <a href="/seikyusho/">請求書 作成<span>インボイス対応、PDF保存</span></a>
-  <a href="/gensen/">源泉徴収税 計算<span>手取りからの逆算にも対応</span></a>
- </div>
+ <h2 class="sec-t">関連ツール</h2>
+ <div class="rel"><a href="/gensen/" style="--c:#2554d8"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></svg></span><span><b>源泉徴収税 計算</b><span class="d">手取りからの逆算、請求書PDFまで</span></span></a><a href="/mitsumori/" style="--c:#0d8a7f"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span><span><b>見積書 作成</b><span class="d">請求書・領収書にワンクリックで切り替え</span></span></a><a href="/nohinsho/" style="--c:#0377b3"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span><span><b>納品書 作成</b><span class="d">見積書の内容からそのまま作成</span></span></a><a href="/seikyusho/" style="--c:#4f46e5"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9.5 11l2.5 3 2.5-3M12 14v4.5M10 16h4"/></svg></span><span><b>請求書 作成</b><span class="d">インボイス対応、源泉徴収・振込手数料にも対応</span></span></a></div>
 </div>
 
 <div class="ad">広告</div>

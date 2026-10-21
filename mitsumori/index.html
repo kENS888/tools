@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>見積書 作成【無料・登録不要】PDF保存・インボイス対応｜しごと計算ラボ</title>
 <link rel="canonical" href="https://shigoto-keisan.pages.dev/mitsumori/">
-<meta name="description" content="見積書をブラウザだけで無料作成。入力するとプレビューにすぐ反映され、そのままPDFで保存できます。税率10%・8%の混在、税込入力、源泉徴収、印影画像に対応。見積書の内容から請求書・領収書もワンクリックで作れます。">
+<meta name="description" content="見積書をブラウザだけで無料作成。入力するとプレビューにすぐ反映され、そのままPDFで保存できます。税率10%・8%の混在、税込入力、源泉徴収、和暦、印影画像に対応。見積書の内容から納品書・請求書・領収書もワンクリックで作れます。">
 <link rel="stylesheet" href="/assets/shorui.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"見積書 作成ツール","url":"https://shigoto-keisan.pages.dev/mitsumori/","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"見積書にインボイスの登録番号は必要？","acceptedAnswer":{"@type":"Answer","text":"見積書は適格請求書(インボイス)ではないため、登録番号の記載は必須ではありません。請求書と同じ形式で出したい場合は、記載しても問題ありません。"}},{"@type":"Question","name":"見積書の有効期限はどのくらい？","acceptedAnswer":{"@type":"Answer","text":"法律上の決まりはなく、2週間から1か月程度が一般的です。このツールでは発行日の30日後が初期値です。"}},{"@type":"Question","name":"見積書に収入印紙は必要？","acceptedAnswer":{"@type":"Answer","text":"一般的な見積書は印紙税の課税文書に当たらないため、収入印紙は不要です。"}}]}]}</script>
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "見積書 作成ツール", "url": "https://shigoto-keisan.pages.dev/mitsumori/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "見積書にインボイスの登録番号は必要？", "acceptedAnswer": {"@type": "Answer", "text": "見積書は適格請求書(インボイス)ではないため、登録番号の記載は必須ではありません。請求書と同じ形式で出したい場合は、記載しても問題ありません。"}}, {"@type": "Question", "name": "見積書の有効期限はどのくらい？", "acceptedAnswer": {"@type": "Answer", "text": "法律上の決まりはなく、2週間から1か月程度が一般的です。このツールでは発行日の30日後が初期値です。"}}, {"@type": "Question", "name": "見積書に収入印紙は必要？", "acceptedAnswer": {"@type": "Answer", "text": "一般的な見積書は印紙税の課税文書に当たらないため、収入印紙は不要です。"}}, {"@type": "Question", "name": "値引きはどう書けばいい？", "acceptedAnswer": {"@type": "Answer", "text": "明細に「値引き」などの行を追加し、単価をマイナス(例：-5000)で入力してください。小計と消費税から差し引かれます。"}}, {"@type": "Question", "name": "税込の金額で見積もりたい", "acceptedAnswer": {"@type": "Answer", "text": "明細の下にある「税込で入力」を選ぶと、単価を税込で入力できます。消費税は税率ごとの合計から計算されます。"}}, {"@type": "Question", "name": "支払条件は書いたほうがいい？", "acceptedAnswer": {"@type": "Answer", "text": "書いておくと、請求・入金の時期について後から行き違いが起きにくくなります。「月末締め翌月末払い」などと入力してください。"}}, {"@type": "Question", "name": "はんこ(押印)は必要？", "acceptedAnswer": {"@type": "Answer", "text": "法律上は押印がなくても見積書として有効です。取引先の慣習で必要な場合は、印影の画像を登録すると書類に表示されます。"}}, {"@type": "Question", "name": "入力した内容はどこに保存される？", "acceptedAnswer": {"@type": "Answer", "text": "お使いのブラウザの中だけに保存され、サーバーには送信されません。共用のパソコンでは「この端末に入力内容を保存する」をオフにしてください。"}}]}]}</script>
 </head>
 <body data-type="q">
 <header class="top"><div class="in">
@@ -24,40 +25,14 @@
 <div class="ad">広告</div>
 
 <div class="card info">
- <h2>使い方</h2>
- <ol>
-  <li>宛名・件名・有効期限を入れる</li>
-  <li>明細(品目・数量・単価)を入れる。消費税と合計は自動で計算されます</li>
-  <li>あなたの氏名・住所などを入れる(次回からは自動で入ります)</li>
-  <li>「印刷 / PDFで保存」を押して、PDFに保存する</li>
- </ol>
- <p class="note">受注したら、画面上部の「請求書」を押すだけで、同じ内容の請求書に切り替わります。</p>
-
- <h2>見積書に書く主な項目</h2>
- <ul>
-  <li>宛名、発行日、見積番号</li>
-  <li>件名、明細(品目・数量・単価・金額)</li>
-  <li>小計・消費税・合計金額(税率ごとの内訳)</li>
-  <li>有効期限、納期、支払条件(必要に応じて)</li>
-  <li>発行者の氏名・住所・連絡先</li>
- </ul>
-
- <h2>よくある質問</h2>
- <details><summary>見積書にインボイスの登録番号は必要？</summary><p>見積書は適格請求書(インボイス)ではないため、登録番号の記載は必須ではありません。請求書と同じ形式で出したい場合は、記載しても問題ありません。</p></details>
- <details><summary>見積書の有効期限はどのくらい？</summary><p>法律上の決まりはなく、2週間から1か月程度が一般的です。このツールでは発行日の30日後が初期値です。</p></details>
- <details><summary>見積書に収入印紙は必要？</summary><p>一般的な見積書は印紙税の課税文書に当たらないため、収入印紙は不要です。</p></details>
- <details><summary>値引きはどう書けばいい？</summary><p>明細に「値引き」などの行を追加し、単価をマイナス(例：-5000)で入力してください。小計と消費税から差し引かれます。</p></details>
- <details><summary>税込の金額で見積もりたい</summary><p>明細の下にある「税込で入力」を選ぶと、単価を税込で入力できます。消費税は税率ごとの合計から計算されます。</p></details>
- <details><summary>はんこ(押印)は必要？</summary><p>法律上は押印がなくても見積書として有効です。取引先の慣習で必要な場合は、印影の画像を登録すると書類に表示されます。</p></details>
- <details><summary>入力した内容はどこに保存される？</summary><p>お使いのブラウザの中だけに保存され、サーバーには送信されません。共用のパソコンでは「この端末に入力内容を保存する」をオフにしてください。</p></details>
+ <h2 class="sec-t">使い方</h2>
+ <ol class="steps"><li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg><b>宛先と件名</b>宛名・件名・有効期限を入れます</li><li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg><b>明細</b>品目・数量・単価を入れると、消費税と合計は自動計算</li><li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><b>あなたの情報</b>氏名・住所などは次回から自動で入ります</li><li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><b>PDFで保存</b>「印刷 / PDFで保存」で完成</li></ol>
+ <p class="note">受注したら、画面上部の「請求書」を押すだけで、同じ内容の請求書に切り替わります。</p><h2 class="sec-t">見積書に書く主な項目</h2><ul><li>宛名、発行日、見積番号</li><li>件名、明細(品目・数量・単価・金額)</li><li>小計・消費税・合計金額(税率ごとの内訳)</li><li>有効期限、納期、支払条件(必要に応じて)</li><li>発行者の氏名・住所・連絡先</li></ul>
+ <h2 class="sec-t">よくある質問</h2>
+ <div class="faq"><details><summary><span>見積書にインボイスの登録番号は必要？</span></summary><p>見積書は適格請求書(インボイス)ではないため、登録番号の記載は必須ではありません。請求書と同じ形式で出したい場合は、記載しても問題ありません。</p></details><details><summary><span>見積書の有効期限はどのくらい？</span></summary><p>法律上の決まりはなく、2週間から1か月程度が一般的です。このツールでは発行日の30日後が初期値です。</p></details><details><summary><span>見積書に収入印紙は必要？</span></summary><p>一般的な見積書は印紙税の課税文書に当たらないため、収入印紙は不要です。</p></details><details><summary><span>値引きはどう書けばいい？</span></summary><p>明細に「値引き」などの行を追加し、単価をマイナス(例：-5000)で入力してください。小計と消費税から差し引かれます。</p></details><details><summary><span>税込の金額で見積もりたい</span></summary><p>明細の下にある「税込で入力」を選ぶと、単価を税込で入力できます。消費税は税率ごとの合計から計算されます。</p></details><details><summary><span>支払条件は書いたほうがいい？</span></summary><p>書いておくと、請求・入金の時期について後から行き違いが起きにくくなります。「月末締め翌月末払い」などと入力してください。</p></details><details><summary><span>はんこ(押印)は必要？</span></summary><p>法律上は押印がなくても見積書として有効です。取引先の慣習で必要な場合は、印影の画像を登録すると書類に表示されます。</p></details><details><summary><span>入力した内容はどこに保存される？</span></summary><p>お使いのブラウザの中だけに保存され、サーバーには送信されません。共用のパソコンでは「この端末に入力内容を保存する」をオフにしてください。</p></details></div>
  <p class="note">※消費税の計算は、税率ごとに合計してから端数を処理する方式(インボイス制度のルール)です。制度の詳細は国税庁の資料をご確認ください。</p>
-
- <h2>関連ツール</h2>
- <div class="rel">
-  <a href="/seikyusho/">請求書 作成<span>インボイス対応、PDF保存</span></a>
-  <a href="/ryoshusho/">領収書 作成<span>収入印紙の要否も自動で判定</span></a>
-  <a href="/gensen/">源泉徴収税 計算<span>手取りからの逆算にも対応</span></a>
- </div>
+ <h2 class="sec-t">関連ツール</h2>
+ <div class="rel"><a href="/gensen/" style="--c:#2554d8"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></svg></span><span><b>源泉徴収税 計算</b><span class="d">手取りからの逆算、請求書PDFまで</span></span></a><a href="/nohinsho/" style="--c:#0377b3"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span><span><b>納品書 作成</b><span class="d">見積書の内容からそのまま作成</span></span></a><a href="/seikyusho/" style="--c:#4f46e5"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9.5 11l2.5 3 2.5-3M12 14v4.5M10 16h4"/></svg></span><span><b>請求書 作成</b><span class="d">インボイス対応、源泉徴収・振込手数料にも対応</span></span></a><a href="/ryoshusho/" style="--c:#d9540f"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18l-2.5-1.5L14 21l-2-1.5L10 21l-2.5-1.5L5 21z"/><path d="M9 11l2 2 4-4"/></svg></span><span><b>領収書 作成</b><span class="d">収入印紙の要否を自動で判定</span></span></a></div>
 </div>
 
 <div class="ad">広告</div>
