@@ -301,7 +301,7 @@ var HIWARI=(function(){
   while(g++<240){var f=B.D(y,m,1),l=B.D(y,m,lastDay(y,m));if(f>b)break;
    out.push({y:y,m:m,first:f,last:l,from:a>f?a:f,to:b<l?b:l});m++;if(m>12){m=1;y++}}
   return out}
- function biz(a,b){return B.countBiz(a,b,CFG).biz}
+ var BC={};function biz(a,b){var k=B.key(a)+B.key(b);return BC[k]!=null?BC[k]:(BC[k]=B.countBiz(a,b,CFG).biz)} // 同じ期間はキャッシュ(カレンダーの再描画を速くする)
  // o:{amt,a,b(Date),mode:'fee'|'pay',basis,n,meth:'add'|'sub',rnd}
  // fee の basis：'cal'その月の日数 / 'd30'30日 / 'y365'年額÷365日
  // pay の basis：'biz'所定労働日数(土日祝休み) / 'cal'その月の暦日数 / 'd30'30日 / 'n'日数を指定(出勤日は土日祝を除いて数える)
