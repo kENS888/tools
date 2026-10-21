@@ -81,7 +81,7 @@ function build(){
  '<div class="optl">'+
   CK('wOn','源泉徴収税を差し引く','個人が法人から、デザイン料・原稿料・講演料などを受け取る場合。交通費など対象外の明細は、明細ごとに外せます','q n i r')+
   CK('noTax','消費税を加算しない',PO?'相手が消費税を請求しない場合(免税事業者の見積りが税込総額のみ、など)':'免税事業者で、消費税を請求しない場合')+
-  CK('feeOn','振込手数料を差し引く(当方負担)','','i')+'<div class="subin" data-show="i" id="feeBox"><input id="fee" class="num" type="text" inputmode="numeric"><span class="note">円</span></div>'+
+  CK('feeOn','振込手数料を差し引く(当方負担)','','i')+'<div class="subin" data-show="i" id="feeBox"><input id="fee" class="num" type="text" inputmode="numeric" aria-label="振込手数料(円)"><span class="note">円</span></div>'+
   CK('wareki','日付を和暦(令和)で表示する')+
   CK('reiss','「再発行」と表示する','紛失などで領収書を発行し直す場合','r')+
  '</div>'+
@@ -98,7 +98,7 @@ function build(){
  '</details>'+
 
  '<section class="sec"><div class="sh"><span class="n">4</span><h2>備考</h2><span class="r">任意</span></div>'+
- '<textarea id="memo" rows="3" placeholder="'+(PO?'納品物の形式：PDF・AIデータ一式／検収：納品後7日以内':'お振込手数料は貴社にてご負担をお願いいたします。')+'"></textarea></section>'+
+ '<textarea id="memo" aria-label="備考" rows="3" placeholder="'+(PO?'納品物の形式：PDF・AIデータ一式／検収：納品後7日以内':'お振込手数料は貴社にてご負担をお願いいたします。')+'"></textarea></section>'+
  '<div class="acts"><button type="button" class="btn p" id="pdf1">PDFをダウンロード</button><button type="button" class="btn" id="print1">印刷</button><button type="button" class="btn" id="reset">新しく作る</button></div>'+
  '<a class="next" id="next"></a>'+
  '<div class="share" id="shareAsk" hidden><b>PDFができました</b><span>便利だと思ったら、お仕事仲間にシェアしていただけるとうれしいです。</span><div class="sbtns" data-share></div></div>'+
@@ -173,7 +173,7 @@ var last;
 function render(){
  var c=calc(rowsN(),opt());last=c;
  [].forEach.call(document.querySelectorAll('#rows .it'),function(el,i){el.querySelector('[data-amt]').textContent=yen(c.lines[i]||0)});
- document.querySelector('.app').classList.toggle('won',S.wOn);
+ document.querySelector('.app').classList.toggle('won',!PO&&S.wOn);
  var h='<div><span>小計'+(S.noTax?'':'(税抜)')+'</span><span>'+yen(c.sub)+'</span></div>';
  if(!S.noTax)c.keys.forEach(function(k){if(k!=='0')h+='<div><span>消費税('+k+'%)</span><span>'+yen(c.tax[k])+'</span></div>'});
  if(c.w||c.fee)h+='<div><span>合計'+(S.noTax?'':'(税込)')+'</span><span>'+yen(c.total)+'</span></div>';
@@ -188,14 +188,14 @@ function render(){
    ['','✓','収入印紙は不要です','税抜5万円未満は非課税です。'+a];
   $('chip').innerHTML='<div class="chip '+m[0]+'"><i>'+m[1]+'</i><div><b>'+m[2]+'</b><span>'+m[3]+'</span>'+(S.pay==='other'&&st.why==='need'?'<br><span>電子マネー・QR決済は、決済の仕組みによって扱いが異なる場合があります。</span>':'')+'</div></div>';}
  if(PO){var po=poStamp({elec:S.elec,mno:S.mno,uke:S.uke}),pm=po==='elec'?['','✓','収入印紙は不要です','PDFなどの電子データで送る発注書には印紙税がかかりません。']:
-   po==='uke'?['','✓','収入印紙は通常不要です','見積書の番号を書いていても、注文請書を出してもらう旨を書いているため、契約書には当たらないとされています。']:
-   po==='risk'?['warn','!','紙で渡すと収入印紙が必要になる場合があります','見積書の番号を書いた注文書は、契約書として扱われることがあります。「注文請書をご提出ください」と書くか、PDFで送れば不要です。']:
-   ['','✓','収入印紙は通常不要です','申し込むだけの発注書・注文書は、原則として印紙税の対象外です。'];
+   po==='uke'?['','✓','この発注書には収入印紙は通常不要です','注文請書を出してもらう旨を書いているため、契約書には当たらないとされています。なお、制作・工事・修理などの請負で、相手が紙の注文請書を出す場合は、注文請書の側に収入印紙が必要です(1万円未満は不要)。']:
+   po==='risk'?['warn','!','請負の注文で紙で渡す場合は、収入印紙が必要になることがあります','見積書の番号を書いた注文書は契約書として扱われ、制作・工事・修理などの請負なら金額に応じた印紙が必要です(1万円未満は不要)。商品の仕入れ(売買)なら通常は不要です。「注文請書をご提出ください」と書くか、PDFで送れば不要です。']:
+   ['','✓','収入印紙は通常不要です','申し込むだけの発注書・注文書は、原則として印紙税の対象外です。ただし、取引基本契約で「注文書だけで契約が成立する」と決めている場合は、契約書として扱われることがあります。'];
   $('chip').innerHTML='<div class="chip '+pm[0]+'"><i>'+pm[1]+'</i><div><b>'+pm[2]+'</b><span>'+pm[3]+'</span></div></div>'}
  $('feeBox').hidden=TYPE!=='i'||!S.feeOn;
  $('paperHost').innerHTML=docHTML(c);fit();
  $('meSt').textContent=ME.from?'保存済み：'+ME.from.slice(0,14):'未入力';
- if(PO){[].forEach.call($('ottl').children,function(b){b.className=b.dataset.v===T.o.n?'on':''});var pc=document.querySelector('.pv-chip');if(pc)pc.textContent=T.o.n}
+ if(PO){[].forEach.call($('ottl').children,function(b){var on=b.dataset.v===T.o.n;b.className=on?'on':'';b.setAttribute('aria-pressed',on)});var pc=document.querySelector('.pv-chip');if(pc)pc.textContent=T.o.n}
  var nx={q:'i',n:'i',i:'r'}[TYPE];
  $('next').className='next'+(nx&&c.total?' on':'');if(nx){$('next').textContent='この内容で'+T[nx].n+'を作る →';$('next').href=T[nx].url}
  save();
@@ -203,7 +203,8 @@ function render(){
 var raf;function upd(){cancelAnimationFrame(raf);raf=requestAnimationFrame(render)}
 function fit(){var box=$('pvbox'),p=box.querySelector('.paper');if(!p)return;var W=box.parentNode.clientWidth-parseFloat(getComputedStyle(box.parentNode).paddingLeft)*2,s=Math.min(1,W/p.offsetWidth);
  p.style.transform='scale('+s+')';box.style.width=p.offsetWidth*s+'px';box.style.height=p.offsetHeight*s+'px'}
-function save(){try{if(keep){localStorage.setItem(KEY,JSON.stringify({me:ME,doc:PO?svDoc:S,keep:true}));if(PO)localStorage.setItem(DKEY,JSON.stringify(S))}
+function save(){try{if(keep){if(PO){try{var cur=JSON.parse(localStorage.getItem(KEY)||'null');if(cur&&cur.doc)svDoc=cur.doc}catch(_){}}
+  localStorage.setItem(KEY,JSON.stringify({me:ME,doc:PO?svDoc:S,keep:true}));if(PO)localStorage.setItem(DKEY,JSON.stringify(S))}
  else{localStorage.setItem(KEY,JSON.stringify({keep:false}));localStorage.removeItem(DKEY)}}catch(_){}}
 
 /* ---------- 入力イベント ---------- */
@@ -221,7 +222,7 @@ function bind(){
  $('keep').checked=keep;$('keep').onchange=function(){keep=this.checked;save();toast(keep?'この端末に保存します':'保存を停止し、保存内容を消しました')};
  $('meSec').open=!ME.from;
  if(PO)$('ottl').onclick=function(e){var b=e.target.closest('[data-v]');if(!b)return;S.ottl=b.dataset.v;poT();upd()};
- function pill(){[].forEach.call($('incl').children,function(b){b.className=(b.dataset.v==='1')===S.incl?'on':''})}pill();
+ function pill(){[].forEach.call($('incl').children,function(b){var on=(b.dataset.v==='1')===S.incl;b.className=on?'on':'';b.setAttribute('aria-pressed',on)})}pill();
  $('incl').onclick=function(e){var v=e.target.dataset.v;if(v==null)return;S.incl=v==='1';pill();drawRows();upd()};
  $('rows').addEventListener('input',function(e){var t=e.target,k=t.dataset.k,it=t.closest('.it');if(!k||!it||k==='r'||k==='w'||k==='us')return;var r=S.rows[+it.dataset.i];
   if(k==='p'){var p=t.selectionStart,l=t.value.length;t.value=fmtI(t.value);try{var q=Math.max(0,p+t.value.length-l);t.setSelectionRange(q,q)}catch(_){}}
