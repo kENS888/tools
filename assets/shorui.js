@@ -89,6 +89,7 @@ function build(){
 
  '<section class="sec"><div class="sh"><span class="n">2</span><h2>明細</h2><span class="r">値引きはマイナスの単価で</span></div>'+
  '<div id="rows"></div><button type="button" class="add" id="addRow">＋ 明細を追加</button>'+
+ '<details class="more" id="optBox"><summary>オプション<span class="ms" id="optSum"></span></summary>'+
  '<div class="opts"><div class="pill" id="incl"><button type="button" data-v="0">税抜で入力</button><button type="button" data-v="1">税込で入力</button></div>'+
  '<label>端数 <select id="rnd"><option value="floor">切り捨て</option><option value="round">四捨五入</option><option value="ceil">切り上げ</option></select></label></div>'+
  '<div class="optl">'+
@@ -97,7 +98,7 @@ function build(){
   CK('feeOn','振込手数料を差し引く(当方負担)','','i')+'<div class="subin" data-show="i" id="feeBox"><input id="fee" class="num" type="text" inputmode="numeric" aria-label="振込手数料(円)"><span class="note">円</span></div>'+
   CK('wareki','日付を和暦(令和)で表示する')+
   CK('reiss','「再発行」と表示する','紛失などで領収書を発行し直す場合','r')+
- '</div>'+
+ '</div></details>'+
  '<div class="sum" id="sum"></div></section>'+
 
  '<details class="sec" id="meSec"><summary><div class="sh"><span class="n">3</span><h2>あなた(発行者)の情報</h2><span class="r" id="meSt"></span></div></summary>'+
@@ -186,9 +187,13 @@ function docHTML(c){
 }
 
 /* ---------- 描画 ---------- */
+function optSum(){var a=[];if(!PO&&S.wOn&&TYPE!=='o')a.push('源泉徴収');if(S.noTax)a.push('消費税なし');if(TYPE==='i'&&S.feeOn)a.push('振込手数料');if(S.incl)a.push('税込入力');if(S.rnd&&S.rnd!=='floor')a.push(S.rnd==='round'?'四捨五入':'切り上げ');if(S.wareki)a.push('和暦');if(TYPE==='r'&&S.reiss)a.push('再発行');
+ var el=$('optSum');if(!el)return;el.textContent=a.length?a.join('・'):(TYPE==='o'?'税込入力・端数・和暦など':TYPE==='i'?'源泉徴収・振込手数料・税込入力など':'源泉徴収・税込入力・和暦など');el.className='ms'+(a.length?' on':'');
+ if(a.length&&!optSum.done){$('optBox').open=true}optSum.done=1}
 var last;
 function render(){
  var c=calc(rowsN(),opt());last=c;
+ optSum();
  [].forEach.call(document.querySelectorAll('#rows .it'),function(el,i){el.querySelector('[data-amt]').textContent=yen(c.lines[i]||0)});
  document.querySelector('.app').classList.toggle('won',!PO&&S.wOn);
  var h='<div><span>小計'+(S.noTax?'':'(税抜)')+'</span><span>'+yen(c.sub)+'</span></div>';

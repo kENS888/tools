@@ -45,3 +45,13 @@
 .sharebox p{margin:0;font-size:.88rem;color:var(--sub)}
 .restore{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;padding:8px 12px;border-radius:10px;background:var(--acc2);color:var(--acc);font-size:.85rem;font-weight:600}
 .restore button{border:1px solid var(--acc);background:var(--card);color:var(--acc);border-radius:8px;padding:5px 10px;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;white-space:nowrap}
+/* 折りたたみ(細かい設定)。使っている設定は見出しに表示 */
+details.more{margin-top:14px;border:1px solid var(--line);border-radius:12px;padding:0 14px;background:var(--card)}
+details.more>summary{list-style:none;cursor:pointer;font-weight:700;font-size:.9rem;padding:11px 0;display:flex;align-items:center;gap:8px;white-space:nowrap}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid var(--sub);border-bottom:2px solid var(--sub);transform:rotate(45deg) translateY(-2px);transition:transform .15s;flex:none}
+details.more[open]>summary::after{transform:rotate(-135deg) translateY(-2px)}
+details.more .ms{font-weight:500;font-size:.78rem;color:var(--sub);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+details.more .ms.on{color:var(--acc);font-weight:700}
+details.more>.mb,details.more>.opts:first-of-type{margin-top:0}
+details.more[open]{padding-bottom:12px}
