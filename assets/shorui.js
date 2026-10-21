@@ -1,31 +1,40 @@
-/* しごと計算ラボ 見積書・納品書・請求書・領収書 作成(画面) */
+/* しごと計算ラボ 見積書・納品書・請求書・領収書・発注書 作成(画面) */
 (function(){
 var $=function(id){return document.getElementById(id)};
 var ICON={q:'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
  n:'<path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/>',
  i:'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 7.5l3 4 3-4M12 11.5v6.5M9.2 13h5.6M9.2 15.6h5.6"/>',
- r:'<path d="M5 3h14v18l-2.5-1.5L14 21l-2-1.5L10 21l-2.5-1.5L5 21z"/><path d="M9 11l2 2 4-4"/>'};
+ r:'<path d="M5 3h14v18l-2.5-1.5L14 21l-2-1.5L10 21l-2.5-1.5L5 21z"/><path d="M9 11l2 2 4-4"/>',
+ o:'<path d="M9 3h6v3H9z"/><path d="M15 4.5h3a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1h3"/><path d="M9 12h6M9 16h4"/>'};
 function ico(k){return '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true">'+ICON[k]+'</svg>'}
 var T={q:{n:'見積書',s:'仕事の前に',d:'見積日',amt:'お見積金額',lead:'下記のとおりお見積り申し上げます。',url:'/mitsumori/'},
        n:{n:'納品書',s:'納品のときに',d:'納品日',amt:'合計金額',lead:'下記のとおり納品いたします。',url:'/nohinsho/'},
        i:{n:'請求書',s:'代金の請求に',d:'請求日',amt:'ご請求金額',lead:'下記のとおりご請求申し上げます。',url:'/seikyusho/'},
-       r:{n:'領収書',s:'入金されたら',d:'領収日',amt:'領収金額',lead:'',url:'/ryoshusho/'}};
+       r:{n:'領収書',s:'入金されたら',d:'領収日',amt:'領収金額',lead:'',url:'/ryoshusho/'},
+       o:{n:'発注書',s:'仕事を頼むとき',d:'発注日',amt:'発注金額',lead:'下記のとおり発注いたします。',url:'/hacchusho/'}};
 var ORDER=['q','n','i','r'];
 // よく使う単位。ない場合は「その他」で自由入力
 var UNITS=[['式','式'],['個','個'],['件','件'],['回','回'],['時間','時間'],['日','日'],['人月','人月'],['','なし'],['x','その他']];
 var PAY={cash:'現金',bank:'銀行振込',card:'クレジットカード',other:'電子マネー・その他'};
 var KEY='shorui_v1';
+// 発注書は発注する側の書類なので、宛先・明細は見積書〜領収書と別に保存する(あなたの情報は共通)
+var DKEY='shorui_po_v1';
 function iso(t){var p=function(n){return ('0'+n).slice(-2)};return t.getFullYear()+'-'+p(t.getMonth()+1)+'-'+p(t.getDate())}
 function today(o){var t=new Date();if(o)t.setDate(t.getDate()+o);return iso(t)}
 function eom(){var t=new Date();return iso(new Date(t.getFullYear(),t.getMonth()+2,0))}
 function blank(){return {to:'',hon:'御中',subj:'',no:today().replace(/-/g,'')+'-01',date:today(),valid:today(30),nouki:'',jouken:'',due:eom(),tad:'',pay:'cash',elec:false,memo:'',
+ ottl:'発注書',basho:'',mno:'',uke:false,
  incl:false,rnd:'floor',noTax:false,wOn:false,feeOn:false,fee:'440',wareki:false,reiss:false,rows:[{n:'',q:'1',u:'式',p:'',r:'10',xr:'',nw:false}]}}
-var S=blank(),ME={from:'',regno:'',addr:'',tel:'',bank:'',ink:'',color:'navy'},keep=true;
-var TYPE=document.body.dataset.type||'q';
-var restored=false;
-try{var sv=JSON.parse(localStorage.getItem(KEY)||'null');if(sv){if(sv.me)ME=Object.assign(ME,sv.me);if(sv.doc){S=Object.assign(blank(),sv.doc);restored=!!(S.to||S.rows.some(function(r){return r.n||r.p}))}if(sv.keep===false)keep=false}}catch(_){}
-// 保存をオフにしている時も、書類の種類を切り替える間だけは内容を引き継ぐ
-try{var ss=JSON.parse(sessionStorage.getItem(KEY)||'null');if(ss){S=Object.assign(blank(),ss.doc);ME=Object.assign(ME,ss.me);restored=false}}catch(_){}
+var S=blank(),ME={from:'',regno:'',addr:'',tel:'',bank:'',tanto:'',ink:'',color:'navy'},keep=true;
+var TYPE=document.body.dataset.type||'q',PO=TYPE==='o';
+var restored=false,svDoc=null;
+function useDoc(d){if(d){S=Object.assign(blank(),d);restored=!!(S.to||S.rows.some(function(r){return r.n||r.p}))}}
+try{var sv=JSON.parse(localStorage.getItem(KEY)||'null');if(sv){if(sv.me)ME=Object.assign(ME,sv.me);svDoc=sv.doc||null;if(!PO)useDoc(sv.doc);if(sv.keep===false)keep=false}}catch(_){}
+try{if(PO&&keep)useDoc(JSON.parse(localStorage.getItem(DKEY)||'null'))}catch(_){}
+// 保存をオフにしている時も、書類の種類を切り替える間だけは内容を引き継ぐ(発注書は対象外)
+try{var ss=JSON.parse(sessionStorage.getItem(KEY)||'null');if(ss&&!PO){S=Object.assign(blank(),ss.doc);ME=Object.assign(ME,ss.me);restored=false}}catch(_){}
+function poT(){T.o.n=S.ottl==='注文書'?'注文書':'発注書';T.o.amt=T.o.n==='注文書'?'ご注文金額':'発注金額';T.o.lead=T.o.n==='注文書'?'下記のとおり注文いたします。':'下記のとおり発注いたします。'}
+if(PO)poT();
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function z2h(s){return String(s||'').replace(/[０-９．，－]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-0xFEE0)}).replace(/[−ー‐]/g,'-')}
@@ -39,7 +48,7 @@ function ph(v,p){return v?esc(v):'<span class="ph">'+p+'</span>'}
 function RL(k){return k==='0'?'対象外':k+'%'}
 function toast(m){var t=$('toast');t.textContent=m;t.className='toast on';clearTimeout(toast._t);toast._t=setTimeout(function(){t.className='toast'},1900)}
 function rowsN(){return S.rows.map(function(r){return {q:fval(r.q),p:ival(r.p),r:r.r,xr:r.xr,nw:!!r.nw}})}
-function opt(){return {incl:S.incl,rnd:S.rnd,noTax:S.noTax,wOn:S.wOn,fee:TYPE==='i'&&S.feeOn?ival(S.fee):0}}
+function opt(){return {incl:S.incl,rnd:S.rnd,noTax:S.noTax,wOn:!PO&&S.wOn,fee:TYPE==='i'&&S.feeOn?ival(S.fee):0}}
 
 /* ---------- フォーム ---------- */
 function F(id,lbl,ph_,o){o=o||{};return '<div'+(o.w?' class="w"':'')+(o.show?' data-show="'+o.show+'"':'')+'><label class="f" for="'+id+'"'+(o.lid?' id="'+o.lid+'"':'')+'>'+lbl+(o.em?'<em>'+o.em+'</em>':'')+'</label>'+
@@ -47,28 +56,31 @@ function F(id,lbl,ph_,o){o=o||{};return '<div'+(o.w?' class="w"':'')+(o.show?' d
 function CK(id,lbl,note,show){return '<label class="ck"'+(show?' data-show="'+show+'"':'')+'><input type="checkbox" id="'+id+'"><span>'+lbl+(note?'<span class="note">'+note+'</span>':'')+'</span></label>'}
 function build(){
  var h='<div class="app"><div class="card fm">'+
- '<nav class="types" aria-label="書類の種類">'+ORDER.map(function(k){return '<a href="'+T[k].url+'" data-type="'+k+'"'+(k===TYPE?' class="on" aria-current="page"':'')+'>'+ico(k)+T[k].n+'<small>'+T[k].s+'</small></a>'}).join('')+'</nav>'+
+ (PO?'<div class="pill ttl" id="ottl" role="group" aria-label="書類の名前"><button type="button" data-v="発注書">'+ico('o')+'発注書</button><button type="button" data-v="注文書">'+ico('o')+'注文書</button></div>':
+ '<nav class="types" aria-label="書類の種類">'+ORDER.map(function(k){return '<a href="'+T[k].url+'" data-type="'+k+'"'+(k===TYPE?' class="on" aria-current="page"':'')+'>'+ico(k)+T[k].n+'<small>'+T[k].s+'</small></a>'}).join('')+'</nav>')+
  (restored?'<div class="restore" id="restore"><span>前回の入力内容を表示しています</span><button type="button" id="restoreNew">新しく作る</button></div>':'')+
- '<p class="hint">入力した内容はそのままで、書類の種類だけを切り替えられます。</p>'+
+ '<p class="hint">'+(PO?'発注書と注文書は名前が違うだけで、書く内容は同じです。取引先で使われている呼び方を選んでください。':'入力した内容はそのままで、書類の種類だけを切り替えられます。')+'</p>'+
 
  '<section class="sec"><div class="sh"><span class="n">1</span><h2>宛先と書類の情報</h2></div>'+
- '<label class="f" for="to">宛名</label><div class="toH"><input id="to" type="text" placeholder="株式会社〇〇"><select id="hon" aria-label="敬称"><option>御中</option><option>様</option><option value="">なし</option></select></div>'+
- '<div class="g2">'+F('subj','件名','ホームページ制作',{em:'任意',show:'q n i',w:1})+F('tad','但し書き','ホームページ制作費として',{show:'r',w:1})+
+ '<label class="f" for="to">'+(PO?'宛名(仕事を頼む相手)':'宛名')+'</label><div class="toH"><input id="to" type="text" placeholder="株式会社〇〇"><select id="hon" aria-label="敬称"><option>御中</option><option>様</option><option value="">なし</option></select></div>'+
+ '<div class="g2">'+F('subj','件名','ホームページ制作',{em:'任意',show:'q n i o',w:1})+F('tad','但し書き','ホームページ制作費として',{show:'r',w:1})+
  F('no','番号','20261021-01')+F('date','発行日','',{t:'date',lid:'dateL'})+
- F('valid','有効期限','',{t:'date',show:'q'})+F('nouki','納期','2026年11月末',{em:'任意',show:'q'})+
- F('jouken','支払条件','月末締め翌月末払い',{em:'任意',show:'q',w:1})+
+ F('valid','有効期限','',{t:'date',show:'q'})+F('nouki','納期','2026年11月末',{em:PO?'':'任意',show:'q o'})+
+ F('basho','納品場所','貴社指定の場所／メールで納品',{em:'任意',show:'o'})+
+ F('jouken',PO?'支払期日・支払条件':'支払条件','月末締め翌月末払い',{em:PO?'':'任意',show:'q o',w:1})+
+ F('mno','見積書の番号','Q-20261015',{em:'任意',show:'o'})+
  F('due','お支払期限','',{t:'date',show:'i'})+
  '<div data-show="r"><label class="f" for="pay">お支払方法</label><select id="pay">'+Object.keys(PAY).map(function(k){return '<option value="'+k+'">'+PAY[k]+'</option>'}).join('')+'</select></div>'+
- '<div data-show="r"><label class="f" for="elec">渡し方</label><select id="elec"><option value="0">紙で渡す・郵送</option><option value="1">PDFで送る</option></select></div>'+
- '</div><div id="chip" data-show="r"></div></section>'+
+ '<div data-show="r o"><label class="f" for="elec">渡し方</label><select id="elec"><option value="0">紙で渡す・郵送</option><option value="1">PDFで送る</option></select></div>'+
+ '</div>'+CK('uke','「注文請書をご提出ください」と書く','相手に注文請書(引き受けたことを示す書類)を出してもらう場合','o')+'<div id="chip" data-show="r o"></div></section>'+
 
  '<section class="sec"><div class="sh"><span class="n">2</span><h2>明細</h2><span class="r">値引きはマイナスの単価で</span></div>'+
  '<div id="rows"></div><button type="button" class="add" id="addRow">＋ 明細を追加</button>'+
  '<div class="opts"><div class="pill" id="incl"><button type="button" data-v="0">税抜で入力</button><button type="button" data-v="1">税込で入力</button></div>'+
  '<label>端数 <select id="rnd"><option value="floor">切り捨て</option><option value="round">四捨五入</option><option value="ceil">切り上げ</option></select></label></div>'+
  '<div class="optl">'+
-  CK('wOn','源泉徴収税を差し引く','個人が法人から、デザイン料・原稿料・講演料などを受け取る場合。交通費など対象外の明細は、明細ごとに外せます')+
-  CK('noTax','消費税を加算しない','免税事業者で、消費税を請求しない場合')+
+  CK('wOn','源泉徴収税を差し引く','個人が法人から、デザイン料・原稿料・講演料などを受け取る場合。交通費など対象外の明細は、明細ごとに外せます','q n i r')+
+  CK('noTax','消費税を加算しない',PO?'相手が消費税を請求しない場合(免税事業者の見積りが税込総額のみ、など)':'免税事業者で、消費税を請求しない場合')+
   CK('feeOn','振込手数料を差し引く(当方負担)','','i')+'<div class="subin" data-show="i" id="feeBox"><input id="fee" class="num" type="text" inputmode="numeric"><span class="note">円</span></div>'+
   CK('wareki','日付を和暦(令和)で表示する')+
   CK('reiss','「再発行」と表示する','紛失などで領収書を発行し直す場合','r')+
@@ -77,7 +89,8 @@ function build(){
 
  '<details class="sec" id="meSec"><summary><div class="sh"><span class="n">3</span><h2>あなた(発行者)の情報</h2><span class="r" id="meSt"></span></div></summary>'+
  '<div class="g2">'+F('from','氏名・屋号・会社名','山田デザイン事務所 山田 太郎',{w:1,a:'organization'})+
- F('addr','住所','〒100-0001 東京都千代田区…',{w:1,ta:2})+F('tel','電話・メール','03-0000-0000',{em:'任意'})+F('regno','登録番号','T1234567890123',{em:'インボイス・任意'})+
+ F('addr','住所','〒100-0001 東京都千代田区…',{w:1,ta:2})+F('tel','電話・メール','03-0000-0000',{em:'任意'})+F('regno','登録番号','T1234567890123',{em:'インボイス・任意',show:'q n i r'})+
+ F('tanto','ご担当者','発注担当：佐藤',{em:'任意',show:'o'})+
  F('bank','振込先','〇〇銀行 〇〇支店 普通 1234567 ヤマダ タロウ',{w:1,show:'q i'})+'</div>'+
  '<label class="f">印影(はんこ)の画像<em>任意・白い紙に押して撮った写真でもOK(背景は自動で透明になります)</em></label><div class="inkan"><img id="inkImg" alt="" hidden><button type="button" class="btn s" id="inkBtn">画像を選ぶ</button><button type="button" class="btn s" id="inkDel" hidden>削除</button><input type="file" id="inkFile" accept="image/*" hidden></div>'+
  '<label class="f">書類の色</label><div class="sw" id="sw">'+[['navy','#1e3a8a','ネイビー'],['black','#222','ブラック'],['green','#0f766e','グリーン'],['red','#9f1239','えんじ']].map(function(c){return '<button type="button" data-c="'+c[0]+'" style="background:'+c[1]+'" aria-label="'+c[2]+'" title="'+c[2]+'"></button>'}).join('')+'</div>'+
@@ -85,7 +98,7 @@ function build(){
  '</details>'+
 
  '<section class="sec"><div class="sh"><span class="n">4</span><h2>備考</h2><span class="r">任意</span></div>'+
- '<textarea id="memo" rows="3" placeholder="お振込手数料は貴社にてご負担をお願いいたします。"></textarea></section>'+
+ '<textarea id="memo" rows="3" placeholder="'+(PO?'納品物の形式：PDF・AIデータ一式／検収：納品後7日以内':'お振込手数料は貴社にてご負担をお願いいたします。')+'"></textarea></section>'+
  '<div class="acts"><button type="button" class="btn p" id="pdf1">PDFをダウンロード</button><button type="button" class="btn" id="print1">印刷</button><button type="button" class="btn" id="reset">新しく作る</button></div>'+
  '<a class="next" id="next"></a>'+
  '<div class="share" id="shareAsk" hidden><b>PDFができました</b><span>便利だと思ったら、お仕事仲間にシェアしていただけるとうれしいです。</span><div class="sbtns" data-share></div></div>'+
@@ -119,7 +132,7 @@ function docHTML(c){
  var to='<div class="d-to"><span style="font-size:inherit;flex:1">'+ph(S.to,'宛名')+'</span><span>'+esc(S.hon)+'</span></div>';
  var meta=(S.no?'No. '+esc(S.no)+'<br>':'')+T[t].d+'：'+jd(S.date);
  var me='<div class="d-r">'+(ME.ink?'<img src="'+ME.ink+'" alt="">':'')+'<div class="nm"'+(ME.ink?' style="padding-right:18mm"':'')+'>'+ph(ME.from,'あなたの氏名・屋号')+'</div>'+
-  (ME.addr?'<div class="ad2">'+esc(ME.addr)+'</div>':'')+(ME.tel?'<div>'+esc(ME.tel)+'</div>':'')+(ME.regno?'<div>登録番号：'+esc(ME.regno)+'</div>':'')+'</div>';
+  (ME.addr?'<div class="ad2">'+esc(ME.addr)+'</div>':'')+(ME.tel?'<div>'+esc(ME.tel)+'</div>':'')+(PO?(ME.tanto?'<div>'+esc(ME.tanto)+'</div>':''):(ME.regno?'<div>登録番号：'+esc(ME.regno)+'</div>':''))+'</div>';
  var has8=false,rows=S.rows.map(function(r,i){var a=c.lines[i],k=rkey(r);if(k==='8')has8=true;
   var mk=k==='8'?'<span class="m">※</span>':k==='0'?'<span class="m" style="color:#666">(対象外)</span>':k!=='10'?'<span class="m" style="color:#666">('+k+'%)</span>':'';
   return '<tr><td>'+esc(r.n)+mk+'</td><td class="c">'+(r.q!==''?esc(r.q):'')+'</td><td class="c">'+esc(r.u)+'</td><td class="r">'+(r.p!==''?ival(r.p).toLocaleString('ja-JP'):'')+'</td><td class="r">'+(r.n||r.p?a.toLocaleString('ja-JP'):'')+'</td></tr>'});
@@ -134,10 +147,13 @@ function docHTML(c){
    (deduct?'<tr><td>'+tl+'</td><td>'+Y(c.total)+'</td></tr>'+deduct+'<tr class="t"><td>差引金額</td><td>'+Y(c.pay)+'</td></tr>':'<tr class="t"><td>'+tl+'</td><td>'+Y(c.total)+'</td></tr>')+bd+'</table>';
   var kv='';if(t==='q'){kv+='<tr><th>有効期限</th><td>'+jd(S.valid)+'</td></tr>';if(S.nouki)kv+='<tr><th>納期</th><td>'+esc(S.nouki)+'</td></tr>';if(S.jouken)kv+='<tr><th>支払条件</th><td>'+esc(S.jouken)+'</td></tr>'}
   if(t==='i'){kv+='<tr><th>お支払期限</th><td>'+jd(S.due)+'</td></tr><tr><th>お振込先</th><td>'+ph(ME.bank,'振込先')+'</td></tr>'}
+  if(t==='o'){kv+='<tr><th>納期</th><td>'+ph(S.nouki,'納期')+'</td></tr>'+(S.basho?'<tr><th>納品場所</th><td>'+esc(S.basho)+'</td></tr>':'')+
+   '<tr><th>お支払</th><td>'+ph(S.jouken,'支払期日・支払条件')+'</td></tr>'+(S.mno?'<tr><th>見積書番号</th><td>'+esc(S.mno)+'</td></tr>':'')}
   return '<div class="'+cls+'"><div class="d-top"><h1 class="d-ttl">'+n+'</h1><div class="d-meta">'+meta+'</div></div>'+
    '<div class="d-hd"><div class="d-l">'+to+(S.subj?'<p class="d-subj">件名：'+esc(S.subj)+'</p>':'')+'<p class="d-lead">'+T[t].lead+'</p>'+
    '<div class="d-amt"><span>'+T[t].amt+'</span><b>'+Y(c.pay)+'-</b>'+inc+'</div><table class="d-kv">'+kv+'</table></div>'+me+'</div>'+
-   items+'<div class="d-sumw"><div class="lf">'+(has8?'※は軽減税率(8%)対象':'')+'</div>'+sum+'</div>'+memo+'</div>';
+   items+'<div class="d-sumw"><div class="lf">'+(has8?'※は軽減税率(8%)対象':'')+'</div>'+sum+'</div>'+memo+
+   (t==='o'&&S.uke?'<p class="d-uke">本書の内容でお引き受けいただける場合は、注文請書をご提出ください。</p>':'')+'</div>';
  }
  var st=stamp(c,{pay:S.pay,elec:S.elec});
  var bk='<table class="rc-bk"><tr><th colspan="2">内訳</th></tr>';
@@ -171,9 +187,15 @@ function render(){
    st.why==='card'?['','✓','収入印紙は不要です','クレジットカード払いは、支払方法を領収書に書けば非課税です(自動で記載されます)。']:
    ['','✓','収入印紙は不要です','税抜5万円未満は非課税です。'+a];
   $('chip').innerHTML='<div class="chip '+m[0]+'"><i>'+m[1]+'</i><div><b>'+m[2]+'</b><span>'+m[3]+'</span>'+(S.pay==='other'&&st.why==='need'?'<br><span>電子マネー・QR決済は、決済の仕組みによって扱いが異なる場合があります。</span>':'')+'</div></div>';}
+ if(PO){var po=poStamp({elec:S.elec,mno:S.mno,uke:S.uke}),pm=po==='elec'?['','✓','収入印紙は不要です','PDFなどの電子データで送る発注書には印紙税がかかりません。']:
+   po==='uke'?['','✓','収入印紙は通常不要です','見積書の番号を書いていても、注文請書を出してもらう旨を書いているため、契約書には当たらないとされています。']:
+   po==='risk'?['warn','!','紙で渡すと収入印紙が必要になる場合があります','見積書の番号を書いた注文書は、契約書として扱われることがあります。「注文請書をご提出ください」と書くか、PDFで送れば不要です。']:
+   ['','✓','収入印紙は通常不要です','申し込むだけの発注書・注文書は、原則として印紙税の対象外です。'];
+  $('chip').innerHTML='<div class="chip '+pm[0]+'"><i>'+pm[1]+'</i><div><b>'+pm[2]+'</b><span>'+pm[3]+'</span></div></div>'}
  $('feeBox').hidden=TYPE!=='i'||!S.feeOn;
  $('paperHost').innerHTML=docHTML(c);fit();
  $('meSt').textContent=ME.from?'保存済み：'+ME.from.slice(0,14):'未入力';
+ if(PO){[].forEach.call($('ottl').children,function(b){b.className=b.dataset.v===T.o.n?'on':''});var pc=document.querySelector('.pv-chip');if(pc)pc.textContent=T.o.n}
  var nx={q:'i',n:'i',i:'r'}[TYPE];
  $('next').className='next'+(nx&&c.total?' on':'');if(nx){$('next').textContent='この内容で'+T[nx].n+'を作る →';$('next').href=T[nx].url}
  save();
@@ -181,22 +203,24 @@ function render(){
 var raf;function upd(){cancelAnimationFrame(raf);raf=requestAnimationFrame(render)}
 function fit(){var box=$('pvbox'),p=box.querySelector('.paper');if(!p)return;var W=box.parentNode.clientWidth-parseFloat(getComputedStyle(box.parentNode).paddingLeft)*2,s=Math.min(1,W/p.offsetWidth);
  p.style.transform='scale('+s+')';box.style.width=p.offsetWidth*s+'px';box.style.height=p.offsetHeight*s+'px'}
-function save(){try{if(keep)localStorage.setItem(KEY,JSON.stringify({me:ME,doc:S,keep:true}));else localStorage.setItem(KEY,JSON.stringify({keep:false}))}catch(_){}}
+function save(){try{if(keep){localStorage.setItem(KEY,JSON.stringify({me:ME,doc:PO?svDoc:S,keep:true}));if(PO)localStorage.setItem(DKEY,JSON.stringify(S))}
+ else{localStorage.setItem(KEY,JSON.stringify({keep:false}));localStorage.removeItem(DKEY)}}catch(_){}}
 
 /* ---------- 入力イベント ---------- */
 function bind(){
  [].forEach.call(document.querySelectorAll('[data-show]'),function(el){el.hidden=el.dataset.show.split(' ').indexOf(TYPE)<0});
  $('dateL').textContent=T[TYPE].d;
  if(TYPE==='r'&&!S.tad&&S.subj)S.tad=S.subj+'代として';
- var SF=['to','hon','subj','no','date','valid','nouki','jouken','due','tad','memo','rnd'],MF=['from','addr','tel','regno','bank'];
+ var SF=['to','hon','subj','no','date','valid','nouki','jouken','due','tad','memo','rnd','basho','mno'],MF=['from','addr','tel','regno','bank','tanto'];
  SF.forEach(function(k){$(k).value=S[k];$(k).addEventListener('input',function(){S[k]=this.value;upd()})});
  MF.forEach(function(k){$(k).value=ME[k];$(k).addEventListener('input',function(){ME[k]=this.value;upd()})});
  $('pay').value=S.pay;$('pay').onchange=function(){S.pay=this.value;upd()};
  $('elec').value=S.elec?'1':'0';$('elec').onchange=function(){S.elec=this.value==='1';upd()};
- ['wOn','noTax','feeOn','wareki','reiss'].forEach(function(k){$(k).checked=!!S[k];$(k).onchange=function(){S[k]=this.checked;upd()}});
+ ['wOn','noTax','feeOn','wareki','reiss','uke'].forEach(function(k){$(k).checked=!!S[k];$(k).onchange=function(){S[k]=this.checked;upd()}});
  $('fee').value=fmtI(S.fee,1);$('fee').oninput=function(){this.value=fmtI(this.value,1);S.fee=this.value;upd()};
  $('keep').checked=keep;$('keep').onchange=function(){keep=this.checked;save();toast(keep?'この端末に保存します':'保存を停止し、保存内容を消しました')};
  $('meSec').open=!ME.from;
+ if(PO)$('ottl').onclick=function(e){var b=e.target.closest('[data-v]');if(!b)return;S.ottl=b.dataset.v;poT();upd()};
  function pill(){[].forEach.call($('incl').children,function(b){b.className=(b.dataset.v==='1')===S.incl?'on':''})}pill();
  $('incl').onclick=function(e){var v=e.target.dataset.v;if(v==null)return;S.incl=v==='1';pill();drawRows();upd()};
  $('rows').addEventListener('input',function(e){var t=e.target,k=t.dataset.k,it=t.closest('.it');if(!k||!it||k==='r'||k==='w'||k==='us')return;var r=S.rows[+it.dataset.i];
@@ -221,7 +245,7 @@ function bind(){
  $('inkBtn').onclick=function(){$('inkFile').click()};
  $('inkDel').onclick=function(){ME.ink='';ink();upd()};
  $('inkFile').onchange=function(){var f=this.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){var im=new Image();im.onload=function(){ME.ink=cleanInk(im);ink();upd()};im.src=rd.result};rd.readAsDataURL(f);this.value=''};
- function fresh(){S=blank();try{sessionStorage.removeItem(KEY)}catch(_){}save();location.reload()}
+ function fresh(){var ot=S.ottl;S=blank();S.ottl=ot;try{sessionStorage.removeItem(KEY)}catch(_){}save();location.reload()}
  $('reset').onclick=function(){if(confirm('宛先・明細・備考を消して、新しい書類を作りますか？\n(あなたの情報はそのまま残ります)'))fresh()};
  if($('restoreNew'))$('restoreNew').onclick=fresh;
  $('print1').onclick=$('print2').onclick=doPrint;

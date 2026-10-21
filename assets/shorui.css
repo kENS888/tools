@@ -7,7 +7,8 @@ body[data-type=q]{--h1:#134e4a;--h2:#0f766e;--h3:#14b8a6;--acc:#0d8a7f;--acc2:#e
 body[data-type=n]{--h1:#0c4a6e;--h2:#0369a1;--h3:#38bdf8;--acc:#0377b3;--acc2:#e3f2fb}
 body[data-type=i]{--h1:#312e81;--h2:#4338ca;--h3:#818cf8;--acc:#4f46e5;--acc2:#eceeff}
 body[data-type=r]{--h1:#7c2d12;--h2:#c2410c;--h3:#fb923c;--acc:#d9540f;--acc2:#fff0e6}
-@media (prefers-color-scheme:dark){body[data-type=q]{--acc:#2dd4bf;--acc2:#0f2a28}body[data-type=n]{--acc:#38bdf8;--acc2:#0c2533}body[data-type=i]{--acc:#a5b4fc;--acc2:#1e1f45}body[data-type=r]{--acc:#fdba74;--acc2:#2f1d10}}
+body[data-type=o]{--h1:#881337;--h2:#be123c;--h3:#fb7185;--acc:#be123c;--acc2:#ffe9ee}
+@media (prefers-color-scheme:dark){body[data-type=q]{--acc:#2dd4bf;--acc2:#0f2a28}body[data-type=n]{--acc:#38bdf8;--acc2:#0c2533}body[data-type=i]{--acc:#a5b4fc;--acc2:#1e1f45}body[data-type=r]{--acc:#fdba74;--acc2:#2f1d10}body[data-type=o]{--acc:#fda4af;--acc2:#33141c}}
 header.top{position:relative;overflow:hidden;background:radial-gradient(circle at 1px 1px,rgba(255,255,255,.13) 1px,transparent 0) 0 0/22px 22px,linear-gradient(135deg,var(--h1),var(--h2) 60%,var(--h3));color:#fff;padding:22px 16px 64px}
 header.top .in{position:relative;z-index:1}
 header.top .deco{position:absolute;right:max(16px,calc(50% - 580px));top:14px;width:250px;height:150px;pointer-events:none}
@@ -242,3 +243,9 @@ table.rc-bk{border-collapse:collapse;font-size:8.5pt;min-width:60mm}
 .pdfmode .paper{box-shadow:none;transform:none}
 .btn:disabled{opacity:.6;cursor:wait}
 .it .uin{margin-top:4px}
+
+/* 発注書・注文書 */
+.pill.ttl{display:flex;width:100%;margin-bottom:6px}
+.pill.ttl button{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 6px;font-size:.95rem;font-weight:700}
+.pill.ttl .ico{width:18px;height:18px}
+.d-uke{margin:4mm 0 0;font-size:9pt}

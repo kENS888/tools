@@ -1,4 +1,4 @@
-/* しごと計算ラボ 書類作成ツール 計算ロジック(見積書・納品書・請求書・領収書 共通) */
+/* しごと計算ラボ 書類作成ツール 計算ロジック(見積書・納品書・請求書・領収書・発注書 共通) */
 var RATE={'10':0.1,'8':0.08,'0':0};
 // 端数処理。負の値(値引き)は絶対値で処理して符号を戻す
 function rnd(v,m){var s=v<0?-1:1,a=Math.round(Math.abs(v)*1e6)/1e6;
@@ -30,8 +30,12 @@ function stamp(c,o){var amt=Math.max(0,c.pay-c.ct);
  if(o.elec)return {duty:0,amt:amt,why:'elec'};
  if(o.pay==='card')return {duty:0,amt:amt,why:'card'};
  var d=duty(amt);return {duty:d,amt:amt,why:d?'need':'under'}}
+// 発注書・注文書の印紙(国税庁 質疑応答事例「申込書等と表示された文書」)
+// 申込みだけの注文書は原則不課税。見積書の番号など相手方の文書に基づく申込みと分かる記載があると契約書に当たり得る。
+// ただし相手方が請書を作成する旨の記載があれば契約書に当たらない。電子データで交付すれば課税文書の作成に当たらない。
+function poStamp(o){if(o.elec)return 'elec';if(o.mno&&String(o.mno).trim())return o.uke?'uke':'risk';return 'none'}
 // 和暦(令和・平成)
 function wareki(v){if(!v)return '';var p=v.split('-'),y=+p[0],m=+p[1],d=+p[2],n=y*10000+m*100+d,e,yy;
  if(n>=20190501){e='令和';yy=y-2018}else if(n>=19890108){e='平成';yy=y-1988}else{e='昭和';yy=y-1925}
  return e+(yy===1?'元':yy)+'年'+m+'月'+d+'日'}
-if(typeof module!=='undefined')module.exports={rnd:rnd,lineAmt:lineAmt,wh:wh,rkey:rkey,calc:calc,duty:duty,stamp:stamp,wareki:wareki};
+if(typeof module!=='undefined')module.exports={rnd:rnd,lineAmt:lineAmt,wh:wh,rkey:rkey,calc:calc,duty:duty,stamp:stamp,poStamp:poStamp,wareki:wareki};
