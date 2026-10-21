@@ -1,9 +1,95 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>しごと計算ラボ｜経理・フリーランスの無料計算ツール</title><meta name="description" content="見積書・納品書・請求書・領収書の作成、源泉徴収税の計算など、経理・フリーランスの仕事で使う計算を無料・登録不要で。"><style>body{margin:0;background:#f4f6f9;color:#14171f;font:15px/1.8 system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}@media (prefers-color-scheme:dark){body{background:#0e1116;color:#e8ecf2}.c{background:#171b22!important;border-color:#262c36!important}}header{background:linear-gradient(135deg,#1e3a8a,#2554d8);color:#fff;padding:24px 16px}header a{color:#fff;text-decoration:none;font-weight:700;font-size:1.2rem}main{max-width:760px;margin:0 auto;padding:16px}.c{background:#fff;border:1px solid #e3e7ee;border-radius:16px;padding:20px;margin:16px 0}footer{text-align:center;font-size:.8rem;opacity:.7;padding:24px}footer a,main a{color:inherit}</style></head><body><header><a href="/">しごと計算ラボ</a></header><main><h1 style="font-size:1.4rem">経理・フリーランスのための無料計算ツール</h1>
-<p>登録不要・無料。入力した内容はサーバーに送信されません。</p>
-<a class="c" href="/gensen/" style="display:block;text-decoration:none"><b>源泉徴収税 計算＆請求書作成</b><br><span style="opacity:.75">報酬・料金の源泉徴収、手取りからの逆算、インボイス対応の請求書PDF</span></a>
-<a class="c" href="/mitsumori/" style="display:block;text-decoration:none"><b>見積書 作成</b><br><span style="opacity:.75">プレビューを見ながら作成、PDF保存。請求書・領収書にワンクリックで切り替え</span></a>
-<a class="c" href="/nohinsho/" style="display:block;text-decoration:none"><b>納品書 作成</b><br><span style="opacity:.75">見積書と同じ入力のまま納品書に。PDF保存</span></a>
-<a class="c" href="/seikyusho/" style="display:block;text-decoration:none"><b>請求書 作成</b><br><span style="opacity:.75">インボイス対応、軽減税率・源泉徴収にも対応</span></a>
-<a class="c" href="/ryoshusho/" style="display:block;text-decoration:none"><b>領収書 作成</b><br><span style="opacity:.75">収入印紙が必要か、いくら貼るかを自動で判定</span></a>
-<p style="opacity:.7">ツールは順次追加していきます。</p>
-</main><footer><a href="/">トップ</a> ・ <a href="/privacy/">プライバシーポリシー</a> ・ <a href="/contact/">お問い合わせ</a><br>© しごと計算ラボ</footer></body></html>
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>しごと計算ラボ｜見積書・請求書・領収書の作成と源泉徴収の計算が無料・登録不要</title>
+<link rel="canonical" href="https://shigoto-keisan.pages.dev/">
+<meta name="description" content="フリーランス・個人事業主・小さな会社の事務作業に使える無料ツール集。見積書・納品書・請求書・領収書をブラウザだけで作成してPDF保存。源泉徴収税の計算、収入印紙の判定にも対応。登録不要で、入力内容はサーバーに送信されません。">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+:root{--bg:#f4f6f9;--card:#fff;--fg:#14171f;--sub:#5b6474;--line:#e3e7ee;--acc:#2554d8;--acc2:#e9efff}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--card:#171b22;--fg:#e8ecf2;--sub:#9aa4b2;--line:#262c36;--acc:#7c9cff;--acc2:#1c2540}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.8 system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;-webkit-font-smoothing:antialiased}
+header{background:radial-gradient(circle at 1px 1px,rgba(255,255,255,.13) 1px,transparent 0) 0 0/22px 22px,linear-gradient(135deg,#1e3a8a,#2554d8 60%,#3b82f6);color:#fff;padding:28px 16px 70px}
+header .in{max-width:880px;margin:0 auto}
+header .brand{color:#fff;text-decoration:none;font-weight:800;font-size:1.05rem;opacity:.9}
+header h1{font-size:1.6rem;margin:10px 0 6px;line-height:1.4}
+header p{margin:0;opacity:.88}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.badges span{font-size:.75rem;background:rgba(255,255,255,.15);padding:3px 10px;border-radius:99px}
+main{max-width:880px;margin:-46px auto 0;padding:0 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px;box-shadow:0 1px 2px rgba(16,24,40,.05),0 8px 24px rgba(16,24,40,.06)}
+@media (prefers-color-scheme:dark){.card{box-shadow:none}}
+.rel{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+td,th{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--bg)}
+td a{color:var(--acc);font-weight:700}
+.note{font-size:.8rem;color:var(--sub)}
+footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40px}footer a{color:inherit}
+@media (max-width:520px){header h1{font-size:1.3rem}.card{padding:16px}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
+{"@type":"Organization","@id":"https://shigoto-keisan.pages.dev/#org","name":"しごと計算ラボ","url":"https://shigoto-keisan.pages.dev/"},
+{"@type":"WebSite","name":"しごと計算ラボ","url":"https://shigoto-keisan.pages.dev/","inLanguage":"ja","publisher":{"@id":"https://shigoto-keisan.pages.dev/#org"},"description":"見積書・納品書・請求書・領収書の作成と源泉徴収税の計算ができる、無料・登録不要の日本語Webツール集"},
+{"@type":"ItemList","name":"しごと計算ラボのツール","itemListElement":[
+{"@type":"ListItem","position":1,"name":"見積書 作成","url":"https://shigoto-keisan.pages.dev/mitsumori/"},
+{"@type":"ListItem","position":2,"name":"納品書 作成","url":"https://shigoto-keisan.pages.dev/nohinsho/"},
+{"@type":"ListItem","position":3,"name":"請求書 作成","url":"https://shigoto-keisan.pages.dev/seikyusho/"},
+{"@type":"ListItem","position":4,"name":"領収書 作成","url":"https://shigoto-keisan.pages.dev/ryoshusho/"},
+{"@type":"ListItem","position":5,"name":"源泉徴収税 計算＆請求書作成","url":"https://shigoto-keisan.pages.dev/gensen/"}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"本当に無料？登録は必要？","acceptedAnswer":{"@type":"Answer","text":"すべて無料で、会員登録やログインは不要です。ページを開けばすぐに使えます。"}},
+{"@type":"Question","name":"スマホでも使える？","acceptedAnswer":{"@type":"Answer","text":"使えます。スマホでもPDFを直接ダウンロードでき、コンビニのネットプリントで印刷することもできます。"}},
+{"@type":"Question","name":"入力した内容は安全？","acceptedAnswer":{"@type":"Answer","text":"入力内容はお使いのブラウザの中だけで処理・保存され、サーバーには送信されません。"}},
+{"@type":"Question","name":"計算の根拠は？","acceptedAnswer":{"@type":"Answer","text":"消費税はインボイス制度のルール(税率ごとに合計して1回だけ端数処理)、源泉徴収税・印紙税は国税庁が公表している税率に基づいています。"}}]}
+]}</script>
+</head>
+<body>
+<header><div class="in">
+ <a class="brand" href="/">しごと計算ラボ</a>
+ <h1>見積書・請求書・領収書の作成と、源泉徴収の計算が無料でできるツール集</h1>
+ <p>フリーランス・個人事業主・小さな会社の事務作業を、ブラウザだけで。</p>
+ <div class="badges"><span>無料・登録不要</span><span>入力はサーバーに送信されません</span><span>スマホでPDF保存</span><span>インボイス対応</span></div>
+</div></header>
+<main>
+<div class="card">
+ <h2 class="sec-t">ツール一覧</h2>
+ <div class="rel">
+  <a href="/mitsumori/" style="--c:#0d8a7f"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span><span><b>見積書 作成</b><span class="d">プレビューを見ながら作成してPDF保存。請求書・領収書にワンクリックで切り替え</span></span></a>
+  <a href="/nohinsho/" style="--c:#0377b3"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span><span><b>納品書 作成</b><span class="d">見積書と同じ入力のまま納品書に</span></span></a>
+  <a href="/seikyusho/" style="--c:#4f46e5"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 7.5l3 4 3-4M12 11.5v6.5M9.2 13h5.6M9.2 15.6h5.6"/></svg></span><span><b>請求書 作成</b><span class="d">インボイス対応。源泉徴収・振込手数料・免税事業者にも対応</span></span></a>
+  <a href="/ryoshusho/" style="--c:#d9540f"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18l-2.5-1.5L14 21l-2-1.5L10 21l-2.5-1.5L5 21z"/><path d="M9 11l2 2 4-4"/></svg></span><span><b>領収書 作成</b><span class="d">収入印紙が必要か、いくら貼るかを自動で判定</span></span></a>
+  <a href="/gensen/" style="--c:#2554d8"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></svg></span><span><b>源泉徴収税 計算</b><span class="d">報酬の源泉徴収税を計算。手取りからの逆算、請求書PDFまで</span></span></a>
+ </div>
+</div>
+
+<div class="card">
+ <h2 class="sec-t">どのツールを使えばいい？</h2>
+ <table>
+  <tr><th>やりたいこと</th><th>使うツール</th></tr>
+  <tr><td>仕事を受ける前に金額を伝えたい</td><td><a href="/mitsumori/">見積書 作成</a></td></tr>
+  <tr><td>納品物と一緒に明細を渡したい</td><td><a href="/nohinsho/">納品書 作成</a></td></tr>
+  <tr><td>代金を請求したい(インボイス対応で)</td><td><a href="/seikyusho/">請求書 作成</a></td></tr>
+  <tr><td>入金を受けたので領収書を出したい／印紙がいるか知りたい</td><td><a href="/ryoshusho/">領収書 作成</a></td></tr>
+  <tr><td>源泉徴収税を引かれた後の手取りを知りたい／手取りから請求額を逆算したい</td><td><a href="/gensen/">源泉徴収税 計算</a></td></tr>
+ </table>
+ <p class="note">見積書・納品書・請求書・領収書は同じ入力を共有しているので、見積書を作れば、あとは画面上部のタブを押すだけで他の書類に切り替えられます。</p>
+</div>
+
+<div class="card">
+ <h2 class="sec-t">よくある質問</h2>
+ <div class="faq">
+  <details><summary><span>本当に無料？登録は必要？</span></summary><p>すべて無料で、会員登録やログインは不要です。ページを開けばすぐに使えます。</p></details>
+  <details><summary><span>スマホでも使える？</span></summary><p>使えます。スマホでもPDFを直接ダウンロードでき、コンビニのネットプリントで印刷することもできます。</p></details>
+  <details><summary><span>入力した内容は安全？</span></summary><p>入力内容はお使いのブラウザの中だけで処理・保存され、サーバーには送信されません。</p></details>
+  <details><summary><span>計算の根拠は？</span></summary><p>消費税はインボイス制度のルール(税率ごとに合計して1回だけ端数処理)、源泉徴収税・印紙税は国税庁が公表している税率に基づいています。</p></details>
+ </div>
+ <p class="note">最終更新日：<time datetime="2026-10-21">2026年10月21日</time> ／ ツールは順次追加していきます。</p>
+</div>
+</main>
+<footer><a href="/">しごと計算ラボ</a> ・ <a href="/privacy/">プライバシーポリシー</a> ・ <a href="/contact/">お問い合わせ</a><br>© しごと計算ラボ</footer>
+</body>
+</html>

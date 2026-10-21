@@ -27,3 +27,9 @@
 .sec-t{display:flex;align-items:center;gap:8px;font-size:1.1rem;margin:22px 0 8px}
 .sec-t:first-child{margin-top:2px}
 .sec-t::before{content:"";width:4px;height:18px;border-radius:2px;background:var(--acc)}
+/* 要約ブロック(AIにも人にも、最初に答えが分かるように) */
+.tldr{border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:12px;padding:4px 18px 12px;background:var(--card);margin-bottom:8px}
+.tldr .lead{font-size:.98rem;margin:4px 0 8px}
+.tldr .feat{margin:0 0 8px;padding-left:1.2em;font-size:.9rem}
+.tldr .feat li{margin:2px 0}
+.tldr .upd{font-size:.75rem;color:var(--sub);margin:0}
