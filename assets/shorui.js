@@ -25,7 +25,10 @@ function grp(){return document.body.dataset.type==='o'?['o']:['q','n','i','r']}
 function hist(){try{var l=JSON.parse(localStorage.getItem(HKEY)||'[]');return Array.isArray(l)?l:[]}catch(_){return []}}
 function myHist(){var g=grp();return hist().filter(function(x){return g.indexOf(x.t)>=0})}
 function ymd(){return today().replace(/-/g,'')}
-function newNo(){var h=myHist();return nextNo(h.length?h[0].no:'',ymd())}
+// 同じ種類の書類の番号から採番(書類ごとに番号の付け方が違うため)。今日の日付形式の番号があれば、その最大の次
+function newNo(){var h=myHist(),ty=document.body.dataset.type||'q',src=h.filter(function(x){return x.t===ty}),d=ymd(),mx=null;
+ src.forEach(function(x){var m=String(x.no||'').match(/^(\d{8})-(\d+)$/);if(m&&m[1]===d&&(!mx||+m[2]>+mx.match(/-(\d+)$/)[1]))mx=x.no});
+ return nextNo(mx||(src.length?src[0].no:''),d)}
 function iso(t){var p=function(n){return ('0'+n).slice(-2)};return t.getFullYear()+'-'+p(t.getMonth()+1)+'-'+p(t.getDate())}
 function today(o){var t=new Date();if(o)t.setDate(t.getDate()+o);return iso(t)}
 function eom(){var t=new Date();return iso(new Date(t.getFullYear(),t.getMonth()+2,0))}
@@ -42,7 +45,7 @@ try{if(PO&&keep)useDoc(JSON.parse(localStorage.getItem(DKEY)||'null'))}catch(_){
 try{var ss=JSON.parse(sessionStorage.getItem(KEY)||'null');if(ss&&!PO){S=Object.assign(blank(),ss.doc);ME=Object.assign(ME,ss.me);restored=false}}catch(_){}
 function poT(){T.o.n=S.ottl==='注文書'?'注文書':'発注書';T.o.amt=T.o.n==='注文書'?'ご注文金額':'発注金額';T.o.lead=T.o.n==='注文書'?'下記のとおり注文いたします。':'下記のとおり発注いたします。'}
 var fromHist=null;
-try{var ld=JSON.parse(sessionStorage.getItem(LKEY)||'null');sessionStorage.removeItem(LKEY);if(ld){fromHist=ld;var ot=S.ottl;S=Object.assign(blank(),ld.doc);S.date=today();S.no=newNo();S.valid=today(30);S.due=eom();if(PO&&!ld.doc.ottl)S.ottl=ot;restored=false}}catch(_){}
+try{var ld=JSON.parse(sessionStorage.getItem(LKEY)||'null');sessionStorage.removeItem(LKEY);if(ld){fromHist=ld;var ot=S.ottl;S=Object.assign(blank(),ld.doc);S.date=today();S.no=newNo();S.valid=today(30);S.due=eom();S.reiss=false;if(PO&&!ld.doc.ottl)S.ottl=ot;restored=false}}catch(_){}
 if(PO)poT();
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -67,9 +70,9 @@ function build(){
  var h='<div class="app"><div class="card fm">'+
  (PO?'<div class="pill ttl" id="ottl" role="group" aria-label="書類の名前"><button type="button" data-v="発注書">'+ico('o')+'発注書</button><button type="button" data-v="注文書">'+ico('o')+'注文書</button></div>':
  '<nav class="types" aria-label="書類の種類">'+ORDER.map(function(k){return '<a href="'+T[k].url+'" data-type="'+k+'"'+(k===TYPE?' class="on" aria-current="page"':'')+'>'+ico(k)+T[k].n+'<small>'+T[k].s+'</small></a>'}).join('')+'</nav>')+
- '<button type="button" class="hbtn" id="histBtn" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg>過去の書類から作る<span id="histN"></span></button>'+
  (restored?'<div class="restore" id="restore"><span>前回の入力内容を表示しています</span><button type="button" id="restoreNew">新しく作る</button></div>':'')+
  '<p class="hint">'+(PO?'発注書と注文書は名前が違うだけで、書く内容は同じです。取引先で使われている呼び方を選んでください。':'入力した内容はそのままで、書類の種類だけを切り替えられます。')+'</p>'+
+ '<button type="button" class="hbtn" id="histBtn" aria-haspopup="dialog" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg>過去の書類から作る<span id="histN"></span></button>'+
 
  '<section class="sec"><div class="sh"><span class="n">1</span><h2>宛先と書類の情報</h2></div>'+
  '<label class="f" for="to">'+(PO?'宛名(仕事を頼む相手)':'宛名')+'</label><div class="toH"><input id="to" type="text" placeholder="株式会社〇〇" list="dlTo" autocomplete="off"><select id="hon" aria-label="敬称"><option>御中</option><option>様</option><option value="">なし</option></select></div>'+
@@ -221,10 +224,11 @@ function save(){try{if(keep){if(PO){try{var cur=JSON.parse(localStorage.getItem(
   localStorage.setItem(KEY,JSON.stringify({me:ME,doc:PO?svDoc:S,keep:true}));if(PO)localStorage.setItem(DKEY,JSON.stringify(S))}
  else{localStorage.setItem(KEY,JSON.stringify({keep:false}));localStorage.removeItem(DKEY);localStorage.removeItem(HKEY)}}catch(_){}}
 /* ---------- 作成履歴 ---------- */
-var ITEMS={};
-function record(){if(!keep||!last)return;var it={id:Date.now(),t:TYPE,at:today(),no:S.no,to:S.to,subj:S.subj,total:last.pay,doc:JSON.parse(JSON.stringify(S))};
+var ITEMS=Object.create(null);
+function hasContent(){return !!(S.to||S.rows.some(function(r){return r.n||r.p}))}
+function record(){if(!keep||!last||!hasContent())return;var it={id:Date.now(),t:TYPE,at:today(),no:S.no,to:S.to,subj:S.subj,total:last.pay,doc:JSON.parse(JSON.stringify(S))};
  try{localStorage.setItem(HKEY,JSON.stringify(histAdd(hist(),it,30)))}catch(_){}histUI()}
-function histUI(){var h=myHist(),seen={},to=[];ITEMS={};
+function histUI(){var h=myHist(),seen={},to=[];ITEMS=Object.create(null);
  h.forEach(function(x){if(x.to&&!seen[x.to]){seen[x.to]=1;to.push(x.to)}(x.doc.rows||[]).forEach(function(r){if(r.n&&!ITEMS[r.n])ITEMS[r.n]={u:r.u,uo:r.uo,p:r.p,r:r.r,xr:r.xr}})});
  $('dlTo').innerHTML=to.map(function(v){return '<option value="'+esc(v)+'">'}).join('');
  $('dlIt').innerHTML=Object.keys(ITEMS).map(function(v){return '<option value="'+esc(v)+'">'}).join('');
@@ -246,7 +250,7 @@ function bind(){
  $('elec').value=S.elec?'1':'0';$('elec').onchange=function(){S.elec=this.value==='1';upd()};
  ['wOn','noTax','feeOn','wareki','reiss','uke'].forEach(function(k){$(k).checked=!!S[k];$(k).onchange=function(){S[k]=this.checked;upd()}});
  $('fee').value=fmtI(S.fee,1);$('fee').oninput=function(){this.value=fmtI(this.value,1);S.fee=this.value;upd()};
- $('keep').checked=keep;$('keep').onchange=function(){keep=this.checked;save();toast(keep?'この端末に保存します':'保存を停止し、保存内容を消しました')};
+ $('keep').checked=keep;$('keep').onchange=function(){keep=this.checked;save();histUI();toast(keep?'この端末に保存します':'保存を停止し、保存内容を消しました')};
  $('meSec').open=!ME.from;
  if(PO)$('ottl').onclick=function(e){var b=e.target.closest('[data-v]');if(!b)return;S.ottl=b.dataset.v;poT();upd()};
  function pill(){[].forEach.call($('incl').children,function(b){var on=(b.dataset.v==='1')===S.incl;b.className=on?'on':'';b.setAttribute('aria-pressed',on)})}pill();
@@ -283,8 +287,9 @@ function bind(){
  $('hClose').onclick=function(){if(dlg.close)dlg.close();else dlg.removeAttribute('open')};
  dlg.addEventListener('click',function(e){if(e.target===dlg)$('hClose').onclick()});
  $('hq').oninput=drawHist;
- $('hlist').onclick=function(e){var d=e.target.closest('[data-del]');if(d){try{localStorage.setItem(HKEY,JSON.stringify(hist().filter(function(x){return String(x.id)!==d.dataset.del})))}catch(_){}histUI();if(!myHist().length)$('hClose').onclick();return}
+ $('hlist').onclick=function(e){var d=e.target.closest('[data-del]');if(d){try{localStorage.setItem(HKEY,JSON.stringify(hist().filter(function(x){return String(x.id)!==d.dataset.del})))}catch(_){}histUI();if(!myHist().length){$('hClose').onclick();$('to').focus()}return}
   var b=e.target.closest('[data-id]');if(!b)return;var x=hist().filter(function(x){return String(x.id)===b.dataset.id})[0];if(!x)return;
+  if(hasContent()&&!hist().some(function(h){return h.t===TYPE&&h.no===S.no})&&!confirm('今入力している内容は消えます。よろしいですか？'))return;
   try{sessionStorage.setItem(LKEY,JSON.stringify({doc:x.doc,t:x.t,to:x.to}));sessionStorage.removeItem(KEY)}catch(_){}location.reload()};
  $('pdf1').onclick=$('pdf2').onclick=$('pdf3').onclick=doPdf;
  $('toPv').onclick=function(){$('pv').scrollIntoView({behavior:'smooth'})};

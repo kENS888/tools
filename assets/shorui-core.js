@@ -35,12 +35,15 @@ function stamp(c,o){var amt=Math.max(0,c.pay-c.ct);
 // ただし相手方が請書を作成する旨の記載があれば契約書に当たらない。電子データで交付すれば課税文書の作成に当たらない。
 function poStamp(o){if(o.elec)return 'elec';if(o.mno&&String(o.mno).trim())return o.uke?'uke':'risk';return 'none'}
 // 次の書類番号。日付形式(20261021-01)なら同じ日は連番、別の日は今日の-01。それ以外は末尾の数字を+1(桁数は保つ)
-function nextNo(prev,ymd){prev=String(prev||'').trim();if(!prev)return ymd+'-01';
- var m=prev.match(/^(\d{8})-(\d+)$/);if(m){if(m[1]!==ymd)return ymd+'-01';var n=String(+m[2]+1);while(n.length<m[2].length)n='0'+n;return ymd+'-'+n}
- m=prev.match(/^(.*?)(\d+)(\D*)$/);if(m){var k=String(+m[2]+1);while(k.length<m[2].length)k='0'+k;return m[1]+k+m[3]}
+// 数字の文字列に1を足す(桁数が多くても精度が落ちない。桁数は保ち、繰り上がりで増える)
+function incD(d){var a=d.split(''),i=a.length-1;while(i>=0){if(a[i]==='9'){a[i]='0';i--}else{a[i]=String(+a[i]+1);return a.join('')}}return '1'+a.join('')}
+function nextNo(prev,ymd){prev=String(prev||'').trim().replace(/[０-９]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-0xFEE0)});if(!prev)return ymd+'-01';
+ var m=prev.match(/^(\d{8})-(\d+)$/);if(m){if(m[1]!==ymd)return ymd+'-01';return ymd+'-'+incD(m[2])}
+ if(/^\d{8}$/.test(prev))return prev+'-2';
+ m=prev.match(/^(.*?)(\d+)(\D*)$/);if(m)return m[1]+incD(m[2])+m[3];
  return prev+'-2'}
-// 作成履歴に追加。同じ種類・番号・宛名のものは置き換え、新しい順に最大max件
-function histAdd(list,it,max){max=max||30;list=(list||[]).filter(function(x){return !(x.t===it.t&&x.no===it.no&&x.to===it.to)});list.unshift(it);return list.slice(0,max)}
+// 作成履歴に追加。同じ種類・番号のもの(宛名を直して出し直した場合など)は置き換え、新しい順に最大max件
+function histAdd(list,it,max){max=max||30;list=(list||[]).filter(function(x){return !(x.t===it.t&&x.no===it.no)});list.unshift(it);return list.slice(0,max)}
 // 和暦(令和・平成)
 function wareki(v){if(!v)return '';var p=v.split('-'),y=+p[0],m=+p[1],d=+p[2],n=y*10000+m*100+d,e,yy;
  if(n>=20190501){e='令和';yy=y-2018}else if(n>=19890108){e='平成';yy=y-1988}else{e='昭和';yy=y-1925}

@@ -270,3 +270,8 @@ table.rc-bk{border-collapse:collapse;font-size:8.5pt;min-width:60mm}
 .hit .m b,.hit .m small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hit .m small{color:var(--sub);font-size:.78rem}
 .hit .v{flex:none;font-variant-numeric:tabular-nums;font-weight:700;font-size:.9rem}
+.hl .hdel{min-width:44px;min-height:44px}
+.hbtn{margin-top:4px}
+.app>*{min-width:0}
+.types{grid-template-columns:repeat(4,minmax(0,1fr))}
+.types a{min-width:0}
