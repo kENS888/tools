@@ -113,7 +113,7 @@ function build(){
 
  '<section class="sec"><div class="sh"><span class="n">4</span><h2>備考</h2><span class="r">任意</span></div>'+
  '<textarea id="memo" aria-label="備考" rows="3" placeholder="'+(PO?'納品物の形式：PDF・AIデータ一式／検収：納品後7日以内':'お振込手数料は貴社にてご負担をお願いいたします。')+'"></textarea></section>'+
- '<div class="acts"><button type="button" class="btn p" id="pdf1">PDFをダウンロード</button><button type="button" class="btn" id="print1">印刷</button><button type="button" class="btn" id="reset">新しく作る</button></div>'+
+ ''+
  '<a class="next" id="next"></a>'+
  '<div class="share" id="shareAsk" hidden><b>PDFができました</b><span>便利だと思ったら、お仕事仲間にシェアしていただけるとうれしいです。</span><div class="sbtns" data-share></div></div>'+
  '<a class="next" id="toSf" href="/sofujo/">郵送・FAXで送るなら、送付状も作る →</a>'+
@@ -121,7 +121,7 @@ function build(){
 
  '<div class="pv" id="pv"><div class="card"><div class="pvh"><h2>プレビュー <span class="pv-chip">'+T[TYPE].n+'</span></h2><span class="note"><span class="dot"></span>入力するとすぐに反映されます</span></div>'+
  '<div class="pvwrap"><div class="pvbox" id="pvbox"><div id="paperHost"></div></div></div>'+
- '<div class="acts pvacts"><button type="button" class="btn p" id="pdf2">PDFをダウンロード</button><button type="button" class="btn" id="print2">印刷</button></div>'+
+ '<div class="acts pvacts"><button type="button" class="btn p" id="pdf2">PDFをダウンロード</button><button type="button" class="btn" id="print2">印刷</button><button type="button" class="btn" id="reset">新しく作る</button></div>'+
  '<p class="note" style="margin:10px 0 0">スマホでもPDFをそのまま保存できます。コンビニで印刷する場合は、保存したPDFをセブン‐イレブンの「netprint」や、ファミリーマート・ローソンなどの「ネットワークプリント」のアプリに登録してください。</p></div></div></div>';
  h+='<datalist id="dlTo"></datalist><datalist id="dlIt"></datalist>'+
  '<dialog class="hdlg" id="hdlg" aria-labelledby="hdlgT"><div class="hh"><b id="hdlgT">過去の書類から作る</b><button type="button" class="ib" id="hClose" aria-label="閉じる">×</button></div>'+
@@ -225,6 +225,8 @@ function render(){
 }
 var raf;function upd(){cancelAnimationFrame(raf);raf=requestAnimationFrame(render)}
 function fit(){var box=$('pvbox'),p=box.querySelector('.paper');if(!p)return;var W=box.parentNode.clientWidth-parseFloat(getComputedStyle(box.parentNode).paddingLeft)*2,s=Math.min(1,W/p.offsetWidth);
+ // パソコン(プレビューが追従する幅)では、ボタンまで画面に収まるよう高さでも縮める
+ if(innerWidth>980){var cd=box.closest('.card'),ex=cd.offsetHeight-box.offsetHeight;s=Math.max(.3,Math.min(s,(innerHeight-32-ex)/p.offsetHeight))}
  p.style.transform='scale('+s+')';box.style.width=p.offsetWidth*s+'px';box.style.height=p.offsetHeight*s+'px'}
 function save(){try{if(keep){if(PO){try{var cur=JSON.parse(localStorage.getItem(KEY)||'null');if(cur&&cur.doc)svDoc=cur.doc}catch(_){}}
   localStorage.setItem(KEY,JSON.stringify({me:ME,doc:PO?svDoc:S,keep:true}));if(PO)localStorage.setItem(DKEY,JSON.stringify(S))}
@@ -289,7 +291,7 @@ function bind(){
  function fresh(){var ot=S.ottl;S=blank();S.ottl=ot;try{sessionStorage.removeItem(KEY)}catch(_){}save();location.reload()}
  $('reset').onclick=function(){if(confirm('宛先・明細・備考を消して、新しい書類を作りますか？\n(あなたの情報はそのまま残ります)'))fresh()};
  if($('restoreNew'))$('restoreNew').onclick=fresh;
- $('print1').onclick=$('print2').onclick=doPrint;
+ $('print2').onclick=doPrint;
  var dlg=$('hdlg');
  $('histBtn').onclick=function(){$('hq').value='';drawHist();if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','')};
  $('hClose').onclick=function(){if(dlg.close)dlg.close();else dlg.removeAttribute('open')};
@@ -299,7 +301,7 @@ function bind(){
   var b=e.target.closest('[data-id]');if(!b)return;var x=hist().filter(function(x){return String(x.id)===b.dataset.id})[0];if(!x)return;
   if(hasContent()&&!hist().some(function(h){return h.t===TYPE&&h.no===S.no})&&!confirm('今入力している内容は消えます。よろしいですか？'))return;
   try{sessionStorage.setItem(LKEY,JSON.stringify({doc:x.doc,t:x.t,to:x.to}));sessionStorage.removeItem(KEY)}catch(_){}location.reload()};
- $('pdf1').onclick=$('pdf2').onclick=$('pdf3').onclick=doPdf;
+ $('pdf2').onclick=$('pdf3').onclick=doPdf;
  $('toPv').onclick=function(){$('pv').scrollIntoView({behavior:'smooth'})};
  window.addEventListener('resize',fit);
 }
@@ -312,7 +314,7 @@ function cleanInk(im){var s=Math.min(1,240/Math.max(im.width,im.height)),cv=docu
 // PDFを直接ダウンロードする(スマホ・コンビニ印刷用)。ライブラリは押した時だけ読み込む
 function load(src){return new Promise(function(ok,ng){if(document.querySelector('script[src="'+src+'"]'))return ok();var e=document.createElement('script');e.src=src;e.onload=ok;e.onerror=ng;document.head.appendChild(e)})}
 var busy=false;
-function doPdf(){if(busy)return;busy=true;var bs=[$('pdf1'),$('pdf2'),$('pdf3')],lb=bs.map(function(b){return b.textContent});bs.forEach(function(b){b.textContent='作成中…';b.disabled=true});
+function doPdf(){if(busy)return;busy=true;var bs=[$('pdf2'),$('pdf3')],lb=bs.map(function(b){return b.textContent});bs.forEach(function(b){b.textContent='作成中…';b.disabled=true});
  var nm=T[TYPE].n+(S.no?'_'+S.no:'')+(S.to?'_'+S.to:''),box=document.createElement('div');
  box.className='pdfmode';box.style.cssText='position:fixed;left:-10000px;top:0;width:210mm';box.innerHTML=docHTML(last);document.body.appendChild(box);
  function end(){busy=false;bs.forEach(function(b,i){b.textContent=lb[i];b.disabled=false});if(box.parentNode)box.parentNode.removeChild(box)}

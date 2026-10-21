@@ -141,7 +141,6 @@ footer.ft a{color:inherit}footer.ft{text-align:center;font-size:.78rem;color:var
 @media (max-width:980px){
  .app{grid-template-columns:1fr}.pv{position:static}
  .bar{display:flex}body{padding-bottom:80px}
- .pvacts{display:none}
 }
 @media (max-width:360px){.g2{grid-template-columns:1fr}}
 @media (max-width:420px){.types a{font-size:.82rem}.types a small{display:none}}
@@ -329,3 +328,8 @@ table.sf-fx{width:100%;border-collapse:collapse;margin-top:6mm;font-size:10pt}
 .sf.fx .sf-ki{margin-top:6mm}
 .sf-memo.fxm{min-height:34mm;background:repeating-linear-gradient(transparent 0 7.4mm,#e1e4e9 7.4mm 7.6mm);background-position:0 5.4mm}
 .sf-fxn{position:absolute;left:20mm;right:20mm;bottom:12mm;margin:0;font-size:8.5pt;color:#555}
+.sfr .dn{display:flex;gap:6px;min-width:0}.sfr .dn select{flex:1;min-width:0}.sfr .dn.o select{flex:0 0 108px}.sfr .dn input{flex:1;min-width:0}
+#addDoc{margin-top:10px}
+
+.pvacts{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pvacts .btn{width:100%;white-space:nowrap}.pvacts .btn.p{grid-column:1/-1}
+@media (max-width:420px){.sfr .dn.o{flex-wrap:wrap}.sfr .dn.o select,.sfr .dn.o input{flex:1 1 100%}}
