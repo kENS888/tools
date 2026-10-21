@@ -19,10 +19,17 @@ var PAY={cash:'現金',bank:'銀行振込',card:'クレジットカード',other
 var KEY='shorui_v1';
 // 発注書は発注する側の書類なので、宛先・明細は見積書〜領収書と別に保存する(あなたの情報は共通)
 var DKEY='shorui_po_v1';
+// 作成履歴(PDF保存・印刷した書類)。発注書と、見積書〜領収書は別グループで表示する
+var HKEY='shorui_hist_v1',LKEY='shorui_load_v1';
+function grp(){return document.body.dataset.type==='o'?['o']:['q','n','i','r']}
+function hist(){try{var l=JSON.parse(localStorage.getItem(HKEY)||'[]');return Array.isArray(l)?l:[]}catch(_){return []}}
+function myHist(){var g=grp();return hist().filter(function(x){return g.indexOf(x.t)>=0})}
+function ymd(){return today().replace(/-/g,'')}
+function newNo(){var h=myHist();return nextNo(h.length?h[0].no:'',ymd())}
 function iso(t){var p=function(n){return ('0'+n).slice(-2)};return t.getFullYear()+'-'+p(t.getMonth()+1)+'-'+p(t.getDate())}
 function today(o){var t=new Date();if(o)t.setDate(t.getDate()+o);return iso(t)}
 function eom(){var t=new Date();return iso(new Date(t.getFullYear(),t.getMonth()+2,0))}
-function blank(){return {to:'',hon:'御中',subj:'',no:today().replace(/-/g,'')+'-01',date:today(),valid:today(30),nouki:'',jouken:'',due:eom(),tad:'',pay:'cash',elec:false,memo:'',
+function blank(){return {to:'',hon:'御中',subj:'',no:newNo(),date:today(),valid:today(30),nouki:'',jouken:'',due:eom(),tad:'',pay:'cash',elec:false,memo:'',
  ottl:'発注書',basho:'',mno:'',uke:false,
  incl:false,rnd:'floor',noTax:false,wOn:false,feeOn:false,fee:'440',wareki:false,reiss:false,rows:[{n:'',q:'1',u:'式',p:'',r:'10',xr:'',nw:false}]}}
 var S=blank(),ME={from:'',regno:'',addr:'',tel:'',bank:'',tanto:'',ink:'',color:'navy'},keep=true;
@@ -34,6 +41,8 @@ try{if(PO&&keep)useDoc(JSON.parse(localStorage.getItem(DKEY)||'null'))}catch(_){
 // 保存をオフにしている時も、書類の種類を切り替える間だけは内容を引き継ぐ(発注書は対象外)
 try{var ss=JSON.parse(sessionStorage.getItem(KEY)||'null');if(ss&&!PO){S=Object.assign(blank(),ss.doc);ME=Object.assign(ME,ss.me);restored=false}}catch(_){}
 function poT(){T.o.n=S.ottl==='注文書'?'注文書':'発注書';T.o.amt=T.o.n==='注文書'?'ご注文金額':'発注金額';T.o.lead=T.o.n==='注文書'?'下記のとおり注文いたします。':'下記のとおり発注いたします。'}
+var fromHist=null;
+try{var ld=JSON.parse(sessionStorage.getItem(LKEY)||'null');sessionStorage.removeItem(LKEY);if(ld){fromHist=ld;var ot=S.ottl;S=Object.assign(blank(),ld.doc);S.date=today();S.no=newNo();S.valid=today(30);S.due=eom();if(PO&&!ld.doc.ottl)S.ottl=ot;restored=false}}catch(_){}
 if(PO)poT();
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -58,11 +67,12 @@ function build(){
  var h='<div class="app"><div class="card fm">'+
  (PO?'<div class="pill ttl" id="ottl" role="group" aria-label="書類の名前"><button type="button" data-v="発注書">'+ico('o')+'発注書</button><button type="button" data-v="注文書">'+ico('o')+'注文書</button></div>':
  '<nav class="types" aria-label="書類の種類">'+ORDER.map(function(k){return '<a href="'+T[k].url+'" data-type="'+k+'"'+(k===TYPE?' class="on" aria-current="page"':'')+'>'+ico(k)+T[k].n+'<small>'+T[k].s+'</small></a>'}).join('')+'</nav>')+
+ '<button type="button" class="hbtn" id="histBtn" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg>過去の書類から作る<span id="histN"></span></button>'+
  (restored?'<div class="restore" id="restore"><span>前回の入力内容を表示しています</span><button type="button" id="restoreNew">新しく作る</button></div>':'')+
  '<p class="hint">'+(PO?'発注書と注文書は名前が違うだけで、書く内容は同じです。取引先で使われている呼び方を選んでください。':'入力した内容はそのままで、書類の種類だけを切り替えられます。')+'</p>'+
 
  '<section class="sec"><div class="sh"><span class="n">1</span><h2>宛先と書類の情報</h2></div>'+
- '<label class="f" for="to">'+(PO?'宛名(仕事を頼む相手)':'宛名')+'</label><div class="toH"><input id="to" type="text" placeholder="株式会社〇〇"><select id="hon" aria-label="敬称"><option>御中</option><option>様</option><option value="">なし</option></select></div>'+
+ '<label class="f" for="to">'+(PO?'宛名(仕事を頼む相手)':'宛名')+'</label><div class="toH"><input id="to" type="text" placeholder="株式会社〇〇" list="dlTo" autocomplete="off"><select id="hon" aria-label="敬称"><option>御中</option><option>様</option><option value="">なし</option></select></div>'+
  '<div class="g2">'+F('subj','件名','ホームページ制作',{em:'任意',show:'q n i o',w:1})+F('tad','但し書き','ホームページ制作費として',{show:'r',w:1})+
  F('no','番号','20261021-01')+F('date','発行日','',{t:'date',lid:'dateL'})+
  F('valid','有効期限','',{t:'date',show:'q'})+F('nouki','納期','2026年11月末',{em:PO?'':'任意',show:'q o'})+
@@ -108,13 +118,17 @@ function build(){
  '<div class="pvwrap"><div class="pvbox" id="pvbox"><div id="paperHost"></div></div></div>'+
  '<div class="acts pvacts"><button type="button" class="btn p" id="pdf2">PDFをダウンロード</button><button type="button" class="btn" id="print2">印刷</button></div>'+
  '<p class="note" style="margin:10px 0 0">スマホでもPDFをそのまま保存できます。コンビニで印刷する場合は、保存したPDFをセブン‐イレブンの「netprint」や、ファミリーマート・ローソンなどの「ネットワークプリント」のアプリに登録してください。</p></div></div></div>';
+ h+='<datalist id="dlTo"></datalist><datalist id="dlIt"></datalist>'+
+ '<dialog class="hdlg" id="hdlg" aria-labelledby="hdlgT"><div class="hh"><b id="hdlgT">過去の書類から作る</b><button type="button" class="ib" id="hClose" aria-label="閉じる">×</button></div>'+
+ '<p class="note">選ぶと内容が入ります。日付と番号は新しくなります。</p><input type="search" id="hq" placeholder="宛名・件名で検索" aria-label="宛名・件名で検索" hidden><ul class="hl" id="hlist"></ul>'+
+ '<p class="note">PDF保存・印刷した書類を、このブラウザに最新30件まで記録しています(サーバーには送信されません)。</p></dialog>';
  $('app').innerHTML=h;
  document.body.insertAdjacentHTML('beforeend','<div class="bar"><div class="t"><small id="barL"></small><b id="barV"></b></div><button type="button" class="btn" id="toPv">プレビュー</button><button type="button" class="btn p" id="pdf3">PDF保存</button></div><div class="toast" id="toast"></div><div id="prt"></div>');
  var hd=document.querySelector('header.top');if(hd)hd.insertAdjacentHTML('beforeend','<svg class="deco" viewBox="0 0 250 150" aria-hidden="true"><g transform="rotate(-8 90 80)"><rect class="pg" x="40" y="20" width="96" height="124" rx="8"/></g><rect class="pg" x="100" y="8" width="96" height="124" rx="8"/><path class="ln" d="M116 34h44M116 52h64M116 66h64M116 80h40M116 106h28"/><circle class="acc" cx="196" cy="118" r="22"/><path d="M186 104l10 13 10-13M196 117v16M188 119.5h16M188 126h16" stroke="'+getComputedStyle(document.body).getPropertyValue('--h2')+'" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>');
 }
 
 function drawRows(){
- $('rows').innerHTML=S.rows.map(function(r,i){var uo=r.uo||UNITS.every(function(u){return u[0]!==r.u});return '<div class="it" data-i="'+i+'"><div class="l1"><span class="idx">'+(i+1)+'</span><input type="text" data-k="n" value="'+esc(r.n)+'" placeholder="品目(例：トップページ デザイン)" aria-label="品目">'+
+ $('rows').innerHTML=S.rows.map(function(r,i){var uo=r.uo||UNITS.every(function(u){return u[0]!==r.u});return '<div class="it" data-i="'+i+'"><div class="l1"><span class="idx">'+(i+1)+'</span><input type="text" data-k="n" value="'+esc(r.n)+'" placeholder="品目(例：トップページ デザイン)" aria-label="品目" list="dlIt" autocomplete="off">'+
  '<button type="button" class="ib" data-act="up" title="上へ" aria-label="上へ"'+(i?'':' disabled style="visibility:hidden"')+'>↑</button>'+
  '<button type="button" class="ib" data-act="del" title="削除" aria-label="削除"'+(S.rows.length>1?'':' style="visibility:hidden"')+'>×</button></div>'+
  '<div class="l2"><label><span class="cap">数量</span><input type="text" class="num" inputmode="decimal" data-k="q" value="'+esc(r.q)+'"></label>'+
@@ -205,7 +219,20 @@ function fit(){var box=$('pvbox'),p=box.querySelector('.paper');if(!p)return;var
  p.style.transform='scale('+s+')';box.style.width=p.offsetWidth*s+'px';box.style.height=p.offsetHeight*s+'px'}
 function save(){try{if(keep){if(PO){try{var cur=JSON.parse(localStorage.getItem(KEY)||'null');if(cur&&cur.doc)svDoc=cur.doc}catch(_){}}
   localStorage.setItem(KEY,JSON.stringify({me:ME,doc:PO?svDoc:S,keep:true}));if(PO)localStorage.setItem(DKEY,JSON.stringify(S))}
- else{localStorage.setItem(KEY,JSON.stringify({keep:false}));localStorage.removeItem(DKEY)}}catch(_){}}
+ else{localStorage.setItem(KEY,JSON.stringify({keep:false}));localStorage.removeItem(DKEY);localStorage.removeItem(HKEY)}}catch(_){}}
+/* ---------- 作成履歴 ---------- */
+var ITEMS={};
+function record(){if(!keep||!last)return;var it={id:Date.now(),t:TYPE,at:today(),no:S.no,to:S.to,subj:S.subj,total:last.pay,doc:JSON.parse(JSON.stringify(S))};
+ try{localStorage.setItem(HKEY,JSON.stringify(histAdd(hist(),it,30)))}catch(_){}histUI()}
+function histUI(){var h=myHist(),seen={},to=[];ITEMS={};
+ h.forEach(function(x){if(x.to&&!seen[x.to]){seen[x.to]=1;to.push(x.to)}(x.doc.rows||[]).forEach(function(r){if(r.n&&!ITEMS[r.n])ITEMS[r.n]={u:r.u,uo:r.uo,p:r.p,r:r.r,xr:r.xr}})});
+ $('dlTo').innerHTML=to.map(function(v){return '<option value="'+esc(v)+'">'}).join('');
+ $('dlIt').innerHTML=Object.keys(ITEMS).map(function(v){return '<option value="'+esc(v)+'">'}).join('');
+ $('histBtn').hidden=!h.length;$('histN').textContent=h.length?'('+h.length+'件)':'';$('hq').hidden=h.length<=6;drawHist()}
+function drawHist(){var q=$('hq').value.trim(),h=myHist().filter(function(x){return !q||(x.to+' '+(x.subj||'')).indexOf(q)>=0});
+ $('hlist').innerHTML=h.length?h.map(function(x){var nm=x.t==='o'?(x.doc.ottl||'発注書'):T[x.t].n,d=x.at.split('-');
+  return '<li><button type="button" class="hit" data-id="'+x.id+'"><span class="ty t-'+x.t+'">'+esc(nm)+'</span><span class="m"><b>'+(x.to?esc(x.to):'(宛名なし)')+'</b><small>'+(+d[1])+'/'+(+d[2])+(x.subj?'・'+esc(x.subj):'')+'</small></span><span class="v">'+Y(x.total||0)+'</span></button>'+
+  '<button type="button" class="ib hdel" data-del="'+x.id+'" aria-label="この履歴を削除">×</button></li>'}).join(''):'<li class="none">見つかりませんでした</li>'}
 
 /* ---------- 入力イベント ---------- */
 function bind(){
@@ -231,6 +258,7 @@ function bind(){
  $('rows').addEventListener('change',function(e){var t=e.target,k=t.dataset.k,it=t.closest('.it');if(!it)return;var r=S.rows[+it.dataset.i];
   if(k==='r'){r.r=t.value;drawRows();upd();if(t.value==='x'){var x=document.querySelector('.it[data-i="'+it.dataset.i+'"] [data-k=xr]');if(x)x.focus()}}
   if(k==='w'){r.nw=!t.checked;upd()}
+  if(k==='n'){var kn=ITEMS[r.n];if(kn&&!r.p){r.u=kn.u;r.uo=kn.uo;r.p=kn.p;r.r=kn.r;r.xr=kn.xr;drawRows();upd()}}
   if(k==='us'){if(t.value==='x'){r.uo=true;r.u=''}else{r.uo=false;r.u=t.value}drawRows();upd();if(r.uo){var u=document.querySelector('.it[data-i="'+it.dataset.i+'"] [data-k=u]');if(u)u.focus()}}});
  $('rows').addEventListener('click',function(e){var b=e.target.closest('[data-act]');if(!b)return;var i=+b.closest('.it').dataset.i;
   if(b.dataset.act==='del')S.rows.splice(i,1);else if(i>0){var x=S.rows[i];S.rows[i]=S.rows[i-1];S.rows[i-1]=x}drawRows();upd()});
@@ -250,6 +278,14 @@ function bind(){
  $('reset').onclick=function(){if(confirm('宛先・明細・備考を消して、新しい書類を作りますか？\n(あなたの情報はそのまま残ります)'))fresh()};
  if($('restoreNew'))$('restoreNew').onclick=fresh;
  $('print1').onclick=$('print2').onclick=doPrint;
+ var dlg=$('hdlg');
+ $('histBtn').onclick=function(){$('hq').value='';drawHist();if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','')};
+ $('hClose').onclick=function(){if(dlg.close)dlg.close();else dlg.removeAttribute('open')};
+ dlg.addEventListener('click',function(e){if(e.target===dlg)$('hClose').onclick()});
+ $('hq').oninput=drawHist;
+ $('hlist').onclick=function(e){var d=e.target.closest('[data-del]');if(d){try{localStorage.setItem(HKEY,JSON.stringify(hist().filter(function(x){return String(x.id)!==d.dataset.del})))}catch(_){}histUI();if(!myHist().length)$('hClose').onclick();return}
+  var b=e.target.closest('[data-id]');if(!b)return;var x=hist().filter(function(x){return String(x.id)===b.dataset.id})[0];if(!x)return;
+  try{sessionStorage.setItem(LKEY,JSON.stringify({doc:x.doc,t:x.t,to:x.to}));sessionStorage.removeItem(KEY)}catch(_){}location.reload()};
  $('pdf1').onclick=$('pdf2').onclick=$('pdf3').onclick=doPdf;
  $('toPv').onclick=function(){$('pv').scrollIntoView({behavior:'smooth'})};
  window.addEventListener('resize',fit);
@@ -270,15 +306,16 @@ function doPdf(){if(busy)return;busy=true;var bs=[$('pdf1'),$('pdf2'),$('pdf3')]
  Promise.all([load('/assets/vendor/html2canvas.min.js'),load('/assets/vendor/jspdf.umd.min.js')]).then(function(){return (document.fonts?document.fonts.ready:Promise.resolve())}).then(function(){
   return html2canvas(box.firstChild,{scale:3,backgroundColor:'#ffffff',logging:false,useCORS:true})}).then(function(cv){
   var pdf=new window.jspdf.jsPDF({unit:'mm',format:'a4',compress:true});pdf.addImage(cv.toDataURL('image/jpeg',0.92),'JPEG',0,0,210,297);
-  pdf.setProperties({title:nm});pdf.save(nm.replace(/[\\/:*?"<>|]/g,'')+'.pdf');end();toast('PDFを保存しました');$('shareAsk').hidden=false;$('shareAsk').scrollIntoView({behavior:'smooth',block:'center'})}).catch(function(){end();toast('PDFを作れませんでした。「印刷」からお試しください')})}
-function doPrint(){var html=docHTML(last),nm=T[TYPE].n+(S.no?'_'+S.no:'')+(S.to?'_'+S.to:'');
+  pdf.setProperties({title:nm});pdf.save(nm.replace(/[\\/:*?"<>|]/g,'')+'.pdf');end();record();toast('PDFを保存しました');$('shareAsk').hidden=false;$('shareAsk').scrollIntoView({behavior:'smooth',block:'center'})}).catch(function(){end();toast('PDFを作れませんでした。「印刷」からお試しください')})}
+function doPrint(){record();var html=docHTML(last),nm=T[TYPE].n+(S.no?'_'+S.no:'')+(S.to?'_'+S.to:'');
  var inFrame=false;try{inFrame=window.self!==window.top}catch(_){inFrame=true}
  if(!inFrame){$('prt').innerHTML=html;var tt=document.title;document.title=nm;window.print();setTimeout(function(){document.title=tt;$('prt').innerHTML=''},800);return}
  var w=window.open('','_blank');if(!w){toast('ポップアップを許可してください');return}
  var css=[].map.call(document.querySelectorAll('link[rel=stylesheet]'),function(l){return '<link rel="stylesheet" href="'+l.href+'">'}).join('');
  w.document.write('<!doctype html><meta charset="utf-8"><title>'+esc(nm)+'</title>'+css+'<body><div id="prt">'+html+'</div><script>onload=function(){setTimeout(print,200)}<\/script>');w.document.close()}
 
-build();drawRows();bind();render();if(window.SKShare)SKShare();
+build();drawRows();bind();render();histUI();if(window.SKShare)SKShare();
+if(fromHist)toast((fromHist.to||'過去の書類')+' の内容を読み込みました');
 try{sessionStorage.removeItem(KEY)}catch(_){}
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
 })();

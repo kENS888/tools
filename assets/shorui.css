@@ -250,3 +250,23 @@ table.rc-bk{border-collapse:collapse;font-size:8.5pt;min-width:60mm}
 .pill.ttl button{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 6px;font-size:.95rem;font-weight:700}
 .pill.ttl .ico{width:18px;height:18px}
 .d-uke{margin:4mm 0 0;font-size:9pt}
+
+/* 過去の書類から作る */
+.hbtn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;border:1px solid var(--line2);background:var(--card);color:var(--acc);border-radius:999px;padding:7px 14px;font:inherit;font-size:.85rem;font-weight:700;cursor:pointer}
+.hbtn .ico{width:16px;height:16px}.hbtn span{color:var(--mute);font-weight:600}
+.hbtn:hover{background:var(--acc2)}
+.hdlg{border:0;border-radius:16px;padding:16px;width:min(520px,calc(100vw - 24px));max-height:80vh;background:var(--card);color:var(--fg);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.hdlg::backdrop{background:rgba(15,20,30,.45)}
+.hdlg .hh{display:flex;align-items:center;justify-content:space-between;font-size:1.05rem}
+.hdlg .note{margin:6px 0 10px}
+.hdlg input[type=search]{width:100%;padding:9px 12px;font-size:1rem;border:1px solid var(--line2);border-radius:10px;background:var(--card);color:var(--fg);margin-bottom:8px}
+.hl{list-style:none;margin:0;padding:0;max-height:52vh;overflow:auto}
+.hl li{display:flex;align-items:center;gap:4px;border-bottom:1px solid var(--line)}
+.hl li.none{padding:14px 4px;color:var(--mute);font-size:.9rem}
+.hit{flex:1;display:flex;align-items:center;gap:10px;min-width:0;border:0;background:none;color:inherit;font:inherit;text-align:left;padding:10px 4px;cursor:pointer;border-radius:8px}
+.hit:hover{background:var(--acc2)}
+.hit .ty{flex:none;font-size:.72rem;font-weight:700;padding:2px 7px;border-radius:999px;background:var(--acc2);color:var(--acc)}
+.hit .m{flex:1;min-width:0;display:flex;flex-direction:column}
+.hit .m b,.hit .m small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hit .m small{color:var(--sub);font-size:.78rem}
+.hit .v{flex:none;font-variant-numeric:tabular-nums;font-weight:700;font-size:.9rem}

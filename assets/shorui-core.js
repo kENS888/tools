@@ -34,8 +34,15 @@ function stamp(c,o){var amt=Math.max(0,c.pay-c.ct);
 // 申込みだけの注文書は原則不課税。見積書の番号など相手方の文書に基づく申込みと分かる記載があると契約書に当たり得る。
 // ただし相手方が請書を作成する旨の記載があれば契約書に当たらない。電子データで交付すれば課税文書の作成に当たらない。
 function poStamp(o){if(o.elec)return 'elec';if(o.mno&&String(o.mno).trim())return o.uke?'uke':'risk';return 'none'}
+// 次の書類番号。日付形式(20261021-01)なら同じ日は連番、別の日は今日の-01。それ以外は末尾の数字を+1(桁数は保つ)
+function nextNo(prev,ymd){prev=String(prev||'').trim();if(!prev)return ymd+'-01';
+ var m=prev.match(/^(\d{8})-(\d+)$/);if(m){if(m[1]!==ymd)return ymd+'-01';var n=String(+m[2]+1);while(n.length<m[2].length)n='0'+n;return ymd+'-'+n}
+ m=prev.match(/^(.*?)(\d+)(\D*)$/);if(m){var k=String(+m[2]+1);while(k.length<m[2].length)k='0'+k;return m[1]+k+m[3]}
+ return prev+'-2'}
+// 作成履歴に追加。同じ種類・番号・宛名のものは置き換え、新しい順に最大max件
+function histAdd(list,it,max){max=max||30;list=(list||[]).filter(function(x){return !(x.t===it.t&&x.no===it.no&&x.to===it.to)});list.unshift(it);return list.slice(0,max)}
 // 和暦(令和・平成)
 function wareki(v){if(!v)return '';var p=v.split('-'),y=+p[0],m=+p[1],d=+p[2],n=y*10000+m*100+d,e,yy;
  if(n>=20190501){e='令和';yy=y-2018}else if(n>=19890108){e='平成';yy=y-1988}else{e='昭和';yy=y-1925}
  return e+(yy===1?'元':yy)+'年'+m+'月'+d+'日'}
-if(typeof module!=='undefined')module.exports={rnd:rnd,lineAmt:lineAmt,wh:wh,rkey:rkey,calc:calc,duty:duty,stamp:stamp,poStamp:poStamp,wareki:wareki};
+if(typeof module!=='undefined')module.exports={rnd:rnd,lineAmt:lineAmt,wh:wh,rkey:rkey,calc:calc,duty:duty,stamp:stamp,poStamp:poStamp,nextNo:nextNo,histAdd:histAdd,wareki:wareki};
