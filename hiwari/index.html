@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>日割り計算｜家賃・利用料・給与の日割りを日付から計算【無料】</title>
+<link rel="canonical" href="https://shigoto-keisan.com/hiwari/">
+<meta name="description" content="月額と期間(開始日・終了日)を入れるだけで、家賃・利用料・給与の日割り額を計算。その月の日数・30日・年額÷365日、所定労働日数(土日祝休み)で割る方法や、欠勤控除の方式にも対応。月をまたぐ期間もまとめて計算。登録不要・無料。">
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"日割り計算(家賃・利用料・給与)","url":"https://shigoto-keisan.com/hiwari/","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"isAccessibleForFree":true,"inLanguage":"ja","description":"月額と期間(開始日・終了日)から、家賃・利用料・給与の日割り額を無料・登録不要で計算できるWebツールです。月の途中の入居・解約や、入社・退職した月の給与に使えます。","featureList":["家賃・利用料の日割り：月額 ÷ その月の日数 × 利用日数(30日で割る・年額÷365日にも対応)","給与の日割り：月給 ÷ その月の所定労働日数(土日祝休み) × 出勤日数(暦日・30日・日数の指定にも対応)","「働いた日数分を払う」と「休んだ日数分を引く(欠勤控除)」を切り替えられる","月をまたぐ期間は月ごとに分けて計算し、1か月まるごとの月は満額","端数処理(切り捨て・四捨五入・切り上げ)を選べる","計算した金額のまま請求書を作成できる","入力内容はブラウザ内だけで処理され、サーバーに送信されない"],"dateModified":"2026-10-22","publisher":{"@type":"Organization","name":"しごと計算ラボ","url":"https://shigoto-keisan.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"しごと計算ラボ","item":"https://shigoto-keisan.com/"},{"@type":"ListItem","position":2,"name":"日割り計算(家賃・利用料・給与)","item":"https://shigoto-keisan.com/hiwari/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"家賃の日割りはどう計算する？","acceptedAnswer":{"@type":"Answer","text":"月額の家賃をその月の日数で割り、住んだ日数をかけます。たとえば家賃90,000円で11月15日に入居した場合、90,000円 ÷ 30日 × 16日 ＝ 48,000円です。"}},{"@type":"Question","name":"その月の日数で割るのと、30日で割るのはどちらが正しい？","acceptedAnswer":{"@type":"Answer","text":"法律では決まっておらず、契約書の定めに従います。その月の日数で割る方法が多いですが、30日で割る方法や、年額を365日で割る方法もあります。契約書に書かれていない場合は、相手に確認してください。"}},{"@type":"Question","name":"入居日や退去日はその日も数える？","acceptedAnswer":{"@type":"Answer","text":"一般的には、開始日と終了日の両方を含めて数えます。このツールも両方を含めます。11月15日〜11月30日なら16日間です。"}},{"@type":"Question","name":"給与の日割りはどう計算する？","acceptedAnswer":{"@type":"Answer","text":"会社の就業規則(賃金規程)の定めに従います。よく使われるのは、月給 ÷ その月の所定労働日数 × 出勤日数です。たとえば月給300,000円で2026年11月16日に入社した場合、11月の所定労働日数は19日(土日祝休み)、出勤日は10日なので、300,000円 ÷ 19日 × 10日 ＝ 157,894円(1円未満切り捨て)です。"}},{"@type":"Question","name":"「働いた日数分を払う」と「休んだ日数分を引く」で金額が違うのはなぜ？","acceptedAnswer":{"@type":"Answer","text":"割る日数が、その月の実際の日数と違う場合に差が出ます。たとえば月給300,000円を30日で割る会社で、31日ある10月に16日間在籍した場合、働いた日数分を払うと300,000円 ÷ 30日 × 16日 ＝ 160,000円、休んだ15日分を引くと300,000円 − 300,000円 ÷ 30日 × 15日 ＝ 150,000円です。どちらを使うかは就業規則で確認してください。"}},{"@type":"Question","name":"月平均所定労働日数で割る場合は？","acceptedAnswer":{"@type":"Answer","text":"「くわしく見る」の「割る日数」で「日数を指定」を選び、月平均所定労働日数(年間の所定労働日数 ÷ 12)を入れてください。出勤日数は土日祝を除いて数えます。"}},{"@type":"Question","name":"1円未満の端数はどうする？","acceptedAnswer":{"@type":"Answer","text":"決まりはなく、契約書や賃金規程によります。一般には切り捨てが多く使われています。このツールの初期設定も切り捨てです。"}},{"@type":"Question","name":"月をまたぐ期間はどう計算する？","acceptedAnswer":{"@type":"Answer","text":"月ごとに分けて計算し、合計します。1か月まるごとの月は満額、月の途中から・途中までの月だけを日割りにします。"}}]}]}</script>
+<style>
+:root{--bg:#f4f6f9;--card:#fff;--fg:#14171f;--sub:#5b6474;--line:#e3e7ee;--acc:#b45309;--acc2:#fef3c7;--neg:#c2410c;--sh:0 1px 2px rgba(16,24,40,.05),0 8px 24px rgba(16,24,40,.06)}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--card:#171b22;--fg:#e8ecf2;--sub:#9aa4b2;--line:#262c36;--acc:#fbbf24;--acc2:#3a2a0a;--neg:#fb923c;--sh:none}}
+[hidden]{display:none!important}
+:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.7 system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;-webkit-font-smoothing:antialiased}
+header{position:relative;overflow:hidden;background:radial-gradient(circle at 1px 1px,rgba(255,255,255,.13) 1px,transparent 0) 0 0/22px 22px,linear-gradient(135deg,#78350f,#b45309 60%,#f59e0b);color:#fff;padding:22px 16px 64px}
+header .in{position:relative;z-index:1;max-width:760px;margin:0 auto}
+header .deco{position:absolute;right:max(16px,calc(50% - 520px));top:16px;width:150px;height:140px;pointer-events:none}
+header .deco .pg{fill:rgba(255,255,255,.1);stroke:rgba(255,255,255,.35);stroke-width:1.2}
+header .deco .ln{stroke:rgba(255,255,255,.45);stroke-width:2.5;stroke-linecap:round}
+header .deco .acc{fill:rgba(255,255,255,.28);stroke:rgba(255,255,255,.85);stroke-width:2}
+header .deco .dot{fill:rgba(255,255,255,.4)}
+@media (max-width:980px){header .deco{display:none}}
+.crumb{font-size:.78rem;opacity:.8}.crumb a{color:#fff;text-decoration:none}
+header h1{margin:4px 0 0;font-size:1.5rem;letter-spacing:.02em}
+header p{margin:6px 0 0;opacity:.88;font-size:.92rem}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.badges span{font-size:.75rem;background:rgba(255,255,255,.15);padding:3px 10px;border-radius:99px}
+main{position:relative;z-index:1;max-width:760px;margin:-44px auto 0;padding:0 16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh);padding:20px;margin-bottom:16px}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--bg);border-radius:12px;padding:4px;margin-bottom:12px;gap:2px}
+.seg button{border:0;background:none;color:var(--sub);padding:10px 4px;border-radius:9px;font:inherit;font-size:.92rem;font-weight:700;cursor:pointer;line-height:1.35}
+.seg button.on{background:var(--card);color:var(--acc);box-shadow:var(--sh)}
+label.f{display:block;font-size:.82rem;color:var(--sub);margin:12px 0 4px;font-weight:600}
+input[type=text],input[type=date],select{width:100%;min-width:0;padding:10px 12px;font-size:1rem;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--fg);font-family:inherit}
+input[type=date]{min-height:46px;-webkit-appearance:none;appearance:none}
+.yen{position:relative}
+.yen input{text-align:right;font-variant-numeric:tabular-nums;font-size:1.15rem;font-weight:700;padding-right:36px}
+.yen::after{content:"円";position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--sub);font-size:.9rem;pointer-events:none}
+input:focus,select:focus{outline:2px solid var(--acc);outline-offset:1px;border-color:transparent}
+.ins{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.ins>div{min-width:0}
+.ins .w2{grid-column:1/-1}
+.big{padding:18px 18px 14px;border-radius:14px;background:var(--acc2);margin-top:18px}
+.big .l{font-size:.88rem;color:var(--sub);font-weight:600}
+.big .v{font-size:2rem;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums;line-height:1.35;margin:2px 0}
+.big .s{font-size:.9rem;color:var(--fg);font-variant-numeric:tabular-nums}
+.big .w{font-size:.8rem;color:var(--sub);margin-top:4px}
+.big .mini{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.big .mini button{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:99px;padding:6px 12px;font:inherit;font-size:.8rem;font-weight:600;cursor:pointer}
+.big .mini button.p{border-color:var(--acc);color:var(--acc)}
+.opts{display:grid;grid-template-columns:auto 1fr;gap:8px 12px;align-items:center;font-size:.9rem;margin-bottom:6px}
+.opts select,.opts input{width:auto;max-width:100%}
+.opts .nn{display:flex;align-items:center;gap:6px}
+.opts .nn input{width:90px;text-align:right}
+table.r{width:100%;border-collapse:collapse;margin-top:8px;font-size:.9rem}
+table.r td,table.r th{padding:8px 4px;border-bottom:1px solid var(--line);text-align:left}
+table.r th{font-size:.8rem;color:var(--sub);font-weight:600}
+table.r .n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+table.r .x{font-size:.78rem;color:var(--sub)}
+.ad{min-height:100px;border:1px dashed var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--sub);font-size:.75rem;margin:20px 0}
+h2{font-size:1.1rem;margin:4px 0 10px}
+.note{font-size:.82rem;color:var(--sub)}
+.hyt{width:100%;border-collapse:collapse;font-size:.86rem;font-variant-numeric:tabular-nums}
+.hyt td,.hyt th{border:1px solid var(--line);padding:5px 8px;text-align:right}
+.hyt th{background:var(--bg);font-size:.8rem}
+.hyt td:first-child{text-align:center}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#14171f;color:#fff;padding:10px 18px;border-radius:99px;font-size:.9rem;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+.toast.on{opacity:1}
+footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40px}footer a{color:inherit}
+@media (max-width:560px){.big .v{font-size:1.6rem}header h1{font-size:1.3rem}.card{padding:16px}.opts{grid-template-columns:1fr;gap:2px}.opts>span{font-size:.8rem;color:var(--sub);margin-top:6px}}
+</style>
+</head>
+<body>
+<header><div class="in">
+ <div class="crumb"><a href="/">しごと計算ラボ</a> › 日割り計算</div>
+ <h1>日割り計算(家賃・利用料・給与)</h1>
+ <p>月額と期間を入れるだけで、日割りの金額を計算します。月の途中の入居・解約や、入社・退職した月の給与に。</p>
+ <div class="badges"><span>無料・登録不要</span><span>月をまたぐ期間にも対応</span><span>所定労働日数(土日祝休み)で計算</span></div>
+</div>
+<svg class="deco" viewBox="0 0 150 140" aria-hidden="true"><rect class="pg" x="14" y="16" width="122" height="114" rx="12"/><path class="ln" d="M14 42h122M44 8v16M106 8v16"/><g class="dot"><circle cx="36" cy="62" r="5"/><circle cx="60" cy="62" r="5"/><circle cx="36" cy="84" r="5"/><circle cx="60" cy="84" r="5"/><circle cx="36" cy="106" r="5"/><circle cx="60" cy="106" r="5"/></g><rect class="acc" x="76" y="54" width="48" height="62" rx="8"/><path class="ln" d="M88 85h24"/><circle cx="100" cy="74" r="3" fill="#fff"/><circle cx="100" cy="96" r="3" fill="#fff"/></svg>
+</header>
+
+<main>
+<div class="card">
+ <div class="seg" role="tablist">
+  <button id="tFee" class="on" type="button">家賃・利用料</button>
+  <button id="tPay" type="button">給与</button>
+ </div>
+
+ <div class="ins">
+  <div class="w2"><label class="f" for="amt" id="amtL">月額</label><div class="yen"><input id="amt" type="text" inputmode="numeric" autocomplete="off" value="100,000" placeholder="0"></div></div>
+  <div><label class="f" for="d1" id="d1L">開始日</label><input id="d1" type="date"></div>
+  <div><label class="f" for="d2" id="d2L">終了日</label><input id="d2" type="date"></div>
+ </div>
+
+ <div class="big" aria-live="polite"><div class="l" id="rL"></div><div class="v" id="rV">-</div><div class="s" id="rS"></div><div class="w" id="rW" hidden></div>
+  <div class="mini"><button type="button" id="copy">結果をコピー</button><button type="button" id="share">この条件のURLをコピー</button><button type="button" class="p" id="toInv">この金額で請求書を作る →</button></div>
+ </div>
+
+ <details class="more" id="detBox"><summary>くわしく見る<span class="ms" id="detSum"></span></summary>
+  <div class="opts">
+   <span>割る日数</span>
+   <select id="bFee" aria-label="割る日数"><option value="cal">その月の日数(28〜31日)</option><option value="d30">30日</option><option value="y365">年額 ÷ 365日</option></select>
+   <select id="bPay" aria-label="割る日数" hidden><option value="biz">所定労働日数(土日祝休み)</option><option value="cal">その月の日数(28〜31日)</option><option value="d30">30日</option><option value="n">日数を指定(月平均など)</option></select>
+   <span id="nL" hidden>日数</span><div class="nn" id="nBox" hidden><input id="nDays" type="text" inputmode="decimal" autocomplete="off" value="20" aria-label="割る日数を指定"><span>日</span></div>
+   <span id="mL" hidden>計算のしかた</span>
+   <select id="meth" aria-label="計算のしかた" hidden><option value="add">働いた日数分を払う</option><option value="sub">休んだ日数分を引く(欠勤控除)</option></select>
+   <span id="rnL">1円未満の端数</span>
+   <select id="rnd" aria-label="端数処理"><option value="floor">切り捨て</option><option value="round">四捨五入</option><option value="ceil">切り上げ</option></select>
+  </div>
+  <table class="r" id="res"></table>
+ </details>
+</div>
+
+<div class="ad">広告</div>
+
+<div class="card">
+ <section class="tldr" aria-label="このツールについて">
+  <h2 class="sec-t">日割り計算ツールでできること</h2>
+  <p class="lead">月額と期間(開始日・終了日)から、家賃・利用料・給与の日割り額を無料・登録不要で計算できるWebツールです。月の途中の入居・解約や、入社・退職した月の給与に使えます。</p>
+  <ul class="feat"><li>家賃・利用料の日割り：月額 ÷ その月の日数 × 利用日数(30日で割る・年額÷365日にも対応)</li><li>給与の日割り：月給 ÷ その月の所定労働日数(土日祝休み) × 出勤日数(暦日・30日・日数の指定にも対応)</li><li>「働いた日数分を払う」と「休んだ日数分を引く(欠勤控除)」を切り替えられる</li><li>月をまたぐ期間は月ごとに分けて計算し、1か月まるごとの月は満額</li><li>端数処理(切り捨て・四捨五入・切り上げ)を選べる</li><li>計算した金額のまま請求書を作成できる</li><li>入力内容はブラウザ内だけで処理され、サーバーに送信されない</li></ul>
+  <p class="upd">最終更新日：<time datetime="2026-10-22">2026年10月22日</time> ／ 運営：しごと計算ラボ</p>
+ </section>
+
+ <h2 class="sec-t">使い方</h2>
+ <ol class="steps">
+  <li><b>種類を選ぶ</b>家賃・利用料か、給与かを選びます。</li>
+  <li><b>月額と期間を入れる</b>月額と、開始日・終了日を入れると、すぐに日割り額が出ます。終了日は最初は月末です。</li>
+  <li><b>割り方を合わせる</b>契約書や就業規則に合わせて、「くわしく見る」で割る日数や端数処理を変えます。</li>
+  <li><b>コピーして使う</b>結果をコピーするか、そのまま請求書を作れます。</li>
+ </ol>
+
+ <h2 class="sec-t">計算方法</h2>
+ <ul>
+  <li>家賃・利用料：<b>月額 ÷ その月の日数 × 利用日数</b>(30日で割る場合は 月額 ÷ 30日 × 利用日数、年額で割る場合は 月額 × 12 ÷ 365日 × 利用日数)</li>
+  <li>給与：<b>月給 ÷ その月の所定労働日数 × 出勤日数</b>。所定労働日は土曜・日曜・祝日を除いた日として数えます(年末年始は含みます)</li>
+  <li>休んだ日数分を引く場合：<b>月給 − 月給 ÷ 割る日数 × 欠勤日数</b>(欠勤日数 ＝ その月の日数 − 出勤日数)</li>
+  <li>開始日と終了日は両方とも数えます。月をまたぐ場合は月ごとに計算し、1か月まるごとの月は満額です</li>
+  <li>1円未満の端数は、初期設定では切り捨てです(休んだ日数分を引く場合は、引く金額の端数を処理します)</li>
+ </ul>
+
+ <h2 class="sec-t">月ごとの日数と所定労働日数(2026年・2027年)</h2>
+ <table class="hyt"><thead><tr><th>月</th><th>2026年 日数</th><th>2026年 所定労働日</th><th>2027年 日数</th><th>2027年 所定労働日</th></tr></thead><tbody>
+ <tr><td>1月</td><td>31日</td><td>20日</td><td>31日</td><td>19日</td></tr>
+ <tr><td>2月</td><td>28日</td><td>18日</td><td>28日</td><td>18日</td></tr>
+ <tr><td>3月</td><td>31日</td><td>21日</td><td>31日</td><td>22日</td></tr>
+ <tr><td>4月</td><td>30日</td><td>21日</td><td>30日</td><td>21日</td></tr>
+ <tr><td>5月</td><td>31日</td><td>18日</td><td>31日</td><td>18日</td></tr>
+ <tr><td>6月</td><td>30日</td><td>22日</td><td>30日</td><td>22日</td></tr>
+ <tr><td>7月</td><td>31日</td><td>22日</td><td>31日</td><td>21日</td></tr>
+ <tr><td>8月</td><td>31日</td><td>20日</td><td>31日</td><td>21日</td></tr>
+ <tr><td>9月</td><td>30日</td><td>19日</td><td>30日</td><td>20日</td></tr>
+ <tr><td>10月</td><td>31日</td><td>21日</td><td>31日</td><td>20日</td></tr>
+ <tr><td>11月</td><td>30日</td><td>19日</td><td>30日</td><td>20日</td></tr>
+ <tr><td>12月</td><td>31日</td><td>23日</td><td>31日</td><td>23日</td></tr>
+ </tbody></table>
+ <p class="note">※所定労働日は、土曜・日曜・祝日(振替休日を含む)を除いた日数です。年末年始や会社独自の休日は含めていません。</p>
+
+ <h2 class="sec-t">よくある質問</h2>
+ <div class="faq">
+ <details><summary><span>家賃の日割りはどう計算する？</span></summary><p>月額の家賃をその月の日数で割り、住んだ日数をかけます。たとえば家賃90,000円で11月15日に入居した場合、90,000円 ÷ 30日 × 16日 ＝ 48,000円です。</p></details>
+ <details><summary><span>その月の日数で割るのと、30日で割るのはどちらが正しい？</span></summary><p>法律では決まっておらず、契約書の定めに従います。その月の日数で割る方法が多いですが、30日で割る方法や、年額を365日で割る方法もあります。契約書に書かれていない場合は、相手に確認してください。</p></details>
+ <details><summary><span>入居日や退去日はその日も数える？</span></summary><p>一般的には、開始日と終了日の両方を含めて数えます。このツールも両方を含めます。11月15日〜11月30日なら16日間です。</p></details>
+ <details><summary><span>給与の日割りはどう計算する？</span></summary><p>会社の就業規則(賃金規程)の定めに従います。よく使われるのは、月給 ÷ その月の所定労働日数 × 出勤日数です。たとえば月給300,000円で2026年11月16日に入社した場合、11月の所定労働日数は19日(土日祝休み)、出勤日は10日なので、300,000円 ÷ 19日 × 10日 ＝ 157,894円(1円未満切り捨て)です。</p></details>
+ <details><summary><span>「働いた日数分を払う」と「休んだ日数分を引く」で金額が違うのはなぜ？</span></summary><p>割る日数が、その月の実際の日数と違う場合に差が出ます。たとえば月給300,000円を30日で割る会社で、31日ある10月に16日間在籍した場合、働いた日数分を払うと300,000円 ÷ 30日 × 16日 ＝ 160,000円、休んだ15日分を引くと300,000円 − 300,000円 ÷ 30日 × 15日 ＝ 150,000円です。どちらを使うかは就業規則で確認してください。</p></details>
+ <details><summary><span>月平均所定労働日数で割る場合は？</span></summary><p>「くわしく見る」の「割る日数」で「日数を指定」を選び、月平均所定労働日数(年間の所定労働日数 ÷ 12)を入れてください。出勤日数は土日祝を除いて数えます。</p></details>
+ <details><summary><span>1円未満の端数はどうする？</span></summary><p>決まりはなく、契約書や賃金規程によります。一般には切り捨てが多く使われています。このツールの初期設定も切り捨てです。</p></details>
+ <details><summary><span>月をまたぐ期間はどう計算する？</span></summary><p>月ごとに分けて計算し、合計します。1か月まるごとの月は満額、月の途中から・途中までの月だけを日割りにします。</p></details>
+ </div>
+ <p class="note">※給与の計算方法は、労働基準法第89条により就業規則に定めることになっています。家賃・利用料は契約書の定めが優先します。実際の金額は、就業規則や契約書をご確認ください。</p>
+</div>
+
+<div class="card"><div class="sharebox" style="border:0;padding:0;margin:0 0 18px"><h2>このツールをシェア</h2><p>お仕事仲間や、同じように事務作業をする方に教えていただけるとうれしいです。</p><div class="sbtns" data-share></div></div><h2>関連ツール</h2><div class="rel"><a href="/seikyusho/" style="--c:#4f46e5"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 7.5l3 4 3-4M12 11.5v6.5M9.2 13h5.6M9.2 15.6h5.6"/></svg></span><span><b>請求書 作成</b><span class="d">インボイス対応、源泉徴収・振込手数料にも対応</span></span></a><a href="/mitsumori/" style="--c:#0d8a7f"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span><span><b>見積書 作成</b><span class="d">請求書・領収書にワンクリックで切り替え</span></span></a><a href="/nohinsho/" style="--c:#0377b3"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span><span><b>納品書 作成</b><span class="d">見積書の内容からそのまま作成</span></span></a><a href="/ryoshusho/" style="--c:#d9540f"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18l-2.5-1.5L14 21l-2-1.5L10 21l-2.5-1.5L5 21z"/><path d="M9 11l2 2 4-4"/></svg></span><span><b>領収書 作成</b><span class="d">収入印紙の要否を自動で判定</span></span></a><a href="/hacchusho/" style="--c:#be123c"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6v3H9z"/><path d="M15 4.5h3a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1h3"/><path d="M9 12h6M9 16h4"/></svg></span><span><b>発注書・注文書 作成</b><span class="d">外注先・仕入先に仕事を頼むときに</span></span></a><a href="/sofujo/" style="--c:#16803c"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span><b>送付状 作成</b><span class="d">郵送・FAXで送るときに。時候の挨拶も自動</span></span></a><a href="/gensen/" style="--c:#2554d8"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></svg></span><span><b>源泉徴収税 計算</b><span class="d">手取りからの逆算、請求書PDFまで</span></span></a><a href="/eigyobi/" style="--c:#6d28d9"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4M8 13.5h.01M12 13.5h.01M16 13.5h.01M8 17h.01M12 17h.01"/><circle cx="16" cy="17" r="1.6"/></svg></span><span><b>営業日・支払期日 計算</b><span class="d">月末締め翌月末払いなどの支払日を、土日祝を除いて計算</span></span></a><a href="/shohizei/" style="--c:#a21caf"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg></span><span><b>消費税計算(税込・税抜)</b><span class="d">税込⇔税抜と消費税額を、10%・8%で計算</span></span></a></div></div>
+
+<div class="ad">広告</div>
+</main>
+<footer><a href="/">しごと計算ラボ</a> ・ <a href="/privacy/">プライバシーポリシー</a> ・ <a href="/contact/">お問い合わせ</a><br>© しごと計算ラボ</footer>
+<div class="toast" id="toast"></div>
+
+<script src="/assets/biz-core.js"></script>
+<script id="core">
+// 日割り計算ロジック(BIZ＝/assets/biz-core.js の祝日・営業日計算を使う)
+var HIWARI=(function(){
+ var B=(typeof BIZ!=='undefined')?BIZ:require('../assets/biz-core.js');
+ var CFG={ny:'none'}; // 所定労働日：土日祝を休みとして数える(年末年始は含めない)
+ function rnd(v,m){v=Math.round(v*1e6)/1e6;return m==='ceil'?Math.ceil(v):m==='round'?Math.round(v):Math.floor(v)}
+ function lastDay(y,m){return B.D(y,m+1,0).getUTCDate()}
+ // 期間(両端を含む)を月ごとに分ける
+ function months(a,b){var out=[],y=a.getUTCFullYear(),m=a.getUTCMonth()+1,g=0;
+  while(g++<240){var f=B.D(y,m,1),l=B.D(y,m,lastDay(y,m));if(f>b)break;
+   out.push({y:y,m:m,first:f,last:l,from:a>f?a:f,to:b<l?b:l});m++;if(m>12){m=1;y++}}
+  return out}
+ function biz(a,b){return B.countBiz(a,b,CFG).biz}
+ // o:{amt,a,b(Date),mode:'fee'|'pay',basis,n,meth:'add'|'sub',rnd}
+ // fee の basis：'cal'その月の日数 / 'd30'30日 / 'y365'年額÷365日
+ // pay の basis：'biz'所定労働日数(土日祝休み) / 'cal'その月の暦日数 / 'd30'30日 / 'n'日数を指定(出勤日は土日祝を除いて数える)
+ function calc(o){
+  var a=o.a,b=o.b;if(a>b){var x=a;a=b;b=x}
+  var amt=Math.max(0,Math.floor(o.amt||0)),rows=[],total=0;
+  months(a,b).forEach(function(r){
+   var md=lastDay(r.y,r.m),days=B.days(r.from,r.to)+1,full=days===md;
+   var q={y:r.y,m:r.m,from:r.from,to:r.to,days:days,md:md,full:full};
+   if(o.mode==='fee'){
+    if(full){q.v=amt;q.how='full'}
+    else if(o.basis==='d30'){q.use=days;q.base=30;q.v=Math.min(amt,rnd(amt*days/30,o.rnd))}
+    else if(o.basis==='y365'){q.use=days;q.base=365;q.v=Math.min(amt,rnd(amt*12*days/365,o.rnd))}
+    else{q.use=days;q.base=md;q.v=rnd(amt*days/md,o.rnd)}
+   }else{
+    var calDays=o.basis==='cal'||o.basis==='d30';
+    q.use=calDays?days:biz(r.from,r.to);                  // 勤務した(在籍した)日数
+    q.all=calDays?md:biz(r.first,r.last);                 // その月の日数(暦日または所定労働日)
+    q.base=o.basis==='d30'?30:o.basis==='n'?Math.max(1,+o.n||0):q.all; // 割る日数
+    if(full){q.v=amt;q.how='full'}
+    else if(o.meth==='sub'){q.off=Math.max(0,q.all-q.use);q.ded=Math.min(amt,rnd(amt*q.off/q.base,o.rnd));q.v=amt-q.ded}
+    else q.v=Math.min(amt,rnd(amt*q.use/q.base,o.rnd));
+   }
+   total+=q.v;rows.push(q);
+  });
+  return {a:a,b:b,days:B.days(a,b)+1,rows:rows,total:total,part:rows.filter(function(q){return !q.full})};
+ }
+ return {rnd:rnd,months:months,calc:calc,lastDay:lastDay,biz:biz};
+})();
+if(typeof module!=='undefined')module.exports=HIWARI;
+</script>
+<script>
+var $=function(id){return document.getElementById(id)};
+var mode='fee',last,CK='hiwari_cfg',endAuto=true;
+var AMT={fee:'100,000',pay:'300,000'};
+var DEF={fee:{basis:'cal',rnd:'floor'},pay:{basis:'biz',meth:'add',n:'20',rnd:'floor'}};
+var C=JSON.parse(JSON.stringify(DEF));
+var RN={floor:'切り捨て',round:'四捨五入',ceil:'切り上げ'};
+var BN={fee:{cal:'その月の日数',d30:'30日',y365:'年額÷365日'},pay:{biz:'所定労働日数',cal:'その月の日数',d30:'30日',n:'指定した日数'}};
+function f(n){return n.toLocaleString('ja-JP')}
+function yen(n){return f(n)+'円'}
+function num(s){var v=parseInt(String(s||'').replace(/[０-９]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-65248)}).replace(/[^0-9]/g,''),10)||0;return Math.min(v,99999999999)}
+function dec(s){var v=parseFloat(String(s||'').replace(/[０-９．]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-65248)}));return v>0&&v<=31?Math.round(v*100)/100:0}
+function toast(m){var t=$('toast');t.textContent=m;t.className='toast on';clearTimeout(toast._t);toast._t=setTimeout(function(){t.className='toast'},1800)}
+function copyText(t,msg){
+ function fb(){var a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy')}catch(_){}document.body.removeChild(a);if(ok)toast(msg);else window.prompt('コピーしてください',t)}
+ if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(function(){toast(msg)},fb)}else fb();
+}
+function pad(n){return ('0'+n).slice(-2)}
+function today(){var t=new Date();return t.getFullYear()+'-'+pad(t.getMonth()+1)+'-'+pad(t.getDate())}
+function eomOf(s){var t=BIZ.parse(s);if(!t)return '';var y=t.getUTCFullYear(),m=t.getUTCMonth()+1;return y+'-'+pad(m)+'-'+pad(HIWARI.lastDay(y,m))}
+function md(t){return (t.getUTCMonth()+1)+'月'+t.getUTCDate()+'日'}
+function ymd(t){return t.getUTCFullYear()+'年'+md(t)}
+function range(a,b){return ymd(a)+'〜'+(a.getUTCFullYear()===b.getUTCFullYear()?md(b):ymd(b))}
+function save(){try{localStorage.setItem(CK,JSON.stringify(C))}catch(_){}}
+function load(){try{var s=JSON.parse(localStorage.getItem(CK)||'{}');['fee','pay'].forEach(function(k){if(s[k])Object.assign(C[k],s[k])})}catch(_){}}
+function syncOpts(){var c=C[mode],pay=mode==='pay';
+ $('bFee').hidden=pay;$('bPay').hidden=!pay;$('mL').hidden=!pay;$('meth').hidden=!pay;
+ if(pay){$('bPay').value=c.basis;$('meth').value=c.meth;$('nDays').value=c.n}else $('bFee').value=c.basis;
+ var nOn=pay&&c.basis==='n';$('nL').hidden=!nOn;$('nBox').hidden=!nOn;
+ $('rnd').value=c.rnd;$('rnL').textContent=pay&&c.meth==='sub'?'引く金額の端数':'1円未満の端数';
+}
+// 1か月分の式の説明
+function how(q,o){
+ var M=q.m+'月',a=yen(o.amt);
+ if(q.full)return M+'は1か月分のため満額';
+ if(mode==='fee'){
+  if(o.basis==='y365')return a+' × 12 ÷ 365日 × '+q.use+'日';
+  return a+' ÷ '+q.base+'日'+(o.basis==='cal'?'('+M+'の日数)':'')+' × '+q.use+'日';
+ }
+ var W=o.basis==='biz'||o.basis==='n'?'出勤':'在籍',U=o.basis==='biz'||o.basis==='n'?'所定労働日':'日数';
+ var baseTxt=o.basis==='d30'?'30日':o.basis==='n'?q.base+'日(指定)':q.base+'日('+M+'の'+U+')';
+ if(o.meth==='sub')return a+' − '+yen(q.ded)+'('+a+' ÷ '+baseTxt+' × 欠勤'+q.off+'日)';
+ return a+' ÷ '+baseTxt+' × '+W+q.use+'日';
+}
+function render(){
+ var pay=mode==='pay',c=C[mode];
+ $('amtL').textContent=pay?'月給':'月額';
+ $('d1L').textContent=pay?'開始日(入社日など)':'開始日(入居・利用開始)';
+ $('d2L').textContent=pay?'終了日(退職日など)':'終了日(退去・解約)';
+ $('toInv').hidden=pay;
+ var a=BIZ.parse($('d1').value),b=BIZ.parse($('d2').value);
+ var bad=!a||!b||a.getUTCFullYear()<1900||b.getUTCFullYear()>2200;
+ var sum=[BN[mode][c.basis]];if(pay)sum.push(c.meth==='sub'?'欠勤控除':'');sum.push('端数：'+RN[c.rnd]);
+ var chg=JSON.stringify(c)!==JSON.stringify(DEF[mode]);
+ $('detSum').textContent=sum.filter(Boolean).join('／');$('detSum').className='ms'+(chg?' on':'');
+ if(bad){last=null;$('rL').textContent='開始日と終了日を入れてください';$('rV').textContent='-';$('rS').textContent='';$('rW').hidden=true;$('res').innerHTML='';return}
+ if(Math.abs(BIZ.days(a,b))>3660){last=null;$('rL').textContent='期間は10年以内で入れてください';$('rV').textContent='-';$('rS').textContent='';$('rW').hidden=true;$('res').innerHTML='';return}
+ var o={amt:num($('amt').value),a:a,b:b,mode:mode,basis:c.basis,n:dec(c.n)||20,meth:c.meth,rnd:c.rnd};
+ var r=HIWARI.calc(o);last={r:r,o:o};
+ var one=r.rows.length===1,q0=r.rows[0];
+ $('rL').textContent=range(r.a,r.b)+'('+r.days+'日間)の'+(one?(pay?'日割り給与':'日割り額'):'合計')+'は';
+ $('rV').textContent=yen(r.total);
+ if(one)$('rS').textContent=how(q0,o);
+ else if(r.rows.length<=4)$('rS').textContent=r.rows.map(function(q){return q.m+'月 '+yen(q.v)+(q.full?'':'(日割り)')}).join(' ＋ ');
+ else $('rS').textContent='日割り '+r.part.length+'か月分 ＋ 満額 '+(r.rows.length-r.part.length)+'か月分(内訳は「くわしく見る」)';
+ var w='';
+ if(a>b)w='※開始日と終了日が逆だったため、入れ替えて計算しました';
+ else if(pay&&(c.basis==='biz'||c.basis==='n')&&r.part.length)w='※出勤日は土日祝を除いて数えています';
+ $('rW').hidden=!w;$('rW').textContent=w;
+ // 内訳
+ var h='<tr><th>月・期間</th><th class="n">金額</th></tr>',bz=pay&&(c.basis==='biz'||c.basis==='n');
+ r.rows.forEach(function(q){var dd=bz?'出勤'+q.use+'日 / 所定'+q.all+'日':q.days+'日間';
+  h+='<tr><td><b>'+q.y+'年'+q.m+'月</b> '+md(q.from)+'〜'+md(q.to)+'('+dd+')<div class="x">'+how(q,o)+'</div></td><td class="n">'+yen(q.v)+'</td></tr>'});
+ if(!one)h+='<tr><td><b>合計</b></td><td class="n"><b>'+yen(r.total)+'</b></td></tr>';
+ $('res').innerHTML=h;
+}
+function fmt(el){var p=el.selectionStart,l=el.value.length,v=num(el.value);el.value=v?f(v):'';try{var q=Math.max(0,p+el.value.length-l);el.setSelectionRange(q,q)}catch(_){}}
+var amtEl=$('amt');
+amtEl.addEventListener('input',function(){fmt(amtEl);AMT[mode]=amtEl.value;render()});
+amtEl.addEventListener('focus',function(){var t=this;setTimeout(function(){try{t.select()}catch(_){}},0)});
+$('d1').addEventListener('change',function(){if(endAuto){var e=eomOf(this.value);if(e)$('d2').value=e}render()});
+$('d2').addEventListener('change',function(){endAuto=false;render()});
+function opt(k,v){C[mode][k]=v;save();syncOpts();render()}
+$('bFee').addEventListener('change',function(){opt('basis',this.value)});
+$('bPay').addEventListener('change',function(){opt('basis',this.value)});
+$('meth').addEventListener('change',function(){opt('meth',this.value)});
+$('rnd').addEventListener('change',function(){opt('rnd',this.value)});
+$('nDays').addEventListener('input',function(){C.pay.n=this.value;save();render()});
+function setMode(m){mode=m;$('tFee').className=m==='fee'?'on':'';$('tPay').className=m==='pay'?'on':'';amtEl.value=AMT[m];syncOpts();render()}
+$('tFee').onclick=function(){setMode('fee')};$('tPay').onclick=function(){setMode('pay')};
+$('copy').onclick=function(){if(!last){toast('先に日付を入れてください');return}var r=last.r,o=last.o;
+ var t='日割り計算('+(mode==='pay'?'月給':'月額')+' '+yen(o.amt)+')\n'+range(r.a,r.b)+'('+r.days+'日間)\n';
+ t+=r.rows.map(function(q){return q.y+'年'+q.m+'月('+md(q.from)+'〜'+md(q.to)+')：'+how(q,o)+(q.full?' '+yen(q.v):' ＝ '+yen(q.v))}).join('\n');
+ t+='\n合計 '+yen(r.total)+'(端数：'+RN[o.rnd]+')';copyText(t,'結果をコピーしました')};
+$('share').onclick=function(){var c=C[mode],q=new URLSearchParams({t:mode,a:num(amtEl.value),s:$('d1').value,e:$('d2').value,k:c.basis,d:c.rnd});
+ if(mode==='pay'){q.set('h',c.meth);if(c.basis==='n')q.set('n',dec(c.n)||20)}
+ copyText(location.origin+location.pathname+'?'+q.toString(),'URLをコピーしました')};
+$('toInv').onclick=function(){if(!last){toast('先に日付を入れてください');return}var r=last.r;
+ var rows=r.rows.map(function(q){return {n:q.y+'年'+q.m+'月分'+(q.full?'':'('+(q.from.getUTCMonth()+1)+'/'+q.from.getUTCDate()+'〜'+(q.to.getUTCMonth()+1)+'/'+q.to.getUTCDate()+' 日割り)'),q:'1',u:'式',p:String(q.v),r:'10',xr:'',nw:false}});
+ var doc={incl:true,rnd:C.fee.rnd,rows:rows};
+ try{sessionStorage.setItem('shorui_v1',JSON.stringify({doc:doc,me:{}}))}catch(_){}location.href='/seikyusho/'};
+(function(){
+ load();
+ var q=new URLSearchParams(location.search),m=q.get('t')==='pay'?'pay':'fee';
+ if(q.has('k')&&BN[m][q.get('k')])C[m].basis=q.get('k');
+ if(RN[q.get('d')])C[m].rnd=q.get('d');
+ if(m==='pay'&&(q.get('h')==='add'||q.get('h')==='sub'))C.pay.meth=q.get('h');
+ if(m==='pay'&&dec(q.get('n')))C.pay.n=String(dec(q.get('n')));
+ if(q.has('a')){var a=num(q.get('a'));AMT[m]=a?f(a):''}
+ var s=BIZ.parse(q.get('s')||'')?q.get('s'):today(),e=BIZ.parse(q.get('e')||'')?q.get('e'):eomOf(s);
+ if(q.get('e')&&BIZ.parse(q.get('e')))endAuto=false;
+ $('d1').value=s;$('d2').value=e;
+ setMode(m);
+})();
+</script>
+<script src="/assets/share.js" defer></script>
+</body>
+</html>
