@@ -6,7 +6,7 @@
 <title>しごと計算ラボ｜見積書・請求書・領収書の作成、消費税・源泉徴収・支払期日の計算が無料・登録不要</title>
 <link rel="canonical" href="https://shigoto-keisan.com/">
 <meta name="msvalidate.01" content="E964378DAE573C655AC5D2503009D897" />
-<meta name="description" content="フリーランス・個人事業主・小さな会社の事務作業に使える無料ツール集。見積書・納品書・請求書・領収書・発注書・送付状をブラウザだけで作成してPDF保存。消費税・源泉徴収税・支払期日・営業日の計算、収入印紙の判定にも対応。登録不要で、入力内容はサーバーに送信されません。">
+<meta name="description" content="フリーランス・個人事業主・小さな会社の事務作業に使える無料ツール集。見積書・納品書・請求書・領収書・発注書・送付状・経費精算書をブラウザだけで作成してPDF保存。消費税・源泉徴収税・支払期日・営業日の計算、収入印紙の判定にも対応。登録不要で、入力内容はサーバーに送信されません。">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
 :root{--bg:#f4f6f9;--card:#fff;--fg:#14171f;--sub:#5b6474;--line:#e3e7ee;--acc:#2554d8;--acc2:#e9efff}
@@ -35,7 +35,7 @@ footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40p
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[
 {"@type":"Organization","@id":"https://shigoto-keisan.com/#org","name":"しごと計算ラボ","url":"https://shigoto-keisan.com/"},
-{"@type":"WebSite","name":"しごと計算ラボ","url":"https://shigoto-keisan.com/","inLanguage":"ja","publisher":{"@id":"https://shigoto-keisan.com/#org"},"description":"見積書・納品書・請求書・領収書・発注書・送付状の作成と、消費税・源泉徴収税・支払期日・営業日の計算ができる、無料・登録不要の日本語Webツール集"},
+{"@type":"WebSite","name":"しごと計算ラボ","url":"https://shigoto-keisan.com/","inLanguage":"ja","publisher":{"@id":"https://shigoto-keisan.com/#org"},"description":"見積書・納品書・請求書・領収書・発注書・送付状・経費精算書の作成と、消費税・源泉徴収税・支払期日・営業日の計算ができる、無料・登録不要の日本語Webツール集"},
 {"@type":"ItemList","name":"しごと計算ラボのツール","itemListElement":[
 {"@type":"ListItem","position":1,"name":"見積書 作成","url":"https://shigoto-keisan.com/mitsumori/"},
 {"@type":"ListItem","position":2,"name":"納品書 作成","url":"https://shigoto-keisan.com/nohinsho/"},
@@ -46,7 +46,8 @@ footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40p
 {"@type":"ListItem","position":7,"name":"送付状 作成(郵送・FAX)","url":"https://shigoto-keisan.com/sofujo/"},
 {"@type":"ListItem","position":8,"name":"営業日・支払期日 計算","url":"https://shigoto-keisan.com/eigyobi/"},
 {"@type":"ListItem","position":9,"name":"消費税計算(税込・税抜)","url":"https://shigoto-keisan.com/shohizei/"},
-{"@type":"ListItem","position":10,"name":"日割り計算(家賃・利用料・給与)","url":"https://shigoto-keisan.com/hiwari/"}]},
+{"@type":"ListItem","position":10,"name":"日割り計算(家賃・利用料・給与)","url":"https://shigoto-keisan.com/hiwari/"},
+{"@type":"ListItem","position":11,"name":"経費精算書・交通費精算書 作成","url":"https://shigoto-keisan.com/keihi/"}]},
 {"@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"本当に無料？登録は必要？","acceptedAnswer":{"@type":"Answer","text":"すべて無料で、会員登録やログインは不要です。ページを開けばすぐに使えます。"}},
 {"@type":"Question","name":"スマホでも使える？","acceptedAnswer":{"@type":"Answer","text":"使えます。スマホでもPDFを直接ダウンロードでき、コンビニのネットプリントで印刷することもできます。"}},
@@ -75,6 +76,7 @@ footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40p
   <a href="/eigyobi/" style="--c:#6d28d9"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4M8 13.5h.01M12 13.5h.01M16 13.5h.01M8 17h.01M12 17h.01"/><circle cx="16" cy="17" r="1.6"/></svg></span><span><b>営業日・支払期日 計算</b><span class="d">「月末締め翌月末払い」の支払日や〇営業日後を、土日祝・年末年始を除いて計算</span></span></a>
   <a href="/shohizei/" style="--c:#a21caf"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg></span><span><b>消費税計算(税込・税抜)</b><span class="d">税抜から税込、税込から税抜と消費税額を計算。10%・8%の混在、端数処理にも対応</span></span></a>
   <a href="/hiwari/" style="--c:#b45309"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4M9 15h6"/><circle cx="12" cy="12.4" r=".6"/><circle cx="12" cy="17.6" r=".6"/></svg></span><span><b>日割り計算(家賃・利用料・給与)</b><span class="d">月の途中の入居・解約や、入社・退職した月の給与を日割りで計算。所定労働日数(土日祝休み)にも対応</span></span></a>
+  <a href="/keihi/" style="--c:#4d7c0f"><span class="ic"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M16 15h2"/><path d="M6 6l9-3 1 3"/></svg></span><span><b>経費精算書・交通費精算書 作成</b><span class="d">立て替えた経費・交通費の精算書をPDFで。合計・科目別の合計・仮払金との差し引きを自動計算</span></span></a>
  </div>
 </div>
 
@@ -92,6 +94,7 @@ footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40p
   <tr><td>支払期日(月末締め翌月末払いなど)や〇営業日後の日付、営業日数を知りたい</td><td><a href="/eigyobi/">営業日・支払期日 計算</a></td></tr>
   <tr><td>税抜から税込、税込から税抜と消費税額を計算したい(10%・8%)</td><td><a href="/shohizei/">消費税計算</a></td></tr>
   <tr><td>月の途中の入居・解約の家賃、入社・退職した月の給与を日割りで計算したい</td><td><a href="/hiwari/">日割り計算</a></td></tr>
+  <tr><td>仕事で立て替えた交通費・備品代を会社に精算したい(仮払金の差し引きも)</td><td><a href="/keihi/">経費精算書 作成</a></td></tr>
  </table>
  <p class="note">見積書・納品書・請求書・領収書は同じ入力を共有しているので、見積書を作れば、あとは画面上部のタブを押すだけで他の書類に切り替えられます。</p>
 </div>
@@ -105,7 +108,7 @@ footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40p
   <details><summary><span>計算の根拠は？</span></summary><p>消費税はインボイス制度のルール(税率ごとに合計して1回だけ端数処理)、源泉徴収税・印紙税は国税庁が公表している税率に基づいています。</p></details>
  </div>
  <div class="sharebox"><h2 class="sec-t">しごと計算ラボをシェア</h2><p>お仕事仲間に教えていただけるとうれしいです。</p><div class="sbtns" data-share></div></div>
- <p class="note">最終更新日：<time datetime="2026-10-21">2026年10月21日</time> ／ ツールは順次追加していきます。</p>
+ <p class="note">最終更新日：<time datetime="2026-10-22">2026年10月22日</time> ／ ツールは順次追加していきます。</p>
 </div>
 </main>
 <footer><a href="/">しごと計算ラボ</a> ・ <a href="/privacy/">プライバシーポリシー</a> ・ <a href="/contact/">お問い合わせ</a><br>© しごと計算ラボ</footer>
