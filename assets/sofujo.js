@@ -150,7 +150,7 @@ function fit(){var box=$('pvbox'),p=box.querySelector('.paper');if(!p)return;var
  // パソコン(プレビューが追従する幅)では、ボタンまで画面に収まるよう高さでも縮める
  if(innerWidth>980){var cd=box.closest('.card'),ex=cd.offsetHeight-box.offsetHeight;s=Math.max(.3,Math.min(s,(innerHeight-32-ex)/p.offsetHeight))}
  p.style.transform='scale('+s+')';box.style.width=p.offsetWidth*s+'px';box.style.height=p.offsetHeight*s+'px'}
-function save(){try{var cur=J(KEY,{})||{};
+function save(){if(window.SKTourOn)return;try{var cur=J(KEY,{})||{};
  if(keep){cur.me=ME;cur.keep=true;localStorage.setItem(KEY,JSON.stringify(cur));localStorage.setItem(SKEY,JSON.stringify(S))}
  else{localStorage.setItem(KEY,JSON.stringify({keep:false}));localStorage.removeItem(SKEY);localStorage.removeItem(HKEY)}}catch(_){}}
 
@@ -163,7 +163,7 @@ function recentUI(){var x=docHist()[0],el=$('recent');REC=null;
  if(!x||recentOff||hasContent()||!x.to){el.hidden=true;return}
  REC=x;var d=x.at.split('-');$('recentT').textContent='最近作った'+dname(x)+'('+x.to+'・'+(+d[1])+'/'+(+d[2])+')を送りますか？';el.hidden=false}
 function useRec(){var x=REC;if(!x)return;S.to=x.to;S.hon=x.doc&&x.doc.hon!=null?x.doc.hon:'御中';S.rows=[{n:dname(x),q:'1',u:'部'}];$('to').value=S.to;$('hon').value=S.hon;recentOff=true;drawRows();upd();toast('宛名と書類名を入れました')}
-function record(){if(!keep||!hasContent())return;var it={id:Date.now(),at:today(),mode:S.mode,to:S.to,person:S.person,docs:named().map(function(r){return r.n}).join('・'),doc:JSON.parse(JSON.stringify(S))};
+function record(){if(window.SKTourOn||!keep||!hasContent())return;var it={id:Date.now(),at:today(),mode:S.mode,to:S.to,person:S.person,docs:named().map(function(r){return r.n}).join('・'),doc:JSON.parse(JSON.stringify(S))};
  var l=hist().filter(function(x){return !(x.at===it.at&&x.to===it.to&&x.person===it.person&&x.docs===it.docs&&x.mode===it.mode)});l.unshift(it);
  try{localStorage.setItem(HKEY,JSON.stringify(l.slice(0,30)))}catch(_){}histUI()}
 function histUI(){var h=hist(),to={},ps={},dn={};
@@ -243,7 +243,19 @@ function doPrint(){record();var html=docHTML(),nm=fname();
  var css=[].map.call(document.querySelectorAll('link[rel=stylesheet]'),function(l){return '<link rel="stylesheet" href="'+l.href+'">'}).join('');
  w.document.write('<!doctype html><meta charset="utf-8"><title>'+esc(nm)+'</title>'+css+'<body><div id="prt">'+html+'</div><script>onload=function(){setTimeout(print,200)}<\/script>');w.document.close()}
 
-build();drawRows();bind();render();histUI();if(window.SKShare)SKShare();
+build();drawRows();bind();render();histUI();
+// 使い方の案内(tour.js)
+if(window.SKTour)SKTour({
+ sc:{post:{t:'請求書などを郵送する人',steps:[['to','<b>宛名</b>と<b>担当者名</b>を入れます。担当者名を入れると、「御中」が自動で「様」になります。'],['rows','<b>送る書類</b>を選びます。複数あれば「＋書類を追加」で。'],['pv','時候の挨拶は日付から自動で入ります。<b>PDFで保存</b>して印刷し、書類と一緒に送ります。']]},
+  fax:{t:'FAXで書類を送る人',steps:[['mode','<b>「FAX」</b>を選びます。'],['to','相手の<b>FAX番号</b>を入れます。'],['pv','<b>送信枚数</b>(送付状を含む)は、書類の枚数から自動で数えます。']]}},
+ tg:{to:function(){return document.querySelectorAll('.fm .sec')[0]||$('to').closest('section')},rows:function(){return $('rows').closest('section')},pv:function(){return $('pv').querySelector('.card')},mode:function(){return $('mode')}},
+ snap:function(){return JSON.stringify(S)},
+ back:function(s){S=JSON.parse(s);fill();drawRows();render()},
+ begin:function(c){var fx=c===this.sc.fax,md=S.mode;S=blank();S.mode=fx?'f':'p';S.to='株式会社サンプル商事';S.hon='御中';S.person=fx?'':'山田 太郎';S.tofax=fx?'03-0000-0000':'';
+  S.rows=fx?[{n:'見積書',q:'2',u:'枚'}]:[{n:'請求書',q:'1',u:'部'},{n:'納品書',q:'1',u:'部'}];fill();drawRows();render()},
+ use:function(){save();toast('この例の内容を入れました。書き換えて使えます')}
+});
+if(window.SKShare)SKShare();
 if(inMsg)toast(inMsg);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
 })();

@@ -81,7 +81,8 @@ footer a{color:inherit}footer{text-align:center;font-size:.78rem;color:var(--sub
 <header class="v2h">
  <div class="sbar"><div class="sin"><a class="slogo" href="/"><i></i>しごと計算ラボ</a></div></div>
  <div class="thead"><span class="tic" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="20" cy="27" r="13"/><path d="M15 21l5 6 5-6M20 27v8M16 30h8"/><circle cx="37" cy="12" r="7"/><path d="M34 12h6"/></svg></span><div><h1>源泉徴収税 計算＆請求書作成</h1>
- <p>報酬・料金の源泉徴収税を自動計算。手取りからの逆算、インボイス対応の請求書まで。</p></div></div>
+ <p>報酬・料金の源泉徴収税を自動計算。手取りからの逆算、インボイス対応の請求書まで。</p>
+ <a class="hint" href="#who">はじめての方へ：使い方を見る</a></div></div>
 </header>
 
 <main>
@@ -129,6 +130,8 @@ footer a{color:inherit}footer{text-align:center;font-size:.78rem;color:var(--sub
   <ul class="feat"><li>源泉徴収税の自動計算(100万円以下10.21%、超える部分20.42%＋102,100円)</li><li>受け取りたい手取り額から、必要な請求額を逆算</li><li>報酬と消費税を分けて記載した場合の計算(税抜額が基準)</li><li>軽減税率8%、振込手数料の差し引きに対応</li><li>インボイス対応の請求書を作成し、印刷・PDF保存</li><li>入力内容はブラウザ内だけで処理され、サーバーに送信されない</li></ul>
   <p class="upd">最終更新日：<time datetime="2026-10-21">2026年10月21日</time> ／ 運営：しごと計算ラボ</p>
  </section>
+ <h2 class="sec-t" id="who">こんな人・こんな時に</h2>
+ <div class="who"><button type="button" data-sc="design"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 38l4-12L32 8l8 8-18 18z"/><path d="M28 12l8 8"/><path d="M10 38l10-2"/></svg></span><b>デザイン料・原稿料を受け取る個人</b><span class="ds">源泉徴収された後の手取りを知りたい</span><span class="go">▶ 使い方を見る</span></button><button type="button" data-sc="net"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="9"/><circle cx="24" cy="24" r="2"/></svg></span><b>手取りを決めてから請求したい人</b><span class="ds">10万円受け取るには、いくら請求すればいい？</span><span class="go">▶ 使い方を見る</span></button><button type="button" data-sc="fee"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16"/><path d="M18 17l6 7 6-7M24 24v10M19 27h10M19 31h10"/></svg></span><b>振込手数料も引かれる人</b><span class="ds">手数料まで引いた、実際の振込額を知りたい</span><span class="go">▶ 使い方を見る</span></button></div>
  <h2>計算方法</h2>
  <ul>
   <li>支払金額100万円以下：<b>支払金額 × 10.21%</b></li>
@@ -249,6 +252,22 @@ $('toShorui').onclick=function(){var o=opt(),it=last.it.filter(function(i){retur
  if(q.get('r')){try{rows=JSON.parse(q.get('r')).slice(0,30).map(function(a){return {name:String(a[0]).slice(0,100),amt:num(a[1]),rate:['10','8','0'].indexOf(String(a[2]))>=0?String(a[2]):'10',on:!!a[3]}})}catch(_){}}
  if(q.get('n'))$('net').value=num(q.get('n')).toLocaleString('ja-JP');
  drawRows();setMode(q.get('m')==='rev'?'rev':'fwd');})();
+</script>
+<script src="/assets/tour.js"></script>
+<script>
+SKTour({
+ sc:{design:{t:'デザイン料・原稿料を受け取る個人',steps:[['rows','報酬の金額(税抜)を入れます。'],['pay','源泉徴収税(10.21%)を引いた<b>手取り</b>が出ます。'],['bar','帯の<b>しま模様</b>が引かれる源泉徴収税、色の部分が手取りです。'],['inv','この内容のまま<b>請求書</b>を作れます。']]},
+  net:{t:'手取りを決めてから請求したい人',steps:[['tabs','<b>「手取りから逆算」</b>を選びます。'],['net','受け取りたい<b>手取り額</b>を入れます。'],['res','必要な<b>請求額</b>と、引かれる源泉徴収税が出ます。']]},
+  fee:{t:'振込手数料も引かれる人',steps:[['opt','「条件を変える」で<b>振込手数料を差し引く</b>をオンにして、金額を入れます。'],['bar','手数料の分(灰色)も帯に出て、<b>実際の振込額</b>が分かります。']]}},
+ tg:{rows:function(){return $('fwdBox')},pay:function(){return $('pay').closest('.big')},bar:function(){return document.querySelector('.wg')},inv:function(){return $('toShorui')},
+  tabs:function(){return document.querySelector('.seg')},net:function(){return $('revBox')},res:function(){return $('res')},opt:function(){return $('optBox')}},
+ snap:function(){return {rows:JSON.stringify(rows),mode:mode,add:$('add').checked,sep:$('sep').checked,wOn:$('wOn').checked,feeOn:$('feeOn').checked,fee:$('fee').value,rnd:$('rnd').value,net:$('net').value,open:$('optBox').open}},
+ back:function(s){rows=JSON.parse(s.rows);['add','sep','wOn','feeOn'].forEach(function(k){$(k).checked=s[k]});$('fee').value=s.fee;$('rnd').value=s.rnd;$('net').value=s.net;$('optBox').open=s.open;drawRows();setMode(s.mode)},
+ begin:function(c){var k=c===this.sc.net?'net':c===this.sc.fee?'fee':'design';$('add').checked=true;$('sep').checked=true;$('wOn').checked=true;$('rnd').value='floor';$('optBox').open=false;
+  $('feeOn').checked=k==='fee';$('fee').value='440';rows=[{name:k==='fee'?'イラスト制作':'ロゴデザイン',amt:k==='fee'?50000:100000,rate:'10',on:true}];$('net').value='100,000';drawRows();setMode(k==='net'?'rev':'fwd')},
+ prep:function(s){if(s==='opt')$('optBox').open=true},
+ use:function(){toast('この例の内容を入れました。書き換えて使えます')}
+});
 </script>
 <script src="/assets/share.js" defer></script>
 </body>

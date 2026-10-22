@@ -149,7 +149,8 @@ main{max-width:1000px}header.v2h .sin,header.v2h .thead{max-width:1000px}footer{
 <header class="v2h">
  <div class="sbar"><div class="sin"><a class="slogo" href="/"><i></i>しごと計算ラボ</a></div></div>
  <div class="thead"><span class="tic" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M6 25L23 8h17v17L23 42z"/><circle cx="33" cy="15" r="2.5"/><path d="M17 32l10-10"/><circle cx="17.5" cy="23.5" r="2"/><circle cx="26.5" cy="31.5" r="2"/></svg></span><div><h1>消費税計算(税込・税抜)</h1>
- <p>レジのように打つだけ。10%と8%がまざっていてもOK。</p></div></div>
+ <p>レジのように打つだけ。10%と8%がまざっていてもOK。</p>
+ <a class="hint" href="#who">はじめての方へ：使い方を見る</a></div></div>
 </header>
 
 <main>
@@ -199,6 +200,8 @@ main{max-width:1000px}header.v2h .sin,header.v2h .thead{max-width:1000px}footer{
   <p class="upd">最終更新日：<time datetime="2026-10-22">2026年10月22日</time> ／ 運営：しごと計算ラボ</p>
  </section>
 
+ <h2 class="sec-t" id="who">こんな人・こんな時に</h2>
+ <div class="who"><button type="button" data-sc="one"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 5h24v38H12z"/><path d="M17 10h14v8H17z"/><path d="M18 25h2M24 25h2M30 25h0M18 31h2M24 31h2M18 37h2M24 37h2M30 31v6"/></svg></span><b>1つの金額の税込を知りたい人</b><span class="ds">5,000円の税込はいくら？</span><span class="go">▶ 使い方を見る</span></button><button type="button" data-sc="mix"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M5 8h6l5 22h22l4-15H13"/><circle cx="19" cy="38" r="3"/><circle cx="35" cy="38" r="3"/></svg></span><b>10%と8%がまざる買い物をした人</b><span class="ds">食べ物とそれ以外を、まとめて計算したい</span><span class="go">▶ 使い方を見る</span></button><button type="button" data-sc="qty"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h18l8 8v28H12z"/><path d="M30 6v8h8"/><path d="M19 20l6 7 6-7M25 27v10M20 30h10M20 34h10"/></svg></span><b>個数×単価で請求書にしたい人</b><span class="ds">「3 × 5,000円」をそのまま請求書の明細に</span><span class="go">▶ 使い方を見る</span></button><button type="button" data-sc="incl"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M38 24H10M18 16l-8 8 8 8"/></svg></span><b>税込の金額から税抜を知りたい人</b><span class="ds">11,000円の税抜と消費税はいくら？</span><span class="go">▶ 使い方を見る</span></button></div>
  <h2 class="sec-t">使い方</h2>
  <ol class="steps">
   <li><b>金額を打つ</b>テンキーかキーボードで金額を打つと、すぐに税込(税抜)と消費税が出ます。税込の金額から計算する時は「税込で打つ」を押します。</li>
@@ -359,6 +362,26 @@ $('toInv').onclick=function(){var a=all();if(!a.length)a=[L(0,1,10,'')];
   else st.cur={a:a?String(a):'',q:1,r:q.get('r')==='8'?8:10,n:''}}
  render();
 })();
+</script>
+<script src="/assets/tour.js"></script>
+<script>
+SKTour({
+ sc:{one:{t:'1つの金額の税込を知りたい人',steps:[['pad','数字を打つだけです。パソコンはキーボードの数字キーでも打てます。'],['disp','<b>税込の合計</b>と消費税がすぐに出ます。']]},
+  mix:{t:'10%と8%がまざる買い物をした人',steps:[['r8','食べ物・飲み物は<b>8%</b>、それ以外は<b>10%</b>を押します。'],['nx','<b>「次の金額」</b>を押して、次の品目を打ちます。'],['rcpt','レシートに<b>税率ごとの合計と消費税</b>が出ます。']]},
+  qty:{t:'個数×単価で請求書にしたい人',steps:[['mul','「3」→<b>「×」</b>→「5000」と打つと、個数×単価になります。品名は画面の上の欄に入れます。'],['rcpt','レシートに「@5,000×3」と入ります。'],['inv','<b>「この内容で請求書を作る」</b>で、品名・数量・単価がそのまま請求書の明細に入ります。']]},
+  incl:{t:'税込の金額から税抜を知りたい人',steps:[['seg','<b>「税込で打つ」</b>を選んで、金額を打ちます。'],['disp','<b>税抜の合計</b>と消費税が出ます。']]}},
+ tg:{pad:function(){return $('pad')},disp:function(){return document.querySelector('.disp')},r8:function(){return document.querySelector('[data-r="8"]')},nx:function(){return $('nx')},rcpt:function(){return document.querySelector('.rcpt')},
+  mul:function(){return document.querySelector('[data-k="x"]')},inv:function(){return $('toInv')},seg:function(){return document.querySelector('.reg .seg')}},
+ snap:function(){return JSON.stringify(st)},
+ back:function(s){st=JSON.parse(s);$('nm').value=st.cur.n||'';render()},
+ begin:function(c){var S=this.sc;
+  if(c===S.one)st={mode:'ex',lines:[],cur:{a:'5000',q:1,r:10,n:''}};
+  else if(c===S.mix)st={mode:'ex',lines:[{u:540,q:1,r:8,n:'お弁当'},{u:150,q:1,r:8,n:'お茶'}],cur:{a:'330',q:1,r:10,n:'ボールペン'}};
+  else if(c===S.qty)st={mode:'ex',lines:[],cur:{a:'5000',q:3,r:10,n:'作業費'}};
+  else st={mode:'in',lines:[],cur:{a:'11000',q:1,r:10,n:''}};
+  $('nm').value=st.cur.n;render()},
+ use:function(){toast('この例の内容を入れました。続けて打てます')}
+});
 </script>
 <script src="/assets/share.js" defer></script>
 </body>

@@ -95,7 +95,8 @@ footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40p
 <header class="v2h">
  <div class="sbar"><div class="sin"><a class="slogo" href="/"><i></i>しごと計算ラボ</a></div></div>
  <div class="thead"><span class="tic" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 11h32v30H8z"/><path d="M8 19h32"/><path d="M16 7v8M32 7v8"/><path d="M18 30l4 4 8-8"/></svg></span><div><h1>営業日・支払期日 計算</h1>
- <p>「月末締め翌月末払い」などの支払期日や、〇営業日後の日付を、土日祝・年末年始を除いて計算します。</p></div></div>
+ <p>「月末締め翌月末払い」などの支払期日や、〇営業日後の日付を、土日祝・年末年始を除いて計算します。</p>
+ <a class="hint" href="#who">はじめての方へ：使い方を見る</a></div></div>
 </header>
 
 <main>
@@ -181,6 +182,8 @@ footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40p
   <p class="upd">最終更新日：<time datetime="2026-10-21">2026年10月21日</time> ／ 運営：しごと計算ラボ</p>
  </section>
 
+ <h2 class="sec-t" id="who">こんな人・こんな時に</h2>
+ <div class="who"><button type="button" data-sc="pay"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 11h32v30H8z"/><path d="M8 19h32"/><path d="M16 7v8M32 7v8"/><path d="M18 30l4 4 8-8"/></svg></span><b>請求書の支払期日を知りたい人</b><span class="ds">「月末締め翌月末払い」の支払日はいつ？</span><span class="go">▶ 使い方を見る</span></button><button type="button" data-sc="biz"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 11h32v30H8z"/><path d="M8 19h32"/><path d="M16 7v8M32 7v8"/><path d="M15 30h16M27 26l4 4-4 4"/></svg></span><b>「〇営業日後」の日付を知りたい人</b><span class="ds">発送や返事の期限を、土日祝を除いて数えたい</span><span class="go">▶ 使い方を見る</span></button><button type="button" data-sc="cnt"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 11h32v30H8z"/><path d="M8 19h32"/><path d="M16 7v8M32 7v8"/><path d="M15 27h4M22 27h4M29 27h4M15 34h4M22 34h4"/></svg></span><b>期間の営業日数を数えたい人</b><span class="ds">今月は何日働く日がある？</span><span class="go">▶ 使い方を見る</span></button></div>
  <h2 class="sec-t">使い方</h2>
  <ol class="steps">
   <li><b>タブを選ぶ</b>支払日、〇営業日後、営業日数のどれを知りたいかを選びます。</li>
@@ -333,6 +336,27 @@ $('share').onclick=function(){var q=new URLSearchParams({m:mode});
  var k=q.get('k');if(/^[01]{3}$/.test(k||'')){$('kSat').checked=k[0]==='1';$('kSun').checked=k[1]==='1';$('kHol').checked=k[2]==='1'}
  if(['bank','gov','none'].indexOf(q.get('ny'))>=0)$('kNy').value=q.get('ny');
  setMode(['pay','biz','cnt'].indexOf(q.get('m'))>=0?q.get('m'):'pay')})();
+</script>
+<script src="/assets/tour.js"></script>
+<script>
+(function(){
+ function d(o,day){var t=new Date();t.setDate(1);t.setMonth(t.getMonth()+o);if(day==='e')t=new Date(t.getFullYear(),t.getMonth()+1,0);else if(day)t.setDate(day);var p=function(n){return ('0'+n).slice(-2)};return t.getFullYear()+'-'+p(t.getMonth()+1)+'-'+p(t.getDate())}
+ function set(id,v){var e=$(id);e.value=v;e.dispatchEvent(new Event('change',{bubbles:true}))}
+ function fields(){return [].slice.call(document.querySelectorAll('main input[id],main select[id],main textarea[id]')).filter(function(e){return e.id.charAt(0)!=='k'})}
+ SKTour({
+  sc:{pay:{t:'請求書の支払期日を知りたい人',steps:[['payin','<b>取引日</b>(納品日・請求日)と<b>支払条件</b>を選びます。'],['ans','<b>支払日</b>が出ます。土日祝なら、前の営業日にずらします。'],['cal','カレンダーで、締め日(枠)と支払日(塗り)を確認できます。']]},
+   biz:{t:'「〇営業日後」の日付を知りたい人',steps:[['tabs','<b>「〇営業日後」</b>を選びます。'],['bizin','いつから、何営業日後かを入れます。'],['ans','土日祝・年末年始を除いた<b>日付</b>が出ます。']]},
+   cnt:{t:'期間の営業日数を数えたい人',steps:[['tabs','<b>「営業日数」</b>を選びます。'],['cntin','期間の<b>最初と最後の日</b>を入れます。'],['ans','その期間の<b>営業日数</b>が出ます。カレンダーでも確認できます。']]}},
+  tg:{payin:function(){return $('payBox')},ans:function(){return document.querySelector('.big')},cal:function(){return document.querySelector('.calw')},tabs:function(){return document.querySelector('.seg')},bizin:function(){return $('bizBox')},cntin:function(){return $('cntBox')}},
+  snap:function(){var o={mode:mode,f:{}};fields().forEach(function(e){o.f[e.id]=e.type==='checkbox'?e.checked:e.value});return o},
+  back:function(s){fields().forEach(function(e){if(s.f[e.id]==null)return;if(e.type==='checkbox')e.checked=s.f[e.id];else e.value=s.f[e.id]});setMode(s.mode)},
+  begin:function(c){var k=c===this.sc.biz?'biz':c===this.sc.cnt?'cnt':'pay';
+   if(k==='pay'){set('pBase',d(0,new Date().getDate()));set('pRule','0,m,1,0');setMode('pay')}
+   else if(k==='biz'){set('bStart',d(0,new Date().getDate()));set('bN','5');setMode('biz')}
+   else{set('cFrom',d(0,1));set('cTo',d(0,'e'));setMode('cnt')}},
+  use:function(){toast('この例の内容を入れました。書き換えて使えます')}
+ });
+})();
 </script>
 <script src="/assets/share.js" defer></script>
 </body>

@@ -86,3 +86,27 @@ input[type=date]{min-width:0;max-width:100%}
 .rel .ic .ico2{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
 /* スマホ：入力欄の文字が16px未満だとiPhoneで画面が勝手に拡大されるため16pxにそろえる */
 @media (max-width:560px){input[type=text],input[type=date],input[type=tel],input[type=number],input[type=email],input:not([type]),select,textarea{font-size:16px}}
+
+/* こんな人・こんな時に(押すと例を入れて使い方を案内) */
+.who{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:8px 0 18px}
+.who>button{border:1.5px solid var(--line2);border-radius:4px;padding:14px;background:var(--card);color:var(--fg);font:inherit;text-align:left;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start}
+.who>button:hover{border-color:var(--acc)}
+.who .wi{width:40px;height:40px;border-radius:8px;display:grid;place-items:center;background:var(--acc);color:#fff;margin-bottom:8px}
+.who .wi svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.who b{display:block;font-size:.95rem}.who .ds{display:block;font-size:.82rem;color:var(--sub);line-height:1.6;margin-top:2px}
+.who .go{margin-top:auto;padding-top:8px;font-size:.8rem;font-weight:700;color:var(--acc)}
+@media (prefers-color-scheme:dark){.who .wi{color:#111}}
+.tshade{position:fixed;inset:0;z-index:60}
+.tring{position:absolute;z-index:61;border-radius:6px;box-shadow:0 0 0 3px var(--acc),0 0 0 9999px rgba(10,12,18,.55);pointer-events:none;transition:all .2s}
+.tbub{position:absolute;z-index:62;background:var(--card);color:var(--fg);border-radius:6px;padding:12px 14px;box-shadow:0 12px 40px rgba(0,0,0,.3);border:1.5px solid var(--ink)}
+.tbub .th{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.75rem;font-weight:700;color:var(--acc)}
+.tbub .tx{border:0;background:none;color:var(--sub);font-size:1.3rem;line-height:1;cursor:pointer;padding:2px 4px}
+.tbub p{margin:6px 0 10px;font-size:.92rem;line-height:1.7}.tbub p b{color:var(--acc)}
+.tf{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.tn{font-size:.75rem;color:var(--sub);margin-right:auto}
+.tb0,.tb1{border-radius:4px;padding:7px 14px;font:inherit;font-size:.82rem;font-weight:700;cursor:pointer}
+.tb0{border:1.5px solid var(--line2);background:var(--card);color:var(--fg)}.tb1{border:1.5px solid var(--acc);background:var(--acc);color:#fff}
+@media (prefers-color-scheme:dark){.tb1{color:#111}}
+@media (prefers-reduced-motion:reduce){.tring{transition:none}}
+/* JavaScriptで作る画面の場所をあらかじめ確保し、読み込み時のガタつき(CLS)を防ぐ */
+#app:empty{min-height:1700px}body[data-type=s] #app:empty{min-height:1100px}body[data-type=k] #app:empty{min-height:940px}
+@media (max-width:980px){#app:empty{min-height:2600px}body[data-type=s] #app:empty{min-height:1900px}body[data-type=k] #app:empty{min-height:1650px}}

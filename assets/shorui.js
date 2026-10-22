@@ -107,6 +107,7 @@ function build(){
  F('tanto','ご担当者','発注担当：佐藤',{em:'任意',show:'o'})+
  F('bank','振込先','〇〇銀行 〇〇支店 普通 1234567 ヤマダ タロウ',{w:1,show:'q i'})+'</div>'+
  '<label class="f">印影(はんこ)の画像<em>任意・白い紙に押して撮った写真でもOK(背景は自動で透明になります)</em></label><div class="inkan"><img id="inkImg" alt="" hidden><button type="button" class="btn s" id="inkBtn">画像を選ぶ</button><button type="button" class="btn s" id="inkDel" hidden>削除</button><input type="file" id="inkFile" accept="image/*" hidden></div>'+
+ '<label class="f">会社・お店のロゴ<em>任意・書類の右上(あなたの名前の上)に入ります</em></label><div class="inkan"><img id="logoImg" alt="" hidden style="width:auto;max-width:120px"><button type="button" class="btn s" id="logoBtn">画像を選ぶ</button><button type="button" class="btn s" id="logoDel" hidden>削除</button><input type="file" id="logoFile" accept="image/*" hidden></div>'+
  '<label class="f">書類の色</label><div class="sw" id="sw">'+[['navy','#1e3a8a','ネイビー'],['black','#222','ブラック'],['green','#0f766e','グリーン'],['red','#9f1239','えんじ']].map(function(c){return '<button type="button" data-c="'+c[0]+'" style="background:'+c[1]+'" aria-label="'+c[2]+'" title="'+c[2]+'"></button>'}).join('')+'</div>'+
  '<label class="ck"><input type="checkbox" id="keep"><span>この端末に入力内容を保存する<span class="note">保存先はこのブラウザだけで、サーバーには送信されません。共用のパソコンではオフにしてください。</span></span></label>'+
  '</details>'+
@@ -150,7 +151,7 @@ function docHTML(c){
  var t=TYPE,cls='paper c-'+ME.color+(t==='r'?' rcp':''),n=T[t].n,inc=S.noTax?'':'<small>(税込)</small>';
  var to='<div class="d-to"><span style="font-size:inherit;flex:1">'+ph(S.to,'宛名')+'</span><span>'+esc(S.hon)+'</span></div>';
  var meta=(S.no?'No. '+esc(S.no)+'<br>':'')+T[t].d+'：'+jd(S.date);
- var me='<div class="d-r">'+(ME.ink?'<img src="'+ME.ink+'" alt="">':'')+'<div class="nm"'+(ME.ink?' style="padding-right:18mm"':'')+'>'+ph(ME.from,'あなたの氏名・屋号')+'</div>'+
+ var me='<div class="d-r">'+(ME.logo?'<img class="logo" src="'+ME.logo+'" alt="">':'')+(ME.ink?'<img src="'+ME.ink+'" alt="">':'')+'<div class="nm"'+(ME.ink?' style="padding-right:18mm"':'')+'>'+ph(ME.from,'あなたの氏名・屋号')+'</div>'+
   (ME.addr?'<div class="ad2">'+esc(ME.addr)+'</div>':'')+(ME.tel?'<div>'+esc(ME.tel)+'</div>':'')+(PO?(ME.tanto?'<div>'+esc(ME.tanto)+'</div>':''):(ME.regno?'<div>登録番号：'+esc(ME.regno)+'</div>':''))+'</div>';
  var has8=false,rows=S.rows.map(function(r,i){var a=c.lines[i],k=rkey(r);if(k==='8')has8=true;
   var mk=k==='8'?'<span class="m">※</span>':k==='0'?'<span class="m" style="color:#666">(対象外)</span>':k!=='10'?'<span class="m" style="color:#666">('+k+'%)</span>':'';
@@ -286,6 +287,13 @@ function bind(){
  function sw(){[].forEach.call($('sw').children,function(b){b.className=b.dataset.c===ME.color?'on':''})}sw();
  function ink(){$('inkImg').hidden=!ME.ink;$('inkDel').hidden=!ME.ink;if(ME.ink)$('inkImg').src=ME.ink}ink();
  $('inkBtn').onclick=function(){$('inkFile').click()};
+ function logo(){$('logoImg').hidden=!ME.logo;$('logoDel').hidden=!ME.logo;if(ME.logo)$('logoImg').src=ME.logo}logo();
+ $('logoBtn').onclick=function(){$('logoFile').click()};
+ $('logoDel').onclick=function(){ME.logo='';logo();upd()};
+ $('logoFile').onchange=function(){var f=this.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){var im=new Image();im.onload=function(){
+  // ロゴは横長400×140px以内に縮小(保存容量とPDFの重さを抑える)
+  var s=Math.min(1,400/im.width,140/im.height),cv=document.createElement('canvas');cv.width=Math.max(1,Math.round(im.width*s));cv.height=Math.max(1,Math.round(im.height*s));
+  cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);ME.logo=cv.toDataURL('image/png');logo();upd()};im.src=rd.result};rd.readAsDataURL(f);this.value=''};
  $('inkDel').onclick=function(){ME.ink='';ink();upd()};
  $('inkFile').onchange=function(){var f=this.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){var im=new Image();im.onload=function(){ME.ink=cleanInk(im);ink();upd()};im.src=rd.result};rd.readAsDataURL(f);this.value=''};
  function fresh(){var ot=S.ottl;S=blank();S.ottl=ot;try{sessionStorage.removeItem(KEY)}catch(_){}save();location.reload()}
@@ -398,7 +406,7 @@ var tourOn=false;
  function start(k){var c=SC[k];if(!c)return;saved={S:JSON.stringify(S),opt:$('optBox').open,y:window.scrollY};cur=c;i=0;tourOn=true;
   var ot=S.ottl;S=Object.assign(blank(),JSON.parse(JSON.stringify(c.d)));if(PO)S.ottl=ot;$('optBox').open=false;fill();
   shade=el('tshade');ring=el('tring');bub=el('tbub');bub.setAttribute('role','dialog');bub.setAttribute('aria-label','使い方：'+c.t);
-  document.addEventListener('keydown',key);window.addEventListener('resize',place);setTimeout(show,60)}
+  document.addEventListener('keydown',key);window.addEventListener('resize',place);window.addEventListener('scroll',place,{passive:true});setTimeout(show,60)}
  function key(e){if(e.key==='Escape')end(false)}
  function show(){var st=cur.steps[i],n=cur.steps.length,last=i===n-1;if(st[0]==='opt')$('optBox').open=true;
   bub.innerHTML='<div class="th"><span>使い方の例：'+cur.t+'</span><button type="button" class="tx" aria-label="閉じる">×</button></div><p>'+st[1]+'</p>'+
@@ -407,7 +415,7 @@ var tourOn=false;
   bub.querySelector('.tx').onclick=function(){end(false)};
   [].forEach.call(bub.querySelectorAll('.tb0'),function(b){b.onclick=b.dataset.r?function(){end(false)}:function(){i--;show()}});
   bub.querySelector('.tb1').onclick=last?function(){end(true)}:function(){i++;show()};
-  var t=TG[st[0]]();t.scrollIntoView({block:t.offsetHeight>innerHeight*.6?'start':'center'});place();
+  var t=TG[st[0]]();t.scrollIntoView({block:t.offsetHeight>innerHeight*.6?'start':'center',behavior:'instant'});place();setTimeout(place,350);
   setTimeout(function(){try{bub.querySelector('.tb1').focus({preventScroll:true})}catch(_){}},0)}
  function place(){if(!cur)return;var t=TG[cur.steps[i][0]](),r=t.getBoundingClientRect(),sx=window.scrollX,sy=window.scrollY,pad=6,vh=window.innerHeight,vw=document.documentElement.clientWidth;
   ring.style.cssText='left:'+(r.left+sx-pad)+'px;top:'+(r.top+sy-pad)+'px;width:'+(r.width+pad*2)+'px;height:'+(r.height+pad*2)+'px';
@@ -416,7 +424,7 @@ var tourOn=false;
   bub.style.cssText='width:'+bw+'px;left:'+(left+sx)+'px;top:'+(top+sy)+'px'}
  function end(use){if(!cur)return;cur=null;tourOn=false;
   [shade,ring,bub].forEach(function(e){if(e&&e.parentNode)e.parentNode.removeChild(e)});
-  document.removeEventListener('keydown',key);window.removeEventListener('resize',place);
+  document.removeEventListener('keydown',key);window.removeEventListener('resize',place);window.removeEventListener('scroll',place);
   if(use){save();toast('この例の内容を入れました。書き換えて使えます');TG.to().scrollIntoView({block:'start'})}
   else{S=JSON.parse(saved.S);$('optBox').open=saved.opt;fill();window.scrollTo(0,saved.y)}}
  window.SRTour=function(){[].forEach.call(document.querySelectorAll('.who [data-sc]'),function(b){b.onclick=function(){start(b.dataset.sc)}})};
