@@ -390,3 +390,21 @@ table.kh-cat{border-collapse:collapse;font-size:8.5pt;min-width:62mm}
 .kh .d-memo{min-height:12mm}
 /* ロゴ(あなたの名前の上) */
 .d-r img.logo{position:static;display:block;width:auto;height:auto;max-width:42mm;max-height:13mm;object-fit:contain;opacity:1;margin:0 0 2mm}
+/* 配置の選択(ロゴ・はんこ・あなたの情報) */
+.posg{display:grid;gap:8px;margin-top:2px}
+.posr{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.posr>span{font-size:.82rem;color:var(--sub);width:6.5em;flex:none}
+.posr .pill button{font-size:.8rem;padding:6px 10px}
+/* 書類の中：はんこを重ねない置き方 */
+.d-r img.ink.st{position:static;width:15mm;height:15mm;object-fit:contain;opacity:.92}
+.d-r .nmx{display:flex;align-items:center;justify-content:space-between;gap:2mm}
+.d-r .inkb{display:flex;justify-content:flex-end;margin-top:1mm}
+/* ロゴ：左上(タイトルの左)・上の中央 */
+.lgl{display:flex;align-items:center;gap:4mm}
+.lgl img.logo{max-width:40mm;max-height:12mm;width:auto;height:auto;object-fit:contain}
+.lgc{text-align:center;margin:-4mm 0 3mm}
+.lgc img.logo{max-width:50mm;max-height:13mm;width:auto;height:auto;object-fit:contain}
+.rcp .lgc{margin:-4mm 0 2mm}
+/* あなたの情報を書類の下に */
+.d-r.bot{margin:6mm 0 0 auto}
+.d-r .nmo{position:relative}

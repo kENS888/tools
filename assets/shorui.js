@@ -108,6 +108,11 @@ function build(){
  F('bank','振込先','〇〇銀行 〇〇支店 普通 1234567 ヤマダ タロウ',{w:1,show:'q i'})+'</div>'+
  '<label class="f">印影(はんこ)の画像<em>任意・白い紙に押して撮った写真でもOK(背景は自動で透明になります)</em></label><div class="inkan"><img id="inkImg" alt="" hidden><button type="button" class="btn s" id="inkBtn">画像を選ぶ</button><button type="button" class="btn s" id="inkDel" hidden>削除</button><input type="file" id="inkFile" accept="image/*" hidden></div>'+
  '<label class="f">会社・お店のロゴ<em>任意・書類の右上(あなたの名前の上)に入ります</em></label><div class="inkan"><img id="logoImg" alt="" hidden style="width:auto;max-width:120px"><button type="button" class="btn s" id="logoBtn">画像を選ぶ</button><button type="button" class="btn s" id="logoDel" hidden>削除</button><input type="file" id="logoFile" accept="image/*" hidden></div>'+
+ '<div id="posBox"><label class="f">配置<em>ロゴ・はんこ・あなたの情報の場所を選べます</em></label><div class="posg">'+
+ '<div class="posr" id="posL"><span>ロゴ</span><div class="pill" data-p="lp"><button type="button" data-v="r">名前の上</button><button type="button" data-v="tl">左上</button><button type="button" data-v="tc">上の中央</button></div></div>'+
+ '<div class="posr" id="posS"><span>はんこ</span><div class="pill" data-p="sp"><button type="button" data-v="over">名前に重ねる</button><button type="button" data-v="side">名前の横</button><button type="button" data-v="below">住所の下</button></div></div>'+
+ '<div class="posr"><span>あなたの情報</span><div class="pill" data-p="np"><button type="button" data-v="r">宛名の右</button><button type="button" data-v="b">書類の下</button></div></div>'+
+ '</div></div>'+
  '<label class="f">書類の色</label><div class="sw" id="sw">'+[['navy','#1e3a8a','ネイビー'],['black','#222','ブラック'],['green','#0f766e','グリーン'],['red','#9f1239','えんじ']].map(function(c){return '<button type="button" data-c="'+c[0]+'" style="background:'+c[1]+'" aria-label="'+c[2]+'" title="'+c[2]+'"></button>'}).join('')+'</div>'+
  '<label class="ck"><input type="checkbox" id="keep"><span>この端末に入力内容を保存する<span class="note">保存先はこのブラウザだけで、サーバーには送信されません。共用のパソコンではオフにしてください。</span></span></label>'+
  '</details>'+
@@ -151,8 +156,13 @@ function docHTML(c){
  var t=TYPE,cls='paper c-'+ME.color+(t==='r'?' rcp':''),n=T[t].n,inc=S.noTax?'':'<small>(税込)</small>';
  var to='<div class="d-to"><span style="font-size:inherit;flex:1">'+ph(S.to,'宛名')+'</span><span>'+esc(S.hon)+'</span></div>';
  var meta=(S.no?'No. '+esc(S.no)+'<br>':'')+T[t].d+'：'+jd(S.date);
- var me='<div class="d-r">'+(ME.logo?'<img class="logo" src="'+ME.logo+'" alt="">':'')+(ME.ink?'<img src="'+ME.ink+'" alt="">':'')+'<div class="nm"'+(ME.ink?' style="padding-right:18mm"':'')+'>'+ph(ME.from,'あなたの氏名・屋号')+'</div>'+
-  (ME.addr?'<div class="ad2">'+esc(ME.addr)+'</div>':'')+(ME.tel?'<div>'+esc(ME.tel)+'</div>':'')+(PO?(ME.tanto?'<div>'+esc(ME.tanto)+'</div>':''):(ME.regno?'<div>登録番号：'+esc(ME.regno)+'</div>':''))+'</div>';
+ // 配置(使う人が選ぶ)：ロゴ lp=r名前の上/tl左上/tc上の中央、はんこ sp=over名前に重ねる/side名前の横/below住所の下、あなたの情報 np=r宛名の右/b書類の下
+ var lp=ME.lp||'r',sp=ME.sp||'over',np=ME.np||'r',LG=ME.logo?'<img class="logo" src="'+ME.logo+'" alt="">':'',IK=ME.ink?'<img class="ink'+(sp==='over'?'':' st')+'" src="'+ME.ink+'" alt="">':'',nmT=ph(ME.from,'あなたの氏名・屋号');
+ var me='<div class="d-r'+(np==='b'?' bot':'')+'">'+(lp==='r'?LG:'')+
+  (sp==='side'&&ME.ink?'<div class="nm nmx"><span>'+nmT+'</span>'+IK+'</div>':sp==='over'&&ME.ink?'<div class="nmo">'+IK+'<div class="nm" style="padding-right:18mm">'+nmT+'</div></div>':'<div class="nm">'+nmT+'</div>')+
+  (ME.addr?'<div class="ad2">'+esc(ME.addr)+'</div>':'')+(ME.tel?'<div>'+esc(ME.tel)+'</div>':'')+(PO?(ME.tanto?'<div>'+esc(ME.tanto)+'</div>':''):(ME.regno?'<div>登録番号：'+esc(ME.regno)+'</div>':''))+
+  (sp==='below'&&ME.ink?'<div class="inkb">'+IK+'</div>':'')+'</div>';
+ var meR=np==='b'?'':me,meB=np==='b'?me:'',lgC=ME.logo&&lp==='tc'?'<div class="lgc">'+LG+'</div>':'',lgL=ME.logo&&lp==='tl'?LG:'';
  var has8=false,rows=S.rows.map(function(r,i){var a=c.lines[i],k=rkey(r);if(k==='8')has8=true;
   var mk=k==='8'?'<span class="m">※</span>':k==='0'?'<span class="m" style="color:#666">(対象外)</span>':k!=='10'?'<span class="m" style="color:#666">('+k+'%)</span>':'';
   return '<tr><td>'+esc(r.n)+mk+'</td><td class="c">'+(r.q!==''?esc(r.q):'')+'</td><td class="c">'+esc(r.u)+'</td><td class="r">'+(r.p!==''?ival(r.p).toLocaleString('ja-JP'):'')+'</td><td class="r">'+(r.n||r.p?a.toLocaleString('ja-JP'):'')+'</td></tr>'});
@@ -169,10 +179,10 @@ function docHTML(c){
   if(t==='i'){kv+='<tr><th>お支払期限</th><td>'+jd(S.due)+'</td></tr><tr><th>お振込先</th><td>'+ph(ME.bank,'振込先')+'</td></tr>'}
   if(t==='o'){kv+='<tr><th>納期</th><td>'+ph(S.nouki,'納期')+'</td></tr>'+(S.basho?'<tr><th>納品場所</th><td>'+esc(S.basho)+'</td></tr>':'')+
    '<tr><th>お支払</th><td>'+ph(S.jouken,'支払期日・支払条件')+'</td></tr>'+(S.mno?'<tr><th>見積書番号</th><td>'+esc(S.mno)+'</td></tr>':'')}
-  return '<div class="'+cls+'"><div class="d-top"><h1 class="d-ttl">'+n+'</h1><div class="d-meta">'+meta+'</div></div>'+
+  return '<div class="'+cls+'">'+lgC+'<div class="d-top">'+(lgL?'<div class="lgl">'+lgL+'<h1 class="d-ttl">'+n+'</h1></div>':'<h1 class="d-ttl">'+n+'</h1>')+'<div class="d-meta">'+meta+'</div></div>'+
    '<div class="d-hd"><div class="d-l">'+to+(S.subj?'<p class="d-subj">件名：'+esc(S.subj)+'</p>':'')+'<p class="d-lead">'+T[t].lead+'</p>'+
-   '<div class="d-amt"><span>'+T[t].amt+'</span><b>'+Y(c.pay)+'-</b>'+inc+'</div><table class="d-kv">'+kv+'</table></div>'+me+'</div>'+
-   items+'<div class="d-sumw"><div class="lf">'+(has8?'※は軽減税率(8%)対象':'')+'</div>'+sum+'</div>'+memo+
+   '<div class="d-amt"><span>'+T[t].amt+'</span><b>'+Y(c.pay)+'-</b>'+inc+'</div><table class="d-kv">'+kv+'</table></div>'+meR+'</div>'+
+   items+'<div class="d-sumw"><div class="lf">'+(has8?'※は軽減税率(8%)対象':'')+'</div>'+sum+'</div>'+meB+memo+
    (t==='o'&&S.uke?'<p class="d-uke">本書の内容でお引き受けいただける場合は、注文請書をご提出ください。</p>':'')+'</div>';
  }
  var st=stamp(c,{pay:S.pay,elec:S.elec});
@@ -180,12 +190,12 @@ function docHTML(c){
  c.keys.forEach(function(k){bk+='<tr><td>'+(k==='0'?'対象外':k+'%対象'+(S.noTax?'':'(税抜)'))+'</td><td>'+Y(c.base[k])+'</td></tr>'+(k!=='0'&&!S.noTax?'<tr><td>消費税('+k+'%)</td><td>'+Y(c.tax[k])+'</td></tr>':'')});
  if(deduct)bk+='<tr><td>'+(S.noTax?'合計':'合計(税込)')+'</td><td>'+Y(c.total)+'</td></tr>'+deduct;
  bk+='</table>';
- return '<div class="'+cls+'"><div class="d-top"><h1 class="d-ttl">'+n+'</h1></div><div class="d-meta">'+meta+'</div>'+(S.reiss?'<div class="reiss">再発行</div>':'')+to+
+ return '<div class="'+cls+'">'+lgC+'<div class="d-top">'+(lgL?'<div class="lgl">'+lgL+'<h1 class="d-ttl">'+n+'</h1></div>':'<h1 class="d-ttl">'+n+'</h1>')+'</div><div class="d-meta">'+meta+'</div>'+(S.reiss?'<div class="reiss">再発行</div>':'')+to+
   '<div class="rc-amt"><span>金額</span><b>'+Y(c.pay)+'-</b>'+inc+'</div>'+
   '<div class="rc-tad">但し <span class="u">'+ph(S.tad,'〇〇代として')+'</span><br>上記正に領収いたしました。</div>'+
   '<div class="rc-low"><div><div class="rc-left">'+(st.duty&&!S.elec?'<div class="rc-stamp"><b>収入印紙</b>'+st.duty.toLocaleString('ja-JP')+'円</div>':'')+bk+'</div>'+
-  '<div class="rc-pm">お支払方法：'+PAY[S.pay]+'</div></div>'+me+'</div>'+
-  (S.rows.length>1||S.rows[0].n?items+(has8?'<div class="d-sumw"><div class="lf">※は軽減税率(8%)対象</div></div>':''):'')+memo+'</div>';
+  '<div class="rc-pm">お支払方法：'+PAY[S.pay]+'</div></div>'+meR+'</div>'+
+  (S.rows.length>1||S.rows[0].n?items+(has8?'<div class="d-sumw"><div class="lf">※は軽減税率(8%)対象</div></div>':''):'')+meB+memo+'</div>';
 }
 
 /* ---------- 描画 ---------- */
@@ -285,9 +295,11 @@ function bind(){
  $('toSf').addEventListener('click',function(){try{sessionStorage.setItem('sofujo_in',JSON.stringify({to:S.to,hon:S.hon,rows:[{n:T[TYPE].n,q:'1',u:'部'}]}))}catch(_){}});
  $('sw').onclick=function(e){var c=e.target.dataset.c;if(!c)return;ME.color=c;sw();upd()};
  function sw(){[].forEach.call($('sw').children,function(b){b.className=b.dataset.c===ME.color?'on':''})}sw();
- function ink(){$('inkImg').hidden=!ME.ink;$('inkDel').hidden=!ME.ink;if(ME.ink)$('inkImg').src=ME.ink}ink();
+ function ink(){$('inkImg').hidden=!ME.ink;$('inkDel').hidden=!ME.ink;if(ME.ink)$('inkImg').src=ME.ink;if(window.posR)posR()}ink();
  $('inkBtn').onclick=function(){$('inkFile').click()};
- function logo(){$('logoImg').hidden=!ME.logo;$('logoDel').hidden=!ME.logo;if(ME.logo)$('logoImg').src=ME.logo}logo();
+ function pos(){$('posL').hidden=!ME.logo;$('posS').hidden=!ME.ink;[].forEach.call(document.querySelectorAll('#posBox [data-p]'),function(g){var d={lp:'r',sp:'over',np:'r'}[g.dataset.p],v=ME[g.dataset.p]||d;[].forEach.call(g.children,function(b){var on=b.dataset.v===v;b.className=on?'on':'';b.setAttribute('aria-pressed',on)})})}
+ $('posBox').onclick=function(e){var b=e.target.closest('[data-v]'),g=e.target.closest('[data-p]');if(!b||!g)return;ME[g.dataset.p]=b.dataset.v;pos();upd()};
+ function logo(){$('logoImg').hidden=!ME.logo;$('logoDel').hidden=!ME.logo;if(ME.logo)$('logoImg').src=ME.logo;pos()}window.posR=pos;logo();
  $('logoBtn').onclick=function(){$('logoFile').click()};
  $('logoDel').onclick=function(){ME.logo='';logo();upd()};
  $('logoFile').onchange=function(){var f=this.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){var im=new Image();im.onload=function(){
