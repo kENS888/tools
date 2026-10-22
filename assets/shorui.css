@@ -358,6 +358,11 @@ body[data-type=k]{--h1:#365314;--h2:#4d7c0f;--h3:#a3e635;--acc:#4d7c0f;--acc2:#e
 .sum .big.bk b{color:var(--neg)}
 .add:disabled{opacity:.5;cursor:not-allowed}
 @media (max-width:520px){.kr .kp select{max-width:128px}.tg{padding:5px 9px 5px 7px}.kr .kx{flex-basis:100%;text-align:right;margin-top:-4px}.kr .kx:empty{display:none}.kr{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"h h" "d c" "n n" "t a" "o o"}.kr .kc.o{flex-wrap:wrap}.kr .kc.o select,.kr .kc.o input{flex:1 1 100%}}
+/* 入力候補(支払先・内容) */
+.sg{position:absolute;z-index:45;background:var(--card);border:1px solid var(--line2);border-radius:12px;box-shadow:0 10px 30px rgba(16,24,40,.16);max-height:240px;overflow:auto;padding:4px}
+.sg .sgh{font-size:.7rem;font-weight:700;color:var(--mute);padding:4px 8px 2px}
+.sg button{display:block;width:100%;text-align:left;border:0;background:none;color:var(--fg);font:inherit;font-size:.92rem;padding:8px 10px;border-radius:8px;cursor:pointer}
+.sg button:hover,.sg button.on{background:var(--acc2);color:var(--acc)}
 /* 帳票 */
 .paper.kh{padding:15mm 14mm}
 .kh .d-ttl{letter-spacing:.3em}

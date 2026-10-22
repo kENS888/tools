@@ -97,7 +97,6 @@ function sugg(c,k){var m={},h=keep?hist():[];
  if(k==='to')(SHOP[c]||[]).forEach(function(v){m[v]=1});return Object.keys(m).slice(0,40)}
 function TG(k,on,lbl,ic,i){return '<button type="button" class="tg'+(on?' on':'')+'" data-act="'+k+'" aria-pressed="'+on+'" aria-label="'+(i+1)+'行目：'+lbl+'"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">'+ic+'</svg>'+lbl+'</button>'}
 function rowHTML(r,i){var tr=r.c===KH_TRAIN,ot=r.co||(r.c!==''&&KH_CATS.indexOf(r.c)<0),pl=payList(r.c),po=r.po||(r.p!==''&&pl.indexOf(r.p)<0);
- var dl=function(id,a){return a.length?'<datalist id="'+id+'">'+a.map(function(v){return '<option value="'+esc(v)+'">'}).join('')+'</datalist>':''};
  return '<div class="kr'+(tr?' tr':'')+'" data-i="'+i+'">'+
  '<div class="kh0"><span>明細 '+(i+1)+'</span><span class="kb"><button type="button" class="ib" data-act="dup" aria-label="'+(i+1)+'行目を複製" title="この行を複製"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">'+IC.dup+'</svg></button>'+
  '<button type="button" class="ib" data-act="del" aria-label="'+(i+1)+'行目を削除" title="この行を削除"'+(S.rows.length>1?'':' hidden')+'>×</button></span></div>'+
@@ -105,8 +104,8 @@ function rowHTML(r,i){var tr=r.c===KH_TRAIN,ot=r.co||(r.c!==''&&KH_CATS.indexOf(
  '<div class="kc'+(ot?' o':'')+'"><select data-k="cs" aria-label="'+(i+1)+'行目の科目"><option value=""'+(!ot&&!r.c?' selected':'')+'>科目を選ぶ</option>'+KH_CATS.map(function(c){return '<option'+(!ot&&c===r.c?' selected':'')+'>'+c+'</option>'}).join('')+'<option value="x"'+(ot?' selected':'')+'>その他(入力)</option></select>'+
  (ot?'<input type="text" data-k="c" value="'+esc(r.c)+'" placeholder="科目名" aria-label="科目名">':'')+'</div>'+
  '<div class="ka yen"><input type="text" inputmode="numeric" data-k="a" value="'+esc(r.a)+'" placeholder="'+(tr&&r.rt?'片道':'金額')+'" aria-label="'+(i+1)+'行目の金額'+(tr&&r.rt?'(片道)':'')+'" autocomplete="off"><span>円</span></div>'+
- '<input type="text" class="kn" data-k="n" value="'+esc(r.n)+'" placeholder="'+(EX[r.c]||'内容')+'" aria-label="'+(i+1)+'行目の内容" list="dlN'+i+'" autocomplete="off">'+dl('dlN'+i,sugg(r.c,'n'))+
- '<input type="text" class="kt" data-k="to" value="'+esc(r.to)+'" placeholder="'+(SHOPPH[r.c]||'お店')+'" aria-label="'+(i+1)+'行目の支払先" list="dlT'+i+'" autocomplete="off">'+dl('dlT'+i,sugg(r.c,'to'))+
+ '<input type="text" class="kn" data-k="n" value="'+esc(r.n)+'" placeholder="'+(EX[r.c]||'内容')+'" aria-label="'+(i+1)+'行目の内容" data-sg="n" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false">'+
+ '<input type="text" class="kt" data-k="to" value="'+esc(r.to)+'" placeholder="'+(SHOPPH[r.c]||'お店')+'" aria-label="'+(i+1)+'行目の支払先" data-sg="to" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false">'+
  '<div class="ko"><div class="kp'+(po?' o':'')+'"><select data-k="ps" aria-label="'+(i+1)+'行目の支払方法"><option value=""'+(!po&&!r.p?' selected':'')+'>支払方法</option>'+pl.map(function(v){return '<option'+(!po&&v===r.p?' selected':'')+'>'+v+'</option>'}).join('')+'<option value="x"'+(po?' selected':'')+'>その他(入力)</option></select>'+
  (po?'<input type="text" data-k="p" value="'+esc(r.p)+'" placeholder="支払方法" aria-label="支払方法">':'')+'</div>'+
  (tr?TG('rt',!!r.rt,'往復','<path d="M7 7h12l-3-3M17 17H5l3 3"/>',i):'')+
@@ -181,6 +180,21 @@ function drawHist(){var q=$('hq').value.trim(),h=hist().filter(function(x){retur
   return '<li><button type="button" class="hit" data-id="'+x.id+'"><span class="ty">'+(x.title==='交通費精算書'?'交通費':'経費')+'</span><span class="m"><b>'+esc(x.per||'(期間なし)')+'</b><small>'+(+d[1])+'/'+(+d[2])+'提出・'+x.n+'件</small></span><span class="v">'+yen(x.total)+'円</span></button>'+
   '<button type="button" class="ib hdel" data-del="'+x.id+'" aria-label="この履歴を削除">×</button></li>'}).join(''):'<li class="none">見つかりませんでした</li>'}
 
+/* ---------- 入力候補(支払先・内容) ----------
+ ブラウザ標準の候補(datalist)は、入っている文字に合う候補しか出さないため、「JR(Suica)」が入っていると他を選べない。
+ 自前の一覧にして、欄を押した時は全部の候補を出し、文字を打ったら絞り込む */
+var SG={el:null,inp:null,all:[],typed:false};
+function sgOpen(inp){var it=inp.closest('.kr');if(!it)return;var r=S.rows[+it.dataset.i];SG.inp=inp;SG.typed=false;SG.all=sugg(r.c,inp.dataset.sg);sgDraw()}
+function sgDraw(){var inp=SG.inp;if(!inp)return;var q=SG.typed?inp.value.trim():'',a=SG.all.filter(function(v){return !q||v.indexOf(q)>=0}).filter(function(v){return v!==inp.value.trim()||!SG.typed});
+ if(!SG.el){SG.el=document.createElement('div');SG.el.className='sg';SG.el.setAttribute('role','listbox');document.body.appendChild(SG.el);
+  SG.el.addEventListener('mousedown',function(e){e.preventDefault()});
+  SG.el.addEventListener('click',function(e){var b=e.target.closest('[data-v]');if(!b||!SG.inp)return;var t=SG.inp;t.value=b.dataset.v;t.dispatchEvent(new Event('input',{bubbles:true}));sgClose();
+   var nx=t.dataset.sg==='n'?t.closest('.kr').querySelector('[data-sg=to]'):null;if(nx&&!nx.value)nx.focus()})}
+ if(!a.length){sgClose(true);return}
+ SG.el.innerHTML='<div class="sgh">'+(inp.dataset.sg==='to'?'支払先の候補':'前に入れた内容')+'</div>'+a.map(function(v){return '<button type="button" role="option" data-v="'+esc(v)+'"'+(v===inp.value.trim()?' class="on"':'')+'>'+esc(v)+'</button>'}).join('');
+ var rc=inp.getBoundingClientRect();SG.el.style.cssText='left:'+(rc.left+window.scrollX)+'px;top:'+(rc.bottom+window.scrollY+4)+'px;width:'+Math.max(rc.width,180)+'px';SG.el.hidden=false;inp.setAttribute('aria-expanded','true')}
+function sgClose(keepInp){if(SG.el)SG.el.hidden=true;if(SG.inp)SG.inp.setAttribute('aria-expanded','false');if(!keepInp)SG.inp=null}
+
 /* ---------- 入力イベント ---------- */
 var SF=['adv','date','per','no','memo'],MF=['name','dept','eno','co'];
 function fill(){SF.forEach(function(k){$(k).value=S[k]});$('how').value=S.how;$('ttl').value=S.ttl;$('apv').value=S.apv;$('wareki').checked=!!S.wareki}
@@ -197,8 +211,15 @@ function bind(){
  $('date').onchange=function(){if(!this.value){this.value=S.date=today()}upd()};
  $('wareki').onchange=function(){S.wareki=this.checked;upd()};
  var R=$('rows');
+ R.addEventListener('focusin',function(e){var t=e.target;if(t.dataset&&t.dataset.sg){sgOpen(t);if(t.value){t._sel=true;try{t.select()}catch(_){}setTimeout(function(){try{if(document.activeElement===t)t.select()}catch(_){}},30)}}});
+ R.addEventListener('click',function(e){var t=e.target;if(t.dataset&&t.dataset.sg&&(SG.inp!==t||SG.el.hidden)){sgOpen(t);if(t.value)try{t.select()}catch(_){}}});
+ R.addEventListener('mouseup',function(e){var t=e.target;if(t._sel){e.preventDefault();t._sel=false}});
+ R.addEventListener('focusout',function(e){if(e.target.dataset&&e.target.dataset.sg)setTimeout(function(){if(SG.inp===e.target&&document.activeElement!==e.target)sgClose()},120)});
+ R.addEventListener('keydown',function(e){if(e.key==='Escape'&&SG.inp)sgClose()});
+ window.addEventListener('resize',function(){if(SG.inp)sgDraw()});
  R.addEventListener('input',function(e){var t=e.target,k=t.dataset.k,it=t.closest('.kr');if(!k||!it||t.type==='checkbox'||k==='cs'||k==='ps')return;
   if(k==='a')t.value=z2h(t.value).replace(/[^0-9,\-]/g,'');
+  if(t.dataset.sg&&SG.inp===t&&e.isTrusted){SG.typed=true;sgDraw()}
   S.rows[+it.dataset.i][k]=t.value;upd()});
  R.addEventListener('focusout',function(e){var t=e.target;if(t.dataset&&t.dataset.k==='a'){fmtYen(t);var it=t.closest('.kr');if(it)S.rows[+it.dataset.i].a=t.value;upd()}});
  R.addEventListener('change',function(e){var t=e.target,it=t.closest('.kr');if(!it)return;var i=+it.dataset.i,r=S.rows[i],k=t.dataset.k;
