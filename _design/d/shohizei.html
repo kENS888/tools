@@ -46,8 +46,11 @@
 .k.r small{font:400 .66rem "BIZ UDPGothic";color:var(--sub)}
 .k.r[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff;box-shadow:0 2px 0 color-mix(in srgb,var(--acc) 55%,#000)}
 .k.r[aria-pressed=true] span[data-i],.k.r[aria-pressed=true] small{color:#fff}
-.k.nx{grid-row:span 2;height:auto;background:var(--ink);color:var(--sheet);border-color:var(--ink);font:700 .95rem/1.4 "BIZ UDPGothic";flex-direction:column;box-shadow:0 2px 0 #000}
-.k.nx b{font:600 1.8rem/1 "Barlow Condensed"}
+.k.nx{background:var(--ink);color:var(--sheet);border-color:var(--ink);font:700 .95rem/1.4 "BIZ UDPGothic";flex-direction:column;box-shadow:0 2px 0 #000}
+.k.nx b{font:600 1.5rem/1 "Barlow Condensed"}
+.k.mul{font-size:1.7rem;color:var(--sub)}
+.k.mul.on{border-color:var(--acc);color:var(--acc);box-shadow:inset 0 0 0 1.5px var(--acc)}
+.rcpt .l .at{font-size:.78rem;color:#7a7f86;white-space:nowrap}
 .k.nx:disabled{opacity:.35;cursor:default}
 /* レシート */
 .rcpt{background:var(--paper);color:#22262b;padding:20px 20px 26px;font:400 .95rem/1.85 "DotGothic16",monospace;position:relative;box-shadow:0 1px 3px rgba(0,0,0,.08);--z:linear-gradient(-45deg,var(--soft) 6px,transparent 0),linear-gradient(45deg,var(--soft) 6px,transparent 0)}
@@ -106,8 +109,9 @@
     <button class="k" data-k="4">4</button><button class="k" data-k="5">5</button><button class="k" data-k="6">6</button>
     <button class="k r" data-r="8" aria-pressed="false"><span data-i="food"></span>8%<small>食べ物・新聞</small></button>
     <button class="k" data-k="1">1</button><button class="k" data-k="2">2</button><button class="k" data-k="3">3</button>
-    <button class="k nx" id="nx" aria-label="次の金額を打つ"><b>＋</b>次の金額</button>
+    <button class="k mul" data-k="x" aria-label="個数をかける(例：3 × 500円)">×</button>
     <button class="k" data-k="0">0</button><button class="k" data-k="00">00</button><button class="k bs" data-k="bs" aria-label="1文字消す">⌫</button>
+    <button class="k nx" id="nx" aria-label="次の金額を打つ"><b>＋</b>次の金額</button>
    </div>
   </div>
   <div class="side">
@@ -137,18 +141,21 @@ if(typeof module!=='undefined')module.exports={regCalc:regCalc};
 <script>
 (function(){
 var $=function(i){return document.getElementById(i)},f=function(v){return v.toLocaleString('ja-JP')};
-var st={mode:'ex',lines:[],cur:{a:'10000',r:10,n:''}},justAdded=false;
+var st={mode:'ex',lines:[],cur:{a:'10000',q:1,r:10,n:''}},justAdded=false;
 var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
 var dd=new Date();$('dt').textContent=dd.getFullYear()+'年'+(dd.getMonth()+1)+'月'+dd.getDate()+'日';
-function all(){var a=st.lines.slice();if(+st.cur.a>0)a.push({a:+st.cur.a,r:st.cur.r,n:st.cur.n});return a}
+function L(u,q,r,n){return{u:u,q:q,a:u*q,r:r,n:n}}
+function all(){var a=st.lines.map(function(l){return L(l.u,l.q,l.r,l.n)});if(+st.cur.a>0)a.push(L(+st.cur.a,st.cur.q,st.cur.r,st.cur.n));return a}
+function at(u,q){return q>1?'<span class="at">@'+f(u)+'×'+q+'</span>':''}
 function render(){
  var ex=st.mode==='ex',res=regCalc(all(),st.mode),h='',n=0;
  $('curL').textContent=(ex?'税抜':'税込')+'　'+st.cur.r+'%';
- var cv=$('curV');cv.textContent=st.cur.a?f(+st.cur.a):'金額を打つ';cv.classList.toggle('ph',!st.cur.a);
+ var cv=$('curV'),qs=st.cur.q>1?st.cur.q+' × ':'';cv.textContent=qs+(st.cur.a?f(+st.cur.a):(qs?'1つの金額':'金額を打つ'));cv.classList.toggle('ph',!st.cur.a&&!qs);
+ document.querySelector('.k.mul').classList.toggle('on',st.cur.q>1);
  $('totL').textContent=ex?'税込 合計':'税抜 合計';
  $('big').textContent=f(ex?res.inc:res.ex);$('txV').textContent=f(res.tax);
- st.lines.forEach(function(l,i){n++;h+='<div class="l'+(justAdded&&i===st.lines.length-1?' new':'')+'"><span class="n">'+n+'　'+(l.r===8?'※':'　')+'</span><input class="nmi" data-nm="'+i+'" value="'+esc(l.n||'')+'" placeholder="品名なし" aria-label="'+n+'行目の品名"><span>¥'+f(l.a)+'</span><button class="x" data-del="'+i+'" aria-label="'+n+'行目を消す">×</button></div>'});
- if(+st.cur.a>0){n++;h+='<div class="l p"><span class="n">'+n+'　'+(st.cur.r===8?'※':'　')+'</span><span class="pn">'+esc(st.cur.n)+'</span><span>¥'+f(+st.cur.a)+'</span><span class="x"></span></div>'}
+ st.lines.forEach(function(l,i){n++;h+='<div class="l'+(justAdded&&i===st.lines.length-1?' new':'')+'"><span class="n">'+n+'　'+(l.r===8?'※':'　')+'</span><input class="nmi" data-nm="'+i+'" value="'+esc(l.n||'')+'" placeholder="品名なし" aria-label="'+n+'行目の品名">'+at(l.u,l.q)+'<span>¥'+f(l.u*l.q)+'</span><button class="x" data-del="'+i+'" aria-label="'+n+'行目を消す">×</button></div>'});
+ if(+st.cur.a>0){n++;h+='<div class="l p"><span class="n">'+n+'　'+(st.cur.r===8?'※':'　')+'</span><span class="pn">'+esc(st.cur.n)+'</span>'+at(+st.cur.a,st.cur.q)+'<span>¥'+f(+st.cur.a*st.cur.q)+'</span><span class="x"></span></div>'}
  if(!n)h+='<div class="l p"><span class="n">まだありません</span></div>';
  h+='<hr>';
  res.groups.forEach(function(g){h+='<div class="l sub"><span>'+g.r+'%対象('+(ex?'税抜':'税込')+')</span><span>¥'+f(g.base)+'</span></div><div class="l sub"><span>　'+(ex?'消費税':'内消費税')+'</span><span>¥'+f(g.tax)+'</span></div>'});
@@ -163,21 +170,22 @@ function render(){
  $('nx').disabled=!(+st.cur.a>0);
 }
 function key(k){
- if(k==='bs')st.cur.a=st.cur.a.slice(0,-1);
+ if(k==='x'){if(st.cur.q===1&&+st.cur.a>1&&+st.cur.a<10000){st.cur.q=+st.cur.a;st.cur.a=''}}
+ else if(k==='bs'){if(!st.cur.a&&st.cur.q>1){st.cur.a=String(st.cur.q);st.cur.q=1}else st.cur.a=st.cur.a.slice(0,-1)}
  else if(st.cur.a.length<10){st.cur.a=(st.cur.a+k).replace(/^0+/,'');}
  render();
 }
-function next(){if(+st.cur.a>0){st.lines.push({a:+st.cur.a,r:st.cur.r,n:st.cur.n.trim()});st.cur={a:'',r:st.cur.r,n:''};$('nm').value='';justAdded=true;render()}}
+function next(){if(+st.cur.a>0){st.lines.push({u:+st.cur.a,q:st.cur.q,r:st.cur.r,n:st.cur.n.trim()});st.cur={a:'',q:1,r:st.cur.r,n:''};$('nm').value='';justAdded=true;render()}}
 $('pad').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
  if(b.dataset.k)key(b.dataset.k);else if(b.dataset.r){st.cur.r=+b.dataset.r;render()}else if(b.id==='nx')next();});
 document.querySelectorAll('[data-m]').forEach(function(b){b.onclick=function(){st.mode=b.dataset.m;render()}});
 $('lines').addEventListener('click',function(e){var b=e.target.closest('[data-del]');if(b){st.lines.splice(+b.dataset.del,1);render()}});
-$('clr').onclick=function(){st.lines=[];st.cur={a:'',r:st.cur.r,n:''};$('nm').value='';render()};
+$('clr').onclick=function(){st.lines=[];st.cur={a:'',q:1,r:st.cur.r,n:''};$('nm').value='';render()};
 $('nm').addEventListener('input',function(){st.cur.n=this.value;render()});
 $('lines').addEventListener('input',function(e){var i=e.target.dataset.nm;if(i!=null)st.lines[+i].n=e.target.value.trim()});
 document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.tagName==='INPUT'){e.target.blur();e.preventDefault()}});
 $('inv').onclick=function(e){var a=all();if(!a.length)return;e.preventDefault();
- var doc={incl:st.mode==='in',rnd:'floor',rows:a.map(function(l){return{n:l.n||'',q:'1',u:'式',p:String(l.a),r:String(l.r),xr:'',nw:false}})};
+ var doc={incl:st.mode==='in',rnd:'floor',rows:a.map(function(l){return{n:l.n||'',q:String(l.q),u:l.q>1?'個':'式',p:String(l.u),r:String(l.r),xr:'',nw:false}})};
  try{sessionStorage.setItem('shorui_v1',JSON.stringify({doc:doc,me:{}}))}catch(_){}location.href='/seikyusho/'};
 function flash(sel){var b=document.querySelector(sel);if(b){b.classList.add('hit');setTimeout(function(){b.classList.remove('hit')},90)}}
 document.addEventListener('keydown',function(e){
@@ -185,9 +193,10 @@ document.addEventListener('keydown',function(e){
  if(/^[0-9]$/.test(e.key)){key(e.key);flash('[data-k="'+e.key+'"]');e.preventDefault()}
  else if(e.key==='Backspace'){key('bs');flash('[data-k=bs]');e.preventDefault()}
  else if(e.key==='Enter'||e.key==='+'){if(e.target.tagName==='BUTTON'&&e.key==='Enter')return;next();flash('#nx');e.preventDefault()}
- else if(e.key==='Escape'){st.cur.a='';render()}
+ else if(e.key==='*'||e.key==='x'||e.key==='X'){key('x');flash('[data-k=x]');e.preventDefault()}
+ else if(e.key==='Escape'){st.cur.a='';st.cur.q=1;render()}
 });
-$('cp').onclick=function(){var r=regCalc(all(),st.mode),t=all().map(function(l){return (l.n||'品名なし')+' '+f(l.a)+'円('+l.r+'%)'}).join('\n')+'\n税抜 '+f(r.ex)+'円 / 消費税 '+f(r.tax)+'円 / 税込 '+f(r.inc)+'円';try{navigator.clipboard.writeText(t)}catch(e){}};
+$('cp').onclick=function(){var r=regCalc(all(),st.mode),t=all().map(function(l){return (l.n||'品名なし')+' '+(l.q>1?f(l.u)+'円×'+l.q+'＝':'')+f(l.a)+'円('+l.r+'%)'}).join('\n')+'\n税抜 '+f(r.ex)+'円 / 消費税 '+f(r.tax)+'円 / 税込 '+f(r.inc)+'円';try{navigator.clipboard.writeText(t)}catch(e){}};
 render();
 })();
 </script>
