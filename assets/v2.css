@@ -1,0 +1,79 @@
+/* しごと計算ラボ デザイン v2(2026-10)：線の枠＋大きな数字。各ページの <style> の後に読み込み、見た目だけを上書きする。
+   色の約束：--acc(ツールの色)は各ページのものをそのまま使う。 */
+:root{--bg:#f4f5f5;--card:#fff;--fg:#1c2a3a;--ink:#1c2a3a;--sub:#5f6b77;--mute:#8a949e;--line:#d8dee1;--line2:#c3cbd0;--pvbg:#e7eaec;--sh:none;--num:"Barlow Condensed","BIZ UDPGothic",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#111417;--card:#191d21;--fg:#e6ebee;--ink:#c9d2d8;--sub:#99a4ad;--mute:#6f7a83;--line:#2c3339;--line2:#3a434a;--pvbg:#0c0f12;--sh:none}}
+body{font-family:"BIZ UDPGothic",system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;background:var(--bg)}
+.paper{font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+
+/* ヘッダー：サイトのバー＋ツールの見出し(アイコン・名前・一文) */
+header.v2h{all:unset;display:block;color:var(--fg)}
+header.v2h .sbar{border-bottom:1.5px solid var(--ink);background:var(--bg)}
+header.v2h .sin{max-width:760px;margin:0 auto;padding:0 16px;height:60px;display:flex;align-items:center}
+body:has(main.wide) header.v2h .sin,body:has(main.wide) header.v2h .thead{max-width:1180px}
+.slogo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--fg);text-decoration:none;font-size:1rem}
+.slogo i{width:22px;height:22px;border:2.5px solid currentColor;border-radius:4px;background:linear-gradient(currentColor,currentColor) 50% 50%/2.5px 100% no-repeat,linear-gradient(currentColor,currentColor) 50% 50%/100% 2.5px no-repeat}
+header.v2h .thead{position:static;display:flex;align-items:center;gap:16px;max-width:760px;margin:0 auto;padding:24px 16px 20px}
+header.v2h .tic{width:52px;height:52px;flex:none;color:var(--acc)}
+header.v2h .tic svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+header.v2h h1{margin:0;font-size:1.6rem;line-height:1.3;letter-spacing:0;color:var(--fg)}
+header.v2h p{margin:3px 0 0;font-size:.92rem;opacity:1;color:var(--sub)}
+header.v2h .hint{display:inline-block;margin:6px 0 0;font-size:.82rem;color:var(--acc);font-weight:700;text-decoration:underline;text-underline-offset:3px;opacity:1;background:none;padding:0}
+@media (max-width:560px){header.v2h .thead{padding:18px 16px 16px;gap:12px}header.v2h .tic{width:40px;height:40px}header.v2h h1{font-size:1.3rem}header.v2h p{font-size:.86rem}}
+main,main.wide{margin-top:0!important}
+
+/* 枠 */
+.card{border:1.5px solid var(--ink);border-radius:0;box-shadow:none}
+.it,.rel a,.faq details,.tldr,details.more,.steps li,.pvwrap,.ad,.restore,.share,.info details{border-radius:0}
+.ad{border:1.5px dashed var(--line2);background:none}
+.it{border-color:var(--line2)}
+.tldr{border:1.5px solid var(--line2);border-left:5px solid var(--acc)}
+details.more{border:1.5px solid var(--line2)}
+.faq details{border:1.5px solid var(--line2)}
+.faq summary::before{border-radius:3px;background:var(--acc);color:#fff}
+@media (prefers-color-scheme:dark){.faq summary::before{color:#14181c}}
+.steps li{border:1.5px solid var(--line2);background:var(--card)}
+.steps li::before{border-radius:3px}
+.sec-t::before{border-radius:0;width:5px}
+
+/* 入力 */
+input[type=text],input[type=date],input[type=tel],input[type=number],input[type=email],select,textarea{border-radius:4px;border:1.5px solid var(--line2)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:1px;border-color:transparent}
+
+/* タブ(切り替え)：黒い線の枠、選んだものは塗る */
+.seg,.types,.pill.ttl{background:none!important;border:1.5px solid var(--ink);border-radius:0!important;padding:0!important;gap:0!important}
+.seg>button,.types>a,.pill.ttl>button{border-radius:0!important;box-shadow:none!important;color:var(--fg)}
+.seg>button+button,.types>a+a,.pill.ttl>button+button{border-left:1.5px solid var(--ink)}
+.seg>button.on,.types>a.on,.pill.ttl>button.on{background:var(--ink)!important;color:var(--card)!important}
+.types a small{color:inherit;opacity:.75}
+.pill{border-radius:4px;background:none;border:1.5px solid var(--line2);padding:2px}
+.pill button{border-radius:2px}
+.pill button.on{background:var(--ink);color:var(--card);box-shadow:none}
+
+/* ボタン */
+.btn,.mini button,.big .mini button,.add,.ib,.restore button,.sb{border-radius:4px}
+.btn{border:1.5px solid var(--ink)}
+.btn.p{background:var(--acc);border-color:var(--acc)}
+.mini button,.big .mini button{border:1.5px solid var(--ink);background:var(--card)}
+.big .mini button.p{background:var(--ink);border-color:var(--ink);color:var(--card)}
+.add{border:1.5px dashed var(--line2)}
+.sb{border-radius:4px}
+
+/* 答え：大きな数字 */
+.big{border-radius:0;border-left:5px solid var(--acc)}
+.big .v,.sum .big b,.res .v,.ans .v,.num-big{font-family:var(--num);font-weight:600;letter-spacing:.005em}
+.big .v{font-size:clamp(2.4rem,6vw,3.2rem);line-height:1.15}
+.sum .big b{font-size:2rem}
+
+/* 関連ツール：色の四角＋線画 */
+.rel a{border:1.5px solid var(--line2);box-shadow:none!important;transform:none!important}
+.rel a:hover{border-color:var(--ink)}
+.rel .ic{border-radius:8px}
+
+/* フッター */
+footer,footer.ft{box-sizing:border-box;border-top:1.5px solid var(--ink);margin:40px auto 0;padding:24px 0 48px;text-align:left;width:calc(100% - 32px);max-width:728px;color:var(--sub);font-size:.82rem}
+body:has(main.wide) footer{max-width:1148px}
+footer a,footer.ft a{color:inherit}
+.g2>*,.g2 .w{min-width:0}
+input[type=date]{min-width:0;max-width:100%}
+.rel .ic .ico2{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
