@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>C案 案内サイン｜しごと計算ラボ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="c.css"><script src="../kit.js"></script>
+<style>
+.hero{padding:64px 0 56px}
+.hero h1{font-size:clamp(2.3rem,7.5vw,5.2rem);line-height:1.15;margin:0;font-weight:700;letter-spacing:-.02em}
+.hero p{margin:20px 0 0;font-size:1rem;color:var(--sub)}
+.grp{margin-top:48px}
+.grp h2{font-size:1.15rem;margin:0 0 16px}
+.signs{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:28px 20px}
+.signs a{text-decoration:none;font-weight:700;display:block}
+.signs .sq{display:flex;align-items:center;justify-content:center;aspect-ratio:1;background:var(--c);color:#fff;border-radius:14px;margin-bottom:10px}
+.signs .sq span{width:54%;height:54%}
+.signs a:hover .sq{outline:4px solid var(--ink);outline-offset:3px}
+@media (max-width:560px){.signs{grid-template-columns:repeat(3,1fr);gap:20px 12px}.signs a{font-size:.85rem}.signs .sq{border-radius:10px;margin-bottom:6px}.hero{padding:40px 0 32px}}
+</style></head><body>
+<div class="wrap">
+ <div class="bar"><a class="logo" href="./"><i></i>しごと計算ラボ</a></div>
+ <section class="hero"><h1>仕事の書類と計算を、<br>もっと手軽に。</h1><p>無料・登録なし。入力はこの端末の中だけ。</p></section>
+ <section class="grp"><h2>書類をつくる</h2><div class="signs" id="doc"></div></section>
+ <section class="grp"><h2>計算する</h2><div class="signs" id="calc"></div></section>
+ <div class="ad">広告</div>
+ <footer><a href="#">プライバシーポリシー</a><a href="#">お問い合わせ</a><a href="../">← 3案の比較へ</a></footer>
+</div>
+<script>
+TOOLS.forEach(function(t){document.getElementById(t.g).insertAdjacentHTML('beforeend','<a href="'+(t.k==='shohizei'?'shohizei.html':'#')+'" style="--c:'+t.c+'"><div class="sq"><span data-i="'+t.k+'"></span></div>'+t.n+'</a>')});
+</script>
+</body></html>

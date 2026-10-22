@@ -1,0 +1,17 @@
+/* C案：案内サイン(ピクトグラム) */
+:root{--bg:#fff;--ink:#000;--sub:#5c5c5c;--gray:#f1f1f1;--line:#d6d6d6;--acc:#a21caf}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#000;--ink:#fff;--sub:#a8a8a8;--gray:#1a1a1a;--line:#333}}
+[hidden]{display:none!important}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 "BIZ UDPGothic",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.bar{display:flex;align-items:center;height:72px;border-bottom:3px solid var(--ink)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;font-size:1.05rem}
+.logo i{width:28px;height:28px;background:var(--ink);border-radius:6px;position:relative}
+.logo i::before,.logo i::after{content:"";position:absolute;background:var(--bg);left:50%;top:50%;transform:translate(-50%,-50%)}
+.logo i::before{width:14px;height:3px}.logo i::after{width:3px;height:14px}
+.ic{width:100%;height:100%;stroke-width:2.6}
+:focus-visible{outline:4px solid var(--acc);outline-offset:3px}
+.ad{height:96px;background:var(--gray);display:flex;align-items:center;justify-content:center;color:var(--sub);font-size:.75rem;margin:56px 0}
+footer{padding:32px 0 56px;font-size:.85rem;color:var(--sub);display:flex;gap:24px;flex-wrap:wrap;border-top:3px solid var(--ink)}

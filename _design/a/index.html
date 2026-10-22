@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>A案 方眼ノート｜しごと計算ラボ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="a.css"><script src="../kit.js"></script>
+<style>
+.hero{padding:56px 0 48px}
+.hero h1{font-size:clamp(2rem,6vw,3.6rem);line-height:1.25;font-weight:900;margin:0;letter-spacing:.01em}
+.hero p{margin:16px 0 0;color:var(--sub)}
+.grp{margin-top:40px}
+.grp h2{display:flex;align-items:center;gap:12px;font-size:1rem;margin:0 0 12px}
+.grp h2 small{font-weight:400;color:var(--sub);font-size:.85rem}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(144px,1fr));gap:0;border-top:1.5px solid var(--ink);border-left:1.5px solid var(--ink)}
+.tiles a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;aspect-ratio:1;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);text-decoration:none;font-weight:700;position:relative;background:var(--white)}
+.tiles a span[data-i]{width:56px;height:56px;color:var(--c)}
+.tiles a:hover{background:color-mix(in srgb,var(--c) 9%,var(--white))}
+.tiles a:hover span[data-i]{transform:translateY(-3px);transition:transform .15s}
+@media (max-width:560px){.tiles{grid-template-columns:repeat(3,1fr)}.tiles a{font-size:.82rem;gap:8px}.tiles a span[data-i]{width:40px;height:40px}}
+</style></head><body>
+<div class="wrap">
+ <div class="bar"><a class="logo" href="./"><i></i>しごと計算ラボ</a></div>
+ <section class="hero"><h1>仕事の書類と計算を、<br>もっと手軽に。</h1><p>無料・登録なし。入力はこの端末の中だけ。</p></section>
+ <section class="grp"><h2>書類をつくる <small>PDFで保存・印刷</small></h2><div class="tiles" id="doc"></div></section>
+ <section class="grp"><h2>計算する <small>答えがすぐ出る</small></h2><div class="tiles" id="calc"></div></section>
+ <div class="ad">広告</div>
+ <footer><a href="#">プライバシーポリシー</a><a href="#">お問い合わせ</a><a href="../">← 3案の比較へ</a></footer>
+</div>
+<script>
+TOOLS.forEach(function(t){document.getElementById(t.g).insertAdjacentHTML('beforeend','<a href="'+(t.k==='shohizei'?'shohizei.html':'#')+'" style="--c:'+t.c+'"><span data-i="'+t.k+'"></span>'+t.n+'</a>')});
+</script>
+</body></html>
