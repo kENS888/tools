@@ -1,8 +1,9 @@
 /* しごと計算ラボ デザイン v2(2026-10)：線の枠＋大きな数字。各ページの <style> の後に読み込み、見た目だけを上書きする。
    色の約束：--acc(ツールの色)は各ページのものをそのまま使う。 */
 [hidden]{display:none!important}
-:root{--bg:#f4f5f5;--card:#fff;--fg:#1c2a3a;--ink:#1c2a3a;--sub:#5f6b77;--mute:#8a949e;--line:#d8dee1;--line2:#c3cbd0;--pvbg:#e7eaec;--sh:none;--num:"Barlow Condensed","BIZ UDPGothic",system-ui,sans-serif}
-@media (prefers-color-scheme:dark){:root{--bg:#111417;--card:#191d21;--fg:#e6ebee;--ink:#c9d2d8;--sub:#99a4ad;--mute:#6f7a83;--line:#2c3339;--line2:#3a434a;--pvbg:#0c0f12;--sh:none}}
+/* 入力欄：枠は背景に対して3:1以上(WCAG 2.2 1.4.11)、文字・プレースホルダーは読める濃さ */
+:root{--field:#fff;--fieldline:#858f98;--ph:#6e7881;--bg:#f4f5f5;--card:#fff;--fg:#1c2a3a;--ink:#1c2a3a;--sub:#5f6b77;--mute:#8a949e;--line:#d8dee1;--line2:#c3cbd0;--pvbg:#e7eaec;--sh:none;--num:"Barlow Condensed","BIZ UDPGothic",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root{--field:#262d33;--fieldline:#77838d;--ph:#8b969f;--bg:#0f1214;--card:#1a1f23;--fg:#e6ebee;--ink:#c9d2d8;--sub:#99a4ad;--mute:#6f7a83;--line:#2c3339;--line2:#3a434a;--pvbg:#0c0f12;--sh:none}}
 body{font-family:"BIZ UDPGothic",system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;background:var(--bg)}
 .paper{font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif}
 :focus-visible{outline:3px solid var(--acc);outline-offset:2px}
@@ -38,8 +39,13 @@ details.more{border:1.5px solid var(--line2)}
 .sec-t::before{border-radius:0;width:5px}
 
 /* 入力 */
-input[type=text],input[type=date],input[type=tel],input[type=number],input[type=email],select,textarea{border-radius:4px;border:1.5px solid var(--line2)}
-input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:1px;border-color:transparent}
+input[type=text],input[type=date],input[type=tel],input[type=number],input[type=email],input:not([type]),select,textarea{border-radius:4px;border:1.5px solid var(--fieldline);background-color:var(--field);color:var(--fg)}
+input::placeholder,textarea::placeholder{color:var(--ph);opacity:1}
+input:hover,select:hover,textarea:hover{border-color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:1px;border-color:var(--acc)}
+input[type=checkbox],input[type=radio]{accent-color:var(--acc);width:18px;height:18px}
+label.f{color:var(--fg);font-weight:700}
+@media (prefers-color-scheme:dark){input[type=date]{color-scheme:dark}select option{background:var(--card);color:var(--fg)}}
 
 /* タブ(切り替え)：黒い線の枠、選んだものは塗る */
 .seg,.types,.pill.ttl{background:none!important;border:1.5px solid var(--ink);border-radius:0!important;padding:0!important;gap:0!important}
@@ -78,3 +84,5 @@ footer a,footer.ft a{color:inherit}
 .g2>*,.g2 .w{min-width:0}
 input[type=date]{min-width:0;max-width:100%}
 .rel .ic .ico2{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+/* スマホ：入力欄の文字が16px未満だとiPhoneで画面が勝手に拡大されるため16pxにそろえる */
+@media (max-width:560px){input[type=text],input[type=date],input[type=tel],input[type=number],input[type=email],input:not([type]),select,textarea{font-size:16px}}

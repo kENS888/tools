@@ -228,13 +228,13 @@ function fit(){var box=$('pvbox'),p=box.querySelector('.paper');if(!p)return;var
  // パソコン(プレビューが追従する幅)では、ボタンまで画面に収まるよう高さでも縮める
  if(innerWidth>980){var cd=box.closest('.card'),ex=cd.offsetHeight-box.offsetHeight;s=Math.max(.3,Math.min(s,(innerHeight-32-ex)/p.offsetHeight))}
  p.style.transform='scale('+s+')';box.style.width=p.offsetWidth*s+'px';box.style.height=p.offsetHeight*s+'px'}
-function save(){try{if(keep){if(PO){try{var cur=JSON.parse(localStorage.getItem(KEY)||'null');if(cur&&cur.doc)svDoc=cur.doc}catch(_){}}
+function save(){if(tourOn)return;try{if(keep){if(PO){try{var cur=JSON.parse(localStorage.getItem(KEY)||'null');if(cur&&cur.doc)svDoc=cur.doc}catch(_){}}
   localStorage.setItem(KEY,JSON.stringify({me:ME,doc:PO?svDoc:S,keep:true}));if(PO)localStorage.setItem(DKEY,JSON.stringify(S))}
  else{localStorage.setItem(KEY,JSON.stringify({keep:false}));localStorage.removeItem(DKEY);localStorage.removeItem(HKEY)}}catch(_){}}
 /* ---------- 作成履歴 ---------- */
 var ITEMS=Object.create(null);
 function hasContent(){return !!(S.to||S.rows.some(function(r){return r.n||r.p}))}
-function record(){if(!keep||!last||!hasContent())return;var it={id:Date.now(),t:TYPE,at:today(),no:S.no,to:S.to,subj:S.subj,total:last.pay,doc:JSON.parse(JSON.stringify(S))};
+function record(){if(tourOn||!keep||!last||!hasContent())return;var it={id:Date.now(),t:TYPE,at:today(),no:S.no,to:S.to,subj:S.subj,total:last.pay,doc:JSON.parse(JSON.stringify(S))};
  try{localStorage.setItem(HKEY,JSON.stringify(histAdd(hist(),it,30)))}catch(_){}histUI()}
 function histUI(){var h=myHist(),seen={},to=[];ITEMS=Object.create(null);
  h.forEach(function(x){if(x.to&&!seen[x.to]){seen[x.to]=1;to.push(x.to)}(x.doc.rows||[]).forEach(function(r){if(r.n&&!ITEMS[r.n])ITEMS[r.n]={u:r.u,uo:r.uo,p:r.p,r:r.r,xr:r.xr}})});
@@ -329,7 +329,100 @@ function doPrint(){record();$('toSf').classList.add('on');var html=docHTML(last)
  var css=[].map.call(document.querySelectorAll('link[rel=stylesheet]'),function(l){return '<link rel="stylesheet" href="'+l.href+'">'}).join('');
  w.document.write('<!doctype html><meta charset="utf-8"><title>'+esc(nm)+'</title>'+css+'<body><div id="prt">'+html+'</div><script>onload=function(){setTimeout(print,200)}<\/script>');w.document.close()}
 
-build();drawRows();bind();render();histUI();if(window.SKShare)SKShare();
+// 使い方の案内：例の内容を入れて、画面の該当部分を順に光らせる(終わったら元の入力に戻せる)
+var tourOn=false;
+(function(){
+ function R(n,q,u,p,r,o){var x={n:n,q:String(q),u:u,p:p,r:r||'10',xr:'',nw:false};if(o)Object.assign(x,o);return x}
+ var SC={
+  q:{
+   free:{t:'個人・フリーランスで仕事を受ける人',d:{to:'株式会社サンプル商事',subj:'ホームページ制作',rows:[R('トップページ デザイン',1,'式','80,000'),R('下層ページ デザイン',5,'件','20,000'),R('コーディング',1,'式','120,000')]},steps:[
+    ['to','<b>宛名</b>と<b>件名</b>を入れます。有効期限は30日後が自動で入ります。'],
+    ['rows','<b>品目・数量・単価</b>を入れると、金額と消費税が自動で計算されます。'],
+    ['pv','プレビューを見ながら<b>PDFで保存</b>して、そのまま相手に送れます。']]},
+   shop:{t:'商品を売るお店・小さな会社',d:{to:'株式会社サンプル商事',subj:'事務用品・飲料',rows:[R('コピー用紙 A4',10,'個','2,800'),R('お茶(2L)',12,'個','198','8')]},steps:[
+    ['rows','食べ物・飲み物は、明細ごとに<b>税率8%</b>を選べます。'],
+    ['sum','<b>税率ごとの合計と消費税</b>が自動で入ります(インボイス対応)。'],
+    ['types','注文が決まったら、上の<b>「請求書」</b>を押すだけで、同じ内容の請求書に切り替わります。']]},
+   wh:{t:'デザイン料・原稿料を受け取る個人',d:{to:'株式会社サンプル出版',subj:'イラスト制作',wOn:true,rows:[R('表紙イラスト',1,'式','100,000')]},steps:[
+    ['opt','「オプション」の<b>源泉徴収税を差し引く</b>をオンにします。'],
+    ['sum','源泉徴収税(10.21%)を差し引いた、<b>実際に受け取る金額</b>が出ます。'],
+    ['pv','書類にも、源泉徴収税と差し引き後の金額が入ります。']]}},
+  n:{
+   est:{t:'見積書を作ったあとに納品する人',d:{to:'株式会社サンプル商事',subj:'ホームページ制作',rows:[R('トップページ デザイン',1,'式','80,000'),R('コーディング',1,'式','120,000')]},steps:[
+    ['types','見積書を作っていれば、上の<b>「納品書」</b>を押すだけで同じ内容になります。'],
+    ['rows','実際に納めた<b>品目と数量</b>に合わせて直します。'],
+    ['pv','PDFで保存して、納品物と一緒に渡します。']]},
+   goods:{t:'商品を届けるお店・会社',d:{to:'サンプル食堂',hon:'様',subj:'10月分 食材',rows:[R('お米(5kg)',4,'個','2,400','8'),R('食用油(1L)',6,'個','420','8'),R('紙ナプキン',10,'個','150')]},steps:[
+    ['to','届け先の<b>宛名</b>を入れます。個人のお店なら敬称を「様」に。'],
+    ['rows','食べ物は<b>8%</b>、それ以外は<b>10%</b>を明細ごとに選べます。'],
+    ['sum','税率ごとの合計が自動で入ります。']]}},
+  i:{
+   free:{t:'個人・フリーランスで仕事を受けた人',d:{to:'株式会社サンプル商事',subj:'10月分 Web運用',wOn:true,rows:[R('Webサイト更新作業',1,'式','150,000')]},steps:[
+    ['due','<b>お支払期限</b>は、来月末が自動で入ります。'],
+    ['opt','デザイン・原稿料などで源泉徴収される時は、<b>源泉徴収税を差し引く</b>をオンにします。'],
+    ['sum','差し引いた<b>お振込み額</b>が、そのまま請求書に入ります。']]},
+   fee:{t:'振込手数料を引いて支払われる人',d:{to:'株式会社サンプル商事',subj:'翻訳料',feeOn:true,fee:'440',rows:[R('翻訳(日本語→英語)',20,'件','5,000')]},steps:[
+    ['opt','相手が振込手数料を差し引いて払う約束なら、<b>振込手数料を差し引く</b>をオンにして金額を入れます。'],
+    ['sum','手数料を引いた<b>お振込み額</b>が出ます。']]},
+   mix:{t:'10%と8%の品目がまざる人',d:{to:'株式会社サンプル商事',subj:'ケータリング',rows:[R('お弁当(持ち帰り)',20,'個','900','8'),R('会場設営',1,'式','15,000')]},steps:[
+    ['rows','品目ごとに<b>税率</b>を選びます。持ち帰りの食べ物は8%です。'],
+    ['sum','<b>税率ごとの合計と消費税</b>が入るので、インボイスの条件を満たします。']]}},
+  r:{
+   cash:{t:'代金を現金で受け取った人',d:{to:'株式会社サンプル商事',tad:'ホームページ制作費として',pay:'cash',rows:[R('ホームページ制作',1,'式','80,000')]},steps:[
+    ['to','<b>宛名</b>と<b>但し書き</b>(何の代金か)を入れます。'],
+    ['chip','税抜5万円以上の現金・紙の領収書には<b>収入印紙</b>が必要です。いくらの印紙かを自動で判定します。'],
+    ['pv','PDFで保存して印刷し、印紙を貼って渡します。']]},
+   pdf:{t:'領収書をPDFで送る人',d:{to:'株式会社サンプル商事',tad:'ホームページ制作費として',pay:'bank',elec:true,rows:[R('ホームページ制作',1,'式','80,000')]},steps:[
+    ['elec','<b>渡し方</b>を「PDFで送る」にします。'],
+    ['chip','PDFなど電子データで渡す領収書には、<b>収入印紙はいりません</b>。']]}},
+  o:{
+   out:{t:'外注先に仕事を頼む人',d:{to:'サンプルデザイン事務所',subj:'パンフレット デザイン',nouki:'2026年12月15日',basho:'メールで納品',jouken:'月末締め翌月末払い',rows:[R('パンフレット デザイン(8ページ)',1,'式','160,000')]},steps:[
+    ['to','頼む相手と<b>納期・納品場所・支払条件</b>を入れます。'],
+    ['rows','頼む内容と金額を入れます。'],
+    ['pv','PDFで保存して、相手に送ります。']]},
+   uke:{t:'相手に注文請書をもらいたい人',d:{to:'株式会社サンプル工業',subj:'部品加工',nouki:'2026年11月30日',uke:true,rows:[R('部品加工 A-100',500,'個','320')]},steps:[
+    ['uke','<b>「注文請書をご提出ください」と書く</b>をオンにすると、書類に一文が入ります。'],
+    ['chip','<b>収入印紙</b>がいるかどうかも表示します。']]}}
+ }[TYPE]||{};
+ window.SR_SC=SC;
+ function q(s){return document.querySelector(s)}
+ var TG={to:function(){return document.querySelectorAll('.fm .sec')[0]},rows:function(){return document.querySelectorAll('.fm .sec')[1]},sum:function(){return $('sum')},opt:function(){return $('optBox')},
+  types:function(){return q('.types')||$('ottl')},pv:function(){return $('pv').querySelector('.card')},due:function(){return $('due').parentNode},chip:function(){return $('chip')},
+  elec:function(){return $('elec').parentNode},uke:function(){return $('uke').closest('label')}};
+ var cur=null,i=0,saved=null,ring,bub,shade;
+ function fill(){['to','hon','subj','no','date','valid','nouki','jouken','due','tad','memo','rnd','basho','mno'].forEach(function(k){$(k).value=S[k]});
+  $('pay').value=S.pay;$('elec').value=S.elec?'1':'0';['wOn','noTax','feeOn','wareki','reiss','uke'].forEach(function(k){$(k).checked=!!S[k]});
+  $('fee').value=fmtI(S.fee,1);[].forEach.call($('incl').children,function(b){var on=(b.dataset.v==='1')===S.incl;b.className=on?'on':'';b.setAttribute('aria-pressed',on)});
+  drawRows();render()}
+ function el(c){var e=document.createElement('div');e.className=c;document.body.appendChild(e);return e}
+ function start(k){var c=SC[k];if(!c)return;saved={S:JSON.stringify(S),opt:$('optBox').open,y:window.scrollY};cur=c;i=0;tourOn=true;
+  var ot=S.ottl;S=Object.assign(blank(),JSON.parse(JSON.stringify(c.d)));if(PO)S.ottl=ot;$('optBox').open=false;fill();
+  shade=el('tshade');ring=el('tring');bub=el('tbub');bub.setAttribute('role','dialog');bub.setAttribute('aria-label','使い方：'+c.t);
+  document.addEventListener('keydown',key);window.addEventListener('resize',place);setTimeout(show,60)}
+ function key(e){if(e.key==='Escape')end(false)}
+ function show(){var st=cur.steps[i],n=cur.steps.length,last=i===n-1;if(st[0]==='opt')$('optBox').open=true;
+  bub.innerHTML='<div class="th"><span>使い方の例：'+cur.t+'</span><button type="button" class="tx" aria-label="閉じる">×</button></div><p>'+st[1]+'</p>'+
+   '<div class="tf"><span class="tn">'+(i+1)+' / '+n+'</span>'+(i?'<button type="button" class="tb0">戻る</button>':'')+
+   (last?'<button type="button" class="tb0" data-r="1">元の入力に戻す</button><button type="button" class="tb1">この例のまま使う</button>':'<button type="button" class="tb1">次へ</button>')+'</div>';
+  bub.querySelector('.tx').onclick=function(){end(false)};
+  [].forEach.call(bub.querySelectorAll('.tb0'),function(b){b.onclick=b.dataset.r?function(){end(false)}:function(){i--;show()}});
+  bub.querySelector('.tb1').onclick=last?function(){end(true)}:function(){i++;show()};
+  var t=TG[st[0]]();t.scrollIntoView({block:t.offsetHeight>innerHeight*.6?'start':'center'});place();
+  setTimeout(function(){try{bub.querySelector('.tb1').focus({preventScroll:true})}catch(_){}},0)}
+ function place(){if(!cur)return;var t=TG[cur.steps[i][0]](),r=t.getBoundingClientRect(),sx=window.scrollX,sy=window.scrollY,pad=6,vh=window.innerHeight,vw=document.documentElement.clientWidth;
+  ring.style.cssText='left:'+(r.left+sx-pad)+'px;top:'+(r.top+sy-pad)+'px;width:'+(r.width+pad*2)+'px;height:'+(r.height+pad*2)+'px';
+  var bw=Math.min(340,vw-24),bh=bub.offsetHeight,left=Math.max(12,Math.min(r.left+r.width/2-bw/2,vw-bw-12)),top;
+  if(r.bottom+pad+12+bh<=vh)top=r.bottom+pad+12;else if(r.top-pad-12-bh>=0)top=r.top-pad-12-bh;else top=vh-bh-12;
+  bub.style.cssText='width:'+bw+'px;left:'+(left+sx)+'px;top:'+(top+sy)+'px'}
+ function end(use){if(!cur)return;cur=null;tourOn=false;
+  [shade,ring,bub].forEach(function(e){if(e&&e.parentNode)e.parentNode.removeChild(e)});
+  document.removeEventListener('keydown',key);window.removeEventListener('resize',place);
+  if(use){save();toast('この例の内容を入れました。書き換えて使えます');TG.to().scrollIntoView({block:'start'})}
+  else{S=JSON.parse(saved.S);$('optBox').open=saved.opt;fill();window.scrollTo(0,saved.y)}}
+ window.SRTour=function(){[].forEach.call(document.querySelectorAll('.who [data-sc]'),function(b){b.onclick=function(){start(b.dataset.sc)}})};
+})();
+
+build();drawRows();bind();render();histUI();SRTour();if(window.SKShare)SKShare();
 if(fromHist)toast((fromHist.to||'過去の書類')+' の内容を読み込みました');
 try{sessionStorage.removeItem(KEY)}catch(_){}
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
