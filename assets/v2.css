@@ -2,10 +2,15 @@
    色の約束：--acc(ツールの色)は各ページのものをそのまま使う。 */
 [hidden]{display:none!important}
 /* 入力欄：枠は背景に対して3:1以上(WCAG 2.2 1.4.11)、文字・プレースホルダーは読める濃さ */
-:root{--field:#fff;--fieldline:#858f98;--ph:#6e7881;--bg:#f4f5f5;--card:#fff;--fg:#1c2a3a;--ink:#1c2a3a;--sub:#5f6b77;--mute:#8a949e;--line:#d8dee1;--line2:#c3cbd0;--pvbg:#e7eaec;--sh:none;--num:"Barlow Condensed","BIZ UDPGothic",system-ui,sans-serif}
+:root{--field:#fff;--fieldline:#858f98;--ph:#6e7881;--bg:#f4f5f5;--card:#fff;--fg:#1c2a3a;--ink:#1c2a3a;--sub:#5f6b77;--mute:#8a949e;--line:#d8dee1;--line2:#c3cbd0;--pvbg:#e7eaec;--sh:none;--num:"Inter Tight","Noto Sans JP",system-ui,sans-serif}
 @media (prefers-color-scheme:dark){:root{--field:#262d33;--fieldline:#77838d;--ph:#8b969f;--bg:#0f1214;--card:#1a1f23;--fg:#e6ebee;--ink:#c9d2d8;--sub:#99a4ad;--mute:#6f7a83;--line:#2c3339;--line2:#3a434a;--pvbg:#0c0f12;--sh:none}}
-body{font-family:"BIZ UDPGothic",system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;background:var(--bg)}
+body{font-family:"Noto Sans JP",system-ui,-apple-system,"Hiragino Sans",sans-serif;background:var(--bg);letter-spacing:.02em}
 .paper{font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif}
+/* 見出しは明朝(Zen Old Mincho)で上品に。本文・入力はNoto Sans JP、数字はInter Tight。大事なところは太字 */
+h1,h2,h3,.sec-t,.slogo,.sh h2,.pvh h2,.who b,.rel b,.hero h1{font-family:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;font-weight:700;letter-spacing:.05em}
+.hero h1{letter-spacing:.04em;line-height:1.3}
+b,strong,label.f,.big .l,.sum .big span,summary,.btn,.seg>button,.types>a,th{font-weight:700}
+.tldr .lead{font-weight:500}
 :focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 
 /* ヘッダー：サイトのバー＋ツールの見出し(アイコン・名前・一文) */
