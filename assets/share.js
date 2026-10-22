@@ -13,3 +13,11 @@
    el.querySelector('.sb-cp').onclick=function(){copy(url())}})}
  window.SKShare=fill;if(document.readyState!=='loading')fill();else document.addEventListener('DOMContentLoaded',fill);
 })();
+/* ページ内リンク(#about など)の行き先が折りたたみの中なら、開いてから表示する */
+(function(){
+ function go(h,smooth){if(!h||h.length<2)return;var el;try{el=document.getElementById(decodeURIComponent(h.slice(1)))}catch(_){return}if(!el)return;
+  if(el.tagName==='DETAILS')el.open=true;var p=el.parentNode&&el.parentNode.closest?el.parentNode.closest('details'):null;while(p){p.open=true;p=p.parentNode&&p.parentNode.closest?p.parentNode.closest('details'):null}
+  el.scrollIntoView({block:'start',behavior:smooth?'smooth':'auto'})}
+ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;var h=a.getAttribute('href');if(!document.getElementById(h.slice(1)))return;e.preventDefault();history.replaceState(null,'',h);go(h,true)});
+ if(location.hash)setTimeout(function(){go(location.hash)},0);
+})();

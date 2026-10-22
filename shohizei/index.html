@@ -192,50 +192,46 @@ main{max-width:1000px}header.v2h .sin,header.v2h .thead{max-width:1000px}footer{
 
 <div class="ad">広告</div>
 
-<div class="card">
- <section class="tldr" aria-label="このツールについて">
-  <h2 class="sec-t">消費税計算ツールでできること</h2>
-  <p class="lead">税抜金額から税込金額を、税込金額から税抜金額と消費税額を、無料・登録不要で計算できるWebツールです。レジのように金額を打っていくだけで、10%と軽減税率8%が混ざっていても、税率ごとに合計して消費税を計算します。</p>
-  <ul class="feat"><li>税抜金額から税込金額と消費税額を計算(10%は×1.1、8%は×1.08)</li><li>税込金額から税抜金額と消費税額を計算(消費税＝税込×10/110、8%は×8/108)</li><li>10%と8%の品目を1行ずつ打つと、税率ごとに合計してから消費税を計算(インボイス制度のルール)</li><li>品名と個数(3×500円など)も入れられ、レシートの形で内訳を確認できる</li><li>端数処理(切り捨て・四捨五入・切り上げ)を選べる</li><li>打った内容のまま請求書の明細にできる</li><li>入力内容はブラウザ内だけで処理され、サーバーに送信されない</li></ul>
-  <p class="upd">最終更新日：<time datetime="2026-10-22">2026年10月22日</time> ／ 運営：しごと計算ラボ</p>
- </section>
+<div class="card"><h2 class="sec-t" id="who">こんな人・こんな時に</h2>
+<div class="who"><button data-sc="one" type="button"><span class="wi"><svg aria-hidden="true" viewbox="0 0 48 48"><path d="M12 5h24v38H12z"></path><path d="M17 10h14v8H17z"></path><path d="M18 25h2M24 25h2M30 25h0M18 31h2M24 31h2M18 37h2M24 37h2M30 31v6"></path></svg></span><b>1つの金額の税込を知りたい人</b><span class="ds">5,000円の税込はいくら？</span><span class="go">▶ 使い方を見る</span></button><button data-sc="mix" type="button"><span class="wi"><svg aria-hidden="true" viewbox="0 0 48 48"><path d="M5 8h6l5 22h22l4-15H13"></path><circle cx="19" cy="38" r="3"></circle><circle cx="35" cy="38" r="3"></circle></svg></span><b>10%と8%がまざる買い物をした人</b><span class="ds">食べ物とそれ以外を、まとめて計算したい</span><span class="go">▶ 使い方を見る</span></button><button data-sc="qty" type="button"><span class="wi"><svg aria-hidden="true" viewbox="0 0 48 48"><path d="M12 6h18l8 8v28H12z"></path><path d="M30 6v8h8"></path><path d="M19 20l6 7 6-7M25 27v10M20 30h10M20 34h10"></path></svg></span><b>個数×単価で請求書にしたい人</b><span class="ds">「3 × 5,000円」をそのまま請求書の明細に</span><span class="go">▶ 使い方を見る</span></button><button data-sc="incl" type="button"><span class="wi"><svg aria-hidden="true" viewbox="0 0 48 48"><path d="M38 24H10M18 16l-8 8 8 8"></path></svg></span><b>税込の金額から税抜を知りたい人</b><span class="ds">11,000円の税抜と消費税はいくら？</span><span class="go">▶ 使い方を見る</span></button></div>
 
- <h2 class="sec-t" id="who">こんな人・こんな時に</h2>
- <div class="who"><button type="button" data-sc="one"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 5h24v38H12z"/><path d="M17 10h14v8H17z"/><path d="M18 25h2M24 25h2M30 25h0M18 31h2M24 31h2M18 37h2M24 37h2M30 31v6"/></svg></span><b>1つの金額の税込を知りたい人</b><span class="ds">5,000円の税込はいくら？</span><span class="go">▶ 使い方を見る</span></button><button type="button" data-sc="mix"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M5 8h6l5 22h22l4-15H13"/><circle cx="19" cy="38" r="3"/><circle cx="35" cy="38" r="3"/></svg></span><b>10%と8%がまざる買い物をした人</b><span class="ds">食べ物とそれ以外を、まとめて計算したい</span><span class="go">▶ 使い方を見る</span></button><button type="button" data-sc="qty"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h18l8 8v28H12z"/><path d="M30 6v8h8"/><path d="M19 20l6 7 6-7M25 27v10M20 30h10M20 34h10"/></svg></span><b>個数×単価で請求書にしたい人</b><span class="ds">「3 × 5,000円」をそのまま請求書の明細に</span><span class="go">▶ 使い方を見る</span></button><button type="button" data-sc="incl"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M38 24H10M18 16l-8 8 8 8"/></svg></span><b>税込の金額から税抜を知りたい人</b><span class="ds">11,000円の税抜と消費税はいくら？</span><span class="go">▶ 使い方を見る</span></button></div>
- <h2 class="sec-t">使い方</h2>
- <ol class="steps">
-  <li><b>金額を打つ</b>テンキーかキーボードで金額を打つと、すぐに税込(税抜)と消費税が出ます。税込の金額から計算する時は「税込で打つ」を押します。</li>
-  <li><b>税率を押す</b>ふつうは10%、食べ物・新聞は8%を押します。</li>
-  <li><b>次の金額を打つ</b>品目が複数ある時は「次の金額」を押して続けます。品名や「3 × 500」のような個数も入れられます。</li>
-  <li><b>コピーして使う</b>結果をコピーするか、そのまま請求書の明細にできます。</li>
- </ol>
+<details class="sx sxt"><summary><h2 class="sec-t">消費税計算ツールでできること</h2></summary><section aria-label="このツールについて" class="tldr">
 
- <h2 class="sec-t">計算方法</h2>
- <ul>
-  <li>税抜 → 税込：<b>税抜金額 × 1.1</b>(8%は × 1.08)</li>
-  <li>税込 → 税抜：<b>消費税額 ＝ 税込金額 × 10/110</b>(8%は × 8/108)、税抜金額 ＝ 税込金額 − 消費税額</li>
-  <li>1円未満の端数は、初期設定では切り捨てです</li>
-  <li>10%と8%が混在する場合は、税率ごとに合計してから消費税を計算し、端数処理します(インボイス制度のルール)</li>
- </ul>
-
- <h2 class="sec-t">消費税の早見表</h2>
- <div class="hy">
-  <table class="hyt"><caption>税抜 → 税込</caption><thead><tr><th>税抜</th><th>税込(10%)</th><th>税込(8%)</th></tr></thead><tbody><tr><td>100円</td><td>110円</td><td>108円</td></tr><tr><td>500円</td><td>550円</td><td>540円</td></tr><tr><td>1,000円</td><td>1,100円</td><td>1,080円</td></tr><tr><td>2,000円</td><td>2,200円</td><td>2,160円</td></tr><tr><td>3,000円</td><td>3,300円</td><td>3,240円</td></tr><tr><td>5,000円</td><td>5,500円</td><td>5,400円</td></tr><tr><td>10,000円</td><td>11,000円</td><td>10,800円</td></tr><tr><td>20,000円</td><td>22,000円</td><td>21,600円</td></tr><tr><td>30,000円</td><td>33,000円</td><td>32,400円</td></tr><tr><td>50,000円</td><td>55,000円</td><td>54,000円</td></tr><tr><td>100,000円</td><td>110,000円</td><td>108,000円</td></tr><tr><td>300,000円</td><td>330,000円</td><td>324,000円</td></tr><tr><td>500,000円</td><td>550,000円</td><td>540,000円</td></tr><tr><td>1,000,000円</td><td>1,100,000円</td><td>1,080,000円</td></tr></tbody></table>
-  <table class="hyt"><caption>税込 → 税抜(端数切り捨て)</caption><thead><tr><th>税込</th><th>税抜(10%)</th><th>税抜(8%)</th></tr></thead><tbody><tr><td>100円</td><td>91円</td><td>93円</td></tr><tr><td>500円</td><td>455円</td><td>463円</td></tr><tr><td>1,000円</td><td>910円</td><td>926円</td></tr><tr><td>3,000円</td><td>2,728円</td><td>2,778円</td></tr><tr><td>5,000円</td><td>4,546円</td><td>4,630円</td></tr><tr><td>10,000円</td><td>9,091円</td><td>9,260円</td></tr><tr><td>30,000円</td><td>27,273円</td><td>27,778円</td></tr><tr><td>50,000円</td><td>45,455円</td><td>46,297円</td></tr><tr><td>100,000円</td><td>90,910円</td><td>92,593円</td></tr><tr><td>110,000円</td><td>100,000円</td><td>101,852円</td></tr><tr><td>300,000円</td><td>272,728円</td><td>277,778円</td></tr><tr><td>1,000,000円</td><td>909,091円</td><td>925,926円</td></tr></tbody></table>
- </div>
-
- <h2 class="sec-t">よくある質問</h2>
- <div class="faq">
- <details><summary><span>税込金額はどう計算する？</span></summary><p>税抜金額に1.1をかけます(軽減税率8%なら1.08)。たとえば税抜10,000円なら、税込は11,000円(消費税1,000円)です。</p></details>
- <details><summary><span>税込金額から税抜金額はどう計算する？</span></summary><p>税込金額を1.1で割ります(8%なら1.08)。このツールでは、税込金額×10/110(8%は×8/108)で消費税額を出して端数を処理し、税込金額から引いて税抜金額を求めています。たとえば税込11,000円なら、税抜10,000円・消費税1,000円です。</p></details>
- <details><summary><span>税込から税抜にすると、元の金額と1円ずれるのはなぜ？</span></summary><p>消費税額の1円未満を処理するためです。たとえば税込1,000円の消費税は90.90…円で、切り捨てると90円、税抜は910円になります。910円に1.1をかけると1,001円となり、1円ずれます。計算の誤りではありません。</p></details>
- <details><summary><span>1円未満の端数は、切り捨て・四捨五入・切り上げのどれ？</span></summary><p>法律で決まっておらず、事業者が選べます。一般には切り捨てが多く使われています。ただしインボイス(適格請求書)では、1枚の請求書につき税率ごとに1回だけ端数処理をします。品目ごとに端数処理して合計することは認められていません。</p></details>
- <details><summary><span>軽減税率8%の対象は？</span></summary><p>酒類と外食を除く飲食料品と、週2回以上発行される新聞の定期購読料が対象です。テイクアウトや宅配は8%、店内での飲食やケータリングは10%です。</p></details>
- <details><summary><span>10%と8%の品目が混ざる場合は？</span></summary><p>金額を打って10%か8%のキーを押し、「次の金額」で次の品目を打ちます。税率ごとに合計してから消費税を計算して端数処理し、最後に合計します(インボイス制度のルール)。</p></details>
- <details><summary><span>消費税10%の内訳は？</span></summary><p>国の消費税が7.8%、地方消費税が2.2%です。軽減税率8%の場合は、国が6.24%、地方が1.76%です。</p></details>
- <details><summary><span>値札や広告は税込で表示しないといけない？</span></summary><p>消費者に販売する商品・サービスの値札や広告は、税込価格の表示(総額表示)が義務です。事業者同士の取引は対象外のため、見積書や請求書は税抜表示でも構いません。</p></details>
- </div>
- <p class="note">※出典：国税庁「消費税の軽減税率制度」「インボイス制度」「総額表示の義務付け」に関する資料。個別の取引の扱いは、国税庁の資料や税理士にご確認ください。</p>
+<p class="lead">税抜金額から税込金額を、税込金額から税抜金額と消費税額を、無料・登録不要で計算できるWebツールです。レジのように金額を打っていくだけで、10%と軽減税率8%が混ざっていても、税率ごとに合計して消費税を計算します。</p>
+<ul class="feat"><li>税抜金額から税込金額と消費税額を計算(10%は×1.1、8%は×1.08)</li><li>税込金額から税抜金額と消費税額を計算(消費税＝税込×10/110、8%は×8/108)</li><li>10%と8%の品目を1行ずつ打つと、税率ごとに合計してから消費税を計算(インボイス制度のルール)</li><li>品名と個数(3×500円など)も入れられ、レシートの形で内訳を確認できる</li><li>端数処理(切り捨て・四捨五入・切り上げ)を選べる</li><li>打った内容のまま請求書の明細にできる</li><li>入力内容はブラウザ内だけで処理され、サーバーに送信されない</li></ul>
+<p class="upd">最終更新日：<time datetime="2026-10-22">2026年10月22日</time> ／ 運営：しごと計算ラボ</p>
+</section></details>
+<details class="sx"><summary><h2 class="sec-t">使い方</h2></summary>
+<ol class="steps">
+<li><b>金額を打つ</b>テンキーかキーボードで金額を打つと、すぐに税込(税抜)と消費税が出ます。税込の金額から計算する時は「税込で打つ」を押します。</li>
+<li><b>税率を押す</b>ふつうは10%、食べ物・新聞は8%を押します。</li>
+<li><b>次の金額を打つ</b>品目が複数ある時は「次の金額」を押して続けます。品名や「3 × 500」のような個数も入れられます。</li>
+<li><b>コピーして使う</b>結果をコピーするか、そのまま請求書の明細にできます。</li>
+</ol>
+</details><details class="sx"><summary><h2 class="sec-t">計算方法</h2></summary>
+<ul>
+<li>税抜 → 税込：<b>税抜金額 × 1.1</b>(8%は × 1.08)</li>
+<li>税込 → 税抜：<b>消費税額 ＝ 税込金額 × 10/110</b>(8%は × 8/108)、税抜金額 ＝ 税込金額 − 消費税額</li>
+<li>1円未満の端数は、初期設定では切り捨てです</li>
+<li>10%と8%が混在する場合は、税率ごとに合計してから消費税を計算し、端数処理します(インボイス制度のルール)</li>
+</ul>
+</details><details class="sx"><summary><h2 class="sec-t">消費税の早見表</h2></summary>
+<div class="hy">
+<table class="hyt"><caption>税抜 → 税込</caption><thead><tr><th>税抜</th><th>税込(10%)</th><th>税込(8%)</th></tr></thead><tbody><tr><td>100円</td><td>110円</td><td>108円</td></tr><tr><td>500円</td><td>550円</td><td>540円</td></tr><tr><td>1,000円</td><td>1,100円</td><td>1,080円</td></tr><tr><td>2,000円</td><td>2,200円</td><td>2,160円</td></tr><tr><td>3,000円</td><td>3,300円</td><td>3,240円</td></tr><tr><td>5,000円</td><td>5,500円</td><td>5,400円</td></tr><tr><td>10,000円</td><td>11,000円</td><td>10,800円</td></tr><tr><td>20,000円</td><td>22,000円</td><td>21,600円</td></tr><tr><td>30,000円</td><td>33,000円</td><td>32,400円</td></tr><tr><td>50,000円</td><td>55,000円</td><td>54,000円</td></tr><tr><td>100,000円</td><td>110,000円</td><td>108,000円</td></tr><tr><td>300,000円</td><td>330,000円</td><td>324,000円</td></tr><tr><td>500,000円</td><td>550,000円</td><td>540,000円</td></tr><tr><td>1,000,000円</td><td>1,100,000円</td><td>1,080,000円</td></tr></tbody></table>
+<table class="hyt"><caption>税込 → 税抜(端数切り捨て)</caption><thead><tr><th>税込</th><th>税抜(10%)</th><th>税抜(8%)</th></tr></thead><tbody><tr><td>100円</td><td>91円</td><td>93円</td></tr><tr><td>500円</td><td>455円</td><td>463円</td></tr><tr><td>1,000円</td><td>910円</td><td>926円</td></tr><tr><td>3,000円</td><td>2,728円</td><td>2,778円</td></tr><tr><td>5,000円</td><td>4,546円</td><td>4,630円</td></tr><tr><td>10,000円</td><td>9,091円</td><td>9,260円</td></tr><tr><td>30,000円</td><td>27,273円</td><td>27,778円</td></tr><tr><td>50,000円</td><td>45,455円</td><td>46,297円</td></tr><tr><td>100,000円</td><td>90,910円</td><td>92,593円</td></tr><tr><td>110,000円</td><td>100,000円</td><td>101,852円</td></tr><tr><td>300,000円</td><td>272,728円</td><td>277,778円</td></tr><tr><td>1,000,000円</td><td>909,091円</td><td>925,926円</td></tr></tbody></table>
+</div>
+</details><h2 class="sec-t">よくある質問</h2>
+<div class="faq">
+<details><summary><span>税込金額はどう計算する？</span></summary><p>税抜金額に1.1をかけます(軽減税率8%なら1.08)。たとえば税抜10,000円なら、税込は11,000円(消費税1,000円)です。</p></details>
+<details><summary><span>税込金額から税抜金額はどう計算する？</span></summary><p>税込金額を1.1で割ります(8%なら1.08)。このツールでは、税込金額×10/110(8%は×8/108)で消費税額を出して端数を処理し、税込金額から引いて税抜金額を求めています。たとえば税込11,000円なら、税抜10,000円・消費税1,000円です。</p></details>
+<details><summary><span>税込から税抜にすると、元の金額と1円ずれるのはなぜ？</span></summary><p>消費税額の1円未満を処理するためです。たとえば税込1,000円の消費税は90.90…円で、切り捨てると90円、税抜は910円になります。910円に1.1をかけると1,001円となり、1円ずれます。計算の誤りではありません。</p></details>
+<details><summary><span>1円未満の端数は、切り捨て・四捨五入・切り上げのどれ？</span></summary><p>法律で決まっておらず、事業者が選べます。一般には切り捨てが多く使われています。ただしインボイス(適格請求書)では、1枚の請求書につき税率ごとに1回だけ端数処理をします。品目ごとに端数処理して合計することは認められていません。</p></details>
+<details><summary><span>軽減税率8%の対象は？</span></summary><p>酒類と外食を除く飲食料品と、週2回以上発行される新聞の定期購読料が対象です。テイクアウトや宅配は8%、店内での飲食やケータリングは10%です。</p></details>
+<details><summary><span>10%と8%の品目が混ざる場合は？</span></summary><p>金額を打って10%か8%のキーを押し、「次の金額」で次の品目を打ちます。税率ごとに合計してから消費税を計算して端数処理し、最後に合計します(インボイス制度のルール)。</p></details>
+<details><summary><span>消費税10%の内訳は？</span></summary><p>国の消費税が7.8%、地方消費税が2.2%です。軽減税率8%の場合は、国が6.24%、地方が1.76%です。</p></details>
+<details><summary><span>値札や広告は税込で表示しないといけない？</span></summary><p>消費者に販売する商品・サービスの値札や広告は、税込価格の表示(総額表示)が義務です。事業者同士の取引は対象外のため、見積書や請求書は税抜表示でも構いません。</p></details>
+</div>
+<p class="note">※出典：国税庁「消費税の軽減税率制度」「インボイス制度」「総額表示の義務付け」に関する資料。個別の取引の扱いは、国税庁の資料や税理士にご確認ください。</p>
 </div>
 
 <div class="card"><div class="sharebox" style="border:0;padding:0;margin:0 0 18px"><h2>このツールをシェア</h2><p>お仕事仲間や、同じように事務作業をする方に教えていただけるとうれしいです。</p><div class="sbtns" data-share></div></div><h2>関連ツール</h2><div class="rel"><a href="/seikyusho/" style="--c:#4f46e5"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h18l8 8v28H12z"/><path d="M30 6v8h8"/><path d="M19 20l6 7 6-7M25 27v10M20 30h10M20 34h10"/></svg></span><span><b>請求書 作成</b><span class="d">インボイス対応、源泉徴収・振込手数料にも対応</span></span></a><a href="/mitsumori/" style="--c:#0d8a7f"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h18l8 8v28H12z"/><path d="M30 6v8h8"/><path d="M18 22h12M18 28h7"/><path d="M29 41l11-11 3.5 3.5-11 11H29z"/></svg></span><span><b>見積書 作成</b><span class="d">請求書・領収書にワンクリックで切り替え</span></span></a><a href="/nohinsho/" style="--c:#0377b3"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 17l16-8 16 8v19l-16 8-16-8z"/><path d="M8 17l16 8 16-8"/><path d="M24 25v19"/><path d="M14 29l5 2.5"/></svg></span><span><b>納品書 作成</b><span class="d">見積書の内容からそのまま作成</span></span></a><a href="/ryoshusho/" style="--c:#d9540f"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h24v36l-4-3-4 3-4-3-4 3-4-3-4 3z"/><path d="M18 22l5 5 8-9"/></svg></span><span><b>領収書 作成</b><span class="d">収入印紙の要否を自動で判定</span></span></a><a href="/hacchusho/" style="--c:#be123c"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 10h20v32H12z"/><path d="M17 6h10v7H17z"/><path d="M17 22h10M17 28h7"/><path d="M28 36h15M39 32l4 4-4 4"/></svg></span><span><b>発注書・注文書 作成</b><span class="d">外注先・仕入先に仕事を頼むときに</span></span></a><a href="/sofujo/" style="--c:#16803c"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 13h36v24H6z"/><path d="M6 13l18 14 18-14"/></svg></span><span><b>送付状 作成</b><span class="d">郵送・FAXで送るときに。時候の挨拶も自動</span></span></a><a href="/gensen/" style="--c:#2554d8"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><circle cx="20" cy="27" r="13"/><path d="M15 21l5 6 5-6M20 27v8M16 30h8"/><circle cx="37" cy="12" r="7"/><path d="M34 12h6"/></svg></span><span><b>源泉徴収税 計算</b><span class="d">手取りからの逆算、請求書PDFまで</span></span></a><a href="/eigyobi/" style="--c:#6d28d9"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 11h32v30H8z"/><path d="M8 19h32"/><path d="M16 7v8M32 7v8"/><path d="M18 30l4 4 8-8"/></svg></span><span><b>営業日・支払期日 計算</b><span class="d">月末締め翌月末払いなどの支払日を、土日祝を除いて計算</span></span></a><a href="/hiwari/" style="--c:#b45309"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 11h32v30H8z"/><path d="M8 19h32"/><path d="M16 7v8M32 7v8"/><path d="M15 30h18M15 26v8M33 26v8"/></svg></span><span><b>日割り計算</b><span class="d">家賃・利用料・給与の日割りを、日付から計算</span></span></a><a href="/keihi/" style="--c:#4d7c0f"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M7 15h31v26H7z"/><path d="M7 15l24-7v7"/><path d="M28 24h12v9H28z"/><circle cx="33" cy="28.5" r="1.2"/></svg></span><span><b>経費精算書 作成</b><span class="d">立て替えた経費・交通費を精算。仮払金の差し引きも</span></span></a></div></div>

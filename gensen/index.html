@@ -123,36 +123,36 @@ footer a{color:inherit}footer{text-align:center;font-size:.78rem;color:var(--sub
 
 <div class="ad">広告</div>
 
-<div class="card">
- <section class="tldr" aria-label="このツールについて">
-  <h2 class="sec-t">源泉徴収税 計算ツールでできること</h2>
-  <p class="lead">報酬・料金にかかる源泉徴収税を無料・登録不要で計算できるWebツールです。支払金額100万円以下は10.21%、100万円を超える部分は20.42%で計算し、手取り額からの逆算や、インボイス対応の請求書PDFの作成もできます。</p>
-  <ul class="feat"><li>源泉徴収税の自動計算(100万円以下10.21%、超える部分20.42%＋102,100円)</li><li>受け取りたい手取り額から、必要な請求額を逆算</li><li>報酬と消費税を分けて記載した場合の計算(税抜額が基準)</li><li>軽減税率8%、振込手数料の差し引きに対応</li><li>インボイス対応の請求書を作成し、印刷・PDF保存</li><li>入力内容はブラウザ内だけで処理され、サーバーに送信されない</li></ul>
-  <p class="upd">最終更新日：<time datetime="2026-10-21">2026年10月21日</time> ／ 運営：しごと計算ラボ</p>
- </section>
- <h2 class="sec-t" id="who">こんな人・こんな時に</h2>
- <div class="who"><button type="button" data-sc="design"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 38l4-12L32 8l8 8-18 18z"/><path d="M28 12l8 8"/><path d="M10 38l10-2"/></svg></span><b>デザイン料・原稿料を受け取る個人</b><span class="ds">源泉徴収された後の手取りを知りたい</span><span class="go">▶ 使い方を見る</span></button><button type="button" data-sc="net"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="9"/><circle cx="24" cy="24" r="2"/></svg></span><b>手取りを決めてから請求したい人</b><span class="ds">10万円受け取るには、いくら請求すればいい？</span><span class="go">▶ 使い方を見る</span></button><button type="button" data-sc="fee"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16"/><path d="M18 17l6 7 6-7M24 24v10M19 27h10M19 31h10"/></svg></span><b>振込手数料も引かれる人</b><span class="ds">手数料まで引いた、実際の振込額を知りたい</span><span class="go">▶ 使い方を見る</span></button></div>
- <h2>計算方法</h2>
- <ul>
-  <li>支払金額100万円以下：<b>支払金額 × 10.21%</b></li>
-  <li>100万円超：<b>(支払金額 − 100万円) × 20.42% ＋ 102,100円</b></li>
-  <li>1円未満は切り捨て。10.21%は所得税10%に復興特別所得税(その2.1%)を加えた率です</li>
-  <li>報酬と消費税が区分されていれば税抜額、区分されていなければ税込額が基準です</li>
-  <li>消費税は、税率ごとに合計してから端数処理します(インボイス制度のルール)</li>
- </ul>
- <h2>よくある質問</h2>
- <div class="faq">
- <details><summary><span>手取りを10万円にするには、いくら請求すればいい？</span></summary><p>「手取りから逆算」に100000と入れると、必要な税抜請求額が分かります。</p></details>
- <details><summary><span>源泉徴収税は誰が納めるの？</span></summary><p>報酬を支払う側(取引先)が差し引いて、原則として支払った月の翌月10日までに税務署へ納めます。受け取る側が自分で納める必要はありません。</p></details>
- <details><summary><span>差し引かれた源泉徴収税は戻ってくる？</span></summary><p>確定申告で精算されます。1年間の所得税が源泉徴収された額より少なければ、差額が還付されます。</p></details>
- <details><summary><span>消費税にも源泉徴収はかかる？</span></summary><p>請求書で報酬と消費税を分けて記載していれば、消費税部分にはかかりません。分けていない場合は、税込金額全体が対象になります。</p></details>
- <details><summary><span>交通費・宿泊費にも源泉徴収はかかる？</span></summary><p>報酬と一緒に受け取る交通費などは、原則として対象です。支払者が交通機関やホテルへ直接支払った場合は対象外です。対象外にするときは、明細の「源泉」のチェックを外してください。</p></details>
- <details><summary><span>取引先が個人の場合も源泉徴収される？</span></summary><p>給与を支払っていない個人などは源泉徴収義務者ではないため、源泉徴収されません。その場合は「源泉徴収を行う」のチェックを外してください。</p></details>
- <details><summary><span>どんな仕事が源泉徴収の対象？</span></summary><p>原稿料、デザイン料、講演料、翻訳料、写真撮影料、通訳料、コンサルティング料などが代表例です。プログラミング(システム開発)は、一般的には対象外とされます。</p></details>
- <details><summary><span>振込手数料は差し引いていい？</span></summary><p>本来は支払う側の負担が原則ですが、契約により受け取る側が負担する場合もあります。差し引く場合は「振込手数料を差し引く」をオンにしてください。</p></details>
- <details><summary><span>軽減税率(8%)の品目がある場合は？</span></summary><p>明細ごとに税率(10%・8%・対象外)を選べます。請求書には税率ごとの合計と消費税額が記載されます。</p></details>
- </div>
- <p class="note">※一般的な報酬・料金(所得税法204条1項1号・2号など)を想定しています。司法書士、外交員、ホステスなどへの報酬は計算方法が異なります。最終的な判断は国税庁の資料や税理士にご確認ください。</p>
+<div class="card"><h2 class="sec-t" id="who">こんな人・こんな時に</h2>
+<div class="who"><button data-sc="design" type="button"><span class="wi"><svg aria-hidden="true" viewbox="0 0 48 48"><path d="M10 38l4-12L32 8l8 8-18 18z"></path><path d="M28 12l8 8"></path><path d="M10 38l10-2"></path></svg></span><b>デザイン料・原稿料を受け取る個人</b><span class="ds">源泉徴収された後の手取りを知りたい</span><span class="go">▶ 使い方を見る</span></button><button data-sc="net" type="button"><span class="wi"><svg aria-hidden="true" viewbox="0 0 48 48"><circle cx="24" cy="24" r="16"></circle><circle cx="24" cy="24" r="9"></circle><circle cx="24" cy="24" r="2"></circle></svg></span><b>手取りを決めてから請求したい人</b><span class="ds">10万円受け取るには、いくら請求すればいい？</span><span class="go">▶ 使い方を見る</span></button><button data-sc="fee" type="button"><span class="wi"><svg aria-hidden="true" viewbox="0 0 48 48"><circle cx="24" cy="24" r="16"></circle><path d="M18 17l6 7 6-7M24 24v10M19 27h10M19 31h10"></path></svg></span><b>振込手数料も引かれる人</b><span class="ds">手数料まで引いた、実際の振込額を知りたい</span><span class="go">▶ 使い方を見る</span></button></div>
+
+<details class="sx sxt"><summary><h2 class="sec-t">源泉徴収税 計算ツールでできること</h2></summary><section aria-label="このツールについて" class="tldr">
+
+<p class="lead">報酬・料金にかかる源泉徴収税を無料・登録不要で計算できるWebツールです。支払金額100万円以下は10.21%、100万円を超える部分は20.42%で計算し、手取り額からの逆算や、インボイス対応の請求書PDFの作成もできます。</p>
+<ul class="feat"><li>源泉徴収税の自動計算(100万円以下10.21%、超える部分20.42%＋102,100円)</li><li>受け取りたい手取り額から、必要な請求額を逆算</li><li>報酬と消費税を分けて記載した場合の計算(税抜額が基準)</li><li>軽減税率8%、振込手数料の差し引きに対応</li><li>インボイス対応の請求書を作成し、印刷・PDF保存</li><li>入力内容はブラウザ内だけで処理され、サーバーに送信されない</li></ul>
+<p class="upd">最終更新日：<time datetime="2026-10-21">2026年10月21日</time> ／ 運営：しごと計算ラボ</p>
+</section></details>
+<details class="sx"><summary><h2 class="sec-t">計算方法</h2></summary>
+<ul>
+<li>支払金額100万円以下：<b>支払金額 × 10.21%</b></li>
+<li>100万円超：<b>(支払金額 − 100万円) × 20.42% ＋ 102,100円</b></li>
+<li>1円未満は切り捨て。10.21%は所得税10%に復興特別所得税(その2.1%)を加えた率です</li>
+<li>報酬と消費税が区分されていれば税抜額、区分されていなければ税込額が基準です</li>
+<li>消費税は、税率ごとに合計してから端数処理します(インボイス制度のルール)</li>
+</ul>
+</details><h2 class="sec-t">よくある質問</h2>
+<div class="faq">
+<details><summary><span>手取りを10万円にするには、いくら請求すればいい？</span></summary><p>「手取りから逆算」に100000と入れると、必要な税抜請求額が分かります。</p></details>
+<details><summary><span>源泉徴収税は誰が納めるの？</span></summary><p>報酬を支払う側(取引先)が差し引いて、原則として支払った月の翌月10日までに税務署へ納めます。受け取る側が自分で納める必要はありません。</p></details>
+<details><summary><span>差し引かれた源泉徴収税は戻ってくる？</span></summary><p>確定申告で精算されます。1年間の所得税が源泉徴収された額より少なければ、差額が還付されます。</p></details>
+<details><summary><span>消費税にも源泉徴収はかかる？</span></summary><p>請求書で報酬と消費税を分けて記載していれば、消費税部分にはかかりません。分けていない場合は、税込金額全体が対象になります。</p></details>
+<details><summary><span>交通費・宿泊費にも源泉徴収はかかる？</span></summary><p>報酬と一緒に受け取る交通費などは、原則として対象です。支払者が交通機関やホテルへ直接支払った場合は対象外です。対象外にするときは、明細の「源泉」のチェックを外してください。</p></details>
+<details><summary><span>取引先が個人の場合も源泉徴収される？</span></summary><p>給与を支払っていない個人などは源泉徴収義務者ではないため、源泉徴収されません。その場合は「源泉徴収を行う」のチェックを外してください。</p></details>
+<details><summary><span>どんな仕事が源泉徴収の対象？</span></summary><p>原稿料、デザイン料、講演料、翻訳料、写真撮影料、通訳料、コンサルティング料などが代表例です。プログラミング(システム開発)は、一般的には対象外とされます。</p></details>
+<details><summary><span>振込手数料は差し引いていい？</span></summary><p>本来は支払う側の負担が原則ですが、契約により受け取る側が負担する場合もあります。差し引く場合は「振込手数料を差し引く」をオンにしてください。</p></details>
+<details><summary><span>軽減税率(8%)の品目がある場合は？</span></summary><p>明細ごとに税率(10%・8%・対象外)を選べます。請求書には税率ごとの合計と消費税額が記載されます。</p></details>
+</div>
+<p class="note">※一般的な報酬・料金(所得税法204条1項1号・2号など)を想定しています。司法書士、外交員、ホステスなどへの報酬は計算方法が異なります。最終的な判断は国税庁の資料や税理士にご確認ください。</p>
 </div>
 
 <div class="card"><div class="sharebox" style="border:0;padding:0;margin:0 0 18px"><h2>このツールをシェア</h2><p>お仕事仲間や、同じようにフリーランスで働く方に教えていただけるとうれしいです。</p><div class="sbtns" data-share></div></div><h2>関連ツール</h2><div class="rel"><a href="/mitsumori/" style="--c:#0d8a7f"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h18l8 8v28H12z"/><path d="M30 6v8h8"/><path d="M18 22h12M18 28h7"/><path d="M29 41l11-11 3.5 3.5-11 11H29z"/></svg></span><span><b>見積書 作成</b><span class="d">請求書・領収書にワンクリックで切り替え</span></span></a><a href="/nohinsho/" style="--c:#0377b3"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 17l16-8 16 8v19l-16 8-16-8z"/><path d="M8 17l16 8 16-8"/><path d="M24 25v19"/><path d="M14 29l5 2.5"/></svg></span><span><b>納品書 作成</b><span class="d">見積書の内容からそのまま作成</span></span></a><a href="/seikyusho/" style="--c:#4f46e5"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h18l8 8v28H12z"/><path d="M30 6v8h8"/><path d="M19 20l6 7 6-7M25 27v10M20 30h10M20 34h10"/></svg></span><span><b>請求書 作成</b><span class="d">インボイス対応、源泉徴収・振込手数料にも対応</span></span></a><a href="/ryoshusho/" style="--c:#d9540f"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h24v36l-4-3-4 3-4-3-4 3-4-3-4 3z"/><path d="M18 22l5 5 8-9"/></svg></span><span><b>領収書 作成</b><span class="d">収入印紙の要否を自動で判定</span></span></a><a href="/hacchusho/" style="--c:#be123c"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 10h20v32H12z"/><path d="M17 6h10v7H17z"/><path d="M17 22h10M17 28h7"/><path d="M28 36h15M39 32l4 4-4 4"/></svg></span><span><b>発注書・注文書 作成</b><span class="d">外注先・仕入先に仕事を頼むときに</span></span></a><a href="/sofujo/" style="--c:#16803c"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 13h36v24H6z"/><path d="M6 13l18 14 18-14"/></svg></span><span><b>送付状 作成</b><span class="d">郵送・FAXで送るときに。時候の挨拶も自動</span></span></a><a href="/eigyobi/" style="--c:#6d28d9"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 11h32v30H8z"/><path d="M8 19h32"/><path d="M16 7v8M32 7v8"/><path d="M18 30l4 4 8-8"/></svg></span><span><b>営業日・支払期日 計算</b><span class="d">月末締め翌月末払いなどの支払日を、土日祝を除いて計算</span></span></a><a href="/shohizei/" style="--c:#a21caf"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 25L23 8h17v17L23 42z"/><circle cx="33" cy="15" r="2.5"/><path d="M17 32l10-10"/><circle cx="17.5" cy="23.5" r="2"/><circle cx="26.5" cy="31.5" r="2"/></svg></span><span><b>消費税計算(税込・税抜)</b><span class="d">税抜⇔税込を10%・8%で計算、混在にも対応</span></span></a><a href="/hiwari/" style="--c:#b45309"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 11h32v30H8z"/><path d="M8 19h32"/><path d="M16 7v8M32 7v8"/><path d="M15 30h18M15 26v8M33 26v8"/></svg></span><span><b>日割り計算</b><span class="d">家賃・利用料・給与の日割りを、日付から計算</span></span></a><a href="/keihi/" style="--c:#4d7c0f"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M7 15h31v26H7z"/><path d="M7 15l24-7v7"/><path d="M28 24h12v9H28z"/><circle cx="33" cy="28.5" r="1.2"/></svg></span><span><b>経費精算書 作成</b><span class="d">立て替えた経費・交通費を精算。仮払金の差し引きも</span></span></a></div></div>

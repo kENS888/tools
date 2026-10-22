@@ -202,81 +202,75 @@ header .hint{display:inline-block;margin-top:10px;color:#fff;font-size:.82rem;fo
 
 <div class="ad">広告</div>
 
-<div class="card">
- <section class="tldr" aria-label="このツールについて">
-  <h2 class="sec-t">日割り計算ツールでできること</h2>
-  <p class="lead">月額と期間(開始日・終了日)から、家賃・利用料・給与の日割り額を無料・登録不要で計算できるWebツールです。月の途中の入居・解約や、入社・退職した月の給与に使えます。</p>
-  <ul class="feat"><li>家賃・利用料の日割り：月額 ÷ その月の日数 × 利用日数(30日で割る・年額÷365日にも対応)</li><li>給与の日割り：月給 ÷ その月の所定労働日数(土日祝休み) × 出勤日数(暦日・30日・日数の指定にも対応)</li><li>「働いた日数分を払う」と「休んだ日数分を引く(欠勤控除)」を切り替えられる</li><li>月をまたぐ期間は月ごとに分けて計算し、1か月まるごとの月は満額</li><li>端数処理(切り捨て・四捨五入・切り上げ)を選べる</li><li>計算した金額のまま請求書を作成できる</li><li>入力内容はブラウザ内だけで処理され、サーバーに送信されない</li></ul>
-  <p class="upd">最終更新日：<time datetime="2026-10-22">2026年10月22日</time> ／ 運営：しごと計算ラボ</p>
- </section>
+<div class="card"><h2 class="sec-t" id="who">こんな人・こんな時に</h2>
+<div class="who">
+<button data-sc="move" type="button"><span class="wi"><svg aria-hidden="true" class="ico" viewbox="0 0 24 24"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-6h4v6"></path></svg></span><b>月の途中で引っ越す人</b><span class="ds">入居した月・退去する月の家賃がいくらになるか知りたい</span><span class="go">▶ 使い方を見る</span></button>
+<button data-sc="job" type="button"><span class="wi"><svg aria-hidden="true" class="ico" viewbox="0 0 24 24"><rect height="13" rx="2" width="18" x="3" y="6"></rect><path d="M3 10h18M16 15h2"></path><path d="M7 6V4.5A1.5 1.5 0 0 1 8.5 3h7A1.5 1.5 0 0 1 17 4.5V6"></path></svg></span><b>月の途中で入社・退職した人</b><span class="ds">最初の月・最後の月の給料がいくらもらえるか知りたい</span><span class="go">▶ 使い方を見る</span></button>
+<button data-sc="hr" type="button"><span class="wi"><svg aria-hidden="true" class="ico" viewbox="0 0 24 24"><path d="M12 3v18M3 8h18"></path><path d="M6 8l-3 6a3 3 0 0 0 6 0zM18 8l-3 6a3 3 0 0 0 6 0z"></path></svg></span><b>会社の総務・経理の人</b><span class="ds">入社・退職した社員の給料や、欠勤した日の分を計算したい</span><span class="go">▶ 使い方を見る</span></button>
+<button data-sc="owner" type="button"><span class="wi"><svg aria-hidden="true" class="ico" viewbox="0 0 24 24"><rect height="18" rx="2" width="16" x="4" y="3"></rect><path d="M8 7h8M8 11h8M8 15h5"></path></svg></span><b>大家さん・管理会社・お店</b><span class="ds">月の途中からの契約や解約で、請求する金額を出したい</span><span class="go">▶ 使い方を見る</span></button>
+<button data-sc="svc" type="button"><span class="wi"><svg aria-hidden="true" class="ico" viewbox="0 0 24 24"><rect height="11" rx="3" width="18" x="3" y="7"></rect><circle cx="8" cy="18" r="2"></circle><circle cx="16" cy="18" r="2"></circle></svg></span><b>駐車場・レンタル・習い事</b><span class="ds">月額のサービスを月の途中で始めた・やめた時の料金を確かめたい</span><span class="go">▶ 使い方を見る</span></button>
+<button data-sc="pick" type="button"><span class="wi"><svg aria-hidden="true" class="ico" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><b>何日にやめるか迷っている人</b><span class="ds">カレンダーで日付ごとの金額を見比べて、ちょうどいい日を選びたい</span><span class="go">▶ 使い方を見る</span></button>
+</div>
 
- <h2 class="sec-t" id="about">日割り計算とは？</h2>
- <p class="lead2">家賃や給料のような「1か月いくら」の金額を、<b>1日あたりの金額に直して、使った日数(働いた日数)の分だけ払う</b>計算です。月の途中から始めたり、途中でやめたりした時に使います。</p>
- <div class="ex">
-  <p class="ext">例：家賃9万円の部屋に、11月15日から住んだ場合</p>
-  <div class="strip" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></div>
-  <div class="stl"><span>11月1日</span><span>15日から住む</span><span>30日</span></div>
-  <div class="fx"><span class="pl"><b>90,000円</b><small>1か月の家賃</small></span><span class="op">÷</span><span class="pl"><b>30日</b><small>11月の日数</small></span><span class="op">＝</span><span class="pl"><b>3,000円</b><small>1日あたり</small></span><span class="op">×</span><span class="pl k"><b>16日</b><small>住んだ日数</small></span><span class="op">＝</span><span class="pl k"><b>48,000円</b><small>11月に払う家賃</small></span></div>
-  <p class="note">1か月分の90,000円ではなく、住んだ16日分の48,000円を払えばよい、という考え方です。</p>
- </div>
+<details class="sx sxt"><summary><h2 class="sec-t">日割り計算ツールでできること</h2></summary><section aria-label="このツールについて" class="tldr">
 
- <h2 class="sec-t">こんな人・こんな時に</h2>
- <div class="who">
-  <button type="button" data-sc="move"><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span><b>月の途中で引っ越す人</b><span class="ds">入居した月・退去する月の家賃がいくらになるか知りたい</span><span class="go">▶ 使い方を見る</span></button>
-  <button type="button" data-sc="job"><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/><path d="M7 6V4.5A1.5 1.5 0 0 1 8.5 3h7A1.5 1.5 0 0 1 17 4.5V6"/></svg></span><b>月の途中で入社・退職した人</b><span class="ds">最初の月・最後の月の給料がいくらもらえるか知りたい</span><span class="go">▶ 使い方を見る</span></button>
-  <button type="button" data-sc="hr"><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 8h18"/><path d="M6 8l-3 6a3 3 0 0 0 6 0zM18 8l-3 6a3 3 0 0 0 6 0z"/></svg></span><b>会社の総務・経理の人</b><span class="ds">入社・退職した社員の給料や、欠勤した日の分を計算したい</span><span class="go">▶ 使い方を見る</span></button>
-  <button type="button" data-sc="owner"><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></span><b>大家さん・管理会社・お店</b><span class="ds">月の途中からの契約や解約で、請求する金額を出したい</span><span class="go">▶ 使い方を見る</span></button>
-  <button type="button" data-sc="svc"><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="11" rx="3"/><circle cx="8" cy="18" r="2"/><circle cx="16" cy="18" r="2"/></svg></span><b>駐車場・レンタル・習い事</b><span class="ds">月額のサービスを月の途中で始めた・やめた時の料金を確かめたい</span><span class="go">▶ 使い方を見る</span></button>
-  <button type="button" data-sc="pick"><span class="wi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><b>何日にやめるか迷っている人</b><span class="ds">カレンダーで日付ごとの金額を見比べて、ちょうどいい日を選びたい</span><span class="go">▶ 使い方を見る</span></button>
- </div>
-
- <h2 class="sec-t">使い方</h2>
- <ol class="steps">
-  <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><b>種類を選ぶ</b>家賃・利用料か、給与か。</li>
-  <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 12h8"/></svg><b>月額を入れる</b>家賃・利用料なら月額、給与なら月給。</li>
-  <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4M9 15h6"/></svg><b>カレンダーで選ぶ</b>日付をタップすると終了日が変わり、開始日より前を押すと開始日が変わります。開始日を後ろにずらす時は「開始日」を押してから。</li>
-  <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h6"/><circle cx="18" cy="16" r="3"/></svg><b>割り方を合わせる</b>契約書や就業規則に合わせて「くわしく見る」で変更。</li>
- </ol>
-
- <h2 class="sec-t">計算方法</h2>
- <ul>
-  <li>家賃・利用料：<b>月額 ÷ その月の日数 × 利用日数</b>(30日で割る場合は 月額 ÷ 30日 × 利用日数、年額で割る場合は 月額 × 12 ÷ 365日 × 利用日数)</li>
-  <li>給与：<b>月給 ÷ その月の所定労働日数 × 出勤日数</b>。所定労働日は土曜・日曜・祝日を除いた日として数えます(年末年始は含みます)</li>
-  <li>休んだ日数分を引く場合：<b>月給 − 月給 ÷ 割る日数 × 欠勤日数</b>(欠勤日数 ＝ その月の日数 − 出勤日数)</li>
-  <li>開始日と終了日は両方とも数えます。月をまたぐ場合は月ごとに計算し、1か月まるごとの月は満額です</li>
-  <li>1円未満の端数は、初期設定では切り捨てです(休んだ日数分を引く場合は、引く金額の端数を処理します)</li>
- </ul>
-
- <h2 class="sec-t">月ごとの日数と所定労働日数(2026年・2027年)</h2>
- <table class="hyt"><thead><tr><th>月</th><th>2026年 日数</th><th>2026年 所定労働日</th><th>2027年 日数</th><th>2027年 所定労働日</th></tr></thead><tbody>
- <tr><td>1月</td><td>31日</td><td>20日</td><td>31日</td><td>19日</td></tr>
- <tr><td>2月</td><td>28日</td><td>18日</td><td>28日</td><td>18日</td></tr>
- <tr><td>3月</td><td>31日</td><td>21日</td><td>31日</td><td>22日</td></tr>
- <tr><td>4月</td><td>30日</td><td>21日</td><td>30日</td><td>21日</td></tr>
- <tr><td>5月</td><td>31日</td><td>18日</td><td>31日</td><td>18日</td></tr>
- <tr><td>6月</td><td>30日</td><td>22日</td><td>30日</td><td>22日</td></tr>
- <tr><td>7月</td><td>31日</td><td>22日</td><td>31日</td><td>21日</td></tr>
- <tr><td>8月</td><td>31日</td><td>20日</td><td>31日</td><td>21日</td></tr>
- <tr><td>9月</td><td>30日</td><td>19日</td><td>30日</td><td>20日</td></tr>
- <tr><td>10月</td><td>31日</td><td>21日</td><td>31日</td><td>20日</td></tr>
- <tr><td>11月</td><td>30日</td><td>19日</td><td>30日</td><td>20日</td></tr>
- <tr><td>12月</td><td>31日</td><td>23日</td><td>31日</td><td>23日</td></tr>
- </tbody></table>
- <p class="note">※所定労働日は、土曜・日曜・祝日(振替休日を含む)を除いた日数です。年末年始や会社独自の休日は含めていません。</p>
-
- <h2 class="sec-t">よくある質問</h2>
- <div class="faq">
- <details><summary><span>日割り計算とは？</span></summary><p>「1か月いくら」の金額を1日あたりに直して、実際に使った日数(働いた日数)の分だけを計算することです。たとえば家賃9万円の部屋に11月15日から住むと、11月の家賃は9万円ではなく、16日分の48,000円になります。</p></details>
- <details><summary><span>家賃の日割りはどう計算する？</span></summary><p>月額の家賃をその月の日数で割り、住んだ日数をかけます。たとえば家賃90,000円で11月15日に入居した場合、90,000円 ÷ 30日 × 16日 ＝ 48,000円です。</p></details>
- <details><summary><span>その月の日数で割るのと、30日で割るのはどちらが正しい？</span></summary><p>法律では決まっておらず、契約書の定めに従います。その月の日数で割る方法が多いですが、30日で割る方法や、年額を365日で割る方法もあります。契約書に書かれていない場合は、相手に確認してください。</p></details>
- <details><summary><span>入居日や退去日はその日も数える？</span></summary><p>一般的には、開始日と終了日の両方を含めて数えます。このツールも両方を含めます。11月15日〜11月30日なら16日間です。</p></details>
- <details><summary><span>給与の日割りはどう計算する？</span></summary><p>会社の就業規則(賃金規程)の定めに従います。よく使われるのは、月給 ÷ その月の所定労働日数 × 出勤日数です。たとえば月給300,000円で2026年11月16日に入社した場合、11月の所定労働日数は19日(土日祝休み)、出勤日は10日なので、300,000円 ÷ 19日 × 10日 ＝ 157,894円(1円未満切り捨て)です。</p></details>
- <details><summary><span>「働いた日数分を払う」と「休んだ日数分を引く」で金額が違うのはなぜ？</span></summary><p>割る日数が、その月の実際の日数と違う場合に差が出ます。たとえば月給300,000円を30日で割る会社で、31日ある10月に16日間在籍した場合、働いた日数分を払うと300,000円 ÷ 30日 × 16日 ＝ 160,000円、休んだ15日分を引くと300,000円 − 300,000円 ÷ 30日 × 15日 ＝ 150,000円です。どちらを使うかは就業規則で確認してください。</p></details>
- <details><summary><span>月平均所定労働日数で割る場合は？</span></summary><p>「くわしく見る」の「割る日数」で「日数を指定」を選び、月平均所定労働日数(年間の所定労働日数 ÷ 12)を入れてください。出勤日数は土日祝を除いて数えます。</p></details>
- <details><summary><span>1円未満の端数はどうする？</span></summary><p>決まりはなく、契約書や賃金規程によります。一般には切り捨てが多く使われています。このツールの初期設定も切り捨てです。</p></details>
- <details><summary><span>月をまたぐ期間はどう計算する？</span></summary><p>月ごとに分けて計算し、合計します。1か月まるごとの月は満額、月の途中から・途中までの月だけを日割りにします。</p></details>
- </div>
- <p class="note">※給与の計算方法は、労働基準法第89条により就業規則に定めることになっています。家賃・利用料は契約書の定めが優先します。実際の金額は、就業規則や契約書をご確認ください。</p>
+<p class="lead">月額と期間(開始日・終了日)から、家賃・利用料・給与の日割り額を無料・登録不要で計算できるWebツールです。月の途中の入居・解約や、入社・退職した月の給与に使えます。</p>
+<ul class="feat"><li>家賃・利用料の日割り：月額 ÷ その月の日数 × 利用日数(30日で割る・年額÷365日にも対応)</li><li>給与の日割り：月給 ÷ その月の所定労働日数(土日祝休み) × 出勤日数(暦日・30日・日数の指定にも対応)</li><li>「働いた日数分を払う」と「休んだ日数分を引く(欠勤控除)」を切り替えられる</li><li>月をまたぐ期間は月ごとに分けて計算し、1か月まるごとの月は満額</li><li>端数処理(切り捨て・四捨五入・切り上げ)を選べる</li><li>計算した金額のまま請求書を作成できる</li><li>入力内容はブラウザ内だけで処理され、サーバーに送信されない</li></ul>
+<p class="upd">最終更新日：<time datetime="2026-10-22">2026年10月22日</time> ／ 運営：しごと計算ラボ</p>
+</section></details>
+<details class="sx" id="about"><summary><h2 class="sec-t">日割り計算とは？</h2></summary>
+<p class="lead2">家賃や給料のような「1か月いくら」の金額を、<b>1日あたりの金額に直して、使った日数(働いた日数)の分だけ払う</b>計算です。月の途中から始めたり、途中でやめたりした時に使います。</p>
+<div class="ex">
+<p class="ext">例：家賃9万円の部屋に、11月15日から住んだ場合</p>
+<div aria-hidden="true" class="strip"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></div>
+<div class="stl"><span>11月1日</span><span>15日から住む</span><span>30日</span></div>
+<div class="fx"><span class="pl"><b>90,000円</b><small>1か月の家賃</small></span><span class="op">÷</span><span class="pl"><b>30日</b><small>11月の日数</small></span><span class="op">＝</span><span class="pl"><b>3,000円</b><small>1日あたり</small></span><span class="op">×</span><span class="pl k"><b>16日</b><small>住んだ日数</small></span><span class="op">＝</span><span class="pl k"><b>48,000円</b><small>11月に払う家賃</small></span></div>
+<p class="note">1か月分の90,000円ではなく、住んだ16日分の48,000円を払えばよい、という考え方です。</p>
+</div>
+</details><details class="sx"><summary><h2 class="sec-t">使い方</h2></summary>
+<ol class="steps">
+<li><svg aria-hidden="true" class="ico" viewbox="0 0 24 24"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path></svg><b>種類を選ぶ</b>家賃・利用料か、給与か。</li>
+<li><svg aria-hidden="true" class="ico" viewbox="0 0 24 24"><rect height="12" rx="2" width="18" x="3" y="6"></rect><path d="M8 12h8"></path></svg><b>月額を入れる</b>家賃・利用料なら月額、給与なら月給。</li>
+<li><svg aria-hidden="true" class="ico" viewbox="0 0 24 24"><rect height="15.5" rx="2" width="17" x="3.5" y="5"></rect><path d="M3.5 9.5h17M8 3v4M16 3v4M9 15h6"></path></svg><b>カレンダーで選ぶ</b>日付をタップすると終了日が変わり、開始日より前を押すと開始日が変わります。開始日を後ろにずらす時は「開始日」を押してから。</li>
+<li><svg aria-hidden="true" class="ico" viewbox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h6"></path><circle cx="18" cy="16" r="3"></circle></svg><b>割り方を合わせる</b>契約書や就業規則に合わせて「くわしく見る」で変更。</li>
+</ol>
+</details><details class="sx"><summary><h2 class="sec-t">計算方法</h2></summary>
+<ul>
+<li>家賃・利用料：<b>月額 ÷ その月の日数 × 利用日数</b>(30日で割る場合は 月額 ÷ 30日 × 利用日数、年額で割る場合は 月額 × 12 ÷ 365日 × 利用日数)</li>
+<li>給与：<b>月給 ÷ その月の所定労働日数 × 出勤日数</b>。所定労働日は土曜・日曜・祝日を除いた日として数えます(年末年始は含みます)</li>
+<li>休んだ日数分を引く場合：<b>月給 − 月給 ÷ 割る日数 × 欠勤日数</b>(欠勤日数 ＝ その月の日数 − 出勤日数)</li>
+<li>開始日と終了日は両方とも数えます。月をまたぐ場合は月ごとに計算し、1か月まるごとの月は満額です</li>
+<li>1円未満の端数は、初期設定では切り捨てです(休んだ日数分を引く場合は、引く金額の端数を処理します)</li>
+</ul>
+</details><details class="sx"><summary><h2 class="sec-t">月ごとの日数と所定労働日数(2026年・2027年)</h2></summary>
+<table class="hyt"><thead><tr><th>月</th><th>2026年 日数</th><th>2026年 所定労働日</th><th>2027年 日数</th><th>2027年 所定労働日</th></tr></thead><tbody>
+<tr><td>1月</td><td>31日</td><td>20日</td><td>31日</td><td>19日</td></tr>
+<tr><td>2月</td><td>28日</td><td>18日</td><td>28日</td><td>18日</td></tr>
+<tr><td>3月</td><td>31日</td><td>21日</td><td>31日</td><td>22日</td></tr>
+<tr><td>4月</td><td>30日</td><td>21日</td><td>30日</td><td>21日</td></tr>
+<tr><td>5月</td><td>31日</td><td>18日</td><td>31日</td><td>18日</td></tr>
+<tr><td>6月</td><td>30日</td><td>22日</td><td>30日</td><td>22日</td></tr>
+<tr><td>7月</td><td>31日</td><td>22日</td><td>31日</td><td>21日</td></tr>
+<tr><td>8月</td><td>31日</td><td>20日</td><td>31日</td><td>21日</td></tr>
+<tr><td>9月</td><td>30日</td><td>19日</td><td>30日</td><td>20日</td></tr>
+<tr><td>10月</td><td>31日</td><td>21日</td><td>31日</td><td>20日</td></tr>
+<tr><td>11月</td><td>30日</td><td>19日</td><td>30日</td><td>20日</td></tr>
+<tr><td>12月</td><td>31日</td><td>23日</td><td>31日</td><td>23日</td></tr>
+</tbody></table>
+<p class="note">※所定労働日は、土曜・日曜・祝日(振替休日を含む)を除いた日数です。年末年始や会社独自の休日は含めていません。</p>
+</details><h2 class="sec-t">よくある質問</h2>
+<div class="faq">
+<details><summary><span>日割り計算とは？</span></summary><p>「1か月いくら」の金額を1日あたりに直して、実際に使った日数(働いた日数)の分だけを計算することです。たとえば家賃9万円の部屋に11月15日から住むと、11月の家賃は9万円ではなく、16日分の48,000円になります。</p></details>
+<details><summary><span>家賃の日割りはどう計算する？</span></summary><p>月額の家賃をその月の日数で割り、住んだ日数をかけます。たとえば家賃90,000円で11月15日に入居した場合、90,000円 ÷ 30日 × 16日 ＝ 48,000円です。</p></details>
+<details><summary><span>その月の日数で割るのと、30日で割るのはどちらが正しい？</span></summary><p>法律では決まっておらず、契約書の定めに従います。その月の日数で割る方法が多いですが、30日で割る方法や、年額を365日で割る方法もあります。契約書に書かれていない場合は、相手に確認してください。</p></details>
+<details><summary><span>入居日や退去日はその日も数える？</span></summary><p>一般的には、開始日と終了日の両方を含めて数えます。このツールも両方を含めます。11月15日〜11月30日なら16日間です。</p></details>
+<details><summary><span>給与の日割りはどう計算する？</span></summary><p>会社の就業規則(賃金規程)の定めに従います。よく使われるのは、月給 ÷ その月の所定労働日数 × 出勤日数です。たとえば月給300,000円で2026年11月16日に入社した場合、11月の所定労働日数は19日(土日祝休み)、出勤日は10日なので、300,000円 ÷ 19日 × 10日 ＝ 157,894円(1円未満切り捨て)です。</p></details>
+<details><summary><span>「働いた日数分を払う」と「休んだ日数分を引く」で金額が違うのはなぜ？</span></summary><p>割る日数が、その月の実際の日数と違う場合に差が出ます。たとえば月給300,000円を30日で割る会社で、31日ある10月に16日間在籍した場合、働いた日数分を払うと300,000円 ÷ 30日 × 16日 ＝ 160,000円、休んだ15日分を引くと300,000円 − 300,000円 ÷ 30日 × 15日 ＝ 150,000円です。どちらを使うかは就業規則で確認してください。</p></details>
+<details><summary><span>月平均所定労働日数で割る場合は？</span></summary><p>「くわしく見る」の「割る日数」で「日数を指定」を選び、月平均所定労働日数(年間の所定労働日数 ÷ 12)を入れてください。出勤日数は土日祝を除いて数えます。</p></details>
+<details><summary><span>1円未満の端数はどうする？</span></summary><p>決まりはなく、契約書や賃金規程によります。一般には切り捨てが多く使われています。このツールの初期設定も切り捨てです。</p></details>
+<details><summary><span>月をまたぐ期間はどう計算する？</span></summary><p>月ごとに分けて計算し、合計します。1か月まるごとの月は満額、月の途中から・途中までの月だけを日割りにします。</p></details>
+</div>
+<p class="note">※給与の計算方法は、労働基準法第89条により就業規則に定めることになっています。家賃・利用料は契約書の定めが優先します。実際の金額は、就業規則や契約書をご確認ください。</p>
 </div>
 
 <div class="card"><div class="sharebox" style="border:0;padding:0;margin:0 0 18px"><h2>このツールをシェア</h2><p>お仕事仲間や、同じように事務作業をする方に教えていただけるとうれしいです。</p><div class="sbtns" data-share></div></div><h2>関連ツール</h2><div class="rel"><a href="/seikyusho/" style="--c:#4f46e5"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h18l8 8v28H12z"/><path d="M30 6v8h8"/><path d="M19 20l6 7 6-7M25 27v10M20 30h10M20 34h10"/></svg></span><span><b>請求書 作成</b><span class="d">インボイス対応、源泉徴収・振込手数料にも対応</span></span></a><a href="/mitsumori/" style="--c:#0d8a7f"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h18l8 8v28H12z"/><path d="M30 6v8h8"/><path d="M18 22h12M18 28h7"/><path d="M29 41l11-11 3.5 3.5-11 11H29z"/></svg></span><span><b>見積書 作成</b><span class="d">請求書・領収書にワンクリックで切り替え</span></span></a><a href="/nohinsho/" style="--c:#0377b3"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 17l16-8 16 8v19l-16 8-16-8z"/><path d="M8 17l16 8 16-8"/><path d="M24 25v19"/><path d="M14 29l5 2.5"/></svg></span><span><b>納品書 作成</b><span class="d">見積書の内容からそのまま作成</span></span></a><a href="/ryoshusho/" style="--c:#d9540f"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h24v36l-4-3-4 3-4-3-4 3-4-3-4 3z"/><path d="M18 22l5 5 8-9"/></svg></span><span><b>領収書 作成</b><span class="d">収入印紙の要否を自動で判定</span></span></a><a href="/hacchusho/" style="--c:#be123c"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 10h20v32H12z"/><path d="M17 6h10v7H17z"/><path d="M17 22h10M17 28h7"/><path d="M28 36h15M39 32l4 4-4 4"/></svg></span><span><b>発注書・注文書 作成</b><span class="d">外注先・仕入先に仕事を頼むときに</span></span></a><a href="/sofujo/" style="--c:#16803c"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 13h36v24H6z"/><path d="M6 13l18 14 18-14"/></svg></span><span><b>送付状 作成</b><span class="d">郵送・FAXで送るときに。時候の挨拶も自動</span></span></a><a href="/gensen/" style="--c:#2554d8"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><circle cx="20" cy="27" r="13"/><path d="M15 21l5 6 5-6M20 27v8M16 30h8"/><circle cx="37" cy="12" r="7"/><path d="M34 12h6"/></svg></span><span><b>源泉徴収税 計算</b><span class="d">手取りからの逆算、請求書PDFまで</span></span></a><a href="/eigyobi/" style="--c:#6d28d9"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 11h32v30H8z"/><path d="M8 19h32"/><path d="M16 7v8M32 7v8"/><path d="M18 30l4 4 8-8"/></svg></span><span><b>営業日・支払期日 計算</b><span class="d">月末締め翌月末払いなどの支払日を、土日祝を除いて計算</span></span></a><a href="/shohizei/" style="--c:#a21caf"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 25L23 8h17v17L23 42z"/><circle cx="33" cy="15" r="2.5"/><path d="M17 32l10-10"/><circle cx="17.5" cy="23.5" r="2"/><circle cx="26.5" cy="31.5" r="2"/></svg></span><span><b>消費税計算(税込・税抜)</b><span class="d">税込⇔税抜と消費税額を、10%・8%で計算</span></span></a><a href="/keihi/" style="--c:#4d7c0f"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M7 15h31v26H7z"/><path d="M7 15l24-7v7"/><path d="M28 24h12v9H28z"/><circle cx="33" cy="28.5" r="1.2"/></svg></span><span><b>経費精算書 作成</b><span class="d">立て替えた経費・交通費を精算。仮払金の差し引きも</span></span></a></div></div>

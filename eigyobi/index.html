@@ -174,49 +174,45 @@ footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40p
 
 <div class="ad">広告</div>
 
-<div class="card">
- <section class="tldr" aria-label="このツールについて">
-  <h2 class="sec-t">営業日・支払期日 計算ツールでできること</h2>
-  <p class="lead">取引条件(締め日・支払日)から支払期日を、土日・祝日・年末年始を除いて計算できる無料のWebツールです。〇営業日後・〇営業日前の日付や、期間の営業日数も計算できます。</p>
-  <ul class="feat"><li>「月末締め翌月末払い」「20日締め翌月10日払い」などの支払期日を計算</li><li>支払日が土日祝のときの前営業日・翌営業日への調整</li><li>今後12か月分の締め日・支払日の一覧(コピーしてExcelに貼り付け可能)</li><li>〇営業日後・〇営業日前の日付を計算</li><li>2つの日付の間の営業日数・暦日数を計算</li><li>2020〜2099年の祝日(振替休日・国民の休日を含む)、年末年始、独自の休日に対応</li><li>入力内容はブラウザ内だけで処理され、サーバーに送信されない</li></ul>
-  <p class="upd">最終更新日：<time datetime="2026-10-21">2026年10月21日</time> ／ 運営：しごと計算ラボ</p>
- </section>
+<div class="card"><h2 class="sec-t" id="who">こんな人・こんな時に</h2>
+<div class="who"><button data-sc="pay" type="button"><span class="wi"><svg aria-hidden="true" viewbox="0 0 48 48"><path d="M8 11h32v30H8z"></path><path d="M8 19h32"></path><path d="M16 7v8M32 7v8"></path><path d="M18 30l4 4 8-8"></path></svg></span><b>請求書の支払期日を知りたい人</b><span class="ds">「月末締め翌月末払い」の支払日はいつ？</span><span class="go">▶ 使い方を見る</span></button><button data-sc="biz" type="button"><span class="wi"><svg aria-hidden="true" viewbox="0 0 48 48"><path d="M8 11h32v30H8z"></path><path d="M8 19h32"></path><path d="M16 7v8M32 7v8"></path><path d="M15 30h16M27 26l4 4-4 4"></path></svg></span><b>「〇営業日後」の日付を知りたい人</b><span class="ds">発送や返事の期限を、土日祝を除いて数えたい</span><span class="go">▶ 使い方を見る</span></button><button data-sc="cnt" type="button"><span class="wi"><svg aria-hidden="true" viewbox="0 0 48 48"><path d="M8 11h32v30H8z"></path><path d="M8 19h32"></path><path d="M16 7v8M32 7v8"></path><path d="M15 27h4M22 27h4M29 27h4M15 34h4M22 34h4"></path></svg></span><b>期間の営業日数を数えたい人</b><span class="ds">今月は何日働く日がある？</span><span class="go">▶ 使い方を見る</span></button></div>
 
- <h2 class="sec-t" id="who">こんな人・こんな時に</h2>
- <div class="who"><button type="button" data-sc="pay"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 11h32v30H8z"/><path d="M8 19h32"/><path d="M16 7v8M32 7v8"/><path d="M18 30l4 4 8-8"/></svg></span><b>請求書の支払期日を知りたい人</b><span class="ds">「月末締め翌月末払い」の支払日はいつ？</span><span class="go">▶ 使い方を見る</span></button><button type="button" data-sc="biz"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 11h32v30H8z"/><path d="M8 19h32"/><path d="M16 7v8M32 7v8"/><path d="M15 30h16M27 26l4 4-4 4"/></svg></span><b>「〇営業日後」の日付を知りたい人</b><span class="ds">発送や返事の期限を、土日祝を除いて数えたい</span><span class="go">▶ 使い方を見る</span></button><button type="button" data-sc="cnt"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 11h32v30H8z"/><path d="M8 19h32"/><path d="M16 7v8M32 7v8"/><path d="M15 27h4M22 27h4M29 27h4M15 34h4M22 34h4"/></svg></span><b>期間の営業日数を数えたい人</b><span class="ds">今月は何日働く日がある？</span><span class="go">▶ 使い方を見る</span></button></div>
- <h2 class="sec-t">使い方</h2>
- <ol class="steps">
-  <li><b>タブを選ぶ</b>支払日、〇営業日後、営業日数のどれを知りたいかを選びます。</li>
-  <li><b>2つ入れる</b>支払日なら、取引日と支払条件を選ぶだけ。条件にないものは「その他」で指定できます。</li>
-  <li><b>休日を確認</b>土曜や年末年始、会社独自の休みは「休日の扱い」で変えられます。</li>
-  <li><b>コピーして使う</b>結果と12か月分の支払日はコピーして、メールやExcelに貼り付けられます。</li>
- </ol>
+<details class="sx sxt"><summary><h2 class="sec-t">営業日・支払期日 計算ツールでできること</h2></summary><section aria-label="このツールについて" class="tldr">
 
- <h2 class="sec-t">計算方法</h2>
- <ul>
-  <li><b>締め日</b>：基準日がその月の締め日以前なら当月、過ぎていれば翌月の締め日が対象です(例：20日締めで21日の取引は翌月20日締め)</li>
-  <li><b>支払日</b>：締め日の月から「〇か月後」の指定日です。31日がない月の「末日」は、その月の最終日になります</li>
-  <li><b>休日の調整</b>：支払日が休みなら、前営業日(または翌営業日)にずらします</li>
-  <li><b>営業日</b>：土日・祝日・年末年始・指定した休日以外の日です</li>
-  <li><b>祝日</b>：「国民の祝日に関する法律」に基づき計算しています。春分の日・秋分の日は、国立天文台の計算方法による値です。2028年以降の春分・秋分は、前年2月の官報で正式に決まります</li>
- </ul>
-
- <h2 class="sec-t">2026年・2027年の祝日一覧</h2>
- <div class="hols"><table class="holt"><tr><th colspan="2">2026年</th></tr><tr><td>1月1日(木)</td><td>元日</td></tr><tr><td>1月12日(月)</td><td>成人の日</td></tr><tr><td>2月11日(水)</td><td>建国記念の日</td></tr><tr><td>2月23日(月)</td><td>天皇誕生日</td></tr><tr><td>3月20日(金)</td><td>春分の日</td></tr><tr><td>4月29日(水)</td><td>昭和の日</td></tr><tr><td>5月3日(日)</td><td>憲法記念日</td></tr><tr><td>5月4日(月)</td><td>みどりの日</td></tr><tr><td>5月5日(火)</td><td>こどもの日</td></tr><tr><td>5月6日(水)</td><td>振替休日</td></tr><tr><td>7月20日(月)</td><td>海の日</td></tr><tr><td>8月11日(火)</td><td>山の日</td></tr><tr><td>9月21日(月)</td><td>敬老の日</td></tr><tr><td>9月22日(火)</td><td>国民の休日</td></tr><tr><td>9月23日(水)</td><td>秋分の日</td></tr><tr><td>10月12日(月)</td><td>スポーツの日</td></tr><tr><td>11月3日(火)</td><td>文化の日</td></tr><tr><td>11月23日(月)</td><td>勤労感謝の日</td></tr></table><table class="holt"><tr><th colspan="2">2027年</th></tr><tr><td>1月1日(金)</td><td>元日</td></tr><tr><td>1月11日(月)</td><td>成人の日</td></tr><tr><td>2月11日(木)</td><td>建国記念の日</td></tr><tr><td>2月23日(火)</td><td>天皇誕生日</td></tr><tr><td>3月21日(日)</td><td>春分の日</td></tr><tr><td>3月22日(月)</td><td>振替休日</td></tr><tr><td>4月29日(木)</td><td>昭和の日</td></tr><tr><td>5月3日(月)</td><td>憲法記念日</td></tr><tr><td>5月4日(火)</td><td>みどりの日</td></tr><tr><td>5月5日(水)</td><td>こどもの日</td></tr><tr><td>7月19日(月)</td><td>海の日</td></tr><tr><td>8月11日(水)</td><td>山の日</td></tr><tr><td>9月20日(月)</td><td>敬老の日</td></tr><tr><td>9月23日(木)</td><td>秋分の日</td></tr><tr><td>10月11日(月)</td><td>スポーツの日</td></tr><tr><td>11月3日(水)</td><td>文化の日</td></tr><tr><td>11月23日(火)</td><td>勤労感謝の日</td></tr></table></div>
- <p class="note">出典：内閣府「国民の祝日について」。2020年と2021年は東京オリンピック・パラリンピックに伴い、海の日・スポーツの日・山の日が移動しています(このツールの計算に反映済み)。</p>
-
- <h2 class="sec-t">よくある質問</h2>
- <div class="faq">
- <details><summary><span>「月末締め翌月末払い」とは？</span></summary><p>その月の末日までの取引をまとめて請求し、翌月の末日に支払う条件です。たとえば10月中の取引は10月31日に締め、11月30日に支払います。</p></details>
- <details><summary><span>支払日が土日祝の場合、前と後どちらにずらす？</span></summary><p>契約で決めた方に従います。決めていない場合は、前営業日に支払う会社が多いです。このツールでは「前営業日」「翌営業日」「ずらさない」を切り替えられます。</p></details>
- <details><summary><span>20日締めの場合、21日の取引はいつ締めになる？</span></summary><p>翌月20日の締めになります。締め日を過ぎた取引は次の締めに入るためです。</p></details>
- <details><summary><span>「3営業日後」は当日を含む？</span></summary><p>一般的には含めず、翌営業日を1日目として数えます。月曜日の3営業日後は木曜日です。当日を含める場合は「休日の扱い」で「起算日を1日目として数える」にチェックしてください。</p></details>
- <details><summary><span>営業日とは何日のこと？</span></summary><p>一般的には、土曜日・日曜日・祝日・年末年始を除いた日です。会社によって休日は違うため、「休日の扱い」で土曜日や年末年始、独自の休日を変えられます。</p></details>
- <details><summary><span>年末年始はいつからいつまで休み？</span></summary><p>銀行は12月31日〜1月3日が休業日です。官公庁や多くの会社は12月29日〜1月3日を休みにしています。初期設定は、振込に合わせて銀行の休業日にしています。</p></details>
- <details><summary><span>祝日は何年まで対応している？</span></summary><p>2020年〜2099年に対応しています。祝日法に基づいて計算しており、振替休日と国民の休日も含みます。2028年以降の春分の日・秋分の日は計算による予定日で、前年2月の官報で正式に決まります。</p></details>
- <details><summary><span>2026年の営業日は何日？</span></summary><p>土日・祝日と銀行の休業日(12月31日〜1月3日)を除くと、2026年は242日です。年末年始を12月29日〜1月3日にすると240日です。「営業日数」タブで期間を指定すると、月ごとの営業日数も分かります。</p></details>
- </div>
- <p class="note">※会社ごとの休日や、契約で決めた支払条件が優先されます。法律で定められた期限(下請代金の支払期日など)の判断は、所管官庁の資料や専門家にご確認ください。</p>
+<p class="lead">取引条件(締め日・支払日)から支払期日を、土日・祝日・年末年始を除いて計算できる無料のWebツールです。〇営業日後・〇営業日前の日付や、期間の営業日数も計算できます。</p>
+<ul class="feat"><li>「月末締め翌月末払い」「20日締め翌月10日払い」などの支払期日を計算</li><li>支払日が土日祝のときの前営業日・翌営業日への調整</li><li>今後12か月分の締め日・支払日の一覧(コピーしてExcelに貼り付け可能)</li><li>〇営業日後・〇営業日前の日付を計算</li><li>2つの日付の間の営業日数・暦日数を計算</li><li>2020〜2099年の祝日(振替休日・国民の休日を含む)、年末年始、独自の休日に対応</li><li>入力内容はブラウザ内だけで処理され、サーバーに送信されない</li></ul>
+<p class="upd">最終更新日：<time datetime="2026-10-21">2026年10月21日</time> ／ 運営：しごと計算ラボ</p>
+</section></details>
+<details class="sx"><summary><h2 class="sec-t">使い方</h2></summary>
+<ol class="steps">
+<li><b>タブを選ぶ</b>支払日、〇営業日後、営業日数のどれを知りたいかを選びます。</li>
+<li><b>2つ入れる</b>支払日なら、取引日と支払条件を選ぶだけ。条件にないものは「その他」で指定できます。</li>
+<li><b>休日を確認</b>土曜や年末年始、会社独自の休みは「休日の扱い」で変えられます。</li>
+<li><b>コピーして使う</b>結果と12か月分の支払日はコピーして、メールやExcelに貼り付けられます。</li>
+</ol>
+</details><details class="sx"><summary><h2 class="sec-t">計算方法</h2></summary>
+<ul>
+<li><b>締め日</b>：基準日がその月の締め日以前なら当月、過ぎていれば翌月の締め日が対象です(例：20日締めで21日の取引は翌月20日締め)</li>
+<li><b>支払日</b>：締め日の月から「〇か月後」の指定日です。31日がない月の「末日」は、その月の最終日になります</li>
+<li><b>休日の調整</b>：支払日が休みなら、前営業日(または翌営業日)にずらします</li>
+<li><b>営業日</b>：土日・祝日・年末年始・指定した休日以外の日です</li>
+<li><b>祝日</b>：「国民の祝日に関する法律」に基づき計算しています。春分の日・秋分の日は、国立天文台の計算方法による値です。2028年以降の春分・秋分は、前年2月の官報で正式に決まります</li>
+</ul>
+</details><details class="sx"><summary><h2 class="sec-t">2026年・2027年の祝日一覧</h2></summary>
+<div class="hols"><table class="holt"><tr><th colspan="2">2026年</th></tr><tr><td>1月1日(木)</td><td>元日</td></tr><tr><td>1月12日(月)</td><td>成人の日</td></tr><tr><td>2月11日(水)</td><td>建国記念の日</td></tr><tr><td>2月23日(月)</td><td>天皇誕生日</td></tr><tr><td>3月20日(金)</td><td>春分の日</td></tr><tr><td>4月29日(水)</td><td>昭和の日</td></tr><tr><td>5月3日(日)</td><td>憲法記念日</td></tr><tr><td>5月4日(月)</td><td>みどりの日</td></tr><tr><td>5月5日(火)</td><td>こどもの日</td></tr><tr><td>5月6日(水)</td><td>振替休日</td></tr><tr><td>7月20日(月)</td><td>海の日</td></tr><tr><td>8月11日(火)</td><td>山の日</td></tr><tr><td>9月21日(月)</td><td>敬老の日</td></tr><tr><td>9月22日(火)</td><td>国民の休日</td></tr><tr><td>9月23日(水)</td><td>秋分の日</td></tr><tr><td>10月12日(月)</td><td>スポーツの日</td></tr><tr><td>11月3日(火)</td><td>文化の日</td></tr><tr><td>11月23日(月)</td><td>勤労感謝の日</td></tr></table><table class="holt"><tr><th colspan="2">2027年</th></tr><tr><td>1月1日(金)</td><td>元日</td></tr><tr><td>1月11日(月)</td><td>成人の日</td></tr><tr><td>2月11日(木)</td><td>建国記念の日</td></tr><tr><td>2月23日(火)</td><td>天皇誕生日</td></tr><tr><td>3月21日(日)</td><td>春分の日</td></tr><tr><td>3月22日(月)</td><td>振替休日</td></tr><tr><td>4月29日(木)</td><td>昭和の日</td></tr><tr><td>5月3日(月)</td><td>憲法記念日</td></tr><tr><td>5月4日(火)</td><td>みどりの日</td></tr><tr><td>5月5日(水)</td><td>こどもの日</td></tr><tr><td>7月19日(月)</td><td>海の日</td></tr><tr><td>8月11日(水)</td><td>山の日</td></tr><tr><td>9月20日(月)</td><td>敬老の日</td></tr><tr><td>9月23日(木)</td><td>秋分の日</td></tr><tr><td>10月11日(月)</td><td>スポーツの日</td></tr><tr><td>11月3日(水)</td><td>文化の日</td></tr><tr><td>11月23日(火)</td><td>勤労感謝の日</td></tr></table></div>
+<p class="note">出典：内閣府「国民の祝日について」。2020年と2021年は東京オリンピック・パラリンピックに伴い、海の日・スポーツの日・山の日が移動しています(このツールの計算に反映済み)。</p>
+</details><h2 class="sec-t">よくある質問</h2>
+<div class="faq">
+<details><summary><span>「月末締め翌月末払い」とは？</span></summary><p>その月の末日までの取引をまとめて請求し、翌月の末日に支払う条件です。たとえば10月中の取引は10月31日に締め、11月30日に支払います。</p></details>
+<details><summary><span>支払日が土日祝の場合、前と後どちらにずらす？</span></summary><p>契約で決めた方に従います。決めていない場合は、前営業日に支払う会社が多いです。このツールでは「前営業日」「翌営業日」「ずらさない」を切り替えられます。</p></details>
+<details><summary><span>20日締めの場合、21日の取引はいつ締めになる？</span></summary><p>翌月20日の締めになります。締め日を過ぎた取引は次の締めに入るためです。</p></details>
+<details><summary><span>「3営業日後」は当日を含む？</span></summary><p>一般的には含めず、翌営業日を1日目として数えます。月曜日の3営業日後は木曜日です。当日を含める場合は「休日の扱い」で「起算日を1日目として数える」にチェックしてください。</p></details>
+<details><summary><span>営業日とは何日のこと？</span></summary><p>一般的には、土曜日・日曜日・祝日・年末年始を除いた日です。会社によって休日は違うため、「休日の扱い」で土曜日や年末年始、独自の休日を変えられます。</p></details>
+<details><summary><span>年末年始はいつからいつまで休み？</span></summary><p>銀行は12月31日〜1月3日が休業日です。官公庁や多くの会社は12月29日〜1月3日を休みにしています。初期設定は、振込に合わせて銀行の休業日にしています。</p></details>
+<details><summary><span>祝日は何年まで対応している？</span></summary><p>2020年〜2099年に対応しています。祝日法に基づいて計算しており、振替休日と国民の休日も含みます。2028年以降の春分の日・秋分の日は計算による予定日で、前年2月の官報で正式に決まります。</p></details>
+<details><summary><span>2026年の営業日は何日？</span></summary><p>土日・祝日と銀行の休業日(12月31日〜1月3日)を除くと、2026年は242日です。年末年始を12月29日〜1月3日にすると240日です。「営業日数」タブで期間を指定すると、月ごとの営業日数も分かります。</p></details>
+</div>
+<p class="note">※会社ごとの休日や、契約で決めた支払条件が優先されます。法律で定められた期限(下請代金の支払期日など)の判断は、所管官庁の資料や専門家にご確認ください。</p>
 </div>
 
 <div class="card"><div class="sharebox" style="border:0;padding:0;margin:0 0 18px"><h2>このツールをシェア</h2><p>経理や事務の仲間に教えていただけるとうれしいです。</p><div class="sbtns" data-share></div></div><h2>関連ツール</h2><div class="rel"><a href="/seikyusho/" style="--c:#4f46e5"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h18l8 8v28H12z"/><path d="M30 6v8h8"/><path d="M19 20l6 7 6-7M25 27v10M20 30h10M20 34h10"/></svg></span><span><b>請求書 作成</b><span class="d">お支払期限を入れて、インボイス対応の請求書をPDFに</span></span></a><a href="/hacchusho/" style="--c:#be123c"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 10h20v32H12z"/><path d="M17 6h10v7H17z"/><path d="M17 22h10M17 28h7"/><path d="M28 36h15M39 32l4 4-4 4"/></svg></span><span><b>発注書・注文書 作成</b><span class="d">納期・支払条件を書いた発注書を作成</span></span></a><a href="/sofujo/" style="--c:#16803c"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 13h36v24H6z"/><path d="M6 13l18 14 18-14"/></svg></span><span><b>送付状 作成</b><span class="d">請求書などを郵送・FAXするときに</span></span></a><a href="/gensen/" style="--c:#2554d8"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><circle cx="20" cy="27" r="13"/><path d="M15 21l5 6 5-6M20 27v8M16 30h8"/><circle cx="37" cy="12" r="7"/><path d="M34 12h6"/></svg></span><span><b>源泉徴収税 計算</b><span class="d">報酬の源泉徴収税と手取りを計算</span></span></a><a href="/mitsumori/" style="--c:#0d8a7f"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h18l8 8v28H12z"/><path d="M30 6v8h8"/><path d="M18 22h12M18 28h7"/><path d="M29 41l11-11 3.5 3.5-11 11H29z"/></svg></span><span><b>見積書 作成</b><span class="d">請求書・領収書にワンクリックで切り替え</span></span></a><a href="/nohinsho/" style="--c:#0377b3"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 17l16-8 16 8v19l-16 8-16-8z"/><path d="M8 17l16 8 16-8"/><path d="M24 25v19"/><path d="M14 29l5 2.5"/></svg></span><span><b>納品書 作成</b><span class="d">見積書の内容からそのまま作成</span></span></a><a href="/ryoshusho/" style="--c:#d9540f"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h24v36l-4-3-4 3-4-3-4 3-4-3-4 3z"/><path d="M18 22l5 5 8-9"/></svg></span><span><b>領収書 作成</b><span class="d">収入印紙の要否を自動で判定</span></span></a><a href="/shohizei/" style="--c:#a21caf"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 25L23 8h17v17L23 42z"/><circle cx="33" cy="15" r="2.5"/><path d="M17 32l10-10"/><circle cx="17.5" cy="23.5" r="2"/><circle cx="26.5" cy="31.5" r="2"/></svg></span><span><b>消費税計算(税込・税抜)</b><span class="d">税抜⇔税込を10%・8%で計算、混在にも対応</span></span></a><a href="/hiwari/" style="--c:#b45309"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 11h32v30H8z"/><path d="M8 19h32"/><path d="M16 7v8M32 7v8"/><path d="M15 30h18M15 26v8M33 26v8"/></svg></span><span><b>日割り計算</b><span class="d">家賃・利用料・給与の日割りを、日付から計算</span></span></a><a href="/keihi/" style="--c:#4d7c0f"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M7 15h31v26H7z"/><path d="M7 15l24-7v7"/><path d="M28 24h12v9H28z"/><circle cx="33" cy="28.5" r="1.2"/></svg></span><span><b>経費精算書 作成</b><span class="d">立て替えた経費・交通費を精算。仮払金の差し引きも</span></span></a></div></div>

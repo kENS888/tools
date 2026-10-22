@@ -110,3 +110,16 @@ input[type=date]{min-width:0;max-width:100%}
 /* JavaScriptで作る画面の場所をあらかじめ確保し、読み込み時のガタつき(CLS)を防ぐ */
 #app:empty{min-height:1700px}body[data-type=s] #app:empty{min-height:1100px}body[data-type=k] #app:empty{min-height:940px}
 @media (max-width:980px){#app:empty{min-height:2600px}body[data-type=s] #app:empty{min-height:1900px}body[data-type=k] #app:empty{min-height:1650px}}
+/* ページ下の説明(できること・使い方・計算方法・早見表など)は折りたたみ。よくある質問(Qの箱)と見た目を分ける */
+details.sx{border-top:1.5px solid var(--line2)}
+details.sx:last-of-type{border-bottom:1.5px solid var(--line2)}
+details.sx+:not(details.sx){margin-top:28px}
+details.sx>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:15px 2px}
+details.sx>summary::-webkit-details-marker{display:none}
+details.sx>summary .sec-t{margin:0;flex:1;font-size:1.05rem}
+details.sx>summary::after{content:"";flex:none;width:28px;height:28px;border:1.5px solid var(--ink);border-radius:50%;background:linear-gradient(var(--ink),var(--ink)) 50% 50%/11px 1.8px no-repeat,linear-gradient(var(--ink),var(--ink)) 50% 50%/1.8px 11px no-repeat}
+details.sx[open]>summary::after{background:linear-gradient(var(--ink),var(--ink)) 50% 50%/11px 1.8px no-repeat}
+details.sx>summary:hover .sec-t{color:var(--acc)}
+details.sx[open]{padding-bottom:16px}
+details.sx .tldr{border:0;padding:0;margin:0;background:none}
+#who{margin-top:4px}
