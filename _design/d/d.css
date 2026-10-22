@@ -1,0 +1,16 @@
+/* D案：A案の線の枠(方眼なし)＋C案の色の四角 */
+:root{--bg:#f4f5f5;--sheet:#fff;--ink:#1c2a3a;--sub:#64707c;--line:#d3d9dc;--soft:#eceff0;--acc:#a21caf;--paper:#fffefb}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#111417;--sheet:#191d21;--ink:#e6ebee;--sub:#97a2ab;--line:#323a40;--soft:#242a2f;--acc:#e879f9;--paper:#f3f1ea}}
+[hidden]{display:none!important}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 "BIZ UDPGothic",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+.bar{display:flex;align-items:center;height:68px;border-bottom:1.5px solid var(--ink)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;text-decoration:none}
+.logo i{width:24px;height:24px;border:2.5px solid var(--ink);border-radius:4px;background:linear-gradient(var(--ink),var(--ink)) 50% 50%/2.5px 100% no-repeat,linear-gradient(var(--ink),var(--ink)) 50% 50%/100% 2.5px no-repeat}
+.ic{width:100%;height:100%;stroke-width:2.4}
+.num{font-family:"Barlow Condensed",sans-serif;font-variant-numeric:tabular-nums}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.ad{height:96px;border:1.5px dashed var(--line);display:flex;align-items:center;justify-content:center;color:var(--sub);font-size:.75rem;margin:48px 0}
+footer{padding:28px 0 56px;font-size:.82rem;color:var(--sub);display:flex;gap:20px;flex-wrap:wrap;border-top:1.5px solid var(--ink)}
