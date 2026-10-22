@@ -62,6 +62,20 @@ footer a{color:inherit}footer{text-align:center;font-size:.78rem;color:var(--sub
 @media (max-width:560px){.row{grid-template-columns:1fr 110px auto}.row select{grid-column:1/2}.row .chk{grid-column:2/3}.grid2{grid-template-columns:1fr}.grid2 .w{grid-column:auto}.big .v{font-size:1.6rem}}
 </style>
 <link rel="stylesheet" href="/assets/fonts/biz.css"><link rel="stylesheet" href="/assets/fonts/barlow.css"><link rel="stylesheet" href="/assets/v2.css">
+<style id="v2t">
+.wg{margin:12px 0 6px}
+.wg-bar{display:flex;height:44px;border:1.5px solid var(--ink);background:var(--card)}
+.wg-bar div{display:flex;align-items:center;justify-content:center;font:600 1rem var(--num);white-space:nowrap;overflow:hidden;min-width:0;transition:flex-grow .35s ease}
+.wg-bar .p{background:var(--acc);color:#fff}
+.wg-bar .w{background:repeating-linear-gradient(-45deg,var(--neg) 0 6px,color-mix(in srgb,var(--neg) 72%,#fff) 6px 12px);color:#fff;border-left:1.5px solid var(--ink);min-width:6px}
+.wg-bar .f{background:var(--line2);border-left:1.5px solid var(--ink);min-width:6px}
+.wg-lg{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--sub);margin-top:6px;align-items:center}
+.wg-lg i{display:inline-block;width:10px;height:10px;margin-right:5px;vertical-align:-1px}
+.wg-lg i.p{background:var(--acc)}.wg-lg i.w{background:var(--neg)}.wg-lg i.f{background:var(--line2)}
+.wg-lg .tot{margin-left:auto;font-weight:700;color:var(--fg)}
+@media (prefers-color-scheme:dark){.wg-bar .p,.wg-bar .w{color:#111}}
+@media (prefers-reduced-motion:reduce){.wg-bar div{transition:none}}
+</style>
 </head>
 <body>
 <header class="v2h">
@@ -97,6 +111,7 @@ footer a{color:inherit}footer{text-align:center;font-size:.78rem;color:var(--sub
  </details>
 
  <div class="big"><span class="l">お振込み額(手取り)</span><span class="v" id="pay">0 円</span></div>
+ <div class="wg" aria-hidden="true"><div class="wg-bar"><div class="p" id="wgP"></div><div class="w" id="wgW"></div><div class="f" id="wgF"></div></div><div class="wg-lg"><span><i class="p"></i>手取り</span><span><i class="w"></i>源泉徴収税</span><span id="wgFL"><i class="f"></i>振込手数料</span><span class="tot" id="wgT"></span></div></div>
  <table class="r" id="res"></table>
  <div class="acts">
   <button class="btn" id="copy" type="button">結果をコピー</button>
@@ -191,6 +206,8 @@ function render(){
  optSum();$('rndBox').hidden=!$('add').checked;$('feeBox').hidden=!$('feeOn').checked;
  var it=items(),c=calcItems(it,opt());last={it:it,c:c};
  $('pay').textContent=yen(c.pay);
+ var g=function(id,v,lb){var e=$(id);e.style.flexGrow=Math.max(v,0);e.style.display=v>0?'':'none';e.textContent=lb||''};var tt=c.total||1;
+ g('wgP',c.pay,c.pay/tt>.18?yen(c.pay):'');g('wgW',c.w,c.w/tt>.09?'−'+yen(c.w):'');g('wgF',c.fee,'');$('wgFL').style.display=c.fee?'':'none';$('wgT').textContent='請求額 '+yen(c.total);
  var h='<tr><td>報酬額(税抜)</td><td>'+yen(c.sub)+'</td></tr>';
  if(c.ctBy['10'])h+='<tr><td>消費税(10%)</td><td>'+yen(c.ctBy['10'])+'</td></tr>';
  if(c.ctBy['8'])h+='<tr><td>消費税(8%)</td><td>'+yen(c.ctBy['8'])+'</td></tr>';

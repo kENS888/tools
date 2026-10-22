@@ -1,5 +1,6 @@
 /* しごと計算ラボ デザイン v2(2026-10)：線の枠＋大きな数字。各ページの <style> の後に読み込み、見た目だけを上書きする。
    色の約束：--acc(ツールの色)は各ページのものをそのまま使う。 */
+[hidden]{display:none!important}
 :root{--bg:#f4f5f5;--card:#fff;--fg:#1c2a3a;--ink:#1c2a3a;--sub:#5f6b77;--mute:#8a949e;--line:#d8dee1;--line2:#c3cbd0;--pvbg:#e7eaec;--sh:none;--num:"Barlow Condensed","BIZ UDPGothic",system-ui,sans-serif}
 @media (prefers-color-scheme:dark){:root{--bg:#111417;--card:#191d21;--fg:#e6ebee;--ink:#c9d2d8;--sub:#99a4ad;--mute:#6f7a83;--line:#2c3339;--line2:#3a434a;--pvbg:#0c0f12;--sh:none}}
 body{font-family:"BIZ UDPGothic",system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;background:var(--bg)}

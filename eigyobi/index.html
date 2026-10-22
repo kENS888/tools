@@ -89,6 +89,7 @@ footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40p
 @media (max-width:560px){.grid2,.hols{grid-template-columns:1fr}.big .v{font-size:1.55rem}header h1{font-size:1.3rem}.card{padding:16px}.cal .d small{display:none}.cal .d{min-height:34px}}
 </style>
 <link rel="stylesheet" href="/assets/fonts/biz.css"><link rel="stylesheet" href="/assets/fonts/barlow.css"><link rel="stylesheet" href="/assets/v2.css">
+<style id="v2t">.calw{margin-top:14px;border:1.5px solid var(--line2);padding:12px;background:var(--card)}.cal .d{border-radius:4px}.calh b{font-family:var(--num);font-size:1.15rem}</style>
 </head>
 <body>
 <header class="v2h">
@@ -146,14 +147,14 @@ footer{text-align:center;font-size:.78rem;color:var(--sub);padding:24px 16px 40p
  <div class="big" aria-live="polite"><div class="l" id="rL"></div><div class="v" id="rV">-</div><div class="s" id="rS"></div>
   <div class="mini"><button type="button" id="copy">結果をコピー</button><button type="button" id="share">この条件のURLをコピー</button></div>
  </div>
+ <div class="calw">
+  <div class="calh"><button type="button" id="cPrev" aria-label="前の月">‹</button><b id="cTitle"></b><button type="button" id="cNext" aria-label="次の月">›</button></div>
+  <div class="cal" id="cal"></div>
+  <div class="legend"><span><i style="background:var(--acc)"></i>答えの日</span><span><i style="border:1px solid var(--acc)"></i>締め日・起算日</span><span><i style="background:var(--offbg);border:1px solid var(--line)"></i>休み</span></div>
+ </div>
 
  <details class="more" id="detBox"><summary>くわしく見る<span class="ms" id="detSum"></span></summary>
   <table class="r" id="res"></table>
-  <div class="calw">
-   <div class="calh"><button type="button" id="cPrev" aria-label="前の月">‹</button><b id="cTitle"></b><button type="button" id="cNext" aria-label="次の月">›</button></div>
-   <div class="cal" id="cal"></div>
-   <div class="legend"><span><i style="background:var(--acc)"></i>答えの日</span><span><i style="border:1px solid var(--acc)"></i>締め日・起算日</span><span><i style="background:var(--offbg);border:1px solid var(--line)"></i>休み</span></div>
-  </div>
   <div id="schBox"><h2 style="margin-top:18px;font-size:1rem">今後12か月の支払日</h2><table class="r" id="sch"></table></div>
  </details>
 
@@ -274,7 +275,7 @@ function render(){
  $('payBox').hidden=mode!=='pay';$('bizBox').hidden=mode!=='biz';$('cntBox').hidden=mode!=='cnt';$('schBox').hidden=mode!=='pay';$('adjBox').hidden=mode!=='pay';$('incBox').hidden=mode!=='biz';
  $('pCustom').hidden=$('pRule').value!=='x';$('pMBox').hidden=$('pType').value!=='m';$('pDBox').hidden=$('pType').value!=='d';
  cs=cfgSum(c);$('cfgSum').textContent=cs.t;$('cfgSum').className='ms'+(cs.ch?' on':'');
- $('detSum').textContent=mode==='pay'?'今後12か月の支払日・カレンダー':mode==='biz'?'間の休み・カレンダー':'休みの内訳・カレンダー';
+ $('detSum').textContent=mode==='pay'?'今後12か月の支払日・内訳':mode==='biz'?'間の休み・内訳':'休みの内訳';
  var h='',L='',V='-',S='';last={marks:{}};
  if(mode==='pay'){var b=pd($('pBase').value),r=rule();L=ruleName(r)+'の場合、支払日は';
   if(!inRange(b)){S='取引日を入れてください(2020〜2099年)'}
