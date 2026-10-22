@@ -163,7 +163,9 @@ function render(){
 }
 function fit(){var box=$('pvbox'),p=box.querySelector('.paper');if(!p)return;var W=box.parentNode.clientWidth-parseFloat(getComputedStyle(box.parentNode).paddingLeft)*2,s=Math.min(1,W/p.offsetWidth);
  if(innerWidth>980){var cd=box.closest('.card'),ex=cd.offsetHeight-box.offsetHeight;s=Math.max(.3,Math.min(s,(innerHeight-32-ex)/p.offsetHeight))}
+ if(window.PVZ)s=PVZ.adj(s,p,box);
  p.style.transform='scale('+s+')';box.style.width=p.offsetWidth*s+'px';box.style.height=p.offsetHeight*s+'px'}
+window.PVfit=fit;
 function save(){if(tourOn)return;try{
  if(keep)localStorage.setItem(KEY,JSON.stringify({keep:true,me:ME,s:S}));
  else{localStorage.setItem(KEY,JSON.stringify({keep:false}));localStorage.removeItem(HKEY)}}catch(_){}}

@@ -149,7 +149,9 @@ function render(){
 function fit(){var box=$('pvbox'),p=box.querySelector('.paper');if(!p)return;var W=box.parentNode.clientWidth-parseFloat(getComputedStyle(box.parentNode).paddingLeft)*2,s=Math.min(1,W/p.offsetWidth);
  // パソコン(プレビューが追従する幅)では、ボタンまで画面に収まるよう高さでも縮める
  if(innerWidth>980){var cd=box.closest('.card'),ex=cd.offsetHeight-box.offsetHeight;s=Math.max(.3,Math.min(s,(innerHeight-32-ex)/p.offsetHeight))}
+ if(window.PVZ)s=PVZ.adj(s,p,box);
  p.style.transform='scale('+s+')';box.style.width=p.offsetWidth*s+'px';box.style.height=p.offsetHeight*s+'px'}
+window.PVfit=fit;
 function save(){if(window.SKTourOn)return;try{var cur=J(KEY,{})||{};
  if(keep){cur.me=ME;cur.keep=true;localStorage.setItem(KEY,JSON.stringify(cur));localStorage.setItem(SKEY,JSON.stringify(S))}
  else{localStorage.setItem(KEY,JSON.stringify({keep:false}));localStorage.removeItem(SKEY);localStorage.removeItem(HKEY)}}catch(_){}}

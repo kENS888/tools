@@ -238,7 +238,9 @@ var raf;function upd(){cancelAnimationFrame(raf);raf=requestAnimationFrame(rende
 function fit(){var box=$('pvbox'),p=box.querySelector('.paper');if(!p)return;var W=box.parentNode.clientWidth-parseFloat(getComputedStyle(box.parentNode).paddingLeft)*2,s=Math.min(1,W/p.offsetWidth);
  // パソコン(プレビューが追従する幅)では、ボタンまで画面に収まるよう高さでも縮める
  if(innerWidth>980){var cd=box.closest('.card'),ex=cd.offsetHeight-box.offsetHeight;s=Math.max(.3,Math.min(s,(innerHeight-32-ex)/p.offsetHeight))}
+ if(window.PVZ)s=PVZ.adj(s,p,box);
  p.style.transform='scale('+s+')';box.style.width=p.offsetWidth*s+'px';box.style.height=p.offsetHeight*s+'px'}
+window.PVfit=fit;
 function save(){if(tourOn)return;try{if(keep){if(PO){try{var cur=JSON.parse(localStorage.getItem(KEY)||'null');if(cur&&cur.doc)svDoc=cur.doc}catch(_){}}
   localStorage.setItem(KEY,JSON.stringify({me:ME,doc:PO?svDoc:S,keep:true}));if(PO)localStorage.setItem(DKEY,JSON.stringify(S))}
  else{localStorage.setItem(KEY,JSON.stringify({keep:false}));localStorage.removeItem(DKEY);localStorage.removeItem(HKEY)}}catch(_){}}
