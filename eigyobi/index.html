@@ -297,6 +297,7 @@ function render(){
    last.text=ruleName(r)+'\n取引日 '+fmt(b)+'\n締め日 '+fmt(x.close)+'\n支払日 '+fmt(x.due);
    S=x.moved?'本来は'+fmtS(x.raw)+'ですが、'+x.reason+'のため'+(r.adj==='prev'?'前':'次')+'の営業日にしています':(x.reason?fmtS(x.raw)+'は'+x.reason+'です(ずらさない設定)':'締め日は'+fmt(x.close));
    if(x.before)S='<span class="warn">支払日が締め日より前になっています。条件を確認してください。</span>';
+   var dd=B.days(b,x.due);if(!x.before&&dd>61)S+='<br><span class="warn">取引日から'+dd+'日後の支払いです。フリーランスへの業務委託や、取適法(旧下請法)の対象取引では、受け取りから60日以内(月末締めなら翌月末まで)の支払いが必要です。</span>';
    h=row('取引日',fmt(b))+row('締め日',fmt(x.close))+(x.moved?row('本来の支払日',fmt(x.raw)+' <span class="mv">'+esc(x.reason)+'</span>'):'')+row('支払日',fmt(x.due))+row('取引日から',B.days(b,x.due)+'日後');
    var sc=B.schedule(b,r,c,12),sh='<tr><th>締め日</th><th>支払日</th><th></th></tr>',st='締め日\t支払日\n';
    sc.forEach(function(s){sh+='<tr><td>'+fmt(s.close)+'</td><td>'+fmt(s.due)+'</td><td class="n">'+(s.moved?'<span class="mv">'+esc(s.reason)+'のため移動</span>':'')+'</td></tr>';st+=B.key(s.close)+'\t'+B.key(s.due)+'\n'});

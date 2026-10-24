@@ -10,7 +10,7 @@
 <meta property="og:title" content="ふるさと納税 上限額シミュレーター｜令和8年(2026年)の改正対応・年収と家族構成で計算【無料】">
 <meta property="og:description" content="年収と家族構成から、ふるさと納税で自己負担2,000円に収まる寄付上限額の目安を計算。令和8年分の基礎控除・給与所得控除の改正に対応。社会保険料・iDeCo・医療費控除も反映。登録不要・無料。">
 <meta property="og:url" content="https://shigoto-keisan.com/furusato/">
-<meta property="og:image" content="https://shigoto-keisan.com/assets/og/site.png">
+<meta property="og:image" content="https://shigoto-keisan.com/assets/og/furusato.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -182,7 +182,7 @@ if(typeof module!=='undefined')module.exports=CORE;
 var $=function(id){return document.getElementById(id)};
 function yen(n){return Math.round(n).toLocaleString('ja-JP')+' 円'}
 function num(s){return parseInt(String(s||'').replace(/[^0-9]/g,''),10)||0}
-function dec(s){var v=parseFloat(String(s||'').replace(/[^0-9.]/g,''));return isFinite(v)?Math.round(v*100)/100:0}
+function dec(s){var m=String(s||'').match(/^\s*(\d+)\s*[:：]\s*(\d{1,2})\s*$/);if(m)return +m[1]+Math.round(+m[2]/60*100)/100;var v=parseFloat(String(s||'').replace(/[^0-9.]/g,''));return isFinite(v)?Math.round(v*100)/100:0}
 function toast(m){var t=$('toast');t.textContent=m;t.className='toast on';clearTimeout(toast._t);toast._t=setTimeout(function(){t.className='toast'},1800)}
 function copyText(t,msg){
  function fb(){var a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy')}catch(_){}document.body.removeChild(a);if(ok)toast(msg);else window.prompt('コピーしてください',t)}

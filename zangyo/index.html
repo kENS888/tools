@@ -10,7 +10,7 @@
 <meta property="og:title" content="残業代 計算｜月給・時給から残業代・深夜手当・休日手当を計算(60時間超50%対応)【無料】">
 <meta property="og:description" content="月給または時給と残業時間から、残業代(25%)・月60時間超(50%)・深夜手当(25%)・休日手当(35%)を計算。月平均所定労働時間は年間休日から自動計算。登録不要・無料。">
 <meta property="og:url" content="https://shigoto-keisan.com/zangyo/">
-<meta property="og:image" content="https://shigoto-keisan.com/assets/og/site.png">
+<meta property="og:image" content="https://shigoto-keisan.com/assets/og/zangyo.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -102,7 +102,7 @@ table.r td.k{color:var(--sub);font-size:.85rem;padding-left:14px}
 <main>
 <div class="card">
  <div class="seg"><button id="tM" class="on" type="button">月給で計算</button><button id="tH" type="button">時給で計算</button></div>
- <div class="f2"><div class="" id="salW"><label class="f" for="sal">月給(基本給＋諸手当)</label><div class="unit"><input id="sal" data-k="s" class="num yen" type="text" inputmode="numeric" placeholder="300,000"><span>円</span></div><p class="note" style="margin:4px 0 0">通勤手当・家族手当・住宅手当などは除きます</p></div><div class="" id="hrW"><label class="f" for="hr">時給</label><div class="unit"><input id="hr" data-k="h" class="num yen" type="text" inputmode="numeric" placeholder="1,200"><span>円</span></div></div><div class=""><label class="f" for="ot">今月の残業時間(法定時間外)</label><div class="unit"><input id="ot" data-k="o" class="num" type="text" inputmode="decimal" placeholder="20"><span>時間</span></div><p class="note" style="margin:4px 0 0">1時間30分なら 1.5 と入力</p></div></div>
+ <div class="f2"><div class="" id="salW"><label class="f" for="sal">月給(基本給＋諸手当)</label><div class="unit"><input id="sal" data-k="s" class="num yen" type="text" inputmode="numeric" placeholder="300,000"><span>円</span></div><p class="note" style="margin:4px 0 0">通勤手当・家族手当・住宅手当などは除きます</p></div><div class="" id="hrW"><label class="f" for="hr">時給</label><div class="unit"><input id="hr" data-k="h" class="num yen" type="text" inputmode="numeric" placeholder="1,200"><span>円</span></div></div><div class=""><label class="f" for="ot">今月の残業時間(法定時間外)</label><div class="unit"><input id="ot" data-k="o" class="num" type="text" inputmode="decimal" placeholder="20"><span>時間</span></div><p class="note" style="margin:4px 0 0">1時間30分なら 1:30 または 1.5 と入力</p></div></div>
  <details class="more" id="optBox"><summary>深夜・休日の時間、所定労働時間<span class="ms" id="optSum"></span></summary>
  <div class="f2"><div class=""><label class="f" for="night">深夜(22時〜翌5時)に働いた時間</label><div class="unit"><input id="night" data-k="n" class="num" type="text" inputmode="decimal" placeholder="0"><span>時間</span></div><p class="note" style="margin:4px 0 0">残業・休日・通常勤務のうち深夜にあたる時間。25%が上乗せされます</p></div><div class=""><label class="f" for="hol">法定休日に働いた時間</label><div class="unit"><input id="hol" data-k="d" class="num" type="text" inputmode="decimal" placeholder="0"><span>時間</span></div></div><div class="" id="yW"><label class="f" for="yh">年間休日</label><div class="unit"><input id="yh" data-k="y" class="num" type="text" inputmode="numeric" placeholder="" value="120"><span>日</span></div></div><div class="" id="tW"><label class="f" for="td">1日の所定労働時間</label><div class="unit"><input id="td" data-k="t" class="num" type="text" inputmode="decimal" placeholder="" value="8"><span>時間</span></div></div></div>
  </details>
@@ -162,7 +162,7 @@ if(typeof module!=='undefined')module.exports=CORE;
 var $=function(id){return document.getElementById(id)};
 function yen(n){return Math.round(n).toLocaleString('ja-JP')+' 円'}
 function num(s){return parseInt(String(s||'').replace(/[^0-9]/g,''),10)||0}
-function dec(s){var v=parseFloat(String(s||'').replace(/[^0-9.]/g,''));return isFinite(v)?Math.round(v*100)/100:0}
+function dec(s){var m=String(s||'').match(/^\s*(\d+)\s*[:：]\s*(\d{1,2})\s*$/);if(m)return +m[1]+Math.round(+m[2]/60*100)/100;var v=parseFloat(String(s||'').replace(/[^0-9.]/g,''));return isFinite(v)?Math.round(v*100)/100:0}
 function toast(m){var t=$('toast');t.textContent=m;t.className='toast on';clearTimeout(toast._t);toast._t=setTimeout(function(){t.className='toast'},1800)}
 function copyText(t,msg){
  function fb(){var a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy')}catch(_){}document.body.removeChild(a);if(ok)toast(msg);else window.prompt('コピーしてください',t)}
