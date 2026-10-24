@@ -5,8 +5,16 @@
  '.xs-list{display:grid;gap:8px}.xs-list a{display:flex;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--line,#e3e7ee);border-radius:0;text-decoration:none;color:inherit;background:var(--card,#fff)}'+
  '.xs-list a:hover{border-color:var(--c,#2554d8)}.xs-list b{display:block;font-size:.95rem}.xs-list span.d{display:block;font-size:.8rem;color:var(--sub,#5b6474);line-height:1.5}'+
  '.xs-dot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--c,#2554d8)}'+
- '.xs-note a{align-items:flex-start}.xs-note img{flex:none;width:96px;height:50px;object-fit:cover;border-radius:0;background:#ddd}.xs-note time{font-size:.75rem;color:var(--sub,#5b6474)}'+
- '.xs-more{display:inline-block;margin-top:10px;font-size:.85rem;font-weight:600}';
+ '.xs-cards{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(200px,1fr);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 10px;margin:0 -2px;-webkit-overflow-scrolling:touch}'+
+ '.xs-cards a{scroll-snap-align:start;display:flex;flex-direction:column;text-decoration:none;color:inherit;min-width:0}'+
+ '.xs-cards .th{aspect-ratio:1280/670;background:var(--bg,#f4f6f9);border:1px solid var(--line,#e3e7ee);overflow:hidden}'+
+ '.xs-cards .th img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s}'+
+ '.xs-cards a:hover .th img{transform:scale(1.04)}'+
+ '.xs-cards b{font-size:.92rem;line-height:1.55;margin-top:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}'+
+ '.xs-cards .meta{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:.75rem;color:var(--sub,#5b6474)}'+
+ '.xs-cards .meta i{width:16px;height:16px;border-radius:50%;background:#f5c542;flex:none}'+
+ '@media (min-width:700px){.xs-cards{grid-auto-flow:row;grid-template-columns:repeat(3,1fr);overflow:visible}}'+
+'.xs-more{display:inline-block;margin-top:10px;font-size:.85rem;font-weight:600}';
  var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
  function esc(s){return String(s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
  var T={nenmatsu:['年末調整 還付金シミュレーター','#0f766e'],furusato:['ふるさと納税 上限額','#be185d'],zangyo:['残業代 計算','#0369a1'],gensen:['源泉徴収税 計算','#2554d8'],
@@ -38,9 +46,9 @@
  fetch('/api/note').then(function(r){return r.ok?r.json():{items:[]}}).then(function(d){
   var it=(d&&d.items)||[];
   if(tool){var kw=K[tool]||[];it=it.filter(function(x){var t=x.title+' '+x.desc;return kw.some(function(k){return t.indexOf(k)>=0})})}
-  it=it.slice(0,3);if(!it.length)return;
-  nb.innerHTML='<div class="xs-card"><h2>'+(tool?'関連する解説・コラム':'お知らせ・活用コラム')+'</h2><p class="xs-sub">'+(tool?'このツールの使いどころを、noteで解説しています':'ツールの使い方や、制度の変更点をnoteで解説しています')+'</p><div class="xs-list xs-note">'+
-   it.map(function(x){return '<a href="'+esc(x.link)+'" target="_blank" rel="noopener">'+(x.thumb?'<img src="'+esc(x.thumb)+'" alt="" loading="lazy">':'')+'<span><b>'+esc(x.title)+'</b>'+(x.date?'<time datetime="'+esc(x.date)+'">'+esc(x.date.replace(/-/g,'/'))+'</time>':'')+'</span></a>'}).join('')+
+  it=it.slice(0,tool?3:6);if(!it.length)return;
+  nb.innerHTML='<div class="xs-card"><h2>'+(tool?'関連する解説・コラム':'お知らせ・活用コラム')+'</h2><p class="xs-sub">'+(tool?'このツールの使いどころを、noteで解説しています':'ツールの使い方や、制度の変更点をnoteで解説しています')+'</p><div class="xs-cards">'+
+   it.map(function(x){return '<a href="'+esc(x.link)+'" target="_blank" rel="noopener"><span class="th">'+(x.thumb?'<img src="'+esc(x.thumb)+'" alt="" loading="lazy">':'')+'</span><b>'+esc(x.title)+'</b><span class="meta"><i></i>Kens'+(x.date?'<time datetime="'+esc(x.date)+'">・'+esc(x.date.replace(/-/g,'/'))+'</time>':'')+'</span></a>'}).join('')+
    '</div>'+(tool?'':'<a class="xs-more" href="https://note.com/k88855888" target="_blank" rel="noopener">noteの記事をすべて見る →</a>')+'</div>';
   nb.hidden=false}).catch(function(){});
 })();
