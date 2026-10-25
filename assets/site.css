@@ -55,3 +55,6 @@ details.more .ms{font-weight:500;font-size:.78rem;color:var(--sub);overflow:hidd
 details.more .ms.on{color:var(--acc);font-weight:700}
 details.more>.mb,details.more>.opts:first-of-type{margin-top:0}
 details.more[open]{padding-bottom:12px}
+
+/* 広告枠の目印(点線の「広告」)は、広告を手動配置するまで非表示 */
+.ad{display:none!important}
