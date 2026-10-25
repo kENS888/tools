@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><title>bridge</title></head><body>
+<script>
+const FB='https://www.facebook.com';
+const ALLOW=/^https:\/\/down-[a-z]+\.img\.susercontent\.com\/file\/[\w-]+$/;
+addEventListener('message',async e=>{
+  if(e.origin!==FB||!e.data||e.data.kind!=='regalo-get')return;
+  const items=[];
+  for(const u of (e.data.urls||[]).slice(0,10)){
+    if(!ALLOW.test(u))continue;
+    try{const r=await fetch(u,{mode:'cors'});items.push({u,b:await r.blob()})}catch(err){items.push({u,err:String(err)})}
+  }
+  e.source.postMessage({kind:'regalo-imgs',items},FB);
+});
+if(parent!==window)parent.postMessage({kind:'regalo-ready'},FB);
+</script></body></html>
