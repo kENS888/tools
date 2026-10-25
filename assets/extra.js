@@ -41,6 +41,11 @@
  var sb=document.getElementById('season');
  if(sb){var m=new Date().getMonth()+1,s=S[m];
   sb.innerHTML='<div class="xs-card"><h2>'+esc(s[0])+'</h2><p class="xs-sub">'+m+'月に役立つツール</p><div class="xs-list">'+s[1].map(function(x){var t=T[x[0]];return '<a href="/'+x[0]+'/" style="--c:'+t[1]+'"><i class="xs-dot"></i><span><b>'+esc(t[0])+'</b><span class="d">'+esc(x[1])+'</span></span></a>'}).join('')+'</div></div>';sb.hidden=false}
+ // 利用回数の計測：押されたボタンの種類だけを送る(入力内容は送らない)
+ (function(){var tool=(location.pathname.split('/')[1]||'');if(!tool)return;
+  document.addEventListener('click',function(ev){var b=ev.target.closest&&ev.target.closest('button,a,[role=button]');if(!b)return;
+   var x=(b.textContent||'').replace(/\s+/g,'');var e=/^PDF保存/.test(x)?'pdf':/^印刷/.test(x)?'print':/^(結果を|URLを)?コピー$|^結果をコピー|^URLをコピー/.test(x)?'copy':'';
+   if(!e)return;try{navigator.sendBeacon('/api/count?t='+encodeURIComponent(tool)+'&e='+e)}catch(_){}},true)})();
  var nb=document.getElementById('noteFeed');
  if(!nb)return;
  var tool=nb.getAttribute('data-tool');
