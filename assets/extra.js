@@ -55,6 +55,6 @@
   it=it.slice(0,tool?3:6);if(!it.length)return;
   nb.innerHTML='<div class="xs-card"><h2>'+(tool?'関連する解説・コラム':'お知らせ・活用コラム')+'</h2><p class="xs-sub">'+(tool?'このツールの使いどころを、noteで解説しています':'ツールの使い方や、制度の変更点をnoteで解説しています')+'</p><div class="xs-cards'+(it.length===1?' one':'')+'">'+
    it.map(function(x){return '<a href="'+esc(x.link)+'" target="_blank" rel="noopener"><span class="th">'+(x.thumb?'<img src="'+esc(x.thumb)+'" alt="" loading="lazy">':'')+'</span><b>'+esc(x.title)+'</b><span class="meta"><i></i>Kens'+(x.date?'<time datetime="'+esc(x.date)+'">・'+esc(x.date.replace(/-/g,'/'))+'</time>':'')+'</span></a>'}).join('')+
-   '</div>'+(tool?'':'<a class="xs-more" href="https://note.com/k88855888" target="_blank" rel="noopener">noteの記事をすべて見る →</a>')+'</div>';
+   '</div>'+(tool?'':'<a class="xs-more" href="https://note.com/shigotokeisanlab" target="_blank" rel="noopener">noteの記事をすべて見る →</a>')+'</div>';
   nb.hidden=false}).catch(function(){});
 })();

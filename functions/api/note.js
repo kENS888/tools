@@ -1,5 +1,5 @@
 // noteの記事一覧(RSS)を取得して、サイト表示用のJSONにして返す。1時間キャッシュ。
-const RSS = 'https://note.com/k88855888/rss';
+const RSS = 'https://note.com/shigotokeisanlab/rss';
 function pick(s, tag) {
   const m = s.match(new RegExp('<' + tag + '[^>]*>([\\s\\S]*?)</' + tag + '>'));
   if (!m) return '';
