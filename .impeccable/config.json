@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-03T11:52:37.214Z",
+        "reason": "Claude triage: div.sbar child .sin is 60px tall with centered 16px text (assets/v2.css:18-19), ~20px above the border; static scan cannot see layout"
+      }
+    ]
+  }
+}

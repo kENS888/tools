@@ -35,10 +35,14 @@
 .tldr .upd{font-size:.75rem;color:var(--sub);margin:0}
 /* シェア */
 .sbtns{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.sb{display:inline-flex;align-items:center;justify-content:center;min-width:86px;padding:8px 14px;border-radius:99px;font:inherit;font-size:.85rem;font-weight:700;text-decoration:none;color:#fff;border:0;cursor:pointer}
-.sb:hover{filter:brightness(1.1)}
-.sb-x{background:#111}.sb-line{background:#06C755}.sb-fb{background:#1877F2}.sb-hb{background:#00A4DE}
-.sb-cp{background:var(--bg);color:var(--fg);border:1px solid var(--line)}
+/* 白文字＋ブランド色の塗りは文字が読みにくい(LINE 2.3:1 など)ので、文字は本文色、ブランド色は左の小さな四角だけにする */
+.sb{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:86px;min-height:40px;padding:8px 14px;border-radius:99px;font:inherit;font-size:.85rem;font-weight:700;text-decoration:none;color:var(--fg);background:var(--card);border:1.5px solid var(--line2,var(--line));cursor:pointer}
+.sb::before{content:"";width:10px;height:10px;border-radius:2px;background:var(--b,transparent);flex:none}
+.sb:hover{border-color:var(--fg)}
+.sb-x{--b:#111}.sb-line{--b:#06C755}.sb-fb{--b:#1877F2}.sb-hb{--b:#00A4DE}
+@media (prefers-color-scheme:dark){.sb-x{--b:#e6ebee}}
+.sb-cp{background:var(--bg)}
+.sb-cp::before{display:none}
 .share{margin-top:12px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--acc2)}
 .share b{display:block}.share span{font-size:.85rem;color:var(--sub)}
 .sharebox{margin:18px 0 10px;border-top:1px solid var(--line);padding-top:14px}
