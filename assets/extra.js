@@ -15,7 +15,7 @@
  '.xs-cards .meta{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:.75rem;color:var(--sub,#5b6474)}'+
  '.xs-cards .meta i{width:16px;height:16px;border-radius:50%;background:#f5c542;flex:none}'+
  '@media (min-width:700px){.xs-cards{grid-auto-flow:row;grid-template-columns:repeat(2,1fr);overflow:visible}}'+
-'.xs-more{display:inline-block;margin-top:10px;font-size:.85rem;font-weight:600}';
+'.xs-more{display:inline-block;margin-top:10px;font-size:.85rem;font-weight:600;color:var(--acc,#2554d8);text-underline-offset:3px}';
  var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
  function esc(s){return String(s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
  var T={nenmatsu:['年末調整 還付金シミュレーター','#0f766e'],furusato:['ふるさと納税 上限額','#be185d'],zangyo:['残業代 計算','#0369a1'],gensen:['源泉徴収税 計算','#2554d8'],
