@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>消費税の端数処理｜インボイスは「1枚につき税率ごとに1回」。行ごとに計算すると2円ずれる例｜しごと計算ラボ</title>
+<link rel="canonical" href="https://shigoto-keisan.com/guide/shohizei-hasu/">
+<meta name="description" content="インボイスの消費税は1枚につき税率ごとに1回だけ端数処理。行ごとに計算すると2円ずれる例と、税込から出す時の注意。">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="しごと計算ラボ">
+<meta property="og:title" content="消費税の端数処理｜インボイスは「1枚につき税率ごとに1回」。行ごとに計算すると2円ずれる例｜しごと計算ラボ">
+<meta property="og:description" content="インボイスの消費税は1枚につき税率ごとに1回だけ端数処理。行ごとに計算すると2円ずれる例と、税込から出す時の注意。">
+<meta property="og:url" content="https://shigoto-keisan.com/guide/shohizei-hasu/">
+<meta property="og:image" content="https://shigoto-keisan.com/assets/og/shohizei.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts/sans.css"><link rel="stylesheet" href="/assets/fonts/mincho.css"><link rel="stylesheet" href="/assets/fonts/num.css"><link rel="stylesheet" href="/assets/v2.css"><link rel="stylesheet" href="/assets/page.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "しごと計算ラボ", "item": "https://shigoto-keisan.com/"}, {"@type": "ListItem", "position": 2, "name": "解説記事", "item": "https://shigoto-keisan.com/guide/"}, {"@type": "ListItem", "position": 3, "name": "消費税の端数処理", "item": "https://shigoto-keisan.com/guide/shohizei-hasu/"}]}, {"@type": "Article", "headline": "消費税の端数処理", "description": "インボイスの消費税は1枚につき税率ごとに1回だけ端数処理。行ごとに計算すると2円ずれる例と、税込から出す時の注意。", "inLanguage": "ja", "datePublished": "2026-11-04", "dateModified": "2026-11-04", "author": {"@type": "Organization", "name": "しごと計算ラボ", "url": "https://shigoto-keisan.com/"}, "publisher": {"@type": "Organization", "name": "しごと計算ラボ", "url": "https://shigoto-keisan.com/"}, "mainEntityOfPage": "https://shigoto-keisan.com/guide/shohizei-hasu/", "image": "https://shigoto-keisan.com/assets/og/shohizei.png"}]}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3779143457996470" crossorigin="anonymous"></script>
+</head>
+<body>
+<header class="v2h"><div class="sbar"><div class="sin"><a class="slogo" href="/"><i></i>しごと計算ラボ</a></div></div></header>
+<main class="doc">
+<p class="crumb"><a href="/">しごと計算ラボ</a> › <a href="/guide/">解説記事</a></p>
+<h1>消費税の端数処理｜インボイスは「1枚につき税率ごとに1回」。行ごとに計算すると2円ずれる例</h1>
+<p class="meta">公開日：2026年11月4日 ／ 最終更新日：2026年11月4日 ／ しごと計算ラボ</p>
+<p>インボイスに書く消費税額は、1枚の請求書につき、税率ごとに1回だけ端数処理します。明細の行ごとに消費税を出して足す方法は、インボイスとしては認められません。表計算ソフトで請求書を作っていると、知らないうちにこの形になっていることがあります。</p>
+<div class="toc"><b>この記事の内容</b><ol><li><a href="#rule">ルールは2つだけ</a></li><li><a href="#zure">行ごとに計算すると、どれだけずれるか</a></li><li><a href="#komi">税込から消費税を出す時</a></li><li><a href="#hoho">切り捨て・四捨五入・切り上げ</a></li><li><a href="#faq">よくある質問</a></li></ol></div>
+
+<h2 id="rule">ルールは2つだけ</h2>
+<ol>
+<li><b>税率ごとに合計してから計算する</b>：10%の明細を全部足し、その合計に10%をかけます。8%も同じです。</li>
+<li><b>端数処理は1枚につき税率ごとに1回</b>：1円未満が出たら、その1回だけ切り捨てなどをします。</li>
+</ol>
+<p>明細ごとの消費税を「参考」として書くのは構いません。ただ、請求書の消費税額の欄には、合計から出した額を書きます。</p>
+
+<h2 id="zure">行ごとに計算すると、どれだけずれるか</h2>
+<p>例えば、10%の商品を3つ売った場合です。端数は切り捨てとします。</p>
+<div class="tblw"><table>
+<tr><th>明細(税抜)</th><th>行ごとの消費税</th></tr>
+<tr><td class="n">1,999円</td><td class="n">199円</td></tr>
+<tr><td class="n">2,999円</td><td class="n">299円</td></tr>
+<tr><td class="n">3,999円</td><td class="n">399円</td></tr>
+<tr><td>合計 8,997円</td><td class="n">足すと 897円</td></tr>
+</table></div>
+<p>正しい計算は、合計の8,997円に10%をかけた899.7円を切り捨てて<b>899円</b>です。行ごとに足した897円とは2円ずれます。</p>
+<p>1枚で2円でも、毎月何十枚も出していれば、相手の経理が気づいて問い合わせが来ます。表計算ソフトのテンプレートを使っているなら、消費税の欄が「各行の税額の合計」になっていないか一度確かめてください。</p>
+
+<h2 id="komi">税込から消費税を出す時</h2>
+<p>税込の金額で値段を決めている場合は、税込の合計に「10/110」(8%なら「8/108」)をかけて消費税を出します。例えば税込1,000円なら、1,000 × 10/110 = 90.90…円で、切り捨てると90円です。税抜は910円になります。</p>
+<div class="box"><b class="t">戻すと1円合わない</b><p>この910円に10%を足すと1,001円になり、元の1,000円と1円ずれます。計算が間違っているわけではありません。端数を切り捨てたことによる差です。税込で値決めしている時は、税込の金額を基準にしてください。</p></div>
+
+<h2 id="hoho">切り捨て・四捨五入・切り上げ</h2>
+<p>端数をどう処理するかは、事業者が自由に決められます。切り捨て・四捨五入・切り上げのどれでも構わず、法律で切り捨てと決まっているわけではありません。</p>
+<p>大事なのは、決めた方法を毎回同じにすることです。請求書ごとに変わると、取引先の帳簿の金額と合わなくなります。</p>
+
+<h2 id="faq">よくある質問</h2>
+<h3>納品書ごとに端数処理してもいい？</h3>
+<p>納品書と月まとめの請求書を合わせてインボイスにする場合は、納品書ごとに税率ごとに1回端数処理する方法も認められています。その場合、請求書でもう一度まとめて計算し直す必要はありません。</p>
+<h3>税抜の商品と税込の商品が混ざる時は？</h3>
+<p>どちらかにそろえてから、税率ごとに合計して消費税を出します。</p>
+
+<a class="cta" href="/shohizei/">消費税計算ツールを開く<span>税込⇔税抜を10%・8%で計算。端数処理の方法を選べて、1円ずれる時はその理由も表示します。</span></a>
+
+<h2>出典</h2>
+<ul class="src">
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6371.htm" rel="nofollow">国税庁 No.6371 端数計算</a></li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/pdf/0023011-048_02.pdf" rel="nofollow">国税庁 インボイス制度 基礎編(令和8年5月)</a></li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/pdf/qa/59.pdf" rel="nofollow">国税庁 インボイスQ&amp;A 問59 税抜価額と税込価額が混在する場合</a></li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/pdf/qa/57.pdf" rel="nofollow">国税庁 インボイスQ&amp;A 問57 適格請求書に記載する消費税額等の端数処理</a></li>
+</ul>
+<p class="src">記事の内容は公開日時点の制度にもとづく一般的な説明です。個別の判断は税務署や専門家にご確認ください。</p>
+</main>
+<footer><a href="/">しごと計算ラボ</a> ・ <a href="/guide/">解説記事</a> ・ <a href="/about/">このサイトについて</a> ・ <a href="/privacy/">プライバシーポリシー</a> ・ <a href="/contact/">お問い合わせ</a><br>© しごと計算ラボ</footer>
+</body>
+</html>

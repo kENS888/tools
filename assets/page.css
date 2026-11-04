@@ -1,0 +1,40 @@
+/* 読み物ページ(このサイトについて・お問い合わせ・解説記事・404)の共通スタイル。v2.css の後に読み込む */
+:root{--acc:#2554d8}
+@media (prefers-color-scheme:dark){:root{--acc:#7c9cff}}
+*{box-sizing:border-box}
+body{margin:0;color:var(--fg);font-size:16px;line-height:1.9}
+main.doc{max-width:760px;margin:0 auto;padding:8px 16px 0}
+.doc .crumb{font-size:.8rem;color:var(--sub);margin:16px 0 0}
+.doc .crumb a{color:inherit}
+.doc h1{font-size:1.55rem;line-height:1.45;margin:10px 0 6px}
+.doc .lead{color:var(--sub);margin:0 0 6px}
+.doc .meta{font-size:.82rem;color:var(--sub);margin:0 0 20px}
+.doc h2{font-size:1.2rem;line-height:1.5;margin:40px 0 10px;padding-top:14px;border-top:1.5px solid var(--ink)}
+.doc h3{font-size:1.02rem;margin:24px 0 6px}
+.doc p{margin:0 0 14px}
+.doc ul,.doc ol{margin:0 0 14px;padding-left:1.4em}
+.doc li{margin:4px 0}
+.doc a{color:var(--acc);text-underline-offset:3px}
+.doc table{width:100%;border-collapse:collapse;margin:8px 0 18px;font-size:.92rem}
+.doc th,.doc td{border:1px solid var(--line2);padding:8px 10px;text-align:left;vertical-align:top}
+.doc th{background:var(--pvbg);font-weight:700}
+.doc td.n{text-align:right;font-family:var(--num);font-variant-numeric:tabular-nums;white-space:nowrap}
+.doc .tblw{overflow-x:auto}
+.doc .box{border:1.5px solid var(--ink);padding:14px 16px;margin:16px 0 20px}
+.doc .box p:last-child,.doc .box ul:last-child{margin-bottom:0}
+.doc .box b.t{display:block;margin-bottom:4px}
+.doc .ex{border-left:4px solid var(--acc);padding:4px 0 4px 14px;margin:14px 0 18px}
+.doc .cta{display:block;border:1.5px solid var(--acc);color:var(--acc);text-decoration:none;font-weight:700;padding:14px 16px;margin:20px 0}
+.doc .cta span{display:block;font-weight:400;font-size:.88rem;color:var(--sub)}
+.doc .src{font-size:.88rem;color:var(--sub)}
+.doc .src li{margin:2px 0}
+.doc .toc{border:1px solid var(--line2);padding:10px 16px;margin:0 0 20px;font-size:.92rem}
+.doc .toc ol{margin:4px 0 0}
+.glist{list-style:none;padding:0!important;margin:0 0 20px!important}
+.glist li{border:1.5px solid var(--ink);margin:0 0 12px!important}
+.glist a{display:block;padding:14px 16px;text-decoration:none;color:var(--fg)}
+.glist a b{display:block;font-size:1.02rem;color:var(--acc);line-height:1.5}
+.glist a span{display:block;font-size:.88rem;color:var(--sub);margin-top:4px}
+.btn-l{display:inline-block;background:var(--acc);color:#fff!important;text-decoration:none;font-weight:700;padding:12px 20px;margin:6px 0 16px}
+.doc iframe{width:100%;height:1150px;border:1px solid var(--line2);background:#fff}
+@media (max-width:560px){.doc h1{font-size:1.3rem}.doc h2{font-size:1.08rem}.doc table{font-size:.85rem}.doc th,.doc td{padding:6px}}
