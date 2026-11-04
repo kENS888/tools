@@ -128,3 +128,15 @@ details.sx>summary:hover .sec-t{color:var(--acc)}
 details.sx[open]{padding-bottom:16px}
 details.sx .tldr{border:0;padding:0;margin:0;background:none}
 #who{margin-top:4px}
+/* ページ固有の解説(2026-11-04)：開いた状態で読ませる本文 */
+.gx{margin:8px 0 18px}
+.gx p{margin:0 0 12px;line-height:1.85}
+.gx ul{margin:0 0 12px;padding-left:1.3em;line-height:1.8}
+.gx h3{font-size:.98rem;margin:14px 0 6px}
+.gx table{border-collapse:collapse;width:100%;font-size:.9rem;margin:8px 0 14px}
+.gx th,.gx td{border:1px solid var(--line2);padding:6px 10px;text-align:left!important;vertical-align:top}
+.gx th{background:var(--pvbg)}
+.gx a{color:var(--acc)}
+.gx .more a{font-weight:700}
+.gx .src{font-size:.8rem;color:var(--sub)}
+.gx .src a{color:inherit}

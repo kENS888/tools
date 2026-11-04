@@ -211,11 +211,25 @@ main{max-width:1000px}header.v2h .sin,header.v2h .thead{max-width:1000px}footer{
 <div class="card"><h2 class="sec-t" id="who">こんな人・こんな時に</h2>
 <div class="who"><button data-sc="one" type="button"><span class="wi"><svg aria-hidden="true" viewbox="0 0 48 48"><path d="M12 5h24v38H12z"></path><path d="M17 10h14v8H17z"></path><path d="M18 25h2M24 25h2M30 25h0M18 31h2M24 31h2M18 37h2M24 37h2M30 31v6"></path></svg></span><b>1つの金額の税込を知りたい人</b><span class="ds">5,000円の税込はいくら？</span><span class="go">▶ 使い方を見る</span></button><button data-sc="mix" type="button"><span class="wi"><svg aria-hidden="true" viewbox="0 0 48 48"><path d="M5 8h6l5 22h22l4-15H13"></path><circle cx="19" cy="38" r="3"></circle><circle cx="35" cy="38" r="3"></circle></svg></span><b>10%と8%がまざる買い物をした人</b><span class="ds">食べ物とそれ以外を、まとめて計算したい</span><span class="go">▶ 使い方を見る</span></button><button data-sc="qty" type="button"><span class="wi"><svg aria-hidden="true" viewbox="0 0 48 48"><path d="M12 6h18l8 8v28H12z"></path><path d="M30 6v8h8"></path><path d="M19 20l6 7 6-7M25 27v10M20 30h10M20 34h10"></path></svg></span><b>個数×単価で請求書にしたい人</b><span class="ds">「3 × 5,000円」をそのまま請求書の明細に</span><span class="go">▶ 使い方を見る</span></button><button data-sc="incl" type="button"><span class="wi"><svg aria-hidden="true" viewbox="0 0 48 48"><path d="M38 24H10M18 16l-8 8 8 8"></path></svg></span><b>税込の金額から税抜を知りたい人</b><span class="ds">11,000円の税抜と消費税はいくら？</span><span class="go">▶ 使い方を見る</span></button></div>
 
+<section class="gx" aria-labelledby="gx-t"><h2 class="sec-t" id="gx-t">計算例：端数処理で1〜2円変わるケース</h2>
+<p>インボイスに書く消費税は、1枚の請求書につき税率ごとに1回だけ端数処理します。明細の行ごとに計算して足すと、ずれることがあります。</p>
+<table>
+<tr><th>10%の明細(税抜)</th><th>行ごとの消費税(切り捨て)</th></tr>
+<tr><td>1,999円</td><td>199円</td></tr>
+<tr><td>2,999円</td><td>299円</td></tr>
+<tr><td>3,999円</td><td>399円</td></tr>
+<tr><td>合計 8,997円</td><td>足すと897円 → 正しくは899円</td></tr>
+</table>
+<p>税込から出す時は「税込 × 10/110」です。税込1,000円なら消費税90円・税抜910円で、910円に10%を足すと1,001円になり1円ずれます。計算の誤りではなく、切り捨てによる差です。このツールはその時に理由を表示します。</p>
+<p class="more">ルールの詳細は<a href="/guide/shohizei-hasu/">消費税の端数処理の記事</a>にまとめています。</p>
+<p class="src">出典：<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shohi/6371.htm" rel="nofollow">国税庁 No.6371 端数計算</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/pdf/qa/57.pdf" rel="nofollow">インボイスQ&amp;A 問57</a>(2026年11月確認)</p>
+</section>
+
 <details class="sx sxt"><summary><h2 class="sec-t">消費税計算ツールでできること</h2></summary><section aria-label="このツールについて" class="tldr">
 
 <p class="lead">税抜金額から税込金額を、税込金額から税抜金額と消費税額を、無料・登録不要で計算できるWebツールです。レジのように金額を打っていくだけで、10%と軽減税率8%が混ざっていても、税率ごとに合計して消費税を計算します。</p>
 <ul class="feat"><li>税抜金額から税込金額と消費税額を計算(10%は×1.1、8%は×1.08)</li><li>税込金額から税抜金額と消費税額を計算(消費税＝税込×10/110、8%は×8/108)</li><li>10%と8%の品目を1行ずつ打つと、税率ごとに合計してから消費税を計算(インボイス制度のルール)</li><li>品名と個数(3×500円など)も入れられ、レシートの形で内訳を確認できる</li><li>端数処理(切り捨て・四捨五入・切り上げ)を選べる</li><li>打った内容のまま請求書の明細にできる</li><li>入力内容はブラウザ内だけで処理され、サーバーに送信されない</li></ul>
-<p class="upd">最終更新日：<time datetime="2026-10-22">2026年10月22日</time> ／ 運営：しごと計算ラボ</p>
+<p class="upd">最終更新日：<time datetime="2026-11-04">2026年11月4日</time> ／ 運営：しごと計算ラボ</p>
 </section></details>
 <details class="sx"><summary><h2 class="sec-t">使い方</h2></summary>
 <ol class="steps">
