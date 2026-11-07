@@ -1,2 +1,5 @@
 /assets/note/*
   Access-Control-Allow-Origin: *
+
+/tests/*
+  X-Robots-Tag: noindex
