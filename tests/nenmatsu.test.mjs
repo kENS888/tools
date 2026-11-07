@@ -76,3 +76,10 @@ test('毎月の天引き(源泉徴収税額表 電算機計算の特例)', () =>
   assert.equal(c.diff, 57480 - 27000);
   assert.equal(c.paidIsEst, true);
 });
+
+test('令和7年分ルール(比較・天引きの見込み用):190万〜220万円は×70%−8万円(74万円を混ぜない)', () => {
+  assert.equal(C.kyuyoShotokuR7(1899999), 1249999);
+  assert.equal(C.kyuyoShotokuR7(1900000), 1250000);
+  assert.equal(C.kyuyoShotokuR7(2000000), 1320000);
+  assert.equal(C.kyuyoShotokuR7(2200000), 1460000);
+});

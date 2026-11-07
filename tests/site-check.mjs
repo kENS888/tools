@@ -1,4 +1,4 @@
-// 使い方: node tests/site-check.mjs <base-url> [path ...]
+// 使い方: node tests/site-check.mjs <base-url> [path ...]  (Git Bash では先頭に MSYS_NO_PATHCONV=1 を付ける)
 // PC 1366x768 とスマホ 390px で、横はみ出し・コンソールエラー・内部リンク切れ・404 を確かめる
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
