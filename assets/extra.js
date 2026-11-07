@@ -5,6 +5,7 @@
  '.xs-list{display:grid;gap:8px}.xs-list a{display:flex;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--line,#e3e7ee);border-radius:0;text-decoration:none;color:inherit;background:var(--card,#fff)}'+
  '.xs-list a:hover{border-color:var(--c,#2554d8)}.xs-list b{display:block;font-size:.95rem}.xs-list span.d{display:block;font-size:.8rem;color:var(--sub,#5b6474);line-height:1.5}'+
  '.xs-dot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--c,#2554d8)}'+
+ '@media (prefers-color-scheme:dark){.xs-dot{background:color-mix(in oklab,var(--c,#2554d8) 55%,#fff)}}'+
  '.xs-cards{display:grid;grid-auto-flow:column;grid-auto-columns:80%;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 10px;margin:0 -2px;-webkit-overflow-scrolling:touch}'+
  '.xs-cards a{scroll-snap-align:start;display:flex;flex-direction:column;text-decoration:none;color:inherit;min-width:0}'+
  '.xs-cards .th{aspect-ratio:1280/670;background:var(--bg,#f4f6f9);border:1px solid var(--line,#e3e7ee);overflow:hidden}'+
@@ -18,7 +19,7 @@
 '.xs-more{display:inline-block;margin-top:10px;font-size:.85rem;font-weight:600;color:var(--acc,#2554d8);text-underline-offset:3px}';
  var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
  function esc(s){return String(s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
- var T={nenmatsu:['年末調整 還付金シミュレーター','#0f766e'],furusato:['ふるさと納税 上限額','#be185d'],zangyo:['残業代 計算','#0369a1'],gensen:['源泉徴収税 計算','#2554d8'],
+ var T={nenmatsu:['年末調整 還付金シミュレーター','#475569'],furusato:['ふるさと納税 上限額','#be185d'],zangyo:['残業代 計算','#0369a1'],gensen:['源泉徴収税 計算','#2554d8'],
   seikyusho:['請求書 作成','#4f46e5'],mitsumori:['見積書 作成','#0d8a7f'],nohinsho:['納品書 作成','#0377b3'],ryoshusho:['領収書 作成','#d9540f'],hacchusho:['発注書・注文書 作成','#be123c'],
   sofujo:['送付状 作成','#16803c'],keihi:['経費精算書 作成','#4d7c0f'],eigyobi:['営業日・支払期日 計算','#6d28d9'],shohizei:['消費税計算','#a21caf'],hiwari:['日割り計算','#b45309']};
  // 月ごとの「この時期に役立つツール」
@@ -31,16 +32,16 @@
   7:['夏の繁忙期に',[['zangyo','残業代・深夜手当を確認'],['eigyobi','お盆休みを除いた支払日を確認'],['seikyusho','請求書の作成に']]],
   8:['お盆・夏休みの時期に',[['eigyobi','夏季休暇を除いた営業日を計算'],['furusato','ふるさと納税の上限を早めに確認'],['zangyo','残業代の確認に']]],
   9:['下半期のはじまりに',[['furusato','年内のふるさと納税の上限を確認'],['hiwari','月の途中の異動・引っ越しに'],['mitsumori','下半期の見積書を作成']]],
-  10:['年末調整の準備の時期に',[['nenmatsu','今年の年末調整でいくら戻るか確認'],['furusato','年内のふるさと納税の上限を確認'],['zangyo','残業代の確認に']]],
-  11:['年末調整・ふるさと納税の時期に',[['nenmatsu','令和8年の改正で、いくら戻るか確認'],['furusato','年内のふるさと納税、上限はいくら?'],['zangyo','年末の繁忙期の残業代を確認']]],
-  12:['年末の時期に',[['furusato','12月31日までのふるさと納税の上限を確認'],['nenmatsu','年末調整で戻る額を確認'],['eigyobi','年末年始の休みを除いた支払日を確認']]]};
+  10:['年末調整の準備に',[['nenmatsu','いくら戻る？'],['furusato','寄付の上限は？'],['zangyo','残業代を確かめる']]],
+  11:['年末調整の季節',[['nenmatsu','令和8年分、いくら戻る？'],['furusato','年内の寄付、上限は？'],['zangyo','忙しい月の残業代']]],
+  12:['年末に',[['furusato','12/31までの寄付の上限'],['nenmatsu','いくら戻る？'],['eigyobi','年末年始をのぞいた支払日']]]};
  // 記事とツールを結びつけるキーワード
  var K={nenmatsu:['年末調整','還付'],furusato:['ふるさと納税'],zangyo:['残業','深夜手当'],gensen:['源泉徴収'],seikyusho:['請求書','インボイス'],mitsumori:['見積'],
   nohinsho:['納品書'],ryoshusho:['領収書','収入印紙'],hacchusho:['発注書','注文書'],sofujo:['送付状'],keihi:['経費精算','交通費精算'],eigyobi:['支払期日','営業日','支払日'],shohizei:['消費税'],hiwari:['日割り']};
  var here=(location.pathname.split('/')[1]||'');
  var sb=document.getElementById('season');
  if(sb){var m=new Date().getMonth()+1,s=S[m];
-  sb.innerHTML='<div class="xs-card"><h2>'+esc(s[0])+'</h2><p class="xs-sub">'+m+'月に役立つツール</p><div class="xs-list">'+s[1].map(function(x){var t=T[x[0]];return '<a href="/'+x[0]+'/" style="--c:'+t[1]+'"><i class="xs-dot"></i><span><b>'+esc(t[0])+'</b><span class="d">'+esc(x[1])+'</span></span></a>'}).join('')+'</div></div>';sb.hidden=false}
+  sb.innerHTML='<div class="xs-card"><h2>'+esc(s[0])+'</h2><p class="xs-sub">'+m+'月のおすすめ</p><div class="xs-list">'+s[1].map(function(x){var t=T[x[0]];return '<a href="/'+x[0]+'/" style="--c:'+t[1]+'"><i class="xs-dot"></i><span><b>'+esc(t[0])+'</b><span class="d">'+esc(x[1])+'</span></span></a>'}).join('')+'</div></div>';sb.hidden=false}
  // 利用回数の計測：押されたボタンの種類だけを送る(入力内容は送らない)
  (function(){var tool=(location.pathname.split('/')[1]||'');if(!tool)return;
   document.addEventListener('click',function(ev){var b=ev.target.closest&&ev.target.closest('button,a,[role=button]');if(!b)return;

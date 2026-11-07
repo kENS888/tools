@@ -15,7 +15,7 @@ const rows = (html, startText) => {
 
 test('ツールページの年収別計算例 = ロジックの結果', () => {
   const h = read('nenmatsu/index.html');
-  for (const [inc, est, nen, diff] of rows(h, '計算例：年収別に')) {
+  for (const [inc, est, nen, diff] of rows(h, 'id="gx-t"')) {
     const c = C.nenmatsu({ ...base, income: parseInt(inc) * 10000 });
     assert.deepEqual([est, nen, diff], [yen(c.est), yen(c.nen), yen(c.diff)], inc);
   }
