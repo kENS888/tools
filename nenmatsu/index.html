@@ -307,7 +307,8 @@ $('copy').onclick=function(){if(!last)return toast('年収を入れてくださ�
 var EX={single:{inc:'4500000',bonus:'',bonusN:'2',paid:'',sp:'',spi:'',dep:'0',tok:'0',old:'0',dok:'0',shaA:true,sha:'',seiho:'',ideco:'',jutaku:''},family:{inc:'6000000',bonus:'',bonusN:'2',paid:'',sp:'1',spi:'1500000',dep:'0',tok:'1',old:'0',dok:'0',shaA:true,sha:'',seiho:'80000',ideco:'',jutaku:''}};
 $('toBonus').addEventListener('click',function(e){e.preventDefault();e.stopPropagation();$('optBox').open=true;var b=$('bonus');b.scrollIntoView({block:'center'});b.focus({preventScroll:true})});
 loadQuery();render();
-if('IntersectionObserver' in window)new IntersectionObserver(function(e){$('mini').classList.toggle('off',e[0].isIntersecting)}).observe($('bigBox'));
+// 本来の結果かフッターが見えている間は、画面下の帯を隠す
+if('IntersectionObserver' in window){var seen=new Set(),io=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?seen.add(e.target):seen.delete(e.target)});$('mini').classList.toggle('off',seen.size>0)});io.observe($('bigBox'));io.observe(document.querySelector('footer'))}
 
 </script>
 <script src="/assets/tour.js"></script>
