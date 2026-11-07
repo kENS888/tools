@@ -51,3 +51,9 @@ test('よくある質問の本文と FAQPage の構造化データが一致す�
   const qs = [...h.matchAll(/<details><summary><span>(.*?)<\/span><\/summary><p>(.*?)<\/p>/g)].map(m => [m[1], m[2]]);
   assert.deepEqual(qs, ld.map(q => [q.name, q.acceptedAnswer.text]));
 });
+
+test('デザインの約束:年末調整ページ独自のスタイル(style#calc2)に角丸・影を使わない', () => {
+  // .pill2 は以前からある札の形(ページ内では未使用)なので除く
+  const css = read('nenmatsu/index.html').match(/<style id="calc2">([\s\S]*?)<\/style>/)[1].replace(/\.pill2\{[^}]*\}/, '');
+  assert.doesNotMatch(css, /border-radius:\s*[1-9]|box-shadow:\s*(?!none)/);
+});
