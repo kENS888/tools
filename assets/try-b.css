@@ -30,3 +30,12 @@ header.v2h .sbar{border-bottom:0}
 /* 余白を多めに */
 .gx{margin:16px 0 32px}
 .gx p{line-height:1.95}
+/* 監査の指摘で追加:区切りが弱い所に細い線を戻す、見出しを大きく、PCで最初の画面にツール一覧を入れる */
+main>.card:first-of-type{border:1px solid var(--line2)}
+details.more{background:var(--card);border:1px solid var(--line2)}
+html body .xs-list a{border:1px solid var(--line2)}
+.gx td{border-bottom:1px solid var(--line2)!important}
+.gx tr:nth-child(odd) td{background:none}
+.faq details{border:1px solid var(--line2)}
+h2,.sec-t,.grp h2,.xs-card h2{font-size:1.35rem!important}
+@media (min-width:561px){.hero{padding:28px 16px 20px}.hero h1{font-size:2.6rem}.js #season{min-height:0}}
