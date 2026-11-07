@@ -44,3 +44,10 @@ test('年末調整の2ページが、ほかのページと同じ文章を使っ�
     }
   }
 });
+
+test('よくある質問の本文と FAQPage の構造化データが一致する', () => {
+  const h = read('nenmatsu/index.html');
+  const ld = JSON.parse(h.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'].find(x => x['@type'] === 'FAQPage').mainEntity;
+  const qs = [...h.matchAll(/<details><summary><span>(.*?)<\/span><\/summary><p>(.*?)<\/p>/g)].map(m => [m[1], m[2]]);
+  assert.deepEqual(qs, ld.map(q => [q.name, q.acceptedAnswer.text]));
+});
