@@ -5,6 +5,7 @@
  '.xs-list{display:grid;gap:8px}.xs-list a{display:flex;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--line,#e3e7ee);border-radius:0;text-decoration:none;color:inherit;background:var(--card,#fff)}'+
  '.xs-list a:hover{border-color:var(--c,#2554d8)}.xs-list b{display:block;font-size:.95rem}.xs-list span.d{display:block;font-size:.8rem;color:var(--sub,#5b6474);line-height:1.5}'+
  '.xs-dot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--c,#2554d8)}'+
+ '@media (prefers-color-scheme:dark){.xs-dot{background:color-mix(in oklab,var(--c,#2554d8) 55%,#fff)}}'+
  '.xs-cards{display:grid;grid-auto-flow:column;grid-auto-columns:80%;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 10px;margin:0 -2px;-webkit-overflow-scrolling:touch}'+
  '.xs-cards a{scroll-snap-align:start;display:flex;flex-direction:column;text-decoration:none;color:inherit;min-width:0}'+
  '.xs-cards .th{aspect-ratio:1280/670;background:var(--bg,#f4f6f9);border:1px solid var(--line,#e3e7ee);overflow:hidden}'+
