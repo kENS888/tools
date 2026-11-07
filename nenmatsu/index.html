@@ -89,6 +89,9 @@ footer a{color:inherit}footer{text-align:center;font-size:.78rem;color:var(--sub
 table.r td.k{color:var(--sub);font-size:.85rem;padding-left:14px}
 @media (prefers-color-scheme:dark){.big.up .v{color:#4ade80}}
 .gx table.nw td{white-space:nowrap}
+.pre{margin:6px 2px 0;font-size:.8rem}
+input[aria-invalid=true]{border-color:var(--neg)!important;outline-color:var(--neg)}
+#optBox[open]{padding-bottom:64px}
 .kv{display:flex;flex-wrap:wrap;gap:2px 18px;font-size:.85rem;color:var(--sub);margin:8px 2px 0}.kv b{color:var(--fg);font-variant-numeric:tabular-nums;margin-left:4px}
 .mres{position:fixed;left:50%;transform:translateX(-50%);width:min(calc(100vw - 32px),520px);bottom:12px;z-index:5;margin:0;padding:10px 14px;border:1.5px solid var(--acc);border-left-width:5px;background:var(--card);color:var(--acc);font-weight:700;font-size:.92rem;text-align:center}.mres:empty,.mres.off{display:none}
 @media (max-width:560px){.big{flex-direction:column;align-items:flex-start;gap:2px}.f2{grid-template-columns:1fr}.f2 .w{grid-column:auto}.gx table{font-size:.82rem}.gx th,.gx td{padding:6px}}
@@ -113,6 +116,7 @@ table.r td.k{color:var(--sub);font-size:.85rem;padding-left:14px}
  </details>
  <div class="big" id="bigBox"><span class="l" id="bigL">年末調整の結果(目安)</span><span class="v" id="bigV">— 円</span></div>
  <div class="kv" id="bigKv"></div>
+ <p class="lead2 pre" id="premise"></p>
  <p class="lead2" id="bigNote"></p>
  <p class="lead2"><a href="#yougo">源泉徴収・年税額などの言葉の意味</a></p>
  <table class="r" id="res"></table>
@@ -172,7 +176,7 @@ table.r td.k{color:var(--sub);font-size:.85rem;padding-left:14px}
 <li>扶養控除：一般38万円、19〜22歳63万円、70歳以上48万円(同居の親は58万円)。配偶者控除38万円(70歳以上は48万円)。扶養・配偶者控除は合計所得62万円以下(給与のみなら年収136万円以下)が対象。配偶者の合計所得が62万円超133万円以下(年収約207万円以下)なら、配偶者特別控除(3万〜38万円)</li>
 <li><b>年税額</b> ＝ (課税所得 × 税率 − 控除額 − 住宅ローン控除) × 102.1%(復興特別所得税)。100円未満切り捨て</li>
 <li><b>戻る額</b> ＝ 今年引かれた所得税の合計 − 年税額(マイナスなら追加で引かれる額)</li>
-<li>所得税の合計が空欄のときは、令和8年分 源泉徴収税額表の「電算機計算の特例」(月額表・甲欄)で1か月分の天引きを求め、12倍して見込みます。給与所得控除は社会保険料を引いた後の月給から求め、基礎控除は月48,334円、配偶者・扶養1人につき月31,667円です。賞与を入れた場合は、「賞与に対する源泉徴収税額の算出率の表」(令和8年分)で、前月の社会保険料を引いた後の給与と扶養の人数から率を求め、社会保険料を引いた後の賞与にかけます(賞与が前月の給与の10倍を超える場合は月額表で計算)。改正で新しく扶養の対象になった家族(年収123万円超136万円以下)は、11月までの天引きでは数えないため、その場合の実際の戻る額は見込みより大きくなります</li>
+<li>所得税の合計が空欄のときは、令和8年分 源泉徴収税額表の「電算機計算の特例」(月額表・甲欄)で1か月分の天引きを求め、12倍して見込みます。給与所得控除は社会保険料を引いた後の月給から求め、基礎控除は月48,334円、配偶者・扶養1人につき月31,667円です。賞与を入れた場合は、「賞与に対する源泉徴収税額の算出率の表」(令和8年分)で、前月の社会保険料を引いた後の給与と扶養の人数から率を求め、社会保険料を引いた後の賞与にかけます(社会保険料を引いた後の賞与が、前月の給与(社会保険料を引いた後)の10倍を超える場合や、前月の給与がない場合は、月額表で計算。賞与の計算期間は年1回なら12か月、年2〜3回なら6か月とみなします)。社会保険料は、給与と賞与の額に比例して分けて見込みます。改正で新しく扶養の対象になった家族(年収123万円超136万円以下)は、11月までの天引きでは数えないため、その場合の実際の戻る額は見込みより大きくなります</li>
 </ul>
 <p class="note">国税庁によると、令和8年11月までの給与の源泉徴収に変更はなく、12月の年末調整で改正後の控除を使って1年分を精算します。</p>
 <p class="note">出典・参考</p><ul class="note"><li><a href="https://www.nta.go.jp/publication/pamph/gensen/nencho2026/pdf/102.pdf" target="_blank" rel="noopener">国税庁「令和8年分 年末調整 昨年と比べて変わった点」(PDF)</a></li><li><a href="https://www.nta.go.jp/users/gensen/nencho/index.htm" target="_blank" rel="noopener">国税庁「年末調整がよくわかるページ(令和8年分)」</a></li><li><a href="https://www.nta.go.jp/publication/pamph/gensen/zeigakuhyo2026/data/all.pdf" target="_blank" rel="noopener">国税庁「令和8年分 源泉徴収税額表」(PDF)</a></li><li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1199.htm" target="_blank" rel="noopener">国税庁 No.1199 基礎控除</a></li><li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm" target="_blank" rel="noopener">国税庁 No.1410 給与所得控除</a></li><li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2260.htm" target="_blank" rel="noopener">国税庁 No.2260 所得税の税率</a></li><li><a href="https://www.nta.go.jp/taxes/shiraberu/shinkoku/tebiki/2025/01/1_12.htm" target="_blank" rel="noopener">国税庁「市区町村からのお知らせ」(住民税の住宅ローン控除)</a></li><li><a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/090929.html" target="_blank" rel="noopener">総務省「個人住民税の住宅ローン控除」</a></li></ul><p class="note">確認日：2026年11月7日</p>
@@ -222,7 +226,6 @@ function monthlyTax(A,n){if(A<=0)return 0;
  var B=A-kk-ki-31667*n;if(B<=0)return 0;
  var t=B<=162500?B*5105/100000:B<=275000?B*10210/100000-8296:B<=579166?B*20420/100000-36374:B<=750000?B*23483/100000-54113:B<=1500000?B*33693/100000-130688:B<=3333333?B*40840/100000-237893:B*45945/100000-408061;
  return Math.max(0,Math.round(t/10)*10)}
-// 賞与なし・12か月同額で支払われたと仮定した、1年分の天引きの見込み
 // 賞与に対する源泉徴収税額の算出率の表(令和8年分・甲欄)。扶養親族等の数ごとの「前月の社会保険料等控除後の給与等の金額」の区切り(千円、以上)
 var BRATE=[0,2.042,4.084,6.126,8.168,10.210,12.252,14.294,16.336,18.378,20.420,22.462,24.504,26.546,28.588,30.630,32.672,35.735,38.798,41.861,45.945];
 var BROW=[[82,94,260,309,342,372,402,433,520,605,684,715,752,795,854,922,1318,1521,2621,3495],[107,250,289,346,373,401,430,463,520,621,705,739,778,821,882,952,1342,1526,2645,3527],[143,276,321,377,400,426,457,492,525,636,728,764,804,848,910,983,1367,1526,2669,3559],[181,300,354,405,424,452,484,517,550,651,751,788,830,876,938,1013,1391,1538,2693,3590],[218,300,387,431,452,477,509,540,577,666,774,813,856,903,966,1044,1416,1555,2716,3622],[251,304,412,457,479,503,531,564,604,681,798,838,881,930,994,1074,1440,1555,2740,3654],[284,343,438,483,505,527,553,589,630,697,821,862,907,957,1022,1104,1464,1555,2764,3685],[317,383,463,508,529,552,578,614,657,708,845,887,933,985,1051,1135,1489,1583,2788,3717]];
@@ -246,7 +249,7 @@ if(typeof module!=='undefined')module.exports=CORE;
 
 var $=function(id){return document.getElementById(id)};
 function yen(n){return Math.round(n).toLocaleString('ja-JP')+' 円'}
-function num(s){s=String(s||'');var m=s.match(/^\s*([0-9,.]+)\s*万/);if(m)return Math.round(parseFloat(m[1].replace(/,/g,''))*10000)||0;return parseInt(s.replace(/[^0-9]/g,''),10)||0}
+function num(s){s=String(s||'').replace(/[０-９，．]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-0xFEE0)});var m=s.match(/^\s*([0-9,.]+)\s*万/);if(m)return Math.round(parseFloat(m[1].replace(/,/g,''))*10000)||0;return parseInt(s.replace(/[^0-9]/g,''),10)||0}
 function dec(s){var m=String(s||'').match(/^\s*(\d+)\s*[:：]\s*(\d{1,2})\s*$/);if(m)return +m[1]+Math.round(+m[2]/60*100)/100;var v=parseFloat(String(s||'').replace(/[^0-9.]/g,''));return isFinite(v)?Math.round(v*100)/100:0}
 function toast(m){var t=$('toast');t.textContent=m;t.className='toast on';clearTimeout(toast._t);toast._t=setTimeout(function(){t.className='toast'},1800)}
 function copyText(t,msg){
@@ -276,14 +279,16 @@ function r(k,v,sub){return '<tr><td'+(sub?' class="k"':'')+'>'+k+'</td><td>'+v+'
 function render(){var o=O();$('shaW').hidden=o.shaAuto;$('spiW').hidden=!o.spouse;
  var man=function(v){return (Math.round(v/1000)/10).toLocaleString('ja-JP')+'万円'},nf=o.dep+o.tok+o.old+o.dokyo,sm=[];if(o.bonus)sm.push('賞与 '+man(o.bonus)+'・'+o.bonusN+'回');if(nf)sm.push('扶養'+nf+'人');if(!o.shaAuto)sm.push('社会保険料 '+man(o.sha));if(o.seiho)sm.push('保険料控除 '+man(o.seiho));if(o.ideco)sm.push('iDeCo等 '+man(o.ideco));if(o.jutaku)sm.push('住宅ローン控除 '+man(o.jutaku));
  $('optSum').textContent=sm.join('・');$('optSum').className='ms'+(sm.length?' on':'');
+ $('inc').setAttribute('aria-invalid',o.income&&(o.income<100000||o.bonus>o.income)?'true':'false');$('paid').setAttribute('aria-invalid',o.paid&&o.paid>o.income?'true':'false');
  var B=$('bigBox'),V=$('bigV'),Lb=$('bigL'),N=$('bigNote');
- if(!o.income){B.className='big';Lb.textContent='年末調整の結果(目安)';V.textContent='— 円';N.textContent='年収を入れると計算します。';$('res').innerHTML='';$('bigKv').innerHTML='';$('mini').textContent='';last=null;return}
+ if(!o.income){B.className='big';Lb.textContent='年末調整の結果(目安)';V.textContent='— 円';N.textContent='年収を入れると計算します。';$('res').innerHTML='';$('bigKv').innerHTML='';$('premise').textContent='';$('mini').textContent='';last=null;return}
  var c=CORE.nenmatsu(o);last={o:o,c:c};
- var est=o.paid?'':o.bonus?'天引きは、毎月の給与を同じ額、賞与を'+o.bonusN+'回に分けて同じ額と仮定した見込みです。':'天引きは賞与なし・毎月同じ給与と仮定した見込みです。賞与がある人は、詳しい設定に賞与を入れてください。';
- if(c.diff>=0){B.className='big up';Lb.textContent=o.paid?'年末調整で戻る額(目安)':'年末調整で戻る見込み';V.textContent='約 '+yen(c.diff);N.textContent=(c.diff?'12月か1月の給与と一緒に戻るのが一般的です。':'過不足はありません。')+est}
- else{B.className='big down';Lb.textContent=o.paid?'追加で引かれる額(目安)':'追加で引かれる見込み';V.textContent='約 '+yen(-c.diff);N.textContent='12月か1月の給与から、不足分として引かれるのが一般的です。'+est}
+ var est=o.paid?'':'天引きは、税額表から見込んだ額です(毎月の給与は同じ額'+(o.bonus&&o.bonusN>1?'、賞与は毎回同じ額':'')+'と仮定)。'+(o.bonus?'':'賞与がある人は「賞与・扶養・保険料など」に入れてください。');
+ if(c.diff>=0){B.className='big up';Lb.textContent=o.paid?'年末調整で戻る額(目安)':'年末調整で戻る見込み';V.textContent='約 '+yen(o.paid?c.diff:Math.round(c.diff/100)*100);N.textContent=(c.diff?'12月か1月の給与と一緒に戻るのが一般的です。':'過不足はありません。')+est}
+ else{B.className='big down';Lb.textContent=o.paid?'追加で引かれる額(目安)':'追加で引かれる見込み';V.textContent='約 '+yen(o.paid?-c.diff:Math.round(-c.diff/100)*100);N.textContent='12月か1月の給与から、不足分として引かれるのが一般的です。'+est}
  if(o.income>20000000){B.className='big';Lb.textContent='年末調整の対象外です';V.textContent='確定申告で精算';N.textContent='給与の収入が2,000万円を超える人は年末調整を受けず、確定申告で1年分を精算します。'}
  else if(o.income<100000){B.className='big';Lb.textContent='年収の単位を確かめてください';V.textContent='— 円';N.textContent='年収は円で入れます。「300万」と入れると3,000,000円になります。'}
+ else if(o.paid>o.income){B.className='big';Lb.textContent='入力を確かめてください';V.textContent='— 円';N.textContent='所得税の合計が年収より大きくなっています。打ち間違いがないか確かめてください。'}
  else if(o.bonus>o.income)N.textContent='賞与が年収を超えています。年収には給与と賞与の合計を入れてください。';
  else if(o.paid&&c.est&&(o.paid>c.est*3||o.paid*3<c.est))N.textContent+='入れた所得税の合計が、税額表からの見込み('+yen(c.est)+')と大きく違います。打ち間違いがないか確かめてください。';
  var h=r('年収(給与の支払総額)',yen(o.income))+r('給与所得控除','− '+yen(c.kk))+r('給与所得',yen(c.s))+r('所得控除の合計','− '+yen(c.ded));
@@ -294,6 +299,7 @@ function render(){var o=O();$('shaW').hidden=o.shaAuto;$('spiW').hidden=!o.spous
  h+=r('年税額(復興特別所得税を含む)',yen(c.nen))+r('改正前(令和7年)のルールでの年税額',yen(c.nenOld),1)+r('参考：令和7年分のルールより減る額',yen(c.cut),1);
  h+=r(o.paid?'今年引かれた所得税の合計':'今年の天引き(税額表からの見込み)',yen(c.paidUsed));if(!o.paid&&o.bonus)h+=r('うち毎月の給与',yen(c.estMon),1)+r('うち賞与('+o.bonusN+'回)',yen(c.estBon),1);h+=r(c.diff>=0?'差額(戻る額)':'差額(不足額)',yen(Math.abs(c.diff)));
  $('res').innerHTML=h;
+ var pr=[o.bonus?'賞与 '+man(o.bonus)+(o.bonusN>1?'(年'+o.bonusN+'回)':'(年1回)'):'賞与なし',(o.spouse?'配偶者あり・':'')+(nf?'扶養'+nf+'人':'扶養なし'),o.shaAuto?'社会保険料は年収の15%':'社会保険料 '+man(o.sha)];$('premise').textContent='計算の前提：'+pr.join('／');
  $('bigKv').innerHTML='<span>1年分の所得税(年税額)<b>'+yen(c.nen)+'</b></span><span>'+(o.paid?'今年引かれた所得税':'今年の天引き(見込み)')+'<b>'+yen(c.paidUsed)+'</b></span>';
  $('mini').textContent=Lb.textContent+'：'+V.textContent}
 $('copy').onclick=function(){if(!last)return toast('年収を入れてください');var c=last.c,o=last.o,t='年収 '+yen(o.income)+'\n課税所得 '+yen(c.kazei)+'\n年税額 '+yen(c.nen)+'\n改正で減る所得税 '+yen(c.cut);t+='\n'+(o.paid?'今年引かれた所得税 ':'今年の天引き(見込み) ')+yen(c.paidUsed)+'\n'+(c.diff>=0?'戻る額(目安) ':'追加で引かれる額(目安) ')+yen(Math.abs(c.diff));copyText(t,'結果をコピーしました')};

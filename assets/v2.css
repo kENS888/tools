@@ -146,3 +146,7 @@ details.sx .tldr{border:0;padding:0;margin:0;background:none}
 .src li>a,ul.note li>a{display:inline-flex;align-items:center;min-height:44px}
 p.src{line-height:3.5}p.src a{padding:13px 0}
 label:has(>input[type=checkbox]){min-height:44px}
+/* ダークモードでも読めるリンク色、チェックボックスが横につぶれない、スマホで折りたたみの要約を2行目に(2026-11-07) */
+.lead2 a,ul.note a,p.note a{color:var(--acc)}
+input[type=checkbox],input[type=radio]{flex:none}
+@media (max-width:560px){details.more>summary{flex-wrap:wrap;white-space:normal}details.more>summary .ms{order:3;flex-basis:100%;white-space:normal}}
