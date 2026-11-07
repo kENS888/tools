@@ -144,9 +144,11 @@ details.sx .tldr{border:0;padding:0;margin:0;background:none}
 /* 押せる大きさを44px以上に(シェアボタン・出典リンク・チェックボックス、2026-11-07) */
 .sb{min-height:44px}
 .src li>a,ul.note li>a{display:inline-flex;align-items:center;min-height:44px}
-p.src{line-height:3.5}p.src a{padding:13px 0}
+.btn{min-height:44px}
 label:has(>input[type=checkbox]){min-height:44px}
 /* ダークモードでも読めるリンク色、チェックボックスが横につぶれない、スマホで折りたたみの要約を2行目に(2026-11-07) */
 .lead2 a,ul.note a,p.note a{color:var(--acc)}
 input[type=checkbox],input[type=radio]{flex:none}
 @media (max-width:560px){details.more>summary{flex-wrap:wrap;white-space:normal}details.more>summary .ms{order:3;flex-basis:100%;white-space:normal}}
+/* スマホで Tab で移った入力欄が、画面下に固定した帯に隠れないように(2026-11-07) */
+html{scroll-padding-bottom:110px}

@@ -21,3 +21,12 @@
  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;var h=a.getAttribute('href');if(!document.getElementById(h.slice(1)))return;e.preventDefault();history.replaceState(null,'',h);go(h,true)});
  if(location.hash)setTimeout(function(){go(location.hash)},0);
 })();
+/* 入力欄に移ったとき、画面下に固定した帯(結果・PDF保存など)にかかっていたら、その分だけスクロールする(2026-11-07) */
+(function(){
+ function coverTop(){var y=innerHeight-4,els=document.elementsFromPoint?document.elementsFromPoint(innerWidth/2,y):[];
+  for(var i=0;i<els.length;i++){var s=getComputedStyle(els[i]);if(s.position==='fixed'&&+s.opacity>0)return els[i].getBoundingClientRect().top}
+  for(var e=els[0];e;e=e.parentElement){if(getComputedStyle(e).position==='fixed')return e.getBoundingClientRect().top}
+  return innerHeight}
+ document.addEventListener('focusin',function(e){var el=e.target;if(!el||!/^(INPUT|SELECT|TEXTAREA)$/.test(el.tagName))return;
+  setTimeout(function(){var r=el.getBoundingClientRect(),t=coverTop();if(r.bottom>t-8)window.scrollBy(0,Math.min(r.bottom-t+16,r.top-8))},60)});
+})();
