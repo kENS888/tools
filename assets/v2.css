@@ -140,3 +140,9 @@ details.sx .tldr{border:0;padding:0;margin:0;background:none}
 .gx .more a{font-weight:700}
 .gx .src{font-size:.8rem;color:var(--sub)}
 .gx .src a{color:inherit}
+
+/* 押せる大きさを44px以上に(シェアボタン・出典リンク・チェックボックス、2026-11-07) */
+.sb{min-height:44px}
+.src li>a,ul.note li>a{display:inline-flex;align-items:center;min-height:44px}
+p.src{line-height:3.5}p.src a{padding:13px 0}
+label:has(>input[type=checkbox]){min-height:44px}

@@ -83,3 +83,32 @@ test('令和7年分ルール(比較・天引きの見込み用):190万〜220万�
   assert.equal(C.kyuyoShotokuR7(2000000), 1320000);
   assert.equal(C.kyuyoShotokuR7(2200000), 1460000);
 });
+
+// 賞与:国税庁「賞与に対する源泉徴収税額の算出率の表(令和8年分)」(源泉徴収税額表 all.pdf p.15〜16、2026-11-07 確認)
+test('賞与の算出率:区切りの前後(甲欄)', () => {
+  assert.equal(C.bonusRate(81999, 0), 0);
+  assert.equal(C.bonusRate(82000, 0), 2.042);
+  assert.equal(C.bonusRate(259999, 0), 4.084);
+  assert.equal(C.bonusRate(260000, 0), 6.126);
+  assert.equal(C.bonusRate(249999, 1), 2.042);
+  assert.equal(C.bonusRate(250000, 1), 4.084);
+  assert.equal(C.bonusRate(3494999, 0), 41.861);
+  assert.equal(C.bonusRate(3495000, 0), 45.945);
+  assert.equal(C.bonusRate(316999, 7), 0);
+  assert.equal(C.bonusRate(317000, 9), 2.042); // 7人以上は同じ列
+});
+
+test('賞与1回分の税額:表で求める場合と、前月の給与の10倍を超える場合(月額表で計算)', () => {
+  assert.equal(C.bonusTax(425000, 283333, 0, 6), 26035);   // 425,000 × 6.126%
+  assert.equal(C.bonusTax(1000000, 100000, 0, 6), 40840);  // ちょうど10倍は表 → 4.084%
+  assert.equal(C.bonusTax(1100000, 100000, 0, 6), 43920);  // 10倍超:(月額表(100,000+183,333) − 月額表(100,000)) × 6
+  assert.equal(C.bonusTax(0, 283333, 0, 6), 0);
+});
+
+test('賞与の入力:0円・夏冬2回・扶養あり', () => {
+  assert.equal(run({ income: 3000000, bonus: 0 }).est, 57480);               // 賞与0円は今までと同じ
+  const c = run({ income: 5000000, bonus: 1000000, bonusN: 2 });            // 年収500万円のうち賞与100万円(50万円×2回)
+  assert.deepEqual([c.estMon, c.estBon, c.est, c.nen, c.diff], [87840, 52070, 139910, 90300, 49610]);
+  const d = run({ income: 5000000, bonus: 1000000, bonusN: 2, dep: 1 });    // 扶養1人:賞与は4.084%、毎月は扶養1人
+  assert.deepEqual([d.estMon, d.estBon, d.est], [68400, 34714, 103114]);
+});
