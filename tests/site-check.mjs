@@ -26,6 +26,9 @@ for (const vp of [{ width: 1366, height: 768 }, { width: 390, height: 844 }]) {
     const bad = [];
     if (res.status() !== 200) bad.push('status ' + res.status());
     if (ow > 1) bad.push('横はみ出し ' + ow + 'px');
+    // 書類の見本(紙)の題名は明朝・字の間を空けたまま(共通CSSの見出しの変更が紙に及ばないように。2026-11-07)
+    const pt = await page.evaluate(() => { const h = document.querySelector('.paper h1'); if (!h) return null; const s = getComputedStyle(h); return { f: s.fontFamily, ls: parseFloat(s.letterSpacing) || 0 }; });
+    if (pt && (!/Mincho/.test(pt.f) || pt.ls < 1)) bad.push('紙の題名の書体が変わった ' + pt.f + ' / ' + pt.ls);
     if (errs.length) bad.push('console: ' + errs.join(' | '));
     console.log((bad.length ? 'NG ' : 'OK ') + vp.width + ' ' + p + (bad.length ? ' ' + bad.join(' / ') : ''));
     ng += bad.length ? 1 : 0;
