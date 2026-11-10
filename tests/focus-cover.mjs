@@ -4,7 +4,7 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 let pw; try { pw = require('playwright'); } catch { pw = require(process.env.APPDATA + '/npm/node_modules/playwright'); }
 const base = (process.argv[2] || 'http://localhost:8788').replace(/\/$/, '');
-const paths = ['/nenmatsu/', '/furusato/', '/zangyo/', '/gensen/', '/eigyobi/', '/hiwari/', '/shohizei/', '/keihi/', '/seikyusho/', '/mitsumori/', '/nohinsho/', '/ryoshusho/', '/hacchusho/', '/sofujo/'];
+const paths = ['/kabu-shinkoku/', '/nenmatsu/', '/furusato/', '/zangyo/', '/gensen/', '/eigyobi/', '/hiwari/', '/shohizei/', '/keihi/', '/seikyusho/', '/mitsumori/', '/nohinsho/', '/ryoshusho/', '/hacchusho/', '/sofujo/'];
 const b = await pw.chromium.launch();
 const ctx = await b.newContext({ viewport: { width: 390, height: 844 } });
 await ctx.route(u => !u.href.startsWith(base), r => r.abort());
