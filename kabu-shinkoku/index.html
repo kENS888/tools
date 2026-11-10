@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>株・配当の確定申告は必要?会社員の判定(令和8年分)|しごと計算ラボ</title>
-<meta name="description" content="会社員の株・投資信託・配当の確定申告が必要かを判定。令和8年分の20万円の境目、住民税、損益通算・損失の繰越、国内株の配当控除の目安を無料で確認できます。">
+<title>会社員の確定申告は必要?株・暗号資産・FX・副業をまとめて判定(令和8年分)|しごと計算ラボ</title>
+<meta name="description" content="会社員の株・投資信託、海外の証券会社の株、暗号資産、FX、副業をまとめて判定。給料のほかの収入を選び、金額を入力せずに20万円の合計、住民税、損の申告の目安を確認できます。">
 <link rel="canonical" href="https://shigoto-keisan.com/kabu-shinkoku/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="しごと計算ラボ">
-<meta property="og:title" content="株・配当の確定申告は必要?会社員の判定(令和8年分)|しごと計算ラボ">
-<meta property="og:description" content="会社員の株・投資信託・配当の確定申告が必要かを判定。令和8年分の20万円の境目、住民税、損益通算・損失の繰越、国内株の配当控除の目安を無料で確認できます。">
+<meta property="og:title" content="会社員の確定申告は必要?株・暗号資産・FX・副業をまとめて判定(令和8年分)|しごと計算ラボ">
+<meta property="og:description" content="会社員の株・投資信託、海外の証券会社の株、暗号資産、FX、副業をまとめて判定。給料のほかの収入を選び、金額を入力せずに20万円の合計、住民税、損の申告の目安を確認できます。">
 <meta property="og:url" content="https://shigoto-keisan.com/kabu-shinkoku/">
 <meta property="og:image" content="https://shigoto-keisan.com/assets/og/kabu-shinkoku.png">
 <meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="/assets/site.css">
 <style id="calc2">
 :root{--acc:#a16207;--acc2:#fef3c7}
-@media(prefers-color-scheme:dark){:root{--acc:#facc15;--acc2:#30270f}}
+@media(prefers-color-scheme:dark){:root{--acc:#facc15;--acc2:#30270f;--ks-on-acc:#0e1116}}
 *{box-sizing:border-box}body{margin:0;color:var(--fg);font:16px/1.8 system-ui,sans-serif}
 main{max-width:760px;margin:0 auto;padding:0 16px}.card{padding:20px;margin-bottom:16px}h2{font-size:1.35rem}p{margin:8px 0 14px}a{color:var(--acc)}
 [hidden]{display:none!important}
@@ -59,18 +59,24 @@ main{max-width:760px;margin:0 auto;padding:0 16px}.card{padding:20px;margin-bott
 .who .wi svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 .ad{margin:32px 0;min-height:100px}.src{overflow-wrap:anywhere}.toast{position:fixed;bottom:24px;left:16px;background:var(--fg);color:var(--card);padding:10px;opacity:0;pointer-events:none}.toast.on{opacity:1}
 @media(max-width:560px){#ks-card{padding:20px 16px}.gx table{font-size:.82rem}.gx th,.gx td{padding:6px}.ks-flow{gap:6px;font-size:.85rem}}
+#ks-tool .ks-answer[aria-pressed=true]{background:var(--acc2);border-color:var(--acc)}
+#ks-tool .ks-answer[aria-pressed=true]::after{content:'✓';margin-left:auto;color:var(--acc);font-weight:800}
+#ks-tool button:disabled{opacity:.5;cursor:default}#ks-next-button{margin:20px 0 12px}
+@media not (prefers-color-scheme:dark){:root{--ks-on-acc:#fff}}#ks-next-button{justify-content:center}#ks-tool #ks-next-button:not(:disabled){background:var(--acc);border-color:var(--acc);color:var(--ks-on-acc)}#ks-next-button:not(:disabled) svg{stroke:var(--ks-on-acc)}
+#ks-card h2,#ks-card #ks-answer{word-break:auto-phrase}
+.ks-after{margin:14px 0 0}.ks-summary{overflow-wrap:anywhere}
 </style>
 <link rel="stylesheet" href="/assets/fonts/sans.css"><link rel="stylesheet" href="/assets/fonts/num.css"><link rel="stylesheet" href="/assets/v2.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3779143457996470" crossorigin="anonymous"></script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "株・配当の確定申告判定(会社員・令和8年分)", "url": "https://shigoto-keisan.com/kabu-shinkoku/", "description": "会社員の株・投資信託・配当の確定申告が必要かを判定。令和8年分の20万円の境目、住民税、損益通算・損失の繰越、国内株の配当控除の目安を無料で確認できます。", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "inLanguage": "ja", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "dateModified": "2026-11-10", "publisher": {"@type": "Organization", "name": "しごと計算ラボ", "url": "https://shigoto-keisan.com/"}, "featureList": ["すべての不要・損失の経路で副業などの所得を確認し、20万円超は必要を優先", "源泉なし口座のもうけ0円と、所得がある場合の住民税を区別", "住民税の申告、損益通算、3年間の損失繰越の確認", "国内株の配当を総合課税にする場合の目安", "回答はブラウザ内で処理し、送信・保存しません"]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "しごと計算ラボ", "item": "https://shigoto-keisan.com/"}, {"@type": "ListItem", "position": 2, "name": "株・配当の確定申告判定", "item": "https://shigoto-keisan.com/kabu-shinkoku/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "20万円は売った金額ですか、利益ですか?", "acceptedAnswer": {"@type": "Answer", "text": "売った金額ではなく、取得費・手数料を引いた利益です。源泉なし・一般口座の利益15万円と副業の利益5万円なら合計20万円で、所得税の申告は不要の見込みですが住民税の申告は必要です。"}}, {"@type": "Question", "name": "NISAは申告がいりますか?", "acceptedAnswer": {"@type": "Answer", "text": "非課税の条件を満たすNISAの利益・配当は、申告しません。副業など給与以外のもうけが20万円を超える場合は、その所得について申告が必要です。上場株式の配当の非課税には株式数比例配分方式などの条件があります。NISAの損失はほかの口座との通算・繰越もできません。"}}, {"@type": "Question", "name": "住民税の申告とは何ですか?", "acceptedAnswer": {"@type": "Answer", "text": "所得税の申告をしない場合に、給与以外の所得をお住まいの市区町村へ知らせる手続きです。源泉なし口座の利益や副業の所得があれば、20万円以下でも申告が必要です。所得税の確定申告をすれば、住民税の申告をしたものとみなされます。"}}, {"@type": "Question", "name": "損した年は申告した方がいいですか?", "acceptedAnswer": {"@type": "Answer", "text": "別口座の利益との通算や、翌年以後3年への繰越を使うなら、申告が必要です。繰り越せるのは上場株式・公募の投資信託などの損です。副業などのもうけが20万円を超える場合は「必要」を優先します。源泉徴収された税が戻る可能性があります。繰越のためには損失が生じた年から連続して申告し、売却しなかった年も申告します。株の損失を給与から引くことはできません。"}}, {"@type": "Question", "name": "配当は申告した方が得ですか?", "acceptedAnswer": {"@type": "Answer", "text": "国内株の配当を含めた課税所得が695万円以下なら、国内株の配当を総合課税で申告すると得になる場合があります。配当控除を使い切れるなどの条件があり、所得税率20%の負担率は約17.4%、23%なら約20.5%です。源泉徴収は20.315%なので、個別に比較してください。外国株・J-REIT等は配当控除の対象外です。"}}, {"@type": "Question", "name": "証券会社が2つある時はどうしますか?", "acceptedAnswer": {"@type": "Answer", "text": "別の証券会社の利益と損失を差し引くには、確定申告が必要です。源泉徴収ありの特定口座だけなら、口座ごとに申告不要を選べます。同じ源泉徴収あり口座内で受け入れた配当と損失は証券会社が通算します。"}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"会社員の確定申告は必要?株・暗号資産・FX・副業をまとめて判定(令和8年分)","url":"https://shigoto-keisan.com/kabu-shinkoku/","description":"会社員の株・投資信託、海外の証券会社の株、暗号資産、FX、副業をまとめて判定。給料のほかの収入を選び、金額を入力せずに20万円の合計、住民税、損の申告の目安を確認できます。","applicationCategory":"FinanceApplication","operatingSystem":"Web","inLanguage":"ja","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"dateModified":"2026-11-10","publisher":{"@type":"Organization","name":"しごと計算ラボ","url":"https://shigoto-keisan.com/"},"featureList":["選んだ収入だけ質問し、20万円は対象所得の合計で判定","源泉なし口座のもうけ0円と、所得がある場合の住民税を区別","住民税の申告、損益通算、3年間の損失繰越の確認","国内株の配当を総合課税にする場合の目安","回答はブラウザ内で処理し、送信・保存しません"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"しごと計算ラボ","item":"https://shigoto-keisan.com/"},{"@type":"ListItem","position":2,"name":"会社員の確定申告は必要?株・暗号資産・FX・副業をまとめて判定(令和8年分)","item":"https://shigoto-keisan.com/kabu-shinkoku/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"20万円は売った金額ですか、利益ですか?","acceptedAnswer":{"@type":"Answer","text":"売った金額ではなく、取得費・手数料を引いた利益です。源泉なし・一般口座の利益15万円と副業の利益5万円なら合計20万円で、所得税の申告は不要の見込みですが住民税の申告は必要です。"}},{"@type":"Question","name":"NISAは申告がいりますか?","acceptedAnswer":{"@type":"Answer","text":"非課税の条件を満たすNISAの利益・配当は、申告しません。副業など給与以外のもうけが20万円を超える場合は、その所得について申告が必要です。上場株式の配当の非課税には株式数比例配分方式などの条件があります。NISAの損失はほかの口座との通算・繰越もできません。"}},{"@type":"Question","name":"住民税の申告とは何ですか?","acceptedAnswer":{"@type":"Answer","text":"所得税の申告をしない場合に、給与以外の所得をお住まいの市区町村へ知らせる手続きです。源泉なし口座の利益や副業の所得があれば、20万円以下でも申告が必要です。所得税の確定申告をすれば、住民税の申告をしたものとみなされます。"}},{"@type":"Question","name":"損した年は申告した方がいいですか?","acceptedAnswer":{"@type":"Answer","text":"別口座の利益との通算や、翌年以後3年への繰越を使うなら、申告が必要です。繰り越せるのは上場株式・公募の投資信託などの損です。副業などのもうけが20万円を超える場合は「必要」を優先します。源泉徴収された税が戻る可能性があります。繰越のためには損失が生じた年から連続して申告し、売却しなかった年も申告します。株の損失を給与から引くことはできません。"}},{"@type":"Question","name":"配当は申告した方が得ですか?","acceptedAnswer":{"@type":"Answer","text":"国内株の配当を含めた課税所得が695万円以下なら、国内株の配当を総合課税で申告すると得になる場合があります。配当控除を使い切れるなどの条件があり、所得税率20%の負担率は約17.4%、23%なら約20.5%です。源泉徴収は20.315%なので、個別に比較してください。外国株・J-REIT等は配当控除の対象外です。"}},{"@type":"Question","name":"証券会社が2つある時はどうしますか?","acceptedAnswer":{"@type":"Answer","text":"別の証券会社の利益と損失を差し引くには、確定申告が必要です。源泉徴収ありの特定口座だけなら、口座ごとに申告不要を選べます。同じ源泉徴収あり口座内で受け入れた配当と損失は証券会社が通算します。"}},{"@type":"Question","name":"暗号資産で損した時は申告した方が得ですか?","acceptedAnswer":{"@type":"Answer","text":"通常の雑所得に当たる暗号資産の損だけでは、この判定は「得」にしません。給料や株のもうけとは差し引けません。副業の雑所得とは差し引ける場合があります。"}},{"@type":"Question","name":"FXの損は申告が必要ですか?","acceptedAnswer":{"@type":"Answer","text":"対象となるFXの損を3年繰り越すには、損した年から毎年の申告が必要です。海外FXなど対象外の取引は、同じ制度が使えると決めつけず確認してください。"}},{"@type":"Question","name":"フリマで自分の物を売った時も副業ですか?","acceptedAnswer":{"@type":"Answer","text":"生活に使っていた古着・家財を売っただけなら、その所得は非課税で、その分の申告は不要です。仕入れて売る転売や高価な収集品は同じ扱いと決めつけず確認してください。"}}]}]}</script>
 </head>
 <body>
 <header class="v2h">
 <div class="sbar"><div class="sin"><a class="slogo" href="/"><i></i>しごと計算ラボ</a></div></div>
-<div class="thead"><span class="tic" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M10 6h20l8 8v28H10zM30 6v8h8"/><path d="M16 34l7-9 6 4 9-11M32 18h6v6"/></svg></span><div><h1>株・配当の確定申告は必要?</h1><p>口座と利益から、会社員の申告の目安を確認。令和8年分(2026年分)。</p></div></div>
+<div class="thead"><span class="tic" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M10 6h20l8 8v28H10zM30 6v8h8"/><path d="M16 34l7-9 6 4 9-11M32 18h6v6"/></svg></span><div><h1>会社員の確定申告は必要?株・暗号資産・FX・副業をまとめて判定(令和8年分)</h1><p>給料のほかの収入を選ぶと、必要な質問だけで申告の目安を確認。令和8年分(2026年分)。</p></div></div>
 </header>
 <main>
-<section id="ks-tool" aria-label="株の申告の診断">
+<section id="ks-tool" aria-label="会社員の確定申告の診断">
 <p class="ks-progress" id="ks-progress"></p>
 <div id="ks-card" aria-live="polite" aria-atomic="true"></div>
 <button type="button" class="ks-back" id="ks-back" hidden>← もどる</button>
@@ -85,20 +91,31 @@ main{max-width:760px;margin:0 auto;padding:0 16px}.card{padding:20px;margin-bott
 <div class="ks-person"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 14h32M34 8l6 6-6 6M40 34H8M14 28l-6 6 6 6"/></svg></span><b>口座をまたいで損と利益</b><span class="ds">別の証券会社の利益と差し引けるか確認。</span></div>
 </div>
 <section class="gx" aria-labelledby="ks-rules"><h2 class="sec-t" id="ks-rules">確定申告が必要かの決まり</h2>
-<p>給与が1か所で年末調整を受ける会社員向けの、所得税の申告の目安です。令和8年分(2026年分)を、2027年2〜3月に申告する場合を扱います。NISAだけ・源泉あり・損した場合・源泉なし口座のもうけ0円の場合も、副業など給与以外のもうけを確認します。副業が20万円を超える場合は、損失の申告による利点より「必要」を優先します。まず源泉徴収の有無を、証券会社の年間取引報告書などで確かめます。</p>
+<p>給与が1か所で年末調整を受ける会社員向けの、所得税の申告の目安です。令和8年分(2026年分)を、2027年2〜3月に申告する場合を扱います。最初に給料のほかの収入を選び、選んだ物だけ質問します。どれかのもうけ、または対象となる所得の合計が20万円を超える場合は、損失の申告による利点より「必要」を優先します。日本の証券会社の口座は、源泉徴収の有無を年間取引報告書などで確かめます。</p>
 <div class="ks-flow" aria-label="利益の考え方"><b>売却代金 − 取得費・手数料</b><span aria-hidden="true">→</span><b>申告を考える「利益」</b></div>
 <p>源泉徴収なしの特定口座・一般口座の利益は、副業などの所得と合わせて20万円を超えるかを見ます。源泉徴収ありの特定口座で申告不要を選ぶ利益や、非課税のNISAの利益は、この合計に入れません。医療費控除などで申告する際は、20万円以下を理由に省略していた所得も含めます。</p>
 <p>源泉徴収ありの口座の損失を別口座の利益や配当と通算したり、損失を翌年以後3年繰り越したりするには申告が必要です。配当との通算は申告分離課税の場合に限ります。同じ源泉徴収あり口座の損失と受け入れた配当は、証券会社内で通算されます。</p>
 <p>副業が20万円以下でも所得があれば、所得税の申告をしない場合は住民税の申告が必要です。源泉なし口座のもうけも副業も0円なら、この注記は出しません。医療費控除などで申告しても、NISAや源泉あり口座の申告不要制度は別に扱います。</p>
+<h3>暗号資産・FX・海外の証券会社・副業</h3>
+<p>暗号資産は、売るだけでなく買い物への使用・別の暗号資産との交換でももうけを計算します。通常の雑所得としての損は給料や株のもうけから引けませんが、副業の雑所得とは差し引ける場合があります。この診断では損を20万円の合計から引かず、申告が必要な可能性を優先します。事業所得に当たる場合は個別に確認してください。(R1-a〜R1-d)</p>
+<p>一部の暗号資産は、今後、株と同じような分離課税に変わる予定です。始まる年は国税庁の案内で確かめてください。(R1-g・R1-h)</p>
+<p>FXのもうけも20万円の合計に入れます。対象となるFXの損は、損した年から毎年申告すると3年間の繰越控除を使えます。第一種金融商品取引業者・登録金融機関を相手とする対象取引などの制度で、海外FXなど対象外の取引へ自動では当てはまりません。(R2-a・R2-c・R2-d、R3-a・R3-b)</p>
+<p>海外の証券会社の海外営業所に直接開いた口座は、日本の特定口座(源泉徴収あり)として扱いません。売ったもうけや配当は日本でも申告の対象です。課税対象の上場株式等なら、日本の口座の株のもうけと同年の売却損を差し引ける場合があります。海外の口座の損失繰越は個別の要件確認が必要です。(R4-a〜R4-e)</p>
+<p>副業は売上から経費を引いたもうけで答えます。給料として受け取る副業や事業所得に当たるかの判断は、この簡易判定とは別に確認してください。フリマで生活に使っていた古着・家財を売っただけなら、その分の申告は不要です。仕入れて売る転売や高価な収集品は同じ扱いと決めつけず確認してください。(R5-a〜R5-c)</p>
+<p>医療費控除などで申告する場合は、20万円以下のため省略できた所得も申告します。確定申告すると、ふるさと納税のワンストップ特例は無効になるので、申請済みの寄附も申告書に書きます。(R3-d・R6-a)</p>
 <h3>この答え方ならこの結果</h3>
 <table id="ks-examples"><thead><tr><th>答え方</th><th>所得税の目安</th></tr></thead><tbody>
-<tr><td>NISAだけ → 副業などのもうけなし</td><td>申告は不要の見込み</td></tr>
-<tr><td>証券会社の口座 → あり → もうかった・とんとん → 副業などのもうけなし</td><td>申告は不要の見込み</td></tr>
-<tr><td>証券会社の口座 → なし → 20万円以下 → 副業なし</td><td>申告は不要の見込み(住民税の申告は必要)</td></tr>
-<tr><td>源泉なし口座 → 売っていない・もうけ0円 → 副業なし</td><td>申告は不要の見込み(住民税の注記なし)</td></tr>
-<tr><td>NISAだけ・源泉あり・損した場合でも → 副業20万円より多い</td><td>申告が必要の見込み</td></tr>
-<tr><td>証券会社の口座 → なし → 20万円より多い</td><td>申告が必要の見込み</td></tr>
-<tr><td>証券会社の口座 → あり → 損した → 副業などのもうけなし</td><td>申告した方が得かもしれません</td></tr>
+<tr><td>どれもない(給料だけ)</td><td>申告は不要の見込み</td></tr>
+<tr><td>日本の株だけ → NISAだけ</td><td>申告は不要の見込み</td></tr>
+<tr><td>日本の株だけ → NISA以外もある → あり → もうかった・とんとん</td><td>申告は不要の見込み</td></tr>
+<tr><td>日本の株だけ → NISA以外もある → なし → 20万円以下</td><td>申告は不要の見込み(住民税の申告は必要)</td></tr>
+<tr><td>日本の株だけ → NISA以外もある → なし → 売っていない・もうけ0円</td><td>申告は不要の見込み(住民税の注記なし)</td></tr>
+<tr><td>暗号資産だけ → 20万円より多い</td><td>申告が必要の見込み</td></tr>
+<tr><td>暗号資産だけ → 損した</td><td>申告は不要の見込み(給料・株とは差し引けない)</td></tr>
+<tr><td>FXだけ → 損した</td><td>申告した方が得かもしれません(対象FXの繰越には毎年の申告)</td></tr>
+<tr><td>日本の株(源泉なし)20万円以下 ＋ 暗号資産20万円以下 → 合わせて20万円より多い</td><td>申告が必要の見込み</td></tr>
+<tr><td>日本の株(源泉なし)20万円以下 ＋ 副業20万円以下 → 合わせて20万円以下</td><td>申告は不要の見込み(住民税の申告は必要)</td></tr>
+<tr><td>日本の株で損した ＋ 副業20万円より多い</td><td>申告が必要の見込み(必要を優先)</td></tr>
 </tbody></table>
 <p id="ks-example-note">源泉なし口座で15万円のもうけがあり、副業がない答え方では、所得税の申告は不要の見込みでも住民税の申告は必要です。源泉あり口座のもうけで申告不要を選ぶ分は、20万円判定に含めません。</p>
 <h3>国内株の配当を総合課税にした場合</h3>
@@ -112,8 +129,8 @@ main{max-width:760px;margin:0 auto;padding:0 16px}.card{padding:20px;margin-bott
 <p>国内株の配当を含めた課税所得が695万円以下なら、配当を総合課税で申告すると得になる場合があります。ただし外国株・J-REITなどは配当控除の対象外です。同じ配当に、総合課税の配当控除と申告分離課税の損益通算を同時に使うことはできません。所得税と住民税で別々の課税方式も選べません。</p>
 <p>年末調整で戻る額の見込みは、<a href="/nenmatsu/">年末調整 還付金シミュレーター</a>でも確認できます。</p>
 <h3>対象の範囲</h3>
-<p>日本の居住者の通常の上場株式・主に公募投資信託を対象にしています。特別分配金は非課税なので利益・配当に加えません。NISAの配当は、株式数比例配分方式など非課税の条件を満たすものが対象です。</p>
-<div id="ks-scope" hidden><p>私募投資信託、大口株主等、日本で源泉徴収されない国外直接受取の配当、同族会社の役員等への貸付金利子・賃貸料など、通常と異なる条件は税務署・税理士に確認してください。極めて高額な投資所得に対する特例もこの判定には含みません。年収2,000万円超は年末調整の対象外です。確定申告で税金が還付される場合は、還付申告として確認してください。</p><p>2027年分の防衛特別所得税については、合計税率20.315%は変わりません。</p></div>
+<p>給与が1か所で年末調整を受ける日本の居住者の、通常の上場株式・主に公募投資信託、暗号資産、FX、副業を対象にしています。特別分配金は非課税なので利益・配当に加えません。NISAの配当は、株式数比例配分方式など非課税の条件を満たすものが対象です。</p>
+<div id="ks-scope" hidden><p>私募投資信託、大口株主等、外国税額控除や非永住者など、国外所得の個別条件、同族会社の役員等への貸付金利子・賃貸料など、通常と異なる条件は税務署・税理士に確認してください。極めて高額な投資所得に対する特例もこの判定には含みません。年収2,000万円超は年末調整の対象外です。確定申告で税金が還付される場合は、還付申告として確認してください。</p><p>2027年分の防衛特別所得税については、合計税率20.315%は変わりません。</p></div>
 <button type="button" class="ks-chip" id="ks-scope-button" aria-expanded="false" aria-controls="ks-scope">▼ もっと見る</button>
 <h3>出典</h3>
 <ul class="src"><li id="ks-src-1199"><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1199.htm" target="_blank" rel="noopener">No.1199 基礎控除｜国税庁</a></li>
@@ -134,17 +151,65 @@ main{max-width:760px;margin:0 auto;padding:0 16px}.card{padding:20px;margin-bott
 <li><a href="https://www.nta.go.jp/users/gensen/nencho/index/kyuyosyotokusya.htm" target="_blank" rel="noopener">給与所得者（従業員）の方へ（令和８年分）｜国税庁</a>(確認日：2026-11-10)</li>
 <li><a href="https://laws.e-gov.go.jp/law/325AC0000000226/" target="_blank" rel="noopener">地方税法 第317条の2(住民税の申告)</a>(確認日：2026-11-10)</li>
 <li><a href="https://laws.e-gov.go.jp/law/325AC0000000226/" target="_blank" rel="noopener">地方税法 附則第5条(住民税の配当控除)</a>(確認日：2026-11-10)</li></ul>
-<p class="src">確認日：2026-11-10。</p>
+<ul class="src"><li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1524.htm" target="_blank" rel="noopener">R1-a: No.1524　暗号資産を使用することにより利益が生じた場合の課税関係｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/publication/pamph/pdf/virtual_currency_faq_03.pdf" target="_blank" rel="noopener">R1-a: PDF取得題名：「暗号資産に関する税務上の取扱いについて（情報）」、本文表紙：暗号資産等に関する税務上の取扱いについて（情報）、別添：暗号資産等に関する税務上の取扱いについて（ＦＡＱ）</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/publication/pamph/pdf/virtual_currency_faq_03.pdf" target="_blank" rel="noopener">R1-b: 「暗号資産に関する税務上の取扱いについて（情報）」</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1465.htm" target="_blank" rel="noopener">R1-b: No.1465　株式等の譲渡損失(赤字)の取扱い｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1500.htm" target="_blank" rel="noopener">R1-c: No.1500　雑所得｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/law/joho-zeikaishaku/shotoku/shinkoku/0022012-080.pdf" target="_blank" rel="noopener">R1-c: PDF取得題名は空欄、本文：ＮＦＴに関する税務上の取扱いについて（情報）</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1521.htm" target="_blank" rel="noopener">R1-c: No.1521　外国為替証拠金取引(FX)の課税関係｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/publication/pamph/pdf/virtual_currency_faq_03.pdf" target="_blank" rel="noopener">R1-d: 「暗号資産に関する税務上の取扱いについて（情報）」</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/publication/pamph/pdf/virtual_currency_faq_03.pdf" target="_blank" rel="noopener">R1-e: 「暗号資産に関する税務上の取扱いについて（情報）」</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm" target="_blank" rel="noopener">R1-f: No.1900　給与所得者で確定申告が必要な人｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1906.htm" target="_blank" rel="noopener">R1-f: No.1906　給与所得者がネットオークション等により副収入を得た場合｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/publication/pamph/joto-sanrin/r08aramashi.pdf" target="_blank" rel="noopener">R1-g: PDF取得題名：個人の方が株式等や土地・建物等を譲渡した場合の</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.fsa.go.jp/access/r7/270.html" target="_blank" rel="noopener">R1-g: アクセスＦＳＡ第270号HTML版：金融庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/publication/pamph/joto-sanrin/r08aramashi.pdf" target="_blank" rel="noopener">R1-h: 個人の方が株式等や土地・建物等を譲渡した場合の</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.fsa.go.jp/common/diet/" target="_blank" rel="noopener">R1-h: 国会提出法案等 ： 金融庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1521.htm" target="_blank" rel="noopener">R2-a: No.1521　外国為替証拠金取引(FX)の課税関係｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1521.htm" target="_blank" rel="noopener">R2-b: No.1521　外国為替証拠金取引(FX)の課税関係｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2250.htm" target="_blank" rel="noopener">R2-b: No.2250　損益通算｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1523.htm" target="_blank" rel="noopener">R2-c: No.1523　先物取引の差金等決済に係る損失の繰越控除｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1521.htm" target="_blank" rel="noopener">R2-d: No.1521　外国為替証拠金取引(FX)の課税関係｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm" target="_blank" rel="noopener">R3-a: No.1900　給与所得者で確定申告が必要な人｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm" target="_blank" rel="noopener">R3-b: No.1900　給与所得者で確定申告が必要な人｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm" target="_blank" rel="noopener">R3-c: No.1900　給与所得者で確定申告が必要な人｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1500.htm" target="_blank" rel="noopener">R3-c: No.1500　雑所得｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1463.htm" target="_blank" rel="noopener">R3-c: No.1463　株式等を譲渡したときの課税(申告分離課税)｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/shinkoku/tokushu/shinkoku-tyuui/index.htm" target="_blank" rel="noopener">R3-d: こんな収入の申告漏れにご注意｜令和7年分 確定申告特集</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/publication/pamph/gensen/aramashi2026/pdf/11.pdf" target="_blank" rel="noopener">R4-a: PDF取得題名：11、本文：第９　特定口座内保管上場株式等の譲渡による所得等の源泉徴収事務</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1476.htm" target="_blank" rel="noopener">R4-a: No.1476　特定口座制度｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1937.htm" target="_blank" rel="noopener">R4-b: No.1937　居住者が海外で株式等を売却した場合の課税関係等｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1463.htm" target="_blank" rel="noopener">R4-c: No.1463　株式等を譲渡したときの課税(申告分離課税)｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1937.htm" target="_blank" rel="noopener">R4-c: No.1937　居住者が海外で株式等を売却した場合の課税関係等｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1463.htm" target="_blank" rel="noopener">R4-d: No.1463　株式等を譲渡したときの課税(申告分離課税)｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1465.htm" target="_blank" rel="noopener">R4-d: No.1465　株式等の譲渡損失(赤字)の取扱い｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1476.htm" target="_blank" rel="noopener">R4-d: No.1476　特定口座制度｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1474.htm" target="_blank" rel="noopener">R4-d: No.1474　上場株式等に係る譲渡損失の損益通算及び繰越控除｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1474.htm" target="_blank" rel="noopener">R4-e: No.1474　上場株式等に係る譲渡損失の損益通算及び繰越控除｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1465.htm" target="_blank" rel="noopener">R4-e: No.1465　株式等の譲渡損失(赤字)の取扱い｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1937.htm" target="_blank" rel="noopener">R4-f: No.1937　居住者が海外で株式等を売却した場合の課税関係等｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/publication/pamph/pdf/virtual_currency_faq_03.pdf" target="_blank" rel="noopener">R4-f: 「暗号資産に関する税務上の取扱いについて（情報）」</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/publication/pamph/joto-sanrin/r08aramashi.pdf" target="_blank" rel="noopener">R4-f: 個人の方が株式等や土地・建物等を譲渡した場合の</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/law/tsutatsu/kihon/shotoku/04/09.htm" target="_blank" rel="noopener">R5-a: 法第35条《雑所得》関係｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1500.htm" target="_blank" rel="noopener">R5-a: No.1500　雑所得｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1350.htm" target="_blank" rel="noopener">R5-b: No.1350　事業所得の課税のしくみ(事業所得)｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1500.htm" target="_blank" rel="noopener">R5-b: No.1500　雑所得｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm" target="_blank" rel="noopener">R5-b: No.1900　給与所得者で確定申告が必要な人｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1906.htm" target="_blank" rel="noopener">R5-c: No.1906　給与所得者がネットオークション等により副収入を得た場合｜国税庁</a>(確認日：2026-11-10)</li>
+<li><a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1155.htm" target="_blank" rel="noopener">R6-a: No.1155　ふるさと納税(寄附金控除)｜国税庁</a>(確認日：2026-11-10)</li></ul><p class="src">確認日：2026-11-10。追加の根拠番号は確認済みの表R1〜R6に対応します。</p>
 </section>
-<details class="sx"><summary><h2 class="sec-t">株・配当の申告判定でできること</h2></summary><section class="tldr"><p class="lead">口座の種類と給与以外の所得から、会社員の株・配当の確定申告の目安を確認できます。</p><ul class="feat"><li>NISAだけ・損した場合も副業を確認し、20万円超は「必要」を優先</li><li>源泉なし口座のもうけ0円と、所得がある場合の住民税を区別</li><li>住民税の申告、損益通算、3年間の損失繰越の確認</li><li>国内株の配当を総合課税にする場合の目安</li><li>回答はブラウザ内で処理し、送信・保存しません</li></ul><p class="upd">最終更新日：<time datetime="2026-11-10">2026年11月10日</time> ／ 運営：しごと計算ラボ</p></section></details>
-<details class="sx" id="ks-method" open><summary><h2 class="sec-t">計算方法(判定のしかた)</h2></summary><ol><li>口座の種類を選び、源泉徴収の有無を確認します。分からない場合は、口座情報や年間取引報告書を見て答えます。</li><li>源泉あり口座は、今年の損の有無を確認します。NISAだけ・源泉あり・損した場合・源泉なし口座のもうけ0円の場合にも、副業などのもうけを「ない・20万円以下・20万円より多い」から選びます。源泉なし・一般口座は、売ったもうけと副業のもうけが合わせて20万円を超えるかで判定します。20万円ちょうどは「以下」です。</li><li>結果の下の「当てはまるものを押すと、答えが変わります」で、年収2,000万円超、医療費控除などの申告予定、前年からの繰越損失、国内株の配当を確認できます。</li><li>申告が必要な判定を最優先にし、次に申告した方が得かもしれない判定、最後に不要の見込みを表示します。</li></ol><p>配当の年収の目安は、給与所得から基礎控除と社会保険料(年収×15%)を引いた課税所得の概算が695万円になる年収を求め、10万円単位で切り下げたものです。独身を想定し、配当・副業の金額や扶養などの控除を反映しない目安です。配当を加えると税率の境目をまたぐ場合があり、実際の有利不利は個別に比較してください。<a href="#ks-rules">根拠と計算例を見る</a></p></details>
+<details class="sx"><summary><h2 class="sec-t">会社員の確定申告判定でできること</h2></summary><section class="tldr"><p class="lead">給料のほかの収入を選び、株・暗号資産・FX・副業の確定申告をまとめて判定できます。</p><ul class="feat"><li>選んだ収入だけ質問し、20万円は対象所得の合計で判定</li><li>源泉なし口座のもうけ0円と、所得がある場合の住民税を区別</li><li>住民税の申告、損益通算、3年間の損失繰越の確認</li><li>国内株の配当を総合課税にする場合の目安</li><li>回答はブラウザ内で処理し、送信・保存しません</li></ul><p class="upd">最終更新日：<time datetime="2026-11-10">2026年11月10日</time> ／ 運営：しごと計算ラボ</p></section></details>
+<details class="sx" id="ks-method" open><summary><h2 class="sec-t">計算方法(判定のしかた)</h2></summary><ol><li>給料のほかの収入をいくつでも選びます。「どれもない」ならそのまま結果へ進みます。</li><li>日本の株、海外の証券会社、暗号資産、FX、副業の順に、選んだ物だけ答えます。金額の入力は不要です。分からない日本の口座情報はアプリや年間取引報告書で確認します。</li><li>源泉なしのもうけがどれか20万円超なら「必要」。20万円以下が2つ以上なら、最後に合計を確認します。損した物は合計に入れません。NISAや申告不要を選ぶ源泉ありの株のもうけも合計から除きます。20万円ちょうどは「以下」です。</li><li>結果の下で年収2,000万円超、医療費控除など、繰越損失、国内株の配当を追加できます。「必要」「得かもしれない」「不要」の順に優先します。</li></ol><p>配当の年収の目安は、給与所得から基礎控除と社会保険料(年収×15%)を引いた課税所得の概算が695万円になる年収を求め、10万円単位で切り下げたものです。独身を想定し、配当・副業の金額や扶養などの控除を反映しない目安です。配当を加えると税率の境目をまたぐ場合があり、実際の有利不利は個別に比較してください。<a href="#ks-rules">根拠と計算例を見る</a></p></details>
 <details class="sx" id="ks-terms" open><summary><h2 class="sec-t">特定口座・源泉徴収・NISAとは</h2></summary><ul><li><b>特定口座</b>：証券会社が年間の売却損益を計算する口座。「源泉徴収あり」と「なし」があります。一般口座では自分で損益を計算します。</li><li><b>源泉徴収</b>：利益・配当から、税金を先に差し引くこと。源泉ありの特定口座は、原則として口座ごとに申告不要を選べます。</li><li><b>NISA</b>：条件を満たす投資の利益・配当が非課税になる制度。損失は、ほかの口座との通算も繰越もできません。</li></ul><div class="ks-flow"><b>源泉あり：税を先に差し引く</b><span aria-hidden="true">／</span><b>源泉なし：自分で申告を確認</b></div><p class="src">根拠：<a href="#ks-src-1476">特定口座制度</a>・<a href="#ks-src-1535">NISA制度</a></p></details>
 <h2 class="sec-t">よくある質問</h2><div class="faq"><details><summary><span>20万円は売った金額ですか、利益ですか?</span></summary><p>売った金額ではなく、取得費・手数料を引いた利益です。源泉なし・一般口座の利益15万円と副業の利益5万円なら合計20万円で、所得税の申告は不要の見込みですが住民税の申告は必要です。</p><p class="src">出典：<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2020.htm" target="_blank" rel="noopener">No.2020 確定申告｜国税庁</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm" target="_blank" rel="noopener">No.1900 給与所得者で確定申告が必要な人｜国税庁</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1463.htm" target="_blank" rel="noopener">No.1463 株式等を譲渡したときの課税(申告分離課税)｜国税庁</a>、<a href="https://laws.e-gov.go.jp/law/325AC0000000226/" target="_blank" rel="noopener">地方税法(e-Gov 法令検索) 第317条の2</a>(確認日：2026-11-10)</p></details>
 <details><summary><span>NISAは申告がいりますか?</span></summary><p>非課税の条件を満たすNISAの利益・配当は、申告しません。副業など給与以外のもうけが20万円を超える場合は、その所得について申告が必要です。上場株式の配当の非課税には株式数比例配分方式などの条件があります。NISAの損失はほかの口座との通算・繰越もできません。</p><p class="src">出典：<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1535.htm" target="_blank" rel="noopener">No.1535 NISA制度｜国税庁</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2011.htm?cid=main" target="_blank" rel="noopener">No.2011 課税される所得と非課税所得｜国税庁</a>、<a href="https://www.fsa.go.jp/policy/nisa2/about/nisa2024/guidebook_202307.pdf" target="_blank" rel="noopener">金融庁 NISAガイドブック(Part.7 よくある質問)</a>(確認日：2026-11-10)</p></details>
 <details><summary><span>住民税の申告とは何ですか?</span></summary><p>所得税の申告をしない場合に、給与以外の所得をお住まいの市区町村へ知らせる手続きです。源泉なし口座の利益や副業の所得があれば、20万円以下でも申告が必要です。所得税の確定申告をすれば、住民税の申告をしたものとみなされます。</p><p class="src">出典：<a href="https://laws.e-gov.go.jp/law/325AC0000000226/" target="_blank" rel="noopener">地方税法(e-Gov 法令検索) 第317条の2</a>(確認日：2026-11-10)</p></details>
 <details><summary><span>損した年は申告した方がいいですか?</span></summary><p>別口座の利益との通算や、翌年以後3年への繰越を使うなら、申告が必要です。繰り越せるのは上場株式・公募の投資信託などの損です。副業などのもうけが20万円を超える場合は「必要」を優先します。源泉徴収された税が戻る可能性があります。繰越のためには損失が生じた年から連続して申告し、売却しなかった年も申告します。株の損失を給与から引くことはできません。</p><p class="src">出典：<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1474.htm" target="_blank" rel="noopener">No.1474 上場株式等に係る譲渡損失の損益通算及び繰越控除｜国税庁</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1465.htm" target="_blank" rel="noopener">No.1465 株式等の譲渡損失(赤字)の取扱い｜国税庁</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1476.htm" target="_blank" rel="noopener">No.1476 特定口座制度｜国税庁</a>(確認日：2026-11-10)</p></details>
 <details><summary><span>配当は申告した方が得ですか?</span></summary><p>国内株の配当を含めた課税所得が695万円以下なら、国内株の配当を総合課税で申告すると得になる場合があります。配当控除を使い切れるなどの条件があり、所得税率20%の負担率は約17.4%、23%なら約20.5%です。源泉徴収は20.315%なので、個別に比較してください。外国株・J-REIT等は配当控除の対象外です。</p><p class="src">出典：<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1250.htm" target="_blank" rel="noopener">No.1250 配当所得があるとき(配当控除)｜国税庁</a>、<a href="https://laws.e-gov.go.jp/law/325AC0000000226/" target="_blank" rel="noopener">地方税法(e-Gov 法令検索) 附則第5条第1項・第3項</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1331.htm" target="_blank" rel="noopener">No.1331 上場株式等の配当等に係る申告分離課税制度｜国税庁</a>(確認日：2026-11-10)</p></details>
-<details><summary><span>証券会社が2つある時はどうしますか?</span></summary><p>別の証券会社の利益と損失を差し引くには、確定申告が必要です。源泉徴収ありの特定口座だけなら、口座ごとに申告不要を選べます。同じ源泉徴収あり口座内で受け入れた配当と損失は証券会社が通算します。</p><p class="src">出典：<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1476.htm" target="_blank" rel="noopener">No.1476 特定口座制度｜国税庁</a>(確認日：2026-11-10)</p></details></div>
+<details><summary><span>証券会社が2つある時はどうしますか?</span></summary><p>別の証券会社の利益と損失を差し引くには、確定申告が必要です。源泉徴収ありの特定口座だけなら、口座ごとに申告不要を選べます。同じ源泉徴収あり口座内で受け入れた配当と損失は証券会社が通算します。</p><p class="src">出典：<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1476.htm" target="_blank" rel="noopener">No.1476 特定口座制度｜国税庁</a>(確認日：2026-11-10)</p></details><details><summary><span>暗号資産で損した時は申告した方が得ですか?</span></summary><p>通常の雑所得に当たる暗号資産の損だけでは、この判定は「得」にしません。給料や株のもうけとは差し引けません。副業の雑所得とは差し引ける場合があります。</p><p class="src">出典：<a href="https://www.nta.go.jp/publication/pamph/pdf/virtual_currency_faq_03.pdf" target="_blank" rel="noopener">R1-b・R1-c: 暗号資産等に関する税務上の取扱いについて(FAQ)｜国税庁</a>(確認日：2026-11-10)</p></details>
+<details><summary><span>FXの損は申告が必要ですか?</span></summary><p>対象となるFXの損を3年繰り越すには、損した年から毎年の申告が必要です。海外FXなど対象外の取引は、同じ制度が使えると決めつけず確認してください。</p><p class="src">出典：<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1523.htm" target="_blank" rel="noopener">R2-c: No.1523 先物取引の差金等決済に係る損失の繰越控除｜国税庁</a>(確認日：2026-11-10)</p></details>
+<details><summary><span>フリマで自分の物を売った時も副業ですか?</span></summary><p>生活に使っていた古着・家財を売っただけなら、その所得は非課税で、その分の申告は不要です。仕入れて売る転売や高価な収集品は同じ扱いと決めつけず確認してください。</p><p class="src">出典：<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1906.htm" target="_blank" rel="noopener">R5-c: No.1906 給与所得者がネットオークション等により副収入を得た場合｜国税庁</a>(確認日：2026-11-10)</p></details></div>
 </div>
 <div class="ad" aria-hidden="true">広告</div>
 <div class="card"><div class="sharebox"><h2>このツールをシェア</h2><div class="sbtns" data-share></div></div><h2>関連ツール</h2><div class="rel"><a href="/nenmatsu/" style="--c:#475569"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h18l8 8v28H12z"/><path d="M30 6v8h8"/><path d="M19 31a7 7 0 1 0 1.5-6.5"/><path d="M19 21v4.5h4.5"/></svg></span><span><b>年末調整</b><span class="d">いくら戻る？(令和8年分)</span></span></a><a href="/gensen/" style="--c:#2554d8"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><circle cx="20" cy="27" r="13"/><path d="M15 21l5 6 5-6M20 27v8M16 30h8"/><circle cx="37" cy="12" r="7"/><path d="M34 12h6"/></svg></span><span><b>源泉徴収税 計算</b><span class="d">手取りと、手取りからの逆算</span></span></a><a href="/mitsumori/" style="--c:#0d8a7f"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h18l8 8v28H12z"/><path d="M30 6v8h8"/><path d="M18 22h12M18 28h7"/><path d="M29 41l11-11 3.5 3.5-11 11H29z"/></svg></span><span><b>見積書 作成</b><span class="d">そのまま請求書にも</span></span></a><a href="/nohinsho/" style="--c:#0377b3"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 17l16-8 16 8v19l-16 8-16-8z"/><path d="M8 17l16 8 16-8"/><path d="M24 25v19"/><path d="M14 29l5 2.5"/></svg></span><span><b>納品書 作成</b><span class="d">見積書からそのまま</span></span></a><a href="/seikyusho/" style="--c:#4f46e5"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h18l8 8v28H12z"/><path d="M30 6v8h8"/><path d="M19 20l6 7 6-7M25 27v10M20 30h10M20 34h10"/></svg></span><span><b>請求書 作成</b><span class="d">インボイス対応</span></span></a><a href="/ryoshusho/" style="--c:#d9540f"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h24v36l-4-3-4 3-4-3-4 3-4-3-4 3z"/><path d="M18 22l5 5 8-9"/></svg></span><span><b>領収書 作成</b><span class="d">印紙がいるかもわかる</span></span></a><a href="/hacchusho/" style="--c:#be123c"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 10h20v32H12z"/><path d="M17 6h10v7H17z"/><path d="M17 22h10M17 28h7"/><path d="M28 36h15M39 32l4 4-4 4"/></svg></span><span><b>発注書・注文書 作成</b><span class="d">外注・仕入れを頼む</span></span></a><a href="/sofujo/" style="--c:#16803c"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 13h36v24H6z"/><path d="M6 13l18 14 18-14"/></svg></span><span><b>送付状 作成</b><span class="d">郵送・FAXにそえる</span></span></a><a href="/eigyobi/" style="--c:#6d28d9"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 11h32v30H8z"/><path d="M8 19h32"/><path d="M16 7v8M32 7v8"/><path d="M18 30l4 4 8-8"/></svg></span><span><b>営業日・支払期日 計算</b><span class="d">支払日を土日祝ぬきで</span></span></a><a href="/shohizei/" style="--c:#a21caf"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 25L23 8h17v17L23 42z"/><circle cx="33" cy="15" r="2.5"/><path d="M17 32l10-10"/><circle cx="17.5" cy="23.5" r="2"/><circle cx="26.5" cy="31.5" r="2"/></svg></span><span><b>消費税計算(税込・税抜)</b><span class="d">税込⇄税抜(10%・8%)</span></span></a><a href="/hiwari/" style="--c:#b45309"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 11h32v30H8z"/><path d="M8 19h32"/><path d="M16 7v8M32 7v8"/><path d="M15 30h18M15 26v8M33 26v8"/></svg></span><span><b>日割り計算</b><span class="d">家賃・給与を日数で割る</span></span></a><a href="/keihi/" style="--c:#4d7c0f"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M7 15h31v26H7z"/><path d="M7 15l24-7v7"/><path d="M28 24h12v9H28z"/><circle cx="33" cy="28.5" r="1.2"/></svg></span><span><b>経費精算書 作成</b><span class="d">立てかえた交通費など</span></span></a><a href="/furusato/" style="--c:#be185d"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 41S9 32 9 21a8 8 0 0 1 15-4 8 8 0 0 1 15 4c0 11-15 20-15 20z"/><path d="M19 22l5 5 5-5M24 27v6M20 29h8"/></svg></span><span><b>ふるさと納税 上限額</b><span class="d">寄付の上限の目安</span></span></a><a href="/zangyo/" style="--c:#0369a1"><span class="ic"><svg class="ico2" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="26" r="15"/><path d="M24 17v9l6 4"/><path d="M19 6h10"/><path d="M24 6v5"/></svg></span><span><b>残業代 計算</b><span class="d">残業・深夜・休日の手当</span></span></a></div></div>
@@ -164,62 +229,88 @@ var labels={need:'申告が必要の見込み',better:'申告した方が得か�
 var sourceMap={"7-b":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1465.htm","title":"国税庁 No.1465 株式等の譲渡損失(赤字)の取扱い"},"5":{"url":"https://laws.e-gov.go.jp/law/325AC0000000226/","title":"地方税法 第317条の2"},"9":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1476.htm","title":"国税庁 No.1476 特定口座制度"},"4-a":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2020.htm","title":"国税庁 No.2020 確定申告"},"4-d":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm","title":"国税庁 No.1900 給与所得者で確定申告が必要な人"},"4-e":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1463.htm","title":"国税庁 No.1463 株式等を譲渡したときの課税(申告分離課税)"},"13-a":{"url":"https://www.nta.go.jp/users/gensen/nencho/index/kyuyosyotokusya.htm","title":"国税庁 給与所得者（従業員）の方へ"},"13-b":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm","title":"国税庁 No.1900 給与所得者で確定申告が必要な人"},"6-a":{"url":"https://www.nta.go.jp/taxes/shiraberu/shinkoku/tebiki/2025/pdf/001.pdf","title":"国税庁 確定申告の手引き"},"6-b":{"url":"https://www.nta.go.jp/taxes/shiraberu/shinkoku/tebiki/2025/pdf/001.pdf","title":"国税庁 確定申告の手引き"},"7-a":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1474.htm","title":"国税庁 No.1474 上場株式等に係る譲渡損失の損益通算及び繰越控除"},"8-a":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1474.htm","title":"国税庁 No.1474 上場株式等に係る譲渡損失の損益通算及び繰越控除"},"8-b":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1474.htm","title":"国税庁 No.1474 上場株式等に係る譲渡損失の損益通算及び繰越控除"},"10-c":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1250.htm","title":"国税庁 No.1250 配当所得があるとき(配当控除)"},"10-h":{"url":"https://laws.e-gov.go.jp/law/325AC0000000226/","title":"地方税法 附則第5条"},"10-i":{"url":"https://laws.e-gov.go.jp/law/325AC0000000226/","title":"地方税法 附則第5条"},"12-a":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1535.htm","title":"国税庁 No.1535 NISA制度"},"12-b":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2011.htm?cid=main","title":"国税庁 No.2011 課税される所得と非課税所得"},"12-d":{"url":"https://www.fsa.go.jp/policy/nisa2/about/nisa2024/guidebook_202307.pdf","title":"金融庁 NISAガイドブック(Part.7 よくある質問)"},"12-e":{"url":"https://www.fsa.go.jp/policy/nisa2/about/nisa2024/guidebook_202307.pdf","title":"金融庁 NISAガイドブック(Part.7 よくある質問)"},"3-a":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1476.htm","title":"国税庁 No.1476 特定口座制度"},"3-e":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1476.htm","title":"国税庁 No.1476 特定口座制度"},"4-b":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm","title":"国税庁 No.1900 給与所得者で確定申告が必要な人"}};
 sourceMap['6-c']=sourceMap['3-a'];
 sourceMap['6-a'].title=sourceMap['6-b'].title='国税庁の説明:確定申告の手引き(令和7年分)';
+// path[0] はチェックした収入のビット集合(0=給料だけ)、以後は回答の添字。
+var incomes=[['stock','株・投資信託(日本の証券会社。NISAも)','bank','Q1','株(源泉なし)'],['foreign','海外の証券会社の株','bank','FOREIGN','海外の証券会社の株'],['crypto','暗号資産(仮想通貨)','both','CRYPTO','暗号資産'],['fx','FX','both','FX','FX'],['side','副業(フリマで自分の物を売っただけは除く)','bag','SIDE','副業']];
+function profitOptions(){return [['売っていない・0円','NEXT','minus'],['損した','NEXT','down'],['20万円以下','NEXT','low'],['20万円より多い','NEXT','up']]}
+Object.assign(sourceMap,{"R1-a":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1524.htm","title":"国税庁 No.1524 暗号資産を使用することにより利益が生じた場合の課税関係"},"R1-b":{"url":"https://www.nta.go.jp/publication/pamph/pdf/virtual_currency_faq_03.pdf","title":"国税庁 暗号資産に関する税務上の取扱い(FAQ)"},"R1-c":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1500.htm","title":"国税庁 No.1500 雑所得"},"R1-d":{"url":"https://www.nta.go.jp/publication/pamph/pdf/virtual_currency_faq_03.pdf","title":"国税庁 暗号資産に関する税務上の取扱い(FAQ)"},"R1-e":{"url":"https://www.nta.go.jp/publication/pamph/pdf/virtual_currency_faq_03.pdf","title":"国税庁 暗号資産に関する税務上の取扱い(FAQ)"},"R1-f":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm","title":"国税庁 No.1900 給与所得者で確定申告が必要な人"},"R1-g":{"url":"https://www.nta.go.jp/publication/pamph/joto-sanrin/r08aramashi.pdf","title":"国税庁 株式等の譲渡の改正のあらまし(令和8年)"},"R1-h":{"url":"https://www.nta.go.jp/publication/pamph/joto-sanrin/r08aramashi.pdf","title":"国税庁 株式等の譲渡の改正のあらまし(令和8年)"},"R2-a":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1521.htm","title":"国税庁 No.1521 外国為替証拠金取引(FX)の課税関係"},"R2-b":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1521.htm","title":"国税庁 No.1521 外国為替証拠金取引(FX)の課税関係"},"R2-c":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1523.htm","title":"国税庁 No.1523 先物取引の差金等決済に係る損失の繰越控除"},"R2-d":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1521.htm","title":"国税庁 No.1521 外国為替証拠金取引(FX)の課税関係"},"R3-a":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm","title":"国税庁 No.1900 給与所得者で確定申告が必要な人"},"R3-b":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm","title":"国税庁 No.1900 給与所得者で確定申告が必要な人"},"R3-c":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm","title":"国税庁 No.1900 給与所得者で確定申告が必要な人"},"R3-d":{"url":"https://www.nta.go.jp/taxes/shiraberu/shinkoku/tokushu/shinkoku-tyuui/index.htm","title":"国税庁 こんな収入の申告漏れにご注意"},"R4-a":{"url":"https://www.nta.go.jp/publication/pamph/gensen/aramashi2026/pdf/11.pdf","title":"国税庁 源泉徴収のあらまし 特定口座の源泉徴収"},"R4-b":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1937.htm","title":"国税庁 No.1937 居住者が海外で株式等を売却した場合の課税関係等"},"R4-c":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1463.htm","title":"国税庁 No.1463 株式等を譲渡したときの課税(申告分離課税)"},"R4-d":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1463.htm","title":"国税庁 No.1463 株式等を譲渡したときの課税(申告分離課税)"},"R4-e":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1474.htm","title":"国税庁 No.1474 上場株式等に係る譲渡損失の損益通算及び繰越控除"},"R4-f":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1937.htm","title":"国税庁 No.1937 居住者が海外で株式等を売却した場合の課税関係等"},"R5-a":{"url":"https://www.nta.go.jp/law/tsutatsu/kihon/shotoku/04/09.htm","title":"国税庁 所得税基本通達 雑所得の関係"},"R5-b":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1350.htm","title":"国税庁 No.1350 事業所得の課税のしくみ(事業所得)"},"R5-c":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1906.htm","title":"国税庁 No.1906 給与所得者がネットオークション等により副収入を得た場合"},"R6-a":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1155.htm","title":"国税庁 No.1155 ふるさと納税(寄附金控除)"}});
 var flow={
- Q1:{question:'株や投資信託、どこで持ってる?',step:1,options:[['NISAだけ','SA','leaf'],['証券会社の口座(NISAもある人も)','Q2','bank'],['わからない','H1','help']]},
- H1:{question:'見てみて、どうだった?',help:'証券会社のアプリで『口座』を見ると、NISA かどうかが書いてあります',step:1,options:[['NISAだけだった','SA','leaf'],['NISA以外もあった','Q2','bank']]},
- Q2:{question:'その口座は『源泉徴収あり』?',hint:'源泉徴収あり=証券会社が税金を先に引いてくれる口座',step:2,options:[['あり','Q3a','check'],['なし(一般口座も)','Q3b','minus'],['あり・なし両方ある','Q3b','both'],['わからない','H2','help']]},
- H2:{question:'見てみて、どうだった?',help:'アプリの口座情報か、年に1回届く『年間取引報告書』に、あり/なしが書いてあります',step:2,options:[['あり','Q3a','check'],['なし','Q3b','minus'],['両方','Q3b','both']]},
- Q3a:{question:'今年、株で損をした?',hint:'NISAの分は数えません',step:3,options:[['もうかった・とんとん','SB','up'],['損した','SE','down']]},
- Q3b:{question:'今年、源泉徴収なしの口座で売ったもうけは?',step:3,options:[['売っていない・もうけ0円','SZ','minus'],['20万円以下','Q4','low'],['20万円より多い','D','up'],['損した','SE','down']]},
- Q4:{question:'副業のもうけもある?',step:4,options:[['ない','C','minus'],['ある','Q5','bag']]},
- Q5:{question:'源泉なし口座のもうけ+副業のもうけ、合わせて20万円より多い?',hint:'あなたの答え:源泉なし口座 20万円以下/副業 あり',step:5,options:[['20万円以下','C','low'],['20万円より多い','D','up']]}
+ Q1:{question:'日本の証券会社の株・投資信託は、NISAだけ?',options:[['NISAだけ','NEXT','leaf'],['NISA以外もある','Q2','bank'],['わからない','H1','help']]},
+ H1:{question:'見てみて、どうだった?',help:'証券会社のアプリで『口座』を見ると、NISA かどうかが書いてあります',options:[['NISAだけだった','NEXT','leaf'],['NISA以外もあった','Q2','bank']]},
+ Q2:{question:'その口座は『源泉徴収あり』?',hint:'源泉徴収あり=証券会社が税金を先に引いてくれる口座',options:[['あり','Q3a','check'],['なし(一般口座も)','Q3b','minus'],['あり・なし両方ある','Q3b','both'],['わからない','H2','help']]},
+ H2:{question:'見てみて、どうだった?',help:'アプリの口座情報か、年に1回届く『年間取引報告書』に、あり/なしが書いてあります',options:[['あり','Q3a','check'],['なし','Q3b','minus'],['両方','Q3b','both']]},
+ Q3a:{question:'今年、株で損をした?',hint:'NISAの分は数えません',options:[['もうかった・とんとん','NEXT','up'],['損した','NEXT','down']]},
+ Q3b:{question:'今年、源泉徴収なしの口座で売ったもうけは?',options:[['売っていない・もうけ0円','NEXT','minus'],['20万円以下','NEXT','low'],['20万円より多い','NEXT','up'],['損した','NEXT','down']]},
+ FOREIGN:{question:'海外の証券会社で、今年売ったもうけと配当は?',hint:'海外の証券会社には『源泉徴収あり』の口座がないため、もうけは申告の対象です',options:profitOptions()},
+ CRYPTO:{question:'暗号資産の、今年のもうけは?',hint:'円に替えた時だけでなく、買い物に使った時、別の暗号資産と交換した時も、もうけになります',options:profitOptions()},
+ FX:{question:'今年のFXのもうけは?',options:profitOptions()},
+ SIDE:{question:'副業のもうけ(売上−経費)は?',hint:'給料としてもらう副業は、ここに入れません',options:[['なし・赤字','NEXT','minus'],['20万円以下','NEXT','low'],['20万円より多い','NEXT','up']]},
+ Q5:{question:'さっきの『20万円以下』のもうけ、合わせると20万円より多い?',hint:'20万円は、全部を合わせた枠です',options:[['20万円以下','RESULT','low'],['20万円より多い','RESULT','up']]}
 };
-['A','B','E','Z'].forEach(function(code){flow['S'+code]={question:'副業など、給与のほかのもうけは?',step:4,options:[['ない',code==='Z'?'B':code,'minus'],['20万円以下',code==='Z'?'B':code,'low'],['20万円より多い','D','up']]}});
-var results={
- A:{kind:'none',reason:'NISAのもうけは税金がかからないため',refs:['12-a','12-b']},
- B:{kind:'none',reason:'源泉徴収ありの口座は、申告しなくてよいため',refs:['3-a','3-e','4-b']},
- C:{kind:'none',reason:'給与以外のもうけが20万円以下のため',refs:['4-a','5']},
- D:{kind:'need',reason:'給与以外のもうけが20万円を超えるため',refs:['4-a','4-d','4-e']},
- E:{kind:'better',reason:'損を申告すると、ほかの口座のもうけと差し引けたり、3年先まで繰り越せたりするため',refs:['7-a','8-a','9']}
-};
-// path は Q1 から順に押した選択肢の添字(0始まり)。ヘルプ画面の回答も含む。
-function destination(path){var id='Q1';if(!Array.isArray(path))throw new TypeError('回答の並びが必要です');path.forEach(function(answer){var node=flow[id];if(!node||!Number.isInteger(answer)||!node.options[answer])throw new RangeError('未定義の回答です');id=node.options[answer][1]});return id}
+function state(path){
+ if(!Array.isArray(path))throw new TypeError('回答の並びが必要です');
+ var c={mask:0,values:{},stockGain:false,stockLoss:false,both:false,totalHigh:false},id='SELECT',cursor=-1;
+ function advance(){for(cursor++;cursor<incomes.length;cursor++)if(c.mask&(1<<cursor))return incomes[cursor][3];
+  var values=Object.values(c.values);return values.filter(v=>v==='low').length>=2&&!values.includes('high')?'Q5':'RESULT'}
+ path.forEach(function(a,n){
+  if(!Number.isInteger(a))throw new RangeError('未定義の回答です');
+  if(n===0){if(a<0||a>31)throw new RangeError('未定義のチェックです');c.mask=a;id=advance();return}
+  var node=flow[id];if(!node||!node.options[a])throw new RangeError('未定義の回答です');
+  if((id==='Q2'||id==='H2')&&a===2)c.both=true;
+  if((id==='Q1'||id==='H1')&&a===0)c.values.stock='nisa';
+  if(id==='Q3a'){c.values.stock='withheld';c.stockLoss=a===1;c.stockGain=a===0}
+  if(id==='Q3b'){c.values.stock=['zero','low','high','loss'][a];c.stockLoss=a===3;c.stockGain=a===1||a===2}
+  if(['FOREIGN','CRYPTO','FX'].includes(id))c.values[incomes[cursor][0]]=['zero','loss','low','high'][a];
+  if(id==='SIDE')c.values.side=['zero','low','high'][a];
+  if(id==='Q5')c.totalHigh=a===1;
+  id=node.options[a][1];if(id==='NEXT')id=advance();
+ });return {id:id,c:c};
+}
+function destination(path){return state(path).id}
+function context(path){return state(path).c}
+function question(path){var s=state(path),node=flow[s.id];if(!node)return null;
+ return Object.assign({},node,s.id==='Q5'?{summary:'あなたの答え:'+incomes.filter(x=>s.c.values[x[0]]==='low').map(x=>x[4]+' 20万円以下').join('/')}:{})}
 // 課税所得695万円に達する最初の年収を二分探索し、10万円単位で切り下げる。
 function salaryBoundary(){var lo=0,hi=20000000;while(lo<hi){var mid=Math.floor((lo+hi)/2);if(taxableEstimate(mid)>=6950000)hi=mid;else lo=mid+1}return lo}
 var dividendSalaryLimit=Math.floor(salaryBoundary()/100000)*100000;
-// 現在の質問も含め、終了までの最長の回答回数。ヘルプ画面も1問と数える。
-function remaining(id){return flow[id]?1+Math.max.apply(null,flow[id].options.map(function(o){return remaining(o[1])})):0}
-function context(path){var id='Q1',c={side:0,stock:false,both:false,zero:false};path.forEach(function(a){
- if((id==='Q2'&&a===2)||(id==='H2'&&a===2))c.both=true;
- if(id==='Q3b'){c.stock=a===1||a===2;c.zero=a===0}
- if(/^S[ABEZ]$/.test(id))c.side=a;
- if(id==='Q4')c.side=a===1?1:0;
- id=flow[id].options[a][1];
-});return c}
-function resolve(path,extras){var id=destination(path),base=results[id];if(!base)throw new RangeError('回答が完了していません');var c=context(path),e=extras||{},r={code:id,kind:base.kind,reason:base.reason,notes:[],refs:base.refs.slice(),resident:false};
+// 現在の質問を含む、選んだ収入の最長の残り回答回数。状態ごとに記憶。
+var remainingCache=new Map();
+function remaining(path){var s=state(path);if(s.id==='SELECT'||s.id==='RESULT')return 0;var key=JSON.stringify(s);if(remainingCache.has(key))return remainingCache.get(key);
+ var n=1+Math.max.apply(null,flow[s.id].options.map(function(_,i){return remaining(path.concat(i))}));remainingCache.set(key,n);return n}
+function resolve(path,extras){var s=state(path);if(s.id!=='RESULT')throw new RangeError('回答が完了していません');
+ var c=s.c,e=extras||{},values=Object.values(c.values),positive=values.some(v=>v==='low'||v==='high'),high=incomes.filter(x=>c.values[x[0]]==='high');
+ var stock=c.values.stock,better=c.stockLoss||c.values.fx==='loss'||(c.values.foreign==='loss'&&c.stockGain);
+ var code=high.length||c.totalHigh?'D':better?'E':positive?'C':stock==='nisa'?'A':'B';
+ var reasons={A:'NISAのもうけは税金がかからないため',B:stock==='withheld'?'源泉徴収ありの口座は、申告しなくてよいため':'給与以外のもうけがないため',C:'給与以外のもうけが20万円以下のため',D:high.length?high.map(x=>x[4]).join('と')+'のもうけが20万円を超えるため':'給与以外のもうけが合わせて20万円を超えるため',E:c.stockLoss?'損を申告すると、ほかの口座のもうけと差し引けたり、3年先まで繰り越せたりするため':c.values.fx==='loss'?'対象となるFXの損を3年繰り越すには、毎年の申告が必要なため':'海外の証券会社の株の損を、日本の口座の株のもうけと差し引ける場合があるため'};
+ var r={code:code,kind:code==='D'?'need':code==='E'?'better':'none',reason:c.mask===0?'給料のほかの所得がないため':reasons[code],notes:[],refs:[code==='A'?'12-a':code==='E'?c.stockLoss?'7-a':c.values.fx==='loss'?'R2-c':'R4-d':'R3-a'],resident:false,oneStop:false};
  function note(text,ids){r.notes.push(text);r.refs=r.refs.concat(ids||[])}
  function change(kind,reason,ids){r.kind=kind;r.reason=reason;r.refs=ids.concat(r.refs)}
- if(c.zero&&id==='B')r.reason='源泉なし口座のもうけが0円のため';
+ if(stock==='zero'&&!positive&&!better)r.reason='源泉なし口座のもうけが0円のため';
  if(e.highSalary){change('need','年末調整の対象外のため',['13-a','13-b']);note('年収が2,000万円を超える条件を反映しました。')}
  if(e.planned){
-  if(id==='C'||c.side===1){change('need',r.kind==='need'?r.reason:'申告する時は20万円以下のもうけも含めるため',['6-a','6-b']);note('医療費控除などで申告する際は、副業などのもうけも含めて申告します。')}
-  if(id==='A'||id==='B'){note('株のもうけは申告に含めなくてよい見込みです',['6-c']);if(r.kind==='none')r.title='株のもうけは申告に含めなくてよい見込み'}
+  if(positive){change('need',r.kind==='need'?r.reason:'申告する時は20万円以下のもうけも含めるため',['6-a','6-b']);note('医療費控除などで申告する際は、副業などのもうけも含めて申告します。')}
+  if(stock==='nisa'||stock==='withheld'){note('株のもうけは申告に含めなくてよい見込みです',['6-c']);if(r.kind==='none')r.title='株のもうけは申告に含めなくてよい見込み'}
  }
- if(id==='E')note('繰り越せるのは上場株式・公募の投資信託などの損です',['8-a']);
- if(id==='C'&&c.both)note('源泉ありの口座で損した場合は、申告すると差し引ける可能性があります',['9']);
+ if(c.stockLoss)note('繰り越せるのは上場株式・公募の投資信託などの損です',['8-a']);
+ if(positive&&c.both)note('源泉ありの口座で損した場合は、申告すると差し引ける可能性があります',['9']);
+ if(c.values.fx==='loss')note('対象となるFXの損を3年繰り越すには、損した年から毎年の申告が必要です。海外FXなど、対象外の取引は別に確認してください。',['R2-c','R2-d']);
+ if(c.values.foreign==='loss'&&c.stockGain)note('海外と日本の株がともに課税対象の上場株式等なら、同年の売った損ともうけを差し引ける場合があります。',['R4-d']);
+ if(c.values.crypto==='loss'){note('暗号資産の損は、給料や株のもうけと差し引けません',['R1-b']);if(c.values.side==='low'||c.values.side==='high')note('暗号資産の損は、副業(雑所得)のもうけとは差し引ける場合があります',['R1-c'])}
  if(e.carried){if(r.kind!=='need')change('better','繰り越しを続けるには毎年の申告が必要なため',['8-b']);note('前の年からの損を繰り越しているため、繰越を続けるには毎年の申告が必要です。',['8-b'])}
  if(e.dividend){
-  if(id==='E')note('同じ証券会社の源泉ありの口座の配当は、自動で損と差し引かれています。別の口座の配当があれば、申告すると差し引けて税金が戻る可能性があります',['7-a','9']);
+  if(c.stockLoss)note('同じ証券会社の源泉ありの口座の配当は、自動で損と差し引かれています。別の口座の配当があれば、申告すると差し引けて税金が戻る可能性があります',['7-a','9']);
   if(r.kind==='need')note('申告する時、配当を総合課税にすると税金が減る場合があります(年収の目安1,120万円以下)。独身・社会保険料15%の目安です。',['10-c','10-h','10-i']);
-  else if(id!=='E'&&e.dividendLow===true){if(r.kind==='none')change('better','配当を申告すると配当控除で税金が減る場合があるため',['10-c','10-h','10-i']);note('国内株の配当と年収の回答を反映：独身・社会保険料15%の年収1,120万円以下という目安です。',['10-c','10-h','10-i'])}
-  else if(id!=='E'&&e.dividendLow===false)note('年収の回答では、国内株の配当による判定は変わりません。');
+  else if(!c.stockLoss&&e.dividendLow===true){if(r.kind==='none')change('better','配当を申告すると配当控除で税金が減る場合があるため',['10-c','10-h','10-i']);note('国内株の配当と年収の回答を反映：独身・社会保険料15%の年収1,120万円以下という目安です。',['10-c','10-h','10-i'])}
+  else if(!c.stockLoss&&e.dividendLow===false)note('年収の回答では、国内株の配当による判定は変わりません。');
  }
- r.resident=r.kind!=='need'&&(c.stock||c.side===1);
- if(r.resident)note(id==='E'||r.kind==='better'?'申告しない場合は、住民税の申告が必要です':'住民税の申告は必要です',['5']);
+ // 住民税の注記は、不要の結果で源泉なしの黒字がある場合だけ。
+ r.resident=r.kind==='none'&&positive;
+ if(r.resident)note('住民税の申告は必要です',['5']);
+ else if(r.kind==='better'&&positive)note('申告しない場合は、住民税の申告が必要です',['5']);
+ r.oneStop=r.kind!=='none'||!!e.planned;if(r.oneStop)r.refs.push('R6-a');
  if(r.kind!=='none')delete r.title;
  r.refs=Array.from(new Set(r.refs));return r;
 }
-return {remaining:remaining,context:context,flow:flow,results:results,resolve:resolve,destination:destination,labels:labels,sourceMap:sourceMap,kyuyoShotoku:kyuyoShotoku,kisoIT:kisoIT,taxableEstimate:taxableEstimate,dividendRate:dividendRate,salaryBoundary:salaryBoundary,dividendSalaryLimit:dividendSalaryLimit};
+return {remaining:remaining,context:context,flow:flow,incomes:incomes,question:question,resolve:resolve,destination:destination,labels:labels,sourceMap:sourceMap,kyuyoShotoku:kyuyoShotoku,kisoIT:kisoIT,taxableEstimate:taxableEstimate,dividendRate:dividendRate,salaryBoundary:salaryBoundary,dividendSalaryLimit:dividendSalaryLimit};
 })();
 if(typeof module!=='undefined')module.exports=CORE;
 </script>
@@ -230,22 +321,28 @@ const $=id=>document.getElementById(id),path=[],extras={},back=$('ks-back'),rest
 const icons={leaf:'M24 8C8 8 8 25 16 28S34 26 34 10Z M15 34l13-17',bank:'M6 16l18-9 18 9ZM10 20v16m9-16v16m10-16v16m9-16v16M6 40h36',help:'M19 17a6 6 0 1 1 8 6l-3 3v3M24 35h.01',check:'M10 25l9 9 20-22',minus:'M12 24h24',both:'M9 16h26m-6-6 6 6-6 6M39 32H13m6-6-6 6 6 6',up:'M8 34l12-13 9 6 11-16M30 11h10v10',down:'M8 14l12 13 9-6 11 16M30 37h10V27',low:'M10 16h28M10 24h20M10 32h12',bag:'M9 16h30v23H9ZM18 16v-6h12v6M9 24h30M24 23v6',need:'M24 6l19 34H5ZM24 18v10M24 34h.01',better:'M8 14h32m-6-6 6 6-6 6M40 34H8m6-6-6 6 6 6'};
 function icon(name){return '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="'+icons[name]+'"/></svg>'}
 const extraLabels={highSalary:'年収が2,000万円を超える',planned:'医療費控除などで申告する',carried:'前の年からの損を繰り越している',dividend:'NISA以外で受け取った国内株の配当がある'};
-let dividendQuestion=false;
+let dividendQuestion=false,selected=0;
 function el(tag,text,cls){const e=document.createElement(tag);if(text)e.textContent=text;if(cls)e.className=cls;return e}
 function heading(text,id){const e=el('h2',text);e.id=id;e.tabIndex=-1;return e}
 function answer(label,name,fn){const b=el('button',null,'ks-answer');b.type='button';b.innerHTML=icon(name);b.append(el('span',label));b.onclick=fn;return b}
 function paint(focus=true,updated=false){
- const id=CORE.destination(path),node=CORE.flow[id],card=$('ks-card');back.remove();restart.remove();card.replaceChildren();
- $('ks-progress').hidden=!node;$('ks-progress').textContent=node?'あと'+CORE.remaining(id)+'問':'';
- if(node){
+ const id=CORE.destination(path),node=CORE.question(path),card=$('ks-card');back.remove();restart.remove();card.replaceChildren();
+ $('ks-progress').hidden=!node;$('ks-progress').textContent=node?'あと'+CORE.remaining(path)+'問':'';
+ if(id==='SELECT'){
+  dividendQuestion=false;card.append(heading('給料のほかに、お金が入ってくるものは?','ks-question'),el('p','いくつでも選べます','ks-hint'));
+  const choices=el('div',null,'ks-answers');
+  const next=answer('次へ','up',()=>{if(selected){path.push(selected);paint()}});next.id='ks-next-button';next.disabled=!selected;
+  CORE.incomes.forEach((x,i)=>{const b=answer(x[1],x[2],()=>{selected^=1<<i;b.setAttribute('aria-pressed',String(!!(selected&(1<<i))));next.disabled=!selected});b.dataset.income=x[0];b.setAttribute('aria-pressed',String(!!(selected&(1<<i))));choices.append(b)});
+  card.append(choices,next,answer('どれもない(給料だけ)','minus',()=>{selected=0;path.push(0);paint()}));
+ }else if(node){
   dividendQuestion=false;back.hidden=!path.length;card.append(back);
   if(node.help){const help=el('p',node.help);help.id='ks-help';card.append(help)}
-  if(id==='Q5')card.append(el('p',node.hint,'ks-summary'));
-  card.append(heading(node.question,'ks-question'));if(node.hint&&id!=='Q5')card.append(el('p',node.hint,'ks-hint'));const choices=el('div',null,'ks-answers');
-  node.options.forEach((o,i)=>choices.append(answer(o[0],o[2],()=>{path.push(i);paint()})));card.append(choices);
+  if(node.summary)card.append(el('p',node.summary,'ks-summary'));
+  card.append(heading(node.question,'ks-question'));if(node.hint&&['Q2','Q3a'].includes(id))card.append(el('p',node.hint,'ks-hint'));const choices=el('div',null,'ks-answers');
+  node.options.forEach((o,i)=>choices.append(answer(o[0],o[2],()=>{path.push(i);paint()})));card.append(choices);if(node.hint&&!['Q2','Q3a'].includes(id))card.append(el('p',node.hint,'ks-hint ks-after'));
  }else{
   const r=CORE.resolve(path,extras);
-  if(extras.dividend&&extras.dividendLow===undefined&&r.kind!=='need'&&r.code!=='E'){
+  if(extras.dividend&&extras.dividendLow===undefined&&r.kind!=='need'&&!CORE.context(path).stockLoss){
    dividendQuestion=true;back.hidden=false;card.append(back);$('ks-progress').hidden=false;$('ks-progress').textContent='あと1問';card.append(heading('年収はだいたい1,120万円以下?','ks-question'),el('p','独身・社会保険料15%の目安','ks-hint'));
    const choices=el('div',null,'ks-answers');[true,false].forEach(v=>choices.append(answer(v?'はい':'いいえ',v?'check':'minus',()=>{extras.dividendLow=v;dividendQuestion=false;paint(true,true)})));card.append(choices);
   }else{
@@ -253,8 +350,9 @@ function paint(focus=true,updated=false){
    const surface=el('div',null,updated?'ks-updated':'');surface.id='ks-result';
    const row=el('div',null,'ks-result-heading');row.innerHTML=icon(r.kind==='none'?'check':r.kind);row.append(heading(r.title||CORE.labels[r.kind],'ks-answer'));
    const reason=el('p',r.reason);reason.id='ks-reason';surface.append(row,reason);card.append(surface);restart.hidden=false;card.append(restart);
-   if(r.kind!=='none'||r.resident){const next=el('p');next.id='ks-next';next.append(el('b','次にすること: '));
+   if(r.kind!=='none'||r.resident||r.oneStop){const next=el('div');next.id='ks-next';next.append(el('b','次にすること: '));
     if(r.kind!=='none'){next.append('申告は2027年2月16日〜3月15日。国税庁の');const a=el('a','確定申告書等作成コーナー');a.href='https://www.keisan.nta.go.jp/';a.target='_blank';a.rel='noopener';next.append(a,'で作れます。')}
+    if(r.oneStop){const line=el('p','ふるさと納税のワンストップ特例を申請していても、申告すると無効になります。寄附も申告書に書いてください');const link=el('a','ふるさと納税の上限額を確認');link.href='/furusato/';line.append(' ',link);next.append(line)}
     if(r.resident)next.append('住民税の申告は、お住まいの市区町村の窓口へ。');card.append(next)}
    const notes=el('div');notes.id='ks-notes';r.notes.forEach(n=>notes.append(el('p',n,n.includes('住民税')?'ks-resident':'')));card.append(notes);
    card.append(el('p','一般的な目安です。個別の判断は税務署・税理士へ','note'));
@@ -267,7 +365,7 @@ function paint(focus=true,updated=false){
  if(focus){const title=card.querySelector('h2');title.focus({preventScroll:true});const rect=$('ks-tool').getBoundingClientRect();if(rect.top<0||title.getBoundingClientRect().bottom>innerHeight)$('ks-tool').scrollIntoView({block:'start',behavior:'instant'})}
 }
 back.onclick=()=>{if(dividendQuestion){extras.dividend=false;delete extras.dividendLow}else{path.pop();Object.keys(extras).forEach(k=>delete extras[k])}paint()};
-restart.onclick=()=>{path.length=0;Object.keys(extras).forEach(k=>delete extras[k]);paint()};
+restart.onclick=()=>{path.length=0;selected=0;Object.keys(extras).forEach(k=>delete extras[k]);paint()};
 $('ks-scope-button').onclick=function(){const open=$('ks-scope').hidden;$('ks-scope').hidden=!open;this.setAttribute('aria-expanded',String(open));this.textContent=open?'▲ 閉じる':'▼ もっと見る'};
 paint(false);
 })();

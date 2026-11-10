@@ -27,8 +27,6 @@ let checks=0;
 const ok=(condition,message)=>{assert.ok(condition,message);checks++};
 const {loadCore}=await import('./load-core.mjs');
 const C=loadCore(resolve(root,'kabu-shinkoku/index.html'));
-const paths=[];
-function walk(id='Q1',path=[]){if(C.results[id]){paths.push({id,path});return}C.flow[id].options.forEach((o,i)=>walk(o[1],[...path,i]))}walk();
 try{
  browser=await pw.chromium.launch();
  await mkdir(resolve(root,'output/playwright'),{recursive:true});
@@ -37,77 +35,68 @@ try{
   const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(String(e)));
   const response=await page.goto(base+'/kabu-shinkoku/');await page.evaluate(()=>document.fonts.ready);
   ok(response.status()===200,'専用ローカルサーバー');
-  ok(await page.locator('#ks-question').innerText()===C.flow.Q1.question,'最初の質問');
-  ok(await page.locator('input,#mini,script[src*="tour.js"],.tbub,.ks-progress li').count()===0,'旧フォーム・帯・点なし');
+  const toggle=k=>page.locator('[data-income='+k+']'),extra=k=>page.locator('[data-extra='+k+']');
   async function layout(){
-   const r=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth-innerWidth,small:[...document.querySelectorAll('#ks-tool button,#ks-refs a')].filter(e=>{const r=e.getBoundingClientRect();return r.height>0&&r.height<43.5}).map(e=>e.textContent)}));
-   ok(r.overflow<=1,'横はみ出しなし');ok(!r.small.length,'44px以上 '+r.small.join(','));
+   const r=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth-innerWidth,small:[...document.querySelectorAll('#ks-tool button,#ks-refs a')].filter(e=>{const r=e.getBoundingClientRect();return r.height>0&&r.height<(e.dataset.income?55.5:43.5)}).map(e=>e.textContent)}));
+   ok(r.overflow<=1,'横はみ出しなし');ok(!r.small.length,'ボタンの大きさ '+r.small.join(','));
   }
-  async function result(path,e={}){
-   const r=C.resolve(path,e);
-   ok(await page.locator('#ks-answer').innerText()===(r.title||C.labels[r.kind]),'最終回答');
-   ok(await page.locator('#ks-reason').innerText()===r.reason,'理由');
-   ok(await page.locator('#ks-progress').isHidden(),'結果では残り問数なし');
-   const style=await page.locator('#ks-answer').evaluate(e=>{const s=getComputedStyle(e);return {size:parseFloat(s.fontSize),weight:Number(s.fontWeight),outline:s.outlineStyle}});
-   ok(style.size>=28&&style.size<=32&&style.weight>=700,'答え28〜32px太字');ok(style.outline==='none','見出しフォーカス枠なし');
-   {const want=colorScheme==='dark'?'rgb(48, 39, 15)':'rgb(254, 243, 199)';let bg='';for(let i=0;i<20;i++){bg=await page.locator('#ks-result').evaluate(e=>getComputedStyle(e).backgroundColor);if(bg===want)break;await page.waitForTimeout(100)}ok(bg===want,'テーマ色の薄い面・ダーク対応')}
-   ok(await page.locator('#ks-restart').evaluate(e=>e.previousElementSibling.id==='ks-result'),'答えのすぐ下にやり直す');
-   ok((await page.locator('#ks-next').count()>0)===(r.kind!=='none'||r.resident),'次の行動の有無');
-   if(r.kind!=='none'){ok((await page.locator('#ks-next').innerText()).includes('2027年2月16日〜3月15日'),'申告期間');ok(await page.locator('#ks-next a').getAttribute('href')==='https://www.keisan.nta.go.jp/','作成コーナー')}
-   if(r.resident)ok((await page.locator('#ks-next').innerText()).includes('お住まいの市区町村の窓口へ'),'住民税の窓口');
-   ok((await page.locator('#ks-notes').innerText()).includes('住民税')===r.resident,'住民税注記');
-   ok((await page.locator('#ks-refs').innerText()).includes('確認日 2026-11-10'),'確認日');
-   ok(await page.locator('#ks-refs a').count()>=1&&await page.locator('#ks-refs a').count()<=2,'根拠リンク');await layout();
+  async function initial(){
+   ok(await page.locator('#ks-question').innerText()==='給料のほかに、お金が入ってくるものは?','チェック画面');
+   ok(await page.locator('#ks-progress').isHidden(),'初期は残り問数なし');ok(await page.locator('#ks-next-button').isDisabled(),'未選択は次へ無効');
+   ok(await page.locator('[data-income]').count()===5,'5つの収入');await layout();
   }
-  async function clickPath(path){for(let n=0;n<path.length;n++){
-   const node=C.flow[C.destination(path.slice(0,n))];
-   ok(await page.locator('#ks-progress').innerText()==='あと'+C.remaining(C.destination(path.slice(0,n)))+'問','最長経路の残り問数');
-   if(n){ok(await page.locator('#ks-back').evaluate(e=>e.parentElement.id==='ks-card'&&e===e.parentElement.firstElementChild),'戻るはカード左上');await page.locator('#ks-back').click();await page.locator('.ks-answer').nth(path[n-1]).click()}
-   if(node.hint)ok((await page.locator('#ks-card').innerText()).includes(node.hint),'質問下の補足・回答要約');
-   if(C.destination(path.slice(0,n))==='Q5')ok(await page.locator('#ks-question').evaluate(e=>e.previousElementSibling.classList.contains('ks-summary')),'回答要約は合計の質問より上');
-   await page.locator('.ks-answer').nth(path[n]).click();ok(await page.locator('#ks-card h2').evaluate(e=>e===document.activeElement),'次の見出しにフォーカス');await layout();
+  async function start(mask){for(let i=0;i<5;i++)if(mask&(1<<i))await toggle(C.incomes[i][0]).click();await page.locator('#ks-next-button').click()}
+  async function answers(path){for(let n=1;n<path.length;n++){
+   const prefix=path.slice(0,n),node=C.question(prefix);
+   ok(await page.locator('#ks-question').innerText()===node.question,'選んだ収入の質問だけ');
+   ok(await page.locator('#ks-progress').innerText()==='あと'+C.remaining(prefix)+'問','最長の残り問数');
+   if(node.summary){ok(await page.locator('#ks-question').evaluate(e=>e.previousElementSibling.classList.contains('ks-summary')),'回答要約は質問の上');ok(await page.locator('.ks-summary').innerText()===node.summary,'合計する黒字だけを要約')}
+   if(node.hint)ok(await page.locator('#ks-card .ks-hint').innerText()===node.hint,'補足');
+   await layout();await page.locator('.ks-answer').nth(path[n]).click();
+   ok(await page.locator('#ks-card h2').evaluate(e=>e===document.activeElement),'見出しへフォーカス');
   }}
-  await page.screenshot({path:resolve(root,'output/playwright/kabu-'+viewport.width+'-'+colorScheme+'-question.png')});
-  for(const {path} of paths){await clickPath(path);await result(path);await page.locator('#ks-restart').click();ok(await page.locator('#ks-question').innerText()===C.flow.Q1.question,'やり直す');ok(await page.locator('#ks-back').isHidden(),'初回は戻るなし')}
-  for(const id of ['A','B','C','D','E']){
-   const path=paths.find(p=>p.id===id).path;await clickPath(path);
-   const extra=key=>page.locator('[data-extra='+key+']');
+  async function result(path,e={}){
+   const r=C.resolve(path,e);ok(await page.locator('#ks-answer').innerText()===(r.title||C.labels[r.kind]),'結果');ok(await page.locator('#ks-reason').innerText()===r.reason,'理由');
+   ok(await page.locator('#ks-progress').isHidden(),'結果は残りなし');
+   const style=await page.locator('#ks-answer').evaluate(e=>{const s=getComputedStyle(e);return {size:parseFloat(s.fontSize),weight:Number(s.fontWeight)}});ok(style.size>=28&&style.size<=32&&style.weight>=700,'大きな答え');
+   const want=colorScheme==='dark'?'rgb(48, 39, 15)':'rgb(254, 243, 199)';let bg='';for(let i=0;i<20;i++){bg=await page.locator('#ks-result').evaluate(e=>getComputedStyle(e).backgroundColor);if(bg===want)break;await page.waitForTimeout(100)}ok(bg===want,'答えの面・ダーク');
+   ok(await page.locator('#ks-restart').evaluate(e=>e.previousElementSibling.id==='ks-result'),'答えの下のやり直す');
+   ok((await page.locator('#ks-notes').innerText()).includes('住民税')===r.notes.some(n=>n.includes('住民税')),'住民税条件');
+   ok(await page.locator('#ks-next a[href="/furusato/"]').count()===(r.oneStop?1:0),'ワンストップと内部リンク');
+   if(r.oneStop)ok((await page.locator('#ks-next').innerText()).includes('寄附も申告書に書いてください'),'寄附を再記載');
+   ok((await page.locator('#ks-refs').innerText()).includes('確認日 2026-11-10'),'確認日');await layout();
+  }
+  await initial();await toggle('crypto').click();ok(await toggle('crypto').getAttribute('aria-pressed')==='true','トグル選択');ok(await toggle('crypto').evaluate(e=>getComputedStyle(e,'::after').content.includes('✓')),'チェック印');
+  await toggle('crypto').click();ok(await page.locator('#ks-next-button').isDisabled(),'選択解除で次へ無効');
+  await page.getByRole('button',{name:'どれもない(給料だけ)',exact:true}).click();await result([0]);
+  await extra('planned').click();await result([0],{planned:true});await page.locator('#ks-restart').click();
+  const cases=[[4,3],[4,1],[5,1,1,1,2,1],[8,1],[3,1,0,0,1],[31,0,0,1,2,1,0]];
+  for(const path of cases){
+   await initial();await start(path[0]);
+   // 最初の問からチェック画面へ戻っても、チェックが残る。
+   await page.locator('#ks-back').click();for(let i=0;i<5;i++)ok(await toggle(C.incomes[i][0]).getAttribute('aria-pressed')===String(!!(path[0]&(1<<i))),'戻るで選択保持');
+   await page.locator('#ks-next-button').click();await answers(path);await result(path);
+   await extra('highSalary').click();await result(path,{highSalary:true});await extra('highSalary').click();
    await extra('planned').click();await result(path,{planned:true});await extra('planned').click();
-   await extra('highSalary').click();await extra('carried').click();await extra('dividend').click();
-   await result(path,{highSalary:true,carried:true,dividend:true});
-   ok((await page.locator('#ks-notes').innerText()).includes('総合課税にすると税金が減る場合'),'必要でも配当説明');
-   ok(await extra('dividend').getAttribute('aria-pressed')==='true','押した状態');
-   ok(await extra('dividend').evaluate(e=>getComputedStyle(e,'::before').content.includes('✓')),'チェック印');
-   await extra('dividend').click();await extra('carried').click();await extra('highSalary').click();await extra('dividend').click();
-   if(id==='E'){await result(path,{dividend:true});ok((await page.locator('#ks-notes').innerText()).includes('別の口座の配当があれば'),'損失の配当説明')}
-   else if(id==='D')await result(path,{dividend:true});
-   else{
-    ok(await page.locator('#ks-question').innerText()==='年収はだいたい1,120万円以下?','配当の追加質問');
-    ok((await page.locator('#ks-card').innerText()).includes('独身・社会保険料15%の目安'),'質問時に目安を表示');
-    ok(await page.locator('#ks-progress').innerText()==='あと1問','配当残り1問');
-    await page.locator('#ks-back').click();ok(await extra('dividend').getAttribute('aria-pressed')==='false','配当から戻る');
-    await extra('dividend').click();await page.locator('.ks-answer').nth(1).click();await result(path,{dividend:true,dividendLow:false});
-    await extra('dividend').click();await extra('dividend').click();await page.locator('.ks-answer').nth(0).click();await result(path,{dividend:true,dividendLow:true});
-   }
-   await page.emulateMedia({reducedMotion:'reduce'});await extra('dividend').click();
-   ok(await page.locator('#ks-result').evaluate(e=>getComputedStyle(e).animationName==='none'),'動きを減らす設定で点滅なし');
-   await page.emulateMedia({reducedMotion:'no-preference'});await extra('carried').click();
-   ok(await page.locator('#ks-result').evaluate(e=>getComputedStyle(e).animationName==='ks-flash'),'更新を色で示す');
+   await extra('carried').click();await result(path,{carried:true});await extra('carried').click();
+   await extra('dividend').click();
+   if(C.resolve(path).kind!=='need'&&!C.context(path).stockLoss){
+    ok(await page.locator('#ks-question').innerText()==='年収はだいたい1,120万円以下?','配当の既存質問');
+    await page.locator('#ks-back').click();ok(await extra('dividend').getAttribute('aria-pressed')==='false','配当質問から戻る');
+    await extra('dividend').click();await page.locator('.ks-answer').nth(0).click();await result(path,{dividend:true,dividendLow:true});
+   }else await result(path,{dividend:true});
    await page.locator('#ks-restart').click();
   }
-  // 見出しへフォーカスした後、TabとEnter/Spaceで最長経路を操作。
-  const keyboardPath=[2,1,3,1,1,1,0];
-  for(let n=0;n<keyboardPath.length;n++){
-   for(let i=0;i<=keyboardPath[n];i++)await page.keyboard.press('Tab');
-   ok(await page.locator('.ks-answer').nth(keyboardPath[n]).evaluate(e=>e===document.activeElement),'Tabで選択肢へ');
-   await page.keyboard.press(n%2?'Space':'Enter');
-  }
-  await result(keyboardPath);
-  await page.screenshot({path:resolve(root,'output/playwright/kabu-'+viewport.width+'-'+colorScheme+'-result.png')});
+  // キーボードだけで暗号資産の選択・解除・選択、次へ、損、やり直し。
+  await page.locator('#ks-question').focus();for(let i=0;i<3;i++)await page.keyboard.press('Tab');
+  ok(await toggle('crypto').evaluate(e=>e===document.activeElement),'Tabで暗号資産');await page.keyboard.press('Space');await page.keyboard.press('Enter');ok(await toggle('crypto').getAttribute('aria-pressed')==='false','キーボードで解除');await page.keyboard.press('Space');
+  for(let i=0;i<3;i++)await page.keyboard.press('Tab');ok(await page.locator('#ks-next-button').evaluate(e=>e===document.activeElement),'Tabで次へ');await page.keyboard.press('Enter');
+  await page.keyboard.press('Tab');await page.keyboard.press('Tab');await page.keyboard.press('Space');await result([4,1]);
+  await page.keyboard.press('Tab');await page.keyboard.press('Enter');await initial();
+  await page.screenshot({path:resolve(root,'output/playwright/kabu-'+viewport.width+'-'+colorScheme+'-check.png')});
+  await start(5);await answers([5,1,1,1,2,1]);await page.screenshot({path:resolve(root,'output/playwright/kabu-'+viewport.width+'-'+colorScheme+'-result.png')});
   await page.evaluate(()=>{for(const d of document.querySelectorAll('details'))d.open=true});await layout();
-  ok(await page.evaluate(()=>[...document.querySelectorAll('a[href^="#"]')].every(a=>!!document.getElementById(a.hash.slice(1)))),'ページ内リンク');
-  ok(errors.length===0,'実行エラーなし '+errors.join(','));await ctx.close();
+  ok(await page.evaluate(()=>[...document.querySelectorAll('a[href^="#"]')].every(a=>!!document.getElementById(a.hash.slice(1)))),'ページ内リンク');ok(errors.length===0,'実行エラーなし '+errors.join(','));await ctx.close();
  }
- ok((await fetch(base+'/no-such-kabu-page/')).status===404,'404');
- console.log('ブラウザ点検 '+checks+'件成功。画像 output/playwright/');
+ ok((await fetch(base+'/no-such-kabu-page/')).status===404,'404');console.log('ブラウザ点検 '+checks+'件成功。画像 output/playwright/');
 }finally{if(browser)await browser.close();await new Promise(r=>server.close(r))}
