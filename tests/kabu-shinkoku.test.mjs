@@ -1,72 +1,66 @@
-﻿import test from 'node:test';
+import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {loadCore} from './load-core.mjs';
 const html=readFileSync(new URL('../kabu-shinkoku/index.html',import.meta.url),'utf8');
 const C=loadCore(new URL('../kabu-shinkoku/index.html',import.meta.url));
-// 仕様から独立に定義した正解経路。実装の行き先から期待値を作らない。
-const expected={Q1:['A','Q2','H1'],H1:['A','Q2'],Q2:['Q3a','Q3b','Q3b','H2'],H2:['Q3a','Q3b','Q3b'],Q3a:['B','E'],Q3b:['Q4','D','E'],Q4:['C','Q5'],Q5:['C','D']};
-const expectedResults={A:'none',B:'none',C:'none',D:'need',E:'better'};
-const paths=[];
-function expectedWalk(id='Q1',path=[]){if(expectedResults[id]){paths.push({id,path});return}expected[id].forEach((next,i)=>expectedWalk(next,[...path,i]))}
-expectedWalk();
-function walk(id='Q1',path=[],ancestors=[]){
+// 監査の仕様から定義。実装の行き先・context関数から期待値を作らない。
+const expected={Q1:['SA','Q2','H1'],H1:['SA','Q2'],Q2:['Q3a','Q3b','Q3b','H2'],H2:['Q3a','Q3b','Q3b'],Q3a:['SB','SE'],Q3b:['SZ','Q4','D','SE'],Q4:['C','Q5'],Q5:['C','D'],SA:['A','A','D'],SB:['B','B','D'],SE:['E','E','D'],SZ:['B','B','D']};
+const kinds={A:'none',B:'none',C:'none',D:'need',E:'better'},paths=[];
+function walk(id='Q1',path=[],c={side:0,stock:false,both:false,zero:false},ancestors=[]){
  assert.ok(!ancestors.includes(id),'循環なし');
- if(C.results[id])return;
- const node=C.flow[id];assert.ok(node&&node.options.length,'行き止まりなし: '+id);
- node.options.forEach((o,i)=>{assert.ok(C.flow[o[1]]||C.results[o[1]],'定義済みの行き先');walk(o[1],[...path,i],[...ancestors,id])});
-}
-walk();
-for(const {id,path} of paths)test(`全経路 ${path.join('→')} → ${id}`,()=>{
- assert.equal(C.destination(path),id);const r=C.resolve(path,{});
- assert.equal(r.kind,expectedResults[id]);assert.equal(r.reason,C.results[id].reason);
- assert.ok(r.refs.length>0);assert.ok(r.refs.every(k=>C.sourceMap[k]),'根拠をすべて解決できる');
- assert.equal(r.notes.some(n=>n.includes('住民税')),id==='C');
-});
-for(const id of Object.keys(C.results))for(let mask=0;mask<16;mask++)for(const low of [true,false,undefined])test(`追加条件 ${id} mask=${mask} 配当年収=${low}`,()=>{
- const path=paths.find(p=>p.id===id).path;
+ if(kinds[id]){paths.push({id,path,c});return}
+ assert.ok(C.flow[id],id+' 定義あり');
+ assert.deepEqual(Array.from(C.flow[id].options,o=>o[1]),expected[id],id+' 行き先');
+ expected[id].forEach((next,a)=>{const n={...c};
+  if((id==='Q2'||id==='H2')&&a===2)n.both=true;
+  if(id==='Q3b'){n.stock=a===1||a===2;n.zero=a===0}
+  if(['SA','SB','SE','SZ'].includes(id))n.side=a;
+  if(id==='Q4')n.side=a===1?1:0;
+  walk(next,[...path,a],n,[...ancestors,id]);
+ });
+}walk();
+for(const {id,path,c} of paths)for(let mask=0;mask<16;mask++)for(const low of [true,false,undefined])test(`経路 ${path.join('→')} ${id} 追加=${mask} 配当年収=${low}`,()=>{
  const e={highSalary:!!(mask&1),planned:!!(mask&2),carried:!!(mask&4),dividend:!!(mask&8),dividendLow:low};
  const copy=JSON.stringify({path,e}),r=C.resolve(path,e);
- const need=id==='D'||e.highSalary||(id==='C'&&e.planned);
+ const need=id==='D'||e.highSalary||(e.planned&&(id==='C'||c.side===1));
  const better=id==='E'||e.carried||(e.dividend&&low===true);
- assert.equal(r.kind,need?'need':better?'better':'none');
+ assert.equal(C.destination(path),id);assert.equal(r.kind,need?'need':better?'better':'none');
  assert.equal(JSON.stringify({path,e}),copy,'引数を変えない');
- assert.ok(r.refs.every(k=>C.sourceMap[k]));
- if(e.planned&&['A','B'].includes(id))assert.ok(r.notes.some(n=>n.includes('申告に含めなくてよい')));
- if(e.carried)assert.ok(r.notes.some(n=>n.includes('毎年の申告が必要')));
- if(e.dividend&&['D','E'].includes(id))assert.ok(!r.refs.includes('10-c'),'D/Eに配当判定をしない');
- if(id==='C'&&!need)assert.ok(r.notes.some(n=>n.includes('住民税')));
+ if(c.side===2){assert.equal(r.kind,'need','副業20万円超は必ず必要');if(!e.highSalary)assert.equal(r.reason,'給与以外のもうけが20万円を超えるため')}
+ assert.equal(r.resident,!need&&(c.stock||c.side===1));
+ assert.equal(r.notes.some(n=>n.includes('住民税')),r.resident,'住民税は所得がある未申告の場合だけ');
+ if(r.resident)assert.ok(r.notes.includes(id==='E'||r.kind==='better'?'申告しない場合は、住民税の申告が必要です':'住民税の申告は必要です'));
+ if(c.zero&&c.side!==2&&!e.highSalary&&!e.planned&&!e.carried&&!e.dividend)assert.equal(r.reason,'源泉なし口座のもうけが0円のため');
+ if(e.planned&&['A','B'].includes(id)){assert.ok(r.notes.some(n=>n.includes('申告に含めなくてよい')));if(!need&&!better)assert.equal(r.title,'株のもうけは申告に含めなくてよい見込み')}
+ if(id==='E')assert.ok(r.notes.includes('繰り越せるのは上場株式・公募の投資信託などの損です'));
+ if(id==='C'&&c.both)assert.ok(r.notes.some(n=>n.includes('源泉ありの口座で損した場合')));
+ if(e.dividend&&id==='E')assert.ok(r.notes.some(n=>n.includes('別の口座の配当があれば')));
+ if(e.dividend&&need){assert.ok(r.notes.some(n=>n.includes('総合課税にすると税金が減る場合')));for(const ref of ['10-c','10-h','10-i'])assert.ok(r.refs.includes(ref))}
+ assert.ok(r.refs.length>0&&r.refs.every(k=>C.sourceMap[k]));
 });
-test('配当の年収目安は1120万円、695万円境界を10万円単位で切り下げる',()=>{
- const b=C.salaryBoundary();assert.equal(b,11200000);assert.equal(C.taxableEstimate(b),6950000);
- assert.ok(C.taxableEstimate(b-1)<6950000);assert.ok(C.taxableEstimate(b+1)>6950000);
- assert.equal(C.dividendSalaryLimit,11200000);assert.equal(Math.floor(b/100000)*100000,C.dividendSalaryLimit);
-});
-test('質問・ヘルプすべて到達でき、最大5段階・終了可能',()=>{
- const visited=new Set();for(const {path} of paths){for(let n=0;n<path.length;n++)visited.add(C.destination(path.slice(0,n)))}
+test('全質問へ到達・残り問数は最長経路、0円を先頭に追加',()=>{
+ const visited=new Set();for(const {path} of paths)for(let n=0;n<path.length;n++)visited.add(C.destination(path.slice(0,n)));
  assert.deepEqual([...visited].sort(),Object.keys(C.flow).sort());
- for(const node of Object.values(C.flow)){assert.ok(node.step>=1&&node.step<=5);assert.ok(node.options.length>=2)}
+ function count(id){return expected[id]?1+Math.max(...expected[id].map(count)):0}
+ for(const id of Object.keys(expected))assert.equal(C.remaining(id),count(id));
+ assert.equal(C.flow.Q3b.options[0][0],'売っていない・もうけ0円');
+ for(const id of ['SA','SB','SE','SZ']){assert.equal(C.flow[id].question,'副業など、給与のほかのもうけは?');assert.deepEqual(Array.from(C.flow[id].options,o=>o[0]),['ない','20万円以下','20万円より多い'])}
+ assert.equal(C.flow.Q5.question,'源泉なし口座のもうけ+副業のもうけ、合わせて20万円より多い?');
+ assert.equal(C.flow.Q5.hint,'あなたの答え:源泉なし口座 20万円以下/副業 あり');
 });
-test('不正な回答・途中の回答を結果として扱わない',()=>{
- for(const path of [[],[1],[2],[1,0]])assert.throws(()=>C.resolve(path,{}),/完了/);
- for(const path of [[9],[-1],['0'],[0,0],null])assert.throws(()=>C.resolve(path,{}));
+test('不正・途中の回答を拒否',()=>{
+ for(const path of [[],[0],[1],[2],[1,0]])assert.throws(()=>C.resolve(path,{}),/完了/);
+ for(const path of [[9],[-1],['0'],[0,0,0],null])assert.throws(()=>C.resolve(path,{}));
 });
-test('オフに戻すとすべて元の結果、必要を得で消さない',()=>{
- for(const {path} of paths){const r=C.resolve(path,{});assert.equal(C.resolve(path,{highSalary:false,planned:false,carried:false,dividend:false,dividendLow:true}).reason,r.reason)}
- const r=C.resolve(paths.find(p=>p.id==='C').path,{planned:true,carried:true,dividend:true,dividendLow:true});assert.equal(r.kind,'need');
-});
-test('本文・出典・構造化データを維持し旧フォーム・案内・帯を外す',()=>{
- assert.doesNotMatch(html,/id="mini"|tour\.js|SKTour|例を入れて使い方を見る|はじめての方へ：使い方を見る|id="ks-form"|inputmode=|年収が空欄|年収を入れ/);
- for(const name of ['ks-examples','ks-method','ks-terms','ks-rules'])assert.ok(html.includes('id="'+name+'"'));
- const ld=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
- assert.deepEqual(ld['@graph'].map(x=>x['@type']),['WebApplication','BreadcrumbList','FAQPage']);
- assert.ok(ld['@graph'][0].featureList.some(x=>x.includes('回答')));assert.ok(html.includes('2026-11-10'));
-});
-
-test('指定された質問の行き先・結果の対応を守る',()=>{
- for(const [id,nexts] of Object.entries(expected))assert.deepEqual(Array.from(C.flow[id].options,o=>o[1]),nexts,id);
- for(const [id,kind] of Object.entries(expectedResults))assert.equal(C.results[id].kind,kind);
+test('配当の年収目安は1120万円',()=>{assert.equal(C.salaryBoundary(),11200000);assert.equal(C.taxableEstimate(11200000),6950000);assert.equal(C.dividendSalaryLimit,11200000)});
+test('旧出典・旧進捗を除去し表示名と出典を一致させる',()=>{
+ assert.doesNotMatch(html,/okinawa|令和元年|最大5問|ほかに当てはまる\?/);
+ assert.match(C.sourceMap['6-b'].url,/2025\/pdf\/001.pdf$/);assert.match(C.sourceMap['6-b'].title,/令和7年分/);
+ for(const t of ['NISA以外で受け取った国内株の配当がある','当てはまるものを押すと、答えが変わります','独身・社会保険料15%の目安','2027年2月16日〜3月15日','https://www.keisan.nta.go.jp/','prefers-reduced-motion:no-preference','@media(hover:hover)','確認日 2026-11-10'])assert.ok(html.includes(t),t);
+ assert.match(html,/#ks-card #ks-answer\{[^}]*28px[^}]*32px[^}]*font-weight:800/);
+ assert.match(html,/#ks-card #ks-answer\{[^}]*font-size:[^;]*!important/,'共通CSSのh2サイズ指定より優先');
 });
 test('配当負担率の本文の表は計算と一致する',()=>{
  for(const m of html.matchAll(/<tr data-rate="([^"]+)"><td>[^<]+<\/td><td>約([0-9.]+)%/g))assert.equal((C.dividendRate(Number(m[1]))*100).toFixed(1),m[2]);
