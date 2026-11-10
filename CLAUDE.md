@@ -147,3 +147,5 @@
 - トップページ(/index.html)の一覧・「どのツールを使えばいい？」の表、sitemap.xml、llms.txt に追加する。canonicalは https://shigoto-keisan.com/〜
 - OGPのタグとファビコンの3行を head に入れ、/assets/og/<フォルダ名>.png のカード画像を作る(既存の画像と同じデザイン。Playwrightで描画)
 - コピーは navigator.clipboard ＋ execCommand の予備方式。navigator.share は使わない(Braveで不具合)
+- 画面テストで、開閉・色の変化・表示の切り替えを確かめる時は、切り替わりを待ってから見る(waitFor か、短い間隔で読み直す)。すぐに読むと、製品は正しいのにテストが落ちる(2026-11-10、/kabu-shinkoku/ で2回)
+- 入力フォームを質問の流れ(診断型)に作り直す時は、元の判定の条件を一覧にし、すべての道筋でそれぞれの条件を聞いているかをテストで確かめる(2026-11-10、副業の所得を一部の道筋で聞いていなかった)
