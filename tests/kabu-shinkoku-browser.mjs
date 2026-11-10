@@ -49,9 +49,10 @@ try{
   async function answers(path){for(let n=1;n<path.length;n++){
    const prefix=path.slice(0,n),node=C.question(prefix);
    ok(await page.locator('#ks-question').innerText()===node.question,'選んだ収入の質問だけ');
-   ok(await page.locator('#ks-progress').innerText()==='あと'+C.remaining(prefix)+'問','最長の残り問数');
+   ok(await page.locator('#ks-progress').innerText()==='あと'+C.remaining(prefix)+'問まで','最長の残り問数');
    if(node.summary){ok(await page.locator('#ks-question').evaluate(e=>e.previousElementSibling.classList.contains('ks-summary')),'回答要約は質問の上');ok(await page.locator('.ks-summary').innerText()===node.summary,'合計する黒字だけを要約')}
-   if(node.hint)ok(await page.locator('#ks-card .ks-hint').innerText()===node.hint,'補足');
+   if(node.hint)ok((await page.locator('#ks-card .ks-hint').allTextContents()).includes(node.hint),'補足');
+   if(node.moreHint)ok((await page.locator('#ks-card .ks-hint').allTextContents()).includes(node.moreHint),'損益の調べ方');
    await layout();await page.locator('.ks-answer').nth(path[n]).click();
    ok(await page.locator('#ks-card h2').evaluate(e=>e===document.activeElement),'見出しへフォーカス');
   }}
@@ -64,13 +65,20 @@ try{
    ok((await page.locator('#ks-notes').innerText()).includes('住民税')===r.notes.some(n=>n.includes('住民税')),'住民税条件');
    ok(await page.locator('#ks-next a[href="/furusato/"]').count()===(r.oneStop?1:0),'ワンストップと内部リンク');
    if(r.oneStop)ok((await page.locator('#ks-next').innerText()).includes('寄附も申告書に書いてください'),'寄附を再記載');
+   if(r.filing){ok((await page.locator('#ks-next').innerText()).includes('2027年2月16日〜3月15日'),'申告期間');ok(await page.locator('#ks-next a[href="https://www.keisan.nta.go.jp/"]').count()===1,'作成コーナー')}
+   if(r.resident)ok((await page.locator('#ks-answer').innerText())==='所得税の申告は不要の見込み','所得税の見出し');
    ok((await page.locator('#ks-refs').innerText()).includes('確認日 2026-11-10'),'確認日');await layout();
   }
-  await initial();await toggle('crypto').click();ok(await toggle('crypto').getAttribute('aria-pressed')==='true','トグル選択');ok(await toggle('crypto').evaluate(e=>getComputedStyle(e,'::after').content.includes('✓')),'チェック印');
+  await initial();
+  if(viewport.width===1366){
+   const bg=()=>toggle('crypto').evaluate(e=>getComputedStyle(e).backgroundColor);
+   const rest=await bg();await toggle('crypto').hover();ok(await bg()===rest,'ホバーでは背景を変えない');
+  }
+  await toggle('crypto').click();ok(await toggle('crypto').getAttribute('aria-pressed')==='true','トグル選択');ok(await toggle('crypto').evaluate(e=>getComputedStyle(e,'::after').content.includes('✓')),'チェック印');
   await toggle('crypto').click();ok(await page.locator('#ks-next-button').isDisabled(),'選択解除で次へ無効');
   await page.getByRole('button',{name:'どれもない(給料だけ)',exact:true}).click();await result([0]);
   await extra('planned').click();await result([0],{planned:true});await page.locator('#ks-restart').click();
-  const cases=[[4,3],[4,1],[5,1,1,1,2,1],[8,1],[3,1,0,0,1],[31,0,0,1,2,1,0]];
+  const cases=[[20,1,2,0],[20,1,2,1],[3,1,1,2,1,0],[3,1,1,2,1,1],[4,3],[4,1],[5,1,1,1,2,1],[8,1],[3,1,0,0,1],[31,0,0,1,2,1,0]];
   for(const path of cases){
    await initial();await start(path[0]);
    // 最初の問からチェック画面へ戻っても、チェックが残る。
