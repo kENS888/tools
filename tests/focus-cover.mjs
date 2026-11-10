@@ -15,8 +15,6 @@ for (const p of paths) {
   await page.waitForTimeout(300);
   // 結果の帯が出る状態にするため、最初の数字の欄に値を入れ、折りたたみを開く
   await page.evaluate(() => {
-    // 株の判定は口座を選んでから有効になる。帯が出せる状態でTabを点検する。
-    document.querySelector('[data-account=withheld]')?.click();
     const i = document.querySelector('input.num, input[inputmode=numeric]');
     if (i && !i.value) { i.value = '4500000'; i.dispatchEvent(new Event('input', { bubbles: true })); }
     document.querySelectorAll('details.more').forEach(d => { d.open = true; });
@@ -26,16 +24,16 @@ for (const p of paths) {
   for (let k = 0; k < 80; k++) {
     await page.keyboard.press('Tab');
     await page.waitForTimeout(120);
-    const r = await page.evaluate(() => {
+    const r = await page.evaluate((kabu) => {
       const el = document.activeElement;
-      if (!el || !/^(INPUT|SELECT|TEXTAREA)$/.test(el.tagName)) return null;
+      if (!el || !/^(INPUT|SELECT|TEXTAREA)$/.test(el.tagName) && !(kabu && el.tagName === 'BUTTON')) return null;
       const er = el.getBoundingClientRect();
       if (er.height === 0) return null;
       const bars = [...document.querySelectorAll('body *')].filter(x => { const s = getComputedStyle(x); return s.position === 'fixed' && s.display !== 'none' && s.visibility !== 'hidden' && +s.opacity > 0 && x.getBoundingClientRect().height > 0 && x.getBoundingClientRect().top > innerHeight / 2; });
       for (const bar of bars) { const br = bar.getBoundingClientRect(); if (er.bottom > br.top + 1 && er.top < br.bottom) return (el.id || el.name || el.tagName) + ' が帯(' + (bar.id || bar.className) + ')に隠れる'; }
       if (er.bottom > innerHeight) return (el.id || el.tagName) + ' が画面の外';
       return '';
-    });
+    }, p === '/kabu-shinkoku/');
     if (r) hidden.push(r);
   }
   const u = [...new Set(hidden)];

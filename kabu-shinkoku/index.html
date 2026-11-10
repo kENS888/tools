@@ -20,93 +20,79 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
 <style id="calc2">
-:root{--acc:#a16207;--acc2:#fef3c7;--neg:#b91c1c}
-@media(prefers-color-scheme:dark){:root{--acc:#eab308;--acc2:#30270f;--neg:#fca5a5}}
+:root{--acc:#a16207;--acc2:#fef3c7}
+@media(prefers-color-scheme:dark){:root{--acc:#facc15;--acc2:#30270f}}
 *{box-sizing:border-box}body{margin:0;color:var(--fg);font:16px/1.8 system-ui,sans-serif}
-main{max-width:760px;margin:0 auto;padding:0 16px}.card{padding:20px;margin-bottom:16px}
-h2{font-size:1.35rem}p{margin:8px 0 14px}a{color:var(--acc)}
-fieldset{border:0;padding:0;margin:0;min-width:0}legend,label.f{font-weight:700}
-label.f{display:block;margin:14px 0 5px}label.f small{font-size:.8em;font-weight:400;color:var(--sub);margin-left:8px}
-.ks-chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
-.ks-chip{min-height:44px;padding:8px 12px;border:1px solid var(--fieldline);background:var(--card);color:var(--fg);font:inherit;font-size:.9rem;cursor:pointer;text-align:left}
-.ks-chip[aria-pressed=true]{border-color:var(--acc);background:var(--acc2);color:var(--acc);font-weight:700}
-.ks-chip[aria-pressed=true]::before{content:'✓ ';font-weight:700}
-input.num{width:100%;padding:10px 40px 10px 12px;min-height:48px;font:inherit;text-align:right;font-variant-numeric:tabular-nums}
-input.num:placeholder-shown{text-align:left}input::placeholder{color:var(--ph)}
-.unit{position:relative}.unit span{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--sub);pointer-events:none}
-.f2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.f2>*{min-width:0}.f2 .w{grid-column:1/-1}
-.ks-check{display:flex;align-items:flex-start;gap:8px;margin:12px 0;font-size:.9rem}.ks-check input{margin-top:7px}
-.big{padding:20px;background:var(--acc2);margin-top:20px}.big .l{font-size:.85rem;color:var(--sub)}
-#ks-answer{display:block;font-size:clamp(1.65rem,4.5vw,2.25rem);font-weight:700;line-height:1.5;color:var(--acc);margin:6px 0}
-#ks-reason{margin:4px 0}.note{font-size:.82rem;color:var(--sub)}
-#ks-notes{padding-left:1.3em;font-size:.92rem}#ks-notes li{margin:8px 0}#ks-notes .ks-resident{font-weight:700}
-.ks-error{color:var(--neg);font-size:.85rem;margin:4px 0}input[aria-invalid=true]{outline:2px solid var(--neg)}
+main{max-width:760px;margin:0 auto;padding:0 16px}.card{padding:20px;margin-bottom:16px}h2{font-size:1.35rem}p{margin:8px 0 14px}a{color:var(--acc)}
+[hidden]{display:none!important}
+#ks-tool{margin:8px 0 32px;scroll-margin-top:16px}
+.ks-progress{display:flex;justify-content:center;gap:10px;margin:0 0 16px;padding:0;list-style:none}
+.ks-progress li{width:10px;height:10px;border:1px solid var(--acc);border-radius:50%}.ks-progress .done{background:var(--acc)}
+#ks-card{padding:28px;border:1px solid var(--line2);border-radius:12px;background:var(--card)}
+#ks-card h2{margin:0 0 24px;line-height:1.6;font-size:clamp(1.25rem,4.8vw,1.6rem);overflow-wrap:anywhere}
+#ks-card h2:focus{outline:none}#ks-card h2:focus-visible{outline:2px solid var(--acc);outline-offset:6px}
+.ks-answers{display:grid;gap:12px}
+#ks-tool button,.ks-chip{font:inherit;color:var(--fg);cursor:pointer;border:1px solid var(--fieldline);border-radius:10px;background:var(--card);text-align:left}
+#ks-tool .ks-answer{display:flex;align-items:center;gap:14px;width:100%;min-height:64px;padding:14px 16px;font-weight:700;line-height:1.6}
+#ks-tool button:hover{border-color:var(--acc);background:var(--acc2)}
+#ks-tool button:focus-visible,.ks-chip:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+#ks-tool svg{width:28px;height:28px;flex:0 0 28px;fill:none;stroke:var(--acc);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#ks-help,.ks-resident{font-size:.9rem;padding:12px 16px;border:1px solid var(--acc);border-radius:10px;background:var(--acc2);margin:0 0 20px}
+#ks-tool .ks-back,#ks-tool .ks-restart{min-height:44px;padding:10px 14px;margin:16px 0 0}
+#ks-tool .ks-back{border-color:transparent;background:transparent}
+#ks-tool .ks-result-icon svg{width:64px;height:64px;margin-bottom:16px}
+#ks-card #ks-answer{color:var(--acc);font-size:clamp(1.5rem,4.5vw,2rem);margin-bottom:14px}
+#ks-reason{line-height:1.9}.note{font-size:.82rem;color:var(--sub)}
+#ks-notes p{font-size:.9rem;margin-top:12px}#ks-refs a{display:block;min-height:44px;padding:8px 0}
+#ks-extras{margin-top:28px}#ks-extras h3{font-size:1rem;margin:0 0 12px}.ks-extra-list{display:grid;gap:8px}
+#ks-tool .ks-extra{min-height:44px;padding:10px 14px;font-size:.9rem;line-height:1.7;width:100%}
+#ks-tool .ks-extra[aria-pressed=true]{background:var(--acc2);border-color:var(--acc);font-weight:700}
+.ks-extra[aria-pressed=true]::before{content:'✓ ';color:var(--acc)}
+.ks-chip{min-height:44px;padding:8px 12px}
 .ks-flow{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin:12px 0}.ks-flow b{background:var(--acc2);padding:14px;text-align:center}
-.ad{margin:24px 0;min-height:100px}.src{overflow-wrap:anywhere}.toast{position:fixed;bottom:24px;left:16px;background:var(--fg);color:var(--card);padding:10px;opacity:0;pointer-events:none}.toast.on{opacity:1}
-.tbub button{min-height:44px}.tbub .tb1{background:var(--acc);color:#fff}
-@media(prefers-color-scheme:dark){.tbub .tb1{color:#14181c}}
-@media(max-width:560px){.f2{grid-template-columns:1fr}.gx table{font-size:.82rem}.gx th,.gx td{padding:6px}.big{padding:16px}}
-#ks-answer.ks-empty{font-size:1rem;color:var(--sub);font-weight:400}
-#ks-options-hint{font-size:.82rem}#ks-options-hint a{color:var(--acc)}
-.ks-check small{display:block;color:var(--sub);font-size:.78rem}
-.mres{position:fixed;left:50%;transform:translateX(-50%);width:min(calc(100vw - 32px),520px);bottom:12px;z-index:5;margin:0;padding:10px 14px;border:1.5px solid var(--acc);border-left-width:5px;background:var(--card);color:var(--acc);font-weight:700;font-size:.92rem;text-align:center}.mres:empty,.mres.off{display:none}
-@media(max-width:600px){.ks-chips{display:flex;flex-wrap:wrap;gap:8px}.ks-chips .ks-chip{white-space:nowrap;padding:5px 8px;font-size:.8rem;line-height:1.4;min-height:44px}}
+.who .ks-person{display:flex;flex-direction:column;align-items:flex-start;padding:14px;background:var(--card);border-radius:10px}
+.who .wi svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.ad{margin:32px 0;min-height:100px}.src{overflow-wrap:anywhere}.toast{position:fixed;bottom:24px;left:16px;background:var(--fg);color:var(--card);padding:10px;opacity:0;pointer-events:none}.toast.on{opacity:1}
+@media(max-width:560px){#ks-card{padding:20px 16px}.gx table{font-size:.82rem}.gx th,.gx td{padding:6px}.ks-flow{gap:6px;font-size:.85rem}}
 </style>
 <link rel="stylesheet" href="/assets/fonts/sans.css"><link rel="stylesheet" href="/assets/fonts/num.css"><link rel="stylesheet" href="/assets/v2.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3779143457996470" crossorigin="anonymous"></script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "株・配当の確定申告判定(会社員・令和8年分)", "url": "https://shigoto-keisan.com/kabu-shinkoku/", "description": "会社員の株・投資信託・配当の確定申告が必要かを判定。令和8年分の20万円の境目、住民税、損益通算・損失の繰越、国内株の配当控除の目安を無料で確認できます。", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "inLanguage": "ja", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "dateModified": "2026-11-10", "publisher": {"@type": "Organization", "name": "しごと計算ラボ", "url": "https://shigoto-keisan.com/"}, "featureList": ["20万円を超えるか、ほかの所得と合計して確認", "住民税の申告、損益通算、3年間の損失繰越の確認", "国内株の配当を総合課税にする場合の目安", "入力はブラウザ内で処理し、送信・保存しません"]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "しごと計算ラボ", "item": "https://shigoto-keisan.com/"}, {"@type": "ListItem", "position": 2, "name": "株・配当の確定申告判定", "item": "https://shigoto-keisan.com/kabu-shinkoku/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "20万円は売った金額ですか、利益ですか?", "acceptedAnswer": {"@type": "Answer", "text": "売った金額ではなく、取得費・手数料を引いた利益です。源泉なし・一般口座の利益15万円と副業の利益5万円なら合計20万円で、所得税の申告は不要の見込みですが住民税の申告は必要です。"}}, {"@type": "Question", "name": "NISAは申告がいりますか?", "acceptedAnswer": {"@type": "Answer", "text": "非課税の条件を満たすNISAの利益・配当は、申告しません。上場株式の配当の非課税には株式数比例配分方式などの条件があります。NISAの損失はほかの口座との通算・繰越もできません。"}}, {"@type": "Question", "name": "住民税の申告とは何ですか?", "acceptedAnswer": {"@type": "Answer", "text": "所得税の申告をしない場合に、給与以外の所得をお住まいの市区町村へ知らせる手続きです。源泉なし口座の利益や副業の所得があれば、20万円以下でも申告が必要です。所得税の確定申告をすれば、住民税の申告をしたものとみなされます。"}}, {"@type": "Question", "name": "損した年は申告した方がいいですか?", "acceptedAnswer": {"@type": "Answer", "text": "別口座の利益との通算や、翌年以後3年への繰越を使うなら、申告が必要です。源泉徴収された税が戻る可能性があります。繰越のためには損失が生じた年から連続して申告し、売却しなかった年も申告します。株の損失を給与から引くことはできません。"}}, {"@type": "Question", "name": "配当は申告した方が得ですか?", "acceptedAnswer": {"@type": "Answer", "text": "国内株の配当を含めた課税所得が695万円以下なら、国内株の配当を総合課税で申告すると得になる場合があります。配当控除を使い切れるなどの条件があり、所得税率20%の負担率は約17.4%、23%なら約20.5%です。源泉徴収は20.315%なので、個別に比較してください。外国株・J-REIT等は配当控除の対象外です。"}}, {"@type": "Question", "name": "証券会社が2つある時はどうしますか?", "acceptedAnswer": {"@type": "Answer", "text": "別の証券会社の利益と損失を差し引くには、確定申告が必要です。源泉徴収ありの特定口座だけなら、口座ごとに申告不要を選べます。同じ源泉徴収あり口座内で受け入れた配当と損失は証券会社が通算します。"}}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "株・配当の確定申告判定(会社員・令和8年分)", "url": "https://shigoto-keisan.com/kabu-shinkoku/", "description": "会社員の株・投資信託・配当の確定申告が必要かを判定。令和8年分の20万円の境目、住民税、損益通算・損失の繰越、国内株の配当控除の目安を無料で確認できます。", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "inLanguage": "ja", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "dateModified": "2026-11-10", "publisher": {"@type": "Organization", "name": "しごと計算ラボ", "url": "https://shigoto-keisan.com/"}, "featureList": ["20万円を超えるか、ほかの所得と合計して確認", "住民税の申告、損益通算、3年間の損失繰越の確認", "国内株の配当を総合課税にする場合の目安", "回答はブラウザ内で処理し、送信・保存しません"]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "しごと計算ラボ", "item": "https://shigoto-keisan.com/"}, {"@type": "ListItem", "position": 2, "name": "株・配当の確定申告判定", "item": "https://shigoto-keisan.com/kabu-shinkoku/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "20万円は売った金額ですか、利益ですか?", "acceptedAnswer": {"@type": "Answer", "text": "売った金額ではなく、取得費・手数料を引いた利益です。源泉なし・一般口座の利益15万円と副業の利益5万円なら合計20万円で、所得税の申告は不要の見込みですが住民税の申告は必要です。"}}, {"@type": "Question", "name": "NISAは申告がいりますか?", "acceptedAnswer": {"@type": "Answer", "text": "非課税の条件を満たすNISAの利益・配当は、申告しません。上場株式の配当の非課税には株式数比例配分方式などの条件があります。NISAの損失はほかの口座との通算・繰越もできません。"}}, {"@type": "Question", "name": "住民税の申告とは何ですか?", "acceptedAnswer": {"@type": "Answer", "text": "所得税の申告をしない場合に、給与以外の所得をお住まいの市区町村へ知らせる手続きです。源泉なし口座の利益や副業の所得があれば、20万円以下でも申告が必要です。所得税の確定申告をすれば、住民税の申告をしたものとみなされます。"}}, {"@type": "Question", "name": "損した年は申告した方がいいですか?", "acceptedAnswer": {"@type": "Answer", "text": "別口座の利益との通算や、翌年以後3年への繰越を使うなら、申告が必要です。源泉徴収された税が戻る可能性があります。繰越のためには損失が生じた年から連続して申告し、売却しなかった年も申告します。株の損失を給与から引くことはできません。"}}, {"@type": "Question", "name": "配当は申告した方が得ですか?", "acceptedAnswer": {"@type": "Answer", "text": "国内株の配当を含めた課税所得が695万円以下なら、国内株の配当を総合課税で申告すると得になる場合があります。配当控除を使い切れるなどの条件があり、所得税率20%の負担率は約17.4%、23%なら約20.5%です。源泉徴収は20.315%なので、個別に比較してください。外国株・J-REIT等は配当控除の対象外です。"}}, {"@type": "Question", "name": "証券会社が2つある時はどうしますか?", "acceptedAnswer": {"@type": "Answer", "text": "別の証券会社の利益と損失を差し引くには、確定申告が必要です。源泉徴収ありの特定口座だけなら、口座ごとに申告不要を選べます。同じ源泉徴収あり口座内で受け入れた配当と損失は証券会社が通算します。"}}]}]}</script>
 </head>
 <body>
 <header class="v2h">
 <div class="sbar"><div class="sin"><a class="slogo" href="/"><i></i>しごと計算ラボ</a></div></div>
-<div class="thead"><span class="tic" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M10 6h20l8 8v28H10zM30 6v8h8"/><path d="M16 34l7-9 6 4 9-11M32 18h6v6"/></svg></span><div><h1>株・配当の確定申告は必要?</h1><p>口座と利益から、会社員の申告の目安を確認。令和8年分(2026年分)。</p><a class="hint" href="#who">はじめての方へ：使い方を見る</a></div></div>
+<div class="thead"><span class="tic" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M10 6h20l8 8v28H10zM30 6v8h8"/><path d="M16 34l7-9 6 4 9-11M32 18h6v6"/></svg></span><div><h1>株・配当の確定申告は必要?</h1><p>口座と利益から、会社員の申告の目安を確認。令和8年分(2026年分)。</p></div></div>
 </header>
 <main>
-<div class="card" id="ks-form">
-<fieldset id="ks-accounts"><legend>持っている口座 <small>複数選べます</small></legend><div class="ks-chips">
-<button type="button" class="ks-chip" data-account="withheld" aria-pressed="false">特定口座(源泉徴収あり)</button>
-<button type="button" class="ks-chip" data-account="plain" aria-pressed="false">特定口座(源泉徴収なし)・一般口座</button>
-<button type="button" class="ks-chip" data-account="nisa" aria-pressed="false">NISA</button>
-</div><p class="note">分からない時は、証券会社の口座の画面か年間取引報告書の「源泉徴収あり/なし」で確かめられます</p></fieldset>
-<div class="f2">
-<div id="ks-profit-wrap" hidden><label class="f" for="profit">今年の利益<small>源泉なし・一般の売却益合計／損した時は0</small></label><div class="unit"><input class="num" id="profit" type="text" inputmode="numeric" placeholder="例 150,000" aria-describedby="profit-error"><span>円</span></div><p class="ks-error" id="profit-error" hidden></p></div>
-<div><label class="f" for="other">ほかの所得<small>副業などの利益／なければ空欄</small></label><div class="unit"><input class="num" id="other" type="text" inputmode="numeric" placeholder="例 50,000" aria-describedby="other-error"><span>円</span></div><p class="ks-error" id="other-error" hidden></p></div>
-</div>
-<details class="more" id="ks-options"><summary>年収・損失・配当など<span class="ms" id="ks-summary">年収未入力・損失等なし・配当なし・申告予定なし</span></summary>
-<div class="f2">
-<div><label class="f" for="salary">給与の年収<small>給与＋賞与・額面</small></label><div class="unit"><input class="num" id="salary" type="text" inputmode="numeric" placeholder="例 4,500,000" aria-describedby="salary-error"><span>円</span></div><p class="ks-error" id="salary-error" hidden></p></div>
-<div id="ks-loss-wrap" hidden><label class="f" for="loss">今年の損失<small>どの口座でも。損益を通算したあとの赤字</small></label><div class="unit"><input class="num" id="loss" type="text" inputmode="numeric" placeholder="例 100,000" aria-describedby="loss-error"><span>円</span></div><p class="ks-error" id="loss-error" hidden></p>
-<label class="ks-check"><input type="checkbox" id="cross"><span>ほかの口座に利益・配当がある<small>同じ証券会社の源泉ありの口座の配当は、自動で差し引かれます</small></span></label>
-<label class="ks-check"><input type="checkbox" id="forward">今年の損失を翌年以後に繰り越したい</label></div>
-<label class="ks-check w"><input type="checkbox" id="carried">前年までの繰越損失がある</label>
-<div class="w"><label class="f" for="dividend">国内株の配当<small>投資信託の分配金・外国株・J-REIT は入れない</small></label><div class="unit"><input class="num" id="dividend" type="text" inputmode="numeric" placeholder="例 100,000" aria-describedby="dividend-error"><span>円</span></div><p class="ks-error" id="dividend-error" hidden></p></div>
-<label class="ks-check w"><input type="checkbox" id="planned">医療費控除・ふるさと納税(ワンストップ特例を使わない)・住宅ローン控除の1年目などで確定申告をする予定</label>
-</div></details>
-<section id="ks-result" aria-label="判定結果" aria-live="polite" aria-atomic="true">
-<div class="big" id="ks-big-box"><span class="l">会社員の株・配当の場合、確定申告は</span><strong id="ks-answer" class="ks-empty">口座を選ぶと、ここに判定が出ます</strong><p id="ks-reason" hidden></p><p class="note" id="ks-breakdown" hidden></p></div>
-<p id="ks-options-hint" hidden><a href="#ks-options">損失や配当がある時は「年収・損失・配当など」に入れると判定が変わることがあります</a></p>
-<ul id="ks-notes" hidden></ul><p class="note" id="ks-caution" hidden>一般的な目安です。個別の判断は税務署・税理士へ</p><p class="note" id="ks-refs" hidden></p>
+<section id="ks-tool" aria-label="株の申告の診断">
+<ol class="ks-progress" id="ks-progress" aria-label="質問1(最大5問)"><li class="done"></li><li></li><li></li><li></li><li></li></ol>
+<div id="ks-card" aria-live="polite" aria-atomic="true"></div>
+<button type="button" class="ks-back" id="ks-back" hidden>← もどる</button>
+<button type="button" class="ks-restart" id="ks-restart" hidden>はじめからやり直す</button>
 </section>
-</div>
+<noscript><p>診断にはJavaScriptを有効にしてください。下の解説でも申告の目安を確認できます。</p></noscript>
 <div class="ad" aria-hidden="true">広告</div>
 <div class="card">
 <h2 class="sec-t" id="who">こんな人・こんな時に</h2>
 <div class="who">
-<button type="button" data-sc="small"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 6h20l8 8v28H10zM30 6v8h8M16 34l7-9 6 4 9-11"/></svg></span><b>株の利益が20万円以下</b><span class="ds">源泉なし口座で15万円の利益。住民税も確認。</span><span class="go">例を入れて使い方を見る →</span></button>
-<button type="button" data-sc="loss"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 14h32M34 8l6 6-6 6M40 34H8M14 28l-6 6 6 6"/></svg></span><b>口座をまたいで損と利益</b><span class="ds">別の証券会社の利益と差し引けるか確認。</span><span class="go">例を入れて使い方を見る →</span></button>
+<div class="ks-person"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 6h20l8 8v28H10zM30 6v8h8M16 34l7-9 6 4 9-11"/></svg></span><b>株の利益が20万円以下</b><span class="ds">源泉なし口座で15万円の利益。住民税も確認。</span></div>
+<div class="ks-person"><span class="wi"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 14h32M34 8l6 6-6 6M40 34H8M14 28l-6 6 6 6"/></svg></span><b>口座をまたいで損と利益</b><span class="ds">別の証券会社の利益と差し引けるか確認。</span></div>
 </div>
 <section class="gx" aria-labelledby="ks-rules"><h2 class="sec-t" id="ks-rules">確定申告が必要かの決まり</h2>
 <p>給与が1か所で年末調整を受ける会社員向けの、所得税の申告の目安です。令和8年分(2026年分)を、2027年2〜3月に申告する場合を扱います。まず源泉徴収の有無を、証券会社の年間取引報告書などで確かめます。</p>
 <div class="ks-flow" aria-label="利益の考え方"><b>売却代金 − 取得費・手数料</b><span aria-hidden="true">→</span><b>申告を考える「利益」</b></div>
 <p>源泉徴収なしの特定口座・一般口座の利益は、副業などの所得と合わせて20万円を超えるかを見ます。源泉徴収ありの特定口座で申告不要を選ぶ利益や、非課税のNISAの利益は、この合計に入れません。医療費控除などで申告する際は、20万円以下を理由に省略していた所得も含めます。</p>
 <p>源泉徴収ありの口座の損失を別口座の利益や配当と通算したり、損失を翌年以後3年繰り越したりするには申告が必要です。配当との通算は申告分離課税の場合に限ります。同じ源泉徴収あり口座の損失と受け入れた配当は、証券会社内で通算されます。</p>
-<h3>入力例と判定</h3>
-<table id="ks-examples"><thead><tr><th>口座・条件(ほかの所得なし)</th><th>売却益</th><th>所得税の目安</th></tr></thead><tbody>
-<tr data-example="small"><td>源泉なし・一般</td><td>150,000円</td><td>申告は不要の見込み</td></tr>
-<tr data-example="large"><td>源泉なし・一般</td><td>250,000円</td><td>申告が必要の見込み</td></tr>
-<tr data-example="withheld"><td>源泉あり特定口座だけ</td><td>1,000,000円</td><td>申告は不要の見込み</td></tr>
+<h3>この答え方ならこの結果</h3>
+<table id="ks-examples"><thead><tr><th>答え方</th><th>所得税の目安</th></tr></thead><tbody>
+<tr><td>NISAだけ</td><td>申告は不要の見込み</td></tr>
+<tr><td>証券会社の口座 → あり → もうかった・とんとん</td><td>申告は不要の見込み</td></tr>
+<tr><td>証券会社の口座 → なし → 20万円以下 → 副業なし</td><td>申告は不要の見込み(住民税の申告は必要)</td></tr>
+<tr><td>証券会社の口座 → なし → 20万円より多い</td><td>申告が必要の見込み</td></tr>
+<tr><td>証券会社の口座 → あり → 損した</td><td>申告した方が得かもしれません</td></tr>
 </tbody></table>
-<p id="ks-example-note">15万円の例は、所得税の申告は不要の見込みでも、住民税の申告は必要です(お住まいの市区町村へ)。源泉あり口座の100万円の例では、申告不要を選ぶ利益は20万円判定に含めません。</p>
+<p id="ks-example-note">源泉なし口座で15万円のもうけがあり、副業がない答え方では、所得税の申告は不要の見込みでも住民税の申告は必要です。源泉あり口座のもうけで申告不要を選ぶ分は、20万円判定に含めません。</p>
 <h3>国内株の配当を総合課税にした場合</h3>
 <p>所得税の税率を r とすると、配当控除を使い切れる場合の負担率は (r − 10%) × 1.021 ＋ (10% − 2.8%)。課税総所得金額等が1,000万円以下の国内法人の配当について、所得税と住民税を合わせた比較です。税率の境界をまたぐ配当全体の税額を求めるものではありません。</p>
 <table id="ks-rates"><thead><tr><th>所得税の税率 r</th><th>総合課税の負担率</th><th>申告しない場合</th></tr></thead><tbody>
@@ -142,8 +128,8 @@ input.num:placeholder-shown{text-align:left}input::placeholder{color:var(--ph)}
 <li><a href="https://laws.e-gov.go.jp/law/325AC0000000226/" target="_blank" rel="noopener">地方税法 附則第5条(住民税の配当控除)</a>(確認日：2026-11-10)</li></ul>
 <p class="src">確認日：2026-11-10。</p>
 </section>
-<details class="sx"><summary><h2 class="sec-t">株・配当の申告判定でできること</h2></summary><section class="tldr"><p class="lead">口座の種類と給与以外の所得から、会社員の株・配当の確定申告の目安を確認できます。</p><ul class="feat"><li>20万円を超えるか、ほかの所得と合計して確認</li><li>住民税の申告、損益通算、3年間の損失繰越の確認</li><li>国内株の配当を総合課税にする場合の目安</li><li>入力はブラウザ内で処理し、送信・保存しません</li></ul><p class="upd">最終更新日：<time datetime="2026-11-10">2026年11月10日</time> ／ 運営：しごと計算ラボ</p></section></details>
-<details class="sx" id="ks-method" open><summary><h2 class="sec-t">計算方法(判定のしかた)</h2></summary><ol><li>給与の年収が2,000万円を超えるかを確認します。</li><li>源泉なし・一般口座の利益と、給与のほかの所得を足して20万円超かを確認します。20万円ちょうどは「以下」です。</li><li>確定申告の予定があり、源泉なし・一般口座の利益とほかの所得の合計が0円を超える場合は、20万円以下の所得も含めます。</li><li>別口座との損益通算、今年の損失の繰越希望・前年までの繰越損失、国内株の配当控除の順に確認します。</li><li>上のどれにも当てはまらなければ、申告は不要の見込みと表示します。</li></ol><p>配当の判定用の課税所得は、年末調整ページと同じ給与所得の式から基礎控除と社会保険料(年収×15%の概算)を引き、0円未満なら0円とします。基礎控除も給与所得だけで見込みます。この目安に国内株の配当を足した金額が695万円以下かを判定します。副業の所得や扶養などの控除は反映しない概算で、695万円付近では特に個別の確認が必要です。年収が空欄なら、この判定は行いません。<a href="#ks-rules">根拠と計算例を見る</a></p></details>
+<details class="sx"><summary><h2 class="sec-t">株・配当の申告判定でできること</h2></summary><section class="tldr"><p class="lead">口座の種類と給与以外の所得から、会社員の株・配当の確定申告の目安を確認できます。</p><ul class="feat"><li>20万円を超えるか、ほかの所得と合計して確認</li><li>住民税の申告、損益通算、3年間の損失繰越の確認</li><li>国内株の配当を総合課税にする場合の目安</li><li>回答はブラウザ内で処理し、送信・保存しません</li></ul><p class="upd">最終更新日：<time datetime="2026-11-10">2026年11月10日</time> ／ 運営：しごと計算ラボ</p></section></details>
+<details class="sx" id="ks-method" open><summary><h2 class="sec-t">計算方法(判定のしかた)</h2></summary><ol><li>口座の種類を選び、源泉徴収の有無を確認します。分からない場合は、口座情報や年間取引報告書を見て答えます。</li><li>源泉あり口座は、今年の損の有無で判定します。源泉なし・一般口座は、売ったもうけと副業のもうけが合わせて20万円を超えるかで判定します。20万円ちょうどは「以下」です。</li><li>結果の下の「ほかに当てはまる?」で、年収2,000万円超、医療費控除などの申告予定、前年からの繰越損失、国内株の配当を確認できます。</li><li>申告が必要な判定を最優先にし、次に申告した方が得かもしれない判定、最後に不要の見込みを表示します。</li></ol><p>配当の年収の目安は、給与所得から基礎控除と社会保険料(年収×15%)を引いた課税所得の概算が695万円になる年収を求め、10万円単位で切り下げたものです。独身を想定し、配当・副業の金額や扶養などの控除を反映しない目安です。配当を加えると税率の境目をまたぐ場合があり、実際の有利不利は個別に比較してください。<a href="#ks-rules">根拠と計算例を見る</a></p></details>
 <details class="sx" id="ks-terms" open><summary><h2 class="sec-t">特定口座・源泉徴収・NISAとは</h2></summary><ul><li><b>特定口座</b>：証券会社が年間の売却損益を計算する口座。「源泉徴収あり」と「なし」があります。一般口座では自分で損益を計算します。</li><li><b>源泉徴収</b>：利益・配当から、税金を先に差し引くこと。源泉ありの特定口座は、原則として口座ごとに申告不要を選べます。</li><li><b>NISA</b>：条件を満たす投資の利益・配当が非課税になる制度。損失は、ほかの口座との通算も繰越もできません。</li></ul><div class="ks-flow"><b>源泉あり：税を先に差し引く</b><span aria-hidden="true">／</span><b>源泉なし：自分で申告を確認</b></div><p class="src">根拠：<a href="#ks-src-1476">特定口座制度</a>・<a href="#ks-src-1535">NISA制度</a></p></details>
 <h2 class="sec-t">よくある質問</h2><div class="faq"><details><summary><span>20万円は売った金額ですか、利益ですか?</span></summary><p>売った金額ではなく、取得費・手数料を引いた利益です。源泉なし・一般口座の利益15万円と副業の利益5万円なら合計20万円で、所得税の申告は不要の見込みですが住民税の申告は必要です。</p><p class="src">出典：<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2020.htm" target="_blank" rel="noopener">No.2020 確定申告｜国税庁</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm" target="_blank" rel="noopener">No.1900 給与所得者で確定申告が必要な人｜国税庁</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1463.htm" target="_blank" rel="noopener">No.1463 株式等を譲渡したときの課税(申告分離課税)｜国税庁</a>、<a href="https://laws.e-gov.go.jp/law/325AC0000000226/" target="_blank" rel="noopener">地方税法(e-Gov 法令検索) 第317条の2</a>(確認日：2026-11-10)</p></details>
 <details><summary><span>NISAは申告がいりますか?</span></summary><p>非課税の条件を満たすNISAの利益・配当は、申告しません。上場株式の配当の非課税には株式数比例配分方式などの条件があります。NISAの損失はほかの口座との通算・繰越もできません。</p><p class="src">出典：<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1535.htm" target="_blank" rel="noopener">No.1535 NISA制度｜国税庁</a>、<a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2011.htm?cid=main" target="_blank" rel="noopener">No.2011 課税される所得と非課税所得｜国税庁</a>、<a href="https://www.fsa.go.jp/policy/nisa2/about/nisa2024/guidebook_202307.pdf" target="_blank" rel="noopener">金融庁 NISAガイドブック(Part.7 よくある質問)</a>(確認日：2026-11-10)</p></details>
@@ -157,74 +143,99 @@ input.num:placeholder-shown{text-align:left}input::placeholder{color:var(--ph)}
 </main>
 <footer><a href="/">しごと計算ラボ</a> ・ <a href="/guide/">解説記事</a> ・ <a href="/about/">このサイトについて</a> ・ <a href="/privacy/">プライバシーポリシー</a> ・ <a href="/contact/">お問い合わせ</a><br>© しごと計算ラボ</footer>
 <div class="toast" id="toast"></div>
-<div class="mres off" id="mini" aria-hidden="true"></div>
 <script id="core">
 var CORE=(function(){
-// 給与所得・基礎控除は /nenmatsu/ と同じ令和8年分の式。
 function kyuyoShotoku(I){if(I<741000)return 0;if(I<2191000)return I-740000;if(I<2193000)return 1451000;if(I<2196000)return 1453000;if(I<2200000)return 1456000;
  if(I<6600000){var A=Math.floor(I/4000)*4000;return I<3600000?A*7/10-80000:A*8/10-440000}
  if(I<8500000)return Math.floor(I*9/10)-1100000;return I-1950000}
 function kisoIT(s){if(s<=4890000)return 1040000;if(s<=6550000)return 670000;if(s<=23500000)return 620000;if(s<=24000000)return 480000;if(s<=24500000)return 320000;if(s<=25000000)return 160000;return 0}
 function taxableEstimate(salary){var s=kyuyoShotoku(salary);return Math.max(0,s-kisoIT(s)-Math.round(salary*0.15))}
 function dividendRate(r){return (r-0.10)*1.021+(0.10-0.028)}
-function money(value){if(value===undefined||value===null||String(value).trim()==='')return null;var s=String(value).normalize('NFKC').replace(/[,\s]/g,'');if(!/^\d+$/.test(s))return NaN;var n=Number(s);return Number.isSafeInteger(n)&&n<=10000000000?n:NaN}
+
 var labels={need:'申告が必要の見込み',better:'申告した方が得かもしれません',none:'申告は不要の見込み'};
 var sourceMap={"7-b":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1465.htm","title":"国税庁 No.1465 株式等の譲渡損失(赤字)の取扱い"},"5":{"url":"https://laws.e-gov.go.jp/law/325AC0000000226/","title":"地方税法 第317条の2"},"9":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1476.htm","title":"国税庁 No.1476 特定口座制度"},"4-a":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2020.htm","title":"国税庁 No.2020 確定申告"},"4-d":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm","title":"国税庁 No.1900 給与所得者で確定申告が必要な人"},"4-e":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1463.htm","title":"国税庁 No.1463 株式等を譲渡したときの課税(申告分離課税)"},"13-a":{"url":"https://www.nta.go.jp/users/gensen/nencho/index/kyuyosyotokusya.htm","title":"国税庁 給与所得者（従業員）の方へ"},"13-b":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm","title":"国税庁 No.1900 給与所得者で確定申告が必要な人"},"6-a":{"url":"https://www.nta.go.jp/taxes/shiraberu/shinkoku/tebiki/2025/pdf/001.pdf","title":"国税庁 確定申告の手引き"},"6-b":{"url":"https://www.nta.go.jp/taxes/shiraberu/shinkoku/tebiki/2025/pdf/001.pdf","title":"国税庁 確定申告の手引き"},"7-a":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1474.htm","title":"国税庁 No.1474 上場株式等に係る譲渡損失の損益通算及び繰越控除"},"8-a":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1474.htm","title":"国税庁 No.1474 上場株式等に係る譲渡損失の損益通算及び繰越控除"},"8-b":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1474.htm","title":"国税庁 No.1474 上場株式等に係る譲渡損失の損益通算及び繰越控除"},"10-c":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1250.htm","title":"国税庁 No.1250 配当所得があるとき(配当控除)"},"10-h":{"url":"https://laws.e-gov.go.jp/law/325AC0000000226/","title":"地方税法 附則第5条"},"10-i":{"url":"https://laws.e-gov.go.jp/law/325AC0000000226/","title":"地方税法 附則第5条"},"12-a":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1535.htm","title":"国税庁 No.1535 NISA制度"},"12-b":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2011.htm?cid=main","title":"国税庁 No.2011 課税される所得と非課税所得"},"12-d":{"url":"https://www.fsa.go.jp/policy/nisa2/about/nisa2024/guidebook_202307.pdf","title":"金融庁 NISAガイドブック(Part.7 よくある質問)"},"12-e":{"url":"https://www.fsa.go.jp/policy/nisa2/about/nisa2024/guidebook_202307.pdf","title":"金融庁 NISAガイドブック(Part.7 よくある質問)"},"3-a":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1476.htm","title":"国税庁 No.1476 特定口座制度"},"3-e":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1476.htm","title":"国税庁 No.1476 特定口座制度"},"4-b":{"url":"https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1900.htm","title":"国税庁 No.1900 給与所得者で確定申告が必要な人"}};
-function judge(input){var o=input||{},a=o.accounts||[],plain=a.indexOf('plain')>=0,withheld=a.indexOf('withheld')>=0,nisa=a.indexOf('nisa')>=0;
- var salary=money(o.salary),profit=plain?money(o.profit):0,other=money(o.other)||0,loss=(withheld||plain)?money(o.loss)||0:0,dividend=money(o.dividend)||0;
- var invalid=['salary','other','dividend'].concat(plain?['profit']:[],(withheld||plain)?['loss']:[]).some(function(k){return Number.isNaN(money(o[k]))});
- function result(kind,reason,refs,notes){notes=(notes||[]).slice();refs=(refs||[]).slice();if(kind!=='empty'&&loss>0){notes.unshift('損失は、申告すればほかの口座の利益と差し引いたり、3年繰り越したりできます。申告しなければ、その損失は使えなくなります');refs=refs.concat(['7-a','7-b'])}return {kind:kind,reason:reason,notes:notes||[],refs:refs||[],sources:Array.from(new Set((refs||[]).map(function(id){return sourceMap[id]})))}}
- if(invalid)return result('empty','入力を直すと判定が出ます');
- if(salary!==null&&salary>20000000)return result('need','給与が2,000万円を超えると年末調整の対象外のため',['13-a','13-b'],['確定申告で税金が還付される場合は、還付申告として確認してください。']);
- if(!a.length)return result('empty','持っている口座を選んでください');
- if(plain&&profit===null)return result('empty','源泉なし・一般口座の今年の利益を入れてください(損した時は0)');
- var total=(profit||0)+other,notes=[],refs=[];
- if(nisa)notes.push('NISAは非課税の条件を満たす利益・配当が対象です。NISAの損失はほかと通算・繰越できません。');
- if(dividend>0&&salary===null)notes.push('国内株の配当を含めた課税所得が695万円以下なら、配当を総合課税で申告すると得になる場合があります');
- if(dividend>0&&salary!==null)notes.push('配当判定用の課税所得の目安：'+taxableEstimate(salary).toLocaleString('ja-JP')+'円。給与所得−基礎控除−社会保険料(年収×15%の概算)。この目安に国内株の配当を足して判定します。副業の所得や扶養などの控除は含めていません。');
- if(o.planned)notes.push('この結果は株・配当の扱いです。予定している医療費控除などの申告は別に行ってください。');
- function done(kind,reason,ids,usesTotal){var r=result(kind,reason,ids,notes);if(usesTotal)r.breakdown='源泉なし・一般の利益 '+(profit||0).toLocaleString('ja-JP')+'円＋ほかの所得 '+other.toLocaleString('ja-JP')+'円＝'+total.toLocaleString('ja-JP')+'円';return r}
- if(total>200000)return done('need','給与以外の所得の合計が20万円を超えるため',['4-a','4-d','4-e'],true);
- if(o.planned&&total>0)return done('need','医療費控除などで申告する時は、20万円以下の所得も申告に含めるため',['6-a','6-b']);
- var betterReason='',betterRefs=[];
- if(loss>0&&o.cross){betterReason='ほかの口座の利益・配当と損失を差し引き、源泉徴収された税が戻る可能性があるため';betterRefs=['7-a','9'];notes.push('配当との通算は申告分離課税を選ぶ場合です。源泉あり口座の損失を申告すると、その口座に受け入れた配当も併せて申告します。')}
- if((loss>0&&o.forward)||o.carried){if(!betterReason){betterReason=o.carried?'繰越損失を引き続き使うには、連続した申告が必要なため':'今年の損失を翌年以後3年繰り越して使える可能性があるため';betterRefs=['8-a','8-b']}notes.push('損失の繰越には、損失が生じた年から連続して申告が必要です。売却しない年も申告します。')}
- if(dividend>0&&salary!==null&&taxableEstimate(salary)+dividend<=6950000&&!betterReason){betterReason='国内株の配当を含めた課税所得の概算が695万円以下で、国内株の配当控除が有利になる場合があるため';betterRefs=['10-c','10-h','10-i'];notes.push('配当控除を使い切れる場合の目安です。実際の所得・控除や配当の金額によって変わります。')}
- if(betterReason){if(total>0&&!o.planned)notes.push('所得税の確定申告をしない場合、住民税の申告は必要です(お住まいの市区町村へ)');return done('better',betterReason,betterRefs)}
- if(total>0){notes.push('ただし住民税の申告は必要です(お住まいの市区町村へ)');refs.push('5')}
- if(nisa&&!plain&&!withheld&&total===0&&dividend===0)return done('none','NISAの非課税の条件を満たす利益・配当は、申告しないため',['12-a','12-b','12-d','12-e']);
- if(withheld&&!plain&&total===0)return done('none','源泉徴収ありの特定口座は申告不要を選べるため',['3-a','3-e','4-b']);
- return done('none','給与以外の所得が20万円以下のため',['4-a'].concat(refs),true);
+sourceMap['6-c']=sourceMap['3-a'];
+sourceMap['6-b']={url:'https://www.nta.go.jp/about/organization/okinawa/release/r02/kakutei_shinkoku/index.htm',title:'国税庁 医療費控除・寄附金控除と確定申告'};
+var flow={
+ Q1:{question:'株や投資信託、どこで持ってる?',step:1,options:[['NISAだけ','A','leaf'],['証券会社の口座(NISA以外も)','Q2','bank'],['わからない','H1','help']]},
+ H1:{question:'見てみて、どうだった?',help:'証券会社のアプリで『口座』を見ると、NISA かどうかが書いてあります',step:1,options:[['NISAだけだった','A','leaf'],['NISA以外もあった','Q2','bank']]},
+ Q2:{question:'その口座は『源泉徴収あり』?',step:2,options:[['あり','Q3a','check'],['なし(一般口座も)','Q3b','minus'],['あり・なし両方ある','Q3b','both'],['わからない','H2','help']]},
+ H2:{question:'見てみて、どうだった?',help:'アプリの口座情報か、年に1回届く『年間取引報告書』に、あり/なしが書いてあります',step:2,options:[['あり','Q3a','check'],['なし','Q3b','minus'],['両方','Q3b','both']]},
+ Q3a:{question:'今年、株で損をした?',step:3,options:[['もうかった・とんとん','B','up'],['損した','E','down']]},
+ Q3b:{question:'今年、源泉徴収なしの口座で売ったもうけは?',step:3,options:[['20万円以下','Q4','low'],['20万円より多い','D','up'],['損した','E','down']]},
+ Q4:{question:'副業のもうけもある?',step:4,options:[['ない','C','minus'],['ある','Q5','bag']]},
+ Q5:{question:'株と副業のもうけ、合わせて20万円より多い?',step:5,options:[['20万円以下','C','low'],['20万円より多い','D','up']]}
+};
+var results={
+ A:{kind:'none',reason:'NISAのもうけは税金がかからないため',refs:['12-a','12-b']},
+ B:{kind:'none',reason:'源泉徴収ありの口座は、申告しなくてよいため',refs:['3-a','3-e','4-b']},
+ C:{kind:'none',reason:'給与以外のもうけが20万円以下のため',refs:['4-a','5']},
+ D:{kind:'need',reason:'給与以外のもうけが20万円を超えるため',refs:['4-a','4-d','4-e']},
+ E:{kind:'better',reason:'損を申告すると、ほかの口座のもうけと差し引けたり、3年先まで繰り越せたりするため',refs:['7-a','8-a','9']}
+};
+// path は Q1 から順に押した選択肢の添字(0始まり)。ヘルプ画面の回答も含む。
+function destination(path){var id='Q1';if(!Array.isArray(path))throw new TypeError('回答の並びが必要です');path.forEach(function(answer){var node=flow[id];if(!node||!Number.isInteger(answer)||!node.options[answer])throw new RangeError('未定義の回答です');id=node.options[answer][1]});return id}
+// 課税所得695万円に達する最初の年収を二分探索し、10万円単位で切り下げる。
+function salaryBoundary(){var lo=0,hi=20000000;while(lo<hi){var mid=Math.floor((lo+hi)/2);if(taxableEstimate(mid)>=6950000)hi=mid;else lo=mid+1}return lo}
+var dividendSalaryLimit=Math.floor(salaryBoundary()/100000)*100000;
+function resolve(path,extras){var id=destination(path),base=results[id];if(!base)throw new RangeError('回答が完了していません');var e=extras||{},r={code:id,kind:base.kind,reason:base.reason,notes:[],refs:base.refs.slice()};
+ function note(text,ids){r.notes.push(text);r.refs=r.refs.concat(ids||[])}
+ function change(kind,reason,ids){r.kind=kind;r.reason=reason;r.refs=ids.concat(r.refs)}
+ if(e.highSalary){change('need','年末調整の対象外のため',['13-a','13-b']);note('年収が2,000万円を超える条件を反映しました。')}
+ if(e.planned){if(id==='C'){change('need',e.highSalary?r.reason:'申告する時は20万円以下のもうけも含めるため',['6-a','6-b']);note('医療費控除・ふるさと納税で申告する条件を反映しました。')}else if(id==='A'||id==='B')note('株のもうけは申告に含めなくてよい見込みです',['6-c']);else note('医療費控除・ふるさと納税で申告する条件を確認しました。')}
+ if(e.carried){if(r.kind!=='need')change('better','繰り越しを続けるには毎年の申告が必要なため',['8-b']);note('前の年からの損を繰り越しているため、繰越を続けるには毎年の申告が必要です。',['8-b'])}
+ if(e.dividend){if(r.kind==='none'&&e.dividendLow===true){change('better','配当を申告すると配当控除で税金が減る場合があるため',['10-c','10-h','10-i']);note('国内株の配当と年収の回答を反映：独身・社会保険料15%の年収'+dividendSalaryLimit/10000+'万円以下という目安です。')}else if(r.kind!=='none')note('国内株の配当による判定は行っていません。');else if(e.dividendLow===false)note('年収の回答では、国内株の配当による判定は変わりません。')}
+ if(id==='C'&&r.kind!=='need')note('ただし、住民税の申告は必要です(市役所・区役所へ)',['5']);
+ r.refs=Array.from(new Set(r.refs));return r;
 }
-return {judge:judge,labels:labels,money:money,kyuyoShotoku:kyuyoShotoku,kisoIT:kisoIT,taxableEstimate:taxableEstimate,dividendRate:dividendRate};
+return {flow:flow,results:results,resolve:resolve,destination:destination,labels:labels,sourceMap:sourceMap,kyuyoShotoku:kyuyoShotoku,kisoIT:kisoIT,taxableEstimate:taxableEstimate,dividendRate:dividendRate,salaryBoundary:salaryBoundary,dividendSalaryLimit:dividendSalaryLimit};
 })();
 if(typeof module!=='undefined')module.exports=CORE;
 </script>
-<script src="/assets/share.js"></script><script src="/assets/tour.js"></script>
+<script src="/assets/share.js"></script>
 <script>
 (function(){
-var $=function(id){return document.getElementById(id)},keys=['profit','other','salary','loss','dividend'],checks=['cross','forward','carried','planned'];
-function read(){var o={accounts:Array.from(document.querySelectorAll('[data-account][aria-pressed=true]')).map(function(b){return b.dataset.account})};keys.forEach(function(k){o[k]=$(k).value});checks.forEach(function(k){o[k]=$(k).checked});return o}
-function paint(){var o=read(),plain=o.accounts.includes('plain'),withheld=o.accounts.includes('withheld');$('ks-profit-wrap').hidden=!plain;$('ks-loss-wrap').hidden=!(withheld||plain);
- keys.forEach(function(k){var active=(k!=='profit'||plain)&&(k!=='loss'||withheld||plain),missing=k==='profit'&&plain&&CORE.money(o[k])===null,bad=active&&(Number.isNaN(CORE.money(o[k]))||missing);$(k).setAttribute('aria-invalid',String(bad));$(k+'-error').hidden=!bad;$(k+'-error').textContent=bad?(missing?'今年の利益を入力してください(損した時は0)':'0以上100億円以下の整数を入力してください。'):''});
- var changes=[];if(o.salary.trim())changes.push('年収 '+o.salary+'円');if((withheld||plain)&&CORE.money(o.loss)>0)changes.push('損失 '+o.loss+'円');if((withheld||plain)&&o.cross)changes.push('別口座に利益・配当');if((withheld||plain)&&o.forward)changes.push('今年の損失を繰越希望');if(o.carried)changes.push('前年の繰越あり');if(CORE.money(o.dividend)>0)changes.push('配当 '+o.dividend+'円');if(o.planned)changes.push('申告予定あり');
- $('ks-summary').textContent=changes.join('・')||'年収未入力・損失等なし・配当なし・申告予定なし';$('ks-summary').classList.toggle('on',changes.length>0);
- var r=CORE.judge(o),hasError=keys.some(function(k){return $(k).getAttribute('aria-invalid')==='true'}),empty=!o.accounts.length||r.kind==='empty'||hasError;$('ks-answer').textContent=empty?(hasError?'入力を直すと判定が出ます':'口座を選ぶと、ここに判定が出ます'):CORE.labels[r.kind];$('ks-answer').classList.toggle('ks-empty',empty);$('mini').textContent=empty?'':CORE.labels[r.kind];$('ks-breakdown').hidden=empty||!r.breakdown;$('ks-breakdown').textContent=r.breakdown||'';$('ks-options-hint').hidden=empty||$('ks-options').open||changes.length>0;$('ks-reason').hidden=empty;$('ks-reason').textContent=empty?'':r.reason;$('ks-notes').replaceChildren();
- (empty?[]:r.notes).forEach(function(n){var li=document.createElement('li');li.textContent=n;if(n.includes('住民税の申告'))li.className='ks-resident';$('ks-notes').appendChild(li)});$('ks-notes').hidden=empty||!r.notes.length;$('ks-caution').hidden=empty;$('ks-refs').hidden=empty;$('ks-refs').replaceChildren();
- if(!empty){$('ks-refs').append('根拠：');var seen=new Set();r.sources.forEach(function(source){if(seen.has(source.url))return;if(seen.size)$('ks-refs').append('・');seen.add(source.url);var link=document.createElement('a');link.href=source.url;link.textContent=source.title;link.target='_blank';link.rel='noopener';$('ks-refs').appendChild(link)})}
+const $=id=>document.getElementById(id),path=[],extras={};
+const icons={leaf:'M24 8C8 8 8 25 16 28S34 26 34 10Z M15 34l13-17',bank:'M6 16l18-9 18 9ZM10 20v16m9-16v16m10-16v16m9-16v16M6 40h36',help:'M19 17a6 6 0 1 1 8 6l-3 3v3M24 35h.01',check:'M10 25l9 9 20-22',minus:'M12 24h24',both:'M9 16h26m-6-6 6 6-6 6M39 32H13m6-6-6 6 6 6',up:'M8 34l12-13 9 6 11-16M30 11h10v10',down:'M8 14l12 13 9-6 11 16M30 37h10V27',low:'M10 16h28M10 24h20M10 32h12',bag:'M9 16h30v23H9ZM18 16v-6h12v6M9 24h30M24 23v6',need:'M24 6l19 34H5ZM24 18v10M24 34h.01',better:'M8 14h32m-6-6 6 6-6 6M40 34H8m6-6-6 6 6 6'};
+function icon(name){return '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="'+icons[name]+'"/></svg>'}
+const extraLabels={highSalary:'年収が2,000万円を超える',planned:'医療費控除・ふるさと納税(ワンストップなし)で申告する',carried:'前の年からの損を繰り越している',dividend:'国内の会社の株の配当がある'};
+let dividendQuestion=false;
+function el(tag,text,cls){const e=document.createElement(tag);if(text)e.textContent=text;if(cls)e.className=cls;return e}
+function heading(text,id){const e=el('h2',text);e.id=id;e.tabIndex=-1;return e}
+function answer(label,name,fn){const b=el('button',null,'ks-answer');b.type='button';b.innerHTML=icon(name);b.append(el('span',label));b.onclick=fn;return b}
+function paint(focus=true){
+ const id=CORE.destination(path),node=CORE.flow[id],card=$('ks-card');card.replaceChildren();
+ $('ks-back').hidden=!path.length;$('ks-restart').hidden=!!node;
+ const progress=node?node.step:5;$('ks-progress').setAttribute('aria-label',node?'質問'+progress+'(最大5問)':'診断完了');
+ [...$('ks-progress').children].forEach((dot,i)=>{dot.classList.toggle('done',i<progress);dot.setAttribute('aria-hidden','true')});
+ if(node){
+  dividendQuestion=false;
+  if(node.help){const help=el('p',node.help);help.id='ks-help';card.append(help)}
+  card.append(heading(node.question,'ks-question'));const choices=el('div',null,'ks-answers');
+  node.options.forEach((o,i)=>choices.append(answer(o[0],o[2],()=>{path.push(i);paint()})));card.append(choices);
+ }else{
+  const r=CORE.resolve(path,extras);
+  if(extras.dividend&&extras.dividendLow===undefined&&r.kind==='none'){
+   dividendQuestion=true;card.append(heading('年収はだいたい '+CORE.dividendSalaryLimit/10000+'万円以下?','ks-question'));
+   const choices=el('div',null,'ks-answers');[true,false].forEach(v=>choices.append(answer(v?'はい':'いいえ',v?'check':'minus',()=>{extras.dividendLow=v;dividendQuestion=false;paint()})));card.append(choices);
+  }else{
+   dividendQuestion=false;
+   const visual=el('div',null,'ks-result-icon');visual.innerHTML=icon(r.kind==='none'?'check':r.kind);card.append(visual,heading(CORE.labels[r.kind],'ks-answer'));
+   const reason=el('p',r.reason);reason.id='ks-reason';card.append(reason);
+   const notes=el('div');notes.id='ks-notes';r.notes.forEach(n=>notes.append(el('p',n,n.includes('ただし、住民税')?'ks-resident':'')));card.append(notes);
+   card.append(el('p','一般的な目安です。個別の判断は税務署・税理士へ','note'));
+   const refs=el('div',null,'note');refs.id='ks-refs';const seen=new Set();
+   r.refs.forEach(key=>{const source=CORE.sourceMap[key];if(!source||seen.has(source.url)||seen.size>=2)return;seen.add(source.url);const a=el('a',source.title);a.href=source.url;a.target='_blank';a.rel='noopener';refs.append(a)});card.append(refs);
+   const more=el('section');more.id='ks-extras';more.append(el('h3','ほかに当てはまる?'));const list=el('div',null,'ks-extra-list');
+   Object.entries(extraLabels).forEach(([key,label])=>{const b=el('button',label,'ks-extra');b.type='button';b.dataset.extra=key;b.setAttribute('aria-pressed',String(!!extras[key]));b.onclick=()=>{extras[key]=!extras[key];if(key==='dividend')delete extras.dividendLow;paint()};list.append(b)});more.append(list);card.append(more);
+  }
+ }
+ if(focus){const title=card.querySelector('h2');title.focus({preventScroll:true});const rect=$('ks-tool').getBoundingClientRect();if(rect.top<0||title.getBoundingClientRect().bottom>innerHeight)$('ks-tool').scrollIntoView({block:'start',behavior:'instant'})}
 }
-document.querySelectorAll('[data-account]').forEach(function(b){b.onclick=function(){b.setAttribute('aria-pressed',String(b.getAttribute('aria-pressed')!=='true'));paint()}});
-// /nenmatsu/ と同じ入力中の整形・IME確定時の整形。無効な値は消さず、欄の下でエラーを示す。
-function fmtYen(el){el.value=el.value.replace(/[０-９，．]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-0xFEE0)});var v=CORE.money(el.value);if(v!==null&&Number.isFinite(v))el.value=v.toLocaleString('ja-JP')}
-keys.forEach(function(k){$(k).addEventListener('input',function(e){if(e.isComposing)return;fmtYen($(k));paint()});$(k).addEventListener('compositionend',function(){fmtYen($(k));paint()})});checks.forEach(function(k){$(k).addEventListener('change',paint)});
-$('ks-scope-button').onclick=function(){var open=$('ks-scope').hidden;$('ks-scope').hidden=!open;this.setAttribute('aria-expanded',String(open));this.textContent=open?'▲ 閉じる':'▼ もっと見る'};
-function snap(){return {values:read(),open:$('ks-options').open}}
-function set(o){keys.forEach(function(k){$(k).value=o[k]===undefined?'':o[k]});checks.forEach(function(k){$(k).checked=!!o[k]});document.querySelectorAll('[data-account]').forEach(function(b){b.setAttribute('aria-pressed',String((o.accounts||[]).includes(b.dataset.account)))});paint()}
-SKTour({sc:{small:{t:'株の利益が20万円以下',steps:[['accounts','<b>源泉徴収なし・一般口座</b>を選びます。'],['profit','売却代金ではなく、費用を引いた<b>利益15万円</b>を入れます。'],['result','所得税の目安と、<b>住民税の申告</b>を確認します。']]},loss:{t:'口座をまたいで損と利益',steps:[['accounts','<b>源泉徴収あり</b>の特定口座を選びます。'],['options','今年の損失と、<b>別口座の利益・配当</b>の有無を入れます。'],['result','申告で損益を差し引ける<b>可能性</b>を確認します。']]}},tg:{accounts:function(){return $('ks-accounts')},profit:function(){return $('ks-profit-wrap')},options:function(){return $('ks-loss-wrap')},result:function(){return $('ks-result')}},snap:snap,back:function(s){set(s.values);$('ks-options').open=s.open},begin:function(c){if(c.t==='株の利益が20万円以下'){set({accounts:['plain'],profit:'150000'});$('ks-options').open=false}else{set({accounts:['withheld'],loss:'100000',cross:true});$('ks-options').open=true}},prep:function(k){if(k==='options')$('ks-options').open=true}});
-$('ks-options').addEventListener('toggle',paint);
-// /nenmatsu/ と同じ条件：条件欄が見え、本来の結果とフッターが見えない間だけ表示。
-if('IntersectionObserver' in window){var seen=new Set(),ob=$('ks-options'),answer=$('ks-answer');function updateMini(){$('mini').classList.toggle('off',!seen.has(ob)||seen.has(answer)||seen.has(document.querySelector('footer')))}var io=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?seen.add(e.target):seen.delete(e.target)});updateMini()}),answerIO=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting&&e.intersectionRatio===1?seen.add(e.target):seen.delete(e.target)});updateMini()},{threshold:1});answerIO.observe(answer);io.observe(document.querySelector('footer'));io.observe(ob)}
-paint();
+$('ks-back').onclick=()=>{if(dividendQuestion){extras.dividend=false;delete extras.dividendLow}else{path.pop();Object.keys(extras).forEach(k=>delete extras[k])}paint()};
+$('ks-restart').onclick=()=>{path.length=0;Object.keys(extras).forEach(k=>delete extras[k]);paint()};
+$('ks-scope-button').onclick=function(){const open=$('ks-scope').hidden;$('ks-scope').hidden=!open;this.setAttribute('aria-expanded',String(open));this.textContent=open?'▲ 閉じる':'▼ もっと見る'};
+paint(false);
 })();
 </script>
 </body></html>
