@@ -10,6 +10,8 @@
 - 失敗と再発防止はこのリポジトリの LESSONS.md にも書く
 
 ## 進め方
+- CLAUDE.md は Codex が変えない(Codex 向けの決まりは AGENTS.md と LESSONS.md に書く)
+- 日本語ファイルは `Get-Content -Encoding UTF8` で読み、PowerShellの出力もUTF-8にする。scratchpadは環境に示された絶対パスを使い、読取り前に実在を確かめる(2026-11-10、読取り失敗の再発防止)。
 - PowerShellで引用符・正規表現・HTMLを含む検査を実行する時は、一時スクリプトファイルに書いて実行する。複雑な `node -e`・`python -c` を使わない(2026-11-10、同じ引用符の失敗2回の再発防止)。
 - Codex は git の commit・push・ブランチ切り替え・main への反映・ログイン・お金の動く操作はしない。これらは指示役が行う
 - 作業の最後に、変えたファイルの一覧と、走らせたテストの結果を短く書く

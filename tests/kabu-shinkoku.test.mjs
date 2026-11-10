@@ -163,3 +163,48 @@ test('関連ツールのある全ページ・トップ一覧・ItemList・相互
 test('申告予定では株の利益0円でもほかの所得を含める',()=>{for(const accounts of [['plain'],['withheld'],['nisa']])for(const other of [0,1,200000]){const r=run({accounts,profit:0,other,planned:true});assert.equal(r.kind,other>0?'need':'none');if(other>0)assert.equal(r.reason,'医療費控除などで申告する時は、20万円以下の所得も申告に含めるため');}});
 test('配当加算後695万円の直前・一致・直後',()=>{const salary=11000000;const limit=6950000-C.taxableEstimate(salary);for(const [delta,kind] of [[-1,'better'],[0,'better'],[1,'none']])assert.equal(run({salary,dividend:limit+delta}).kind,kind);});
 test('出典は読める名前で表示し、内部の根拠記号を表示しない',()=>{const outside=html.replace(/<script id="core">[\s\S]*?<\/script>/,'');assert.doesNotMatch(outside,/r\.refs|根拠 [0-9]|指定された判定用|organization\/okinawa|>13<|>001</);for(const o of [{profit:1},{profit:1,planned:true},{profit:200001},{accounts:['withheld'],salary:20000001},{salary:4500000,dividend:100000},{accounts:['nisa']}])for(const source of run(o).sources){assert.ok(source.url?.startsWith('https://'));assert.ok(source.title);}assert.match(read('404.html'),/href="\/nenmatsu\/"[^]*?href="\/kabu-shinkoku\/"/);assert.match(read('.gitignore'),/^output\/$/m);});
+
+for(const accounts of [['plain'],['withheld'],['plain','withheld']])for(const [cross,forward,kind] of [[false,false,'none'],[true,false,'better'],[false,true,'better'],[true,true,'better']]){
+  test(`${accounts}の損失：通算=${cross}・繰越=${forward}・注記と根拠`,()=>{
+    const r=run({accounts,loss:100000,cross,forward});
+    assert.equal(r.kind,kind);
+    assert.equal(r.notes.filter(n=>n.startsWith('損失は、申告すれば')).length,1);
+    assert.ok(r.notes.includes('損失は、申告すればほかの口座の利益と差し引いたり、3年繰り越したりできます。申告しなければ、その損失は使えなくなります'));
+    for(const no of ['1474','1465'])assert.ok(r.sources.some(s=>s.url.endsWith('/'+no+'.htm')));
+  });
+}
+test('損失の注記は必要判定でも残し、NISA単独・損失0では出さない',()=>{
+  for(const o of [{profit:200001},{salary:20000001},{profit:1,planned:true}]){
+    const r=run({...o,loss:100000});assert.equal(r.kind,'need');assert.ok(r.notes.some(n=>n.startsWith('損失は、申告すれば')));
+  }
+  for(const o of [{loss:0},{accounts:['nisa'],loss:100000,cross:true,forward:true}])assert.ok(!run(o).notes.some(n=>n.startsWith('損失は、申告すれば')));
+});
+test('全金額欄の100億円ちょうど・超過・全角・不正値の境界',()=>{
+  assert.equal(C.money('１０，０００，０００，０００'),10000000000);
+  assert.ok(Number.isNaN(C.money('10,000,000,001')));
+  for(const key of ['profit','other','salary','loss','dividend']){
+    assert.notEqual(run({[key]:10000000000}).kind,'empty',key);
+    for(const bad of [10000000001,'-1','1.5','abc']){
+      const r=run({[key]:bad});assert.equal(r.kind,'empty',key);assert.equal(r.reason,'入力を直すと判定が出ます');assert.equal(r.notes.length,0);
+    }
+  }
+});
+test('20万円で判定した時だけ、実際の利益・他所得・合計の内訳を返す',()=>{
+  for(const [profit,other,kind] of [[180000,30000,'need'],[150000,50000,'none'],[0,0,'none'],[200000,1,'need']]){
+    const r=run({profit,other});assert.equal(r.kind,kind);
+    assert.equal(r.breakdown,`源泉なし・一般の利益 ${profit.toLocaleString('ja-JP')}円＋ほかの所得 ${other.toLocaleString('ja-JP')}円＝${(profit+other).toLocaleString('ja-JP')}円`);
+  }
+  for(const o of [{salary:20000001},{profit:1,planned:true},{accounts:['withheld']},{accounts:['nisa']},{carried:true},{salary:4500000,dividend:100000}])assert.equal(run(o).breakdown,undefined);
+});
+test('ページ本文で同じ語句が直後に重複していない',()=>{
+  const text=html.replace(/<script\b[^>]*>[\s\S]*?<\/script>|<style\b[^>]*>[\s\S]*?<\/style>/g,'').replace(/<[^>]+>/g,' ');
+  assert.doesNotMatch(text,/([ぁ-んァ-ヶ一-龠ー]{4,})\1/);
+});
+test('結果帯の見た目は年末調整と同じ定義・チェックボックス・国内株の対象と出典',()=>{
+  const definition=s=>s.match(/\.mres\{[^\n]+/)[0];assert.equal(definition(html),definition(read('nenmatsu/index.html')));
+  assert.match(html,/<input type="checkbox" id="forward">/);
+  assert.match(html,/国内株の配当<small>投資信託の分配金・外国株・J-REIT は入れない/);
+  assert.match(html,/国内の会社の株の配当の場合。投資信託の分配金は配当控除の率が違います/);
+  assert.match(html,/1199\.htm"[^>]*>No.1199 基礎控除｜国税庁<\/a>/);
+  assert.doesNotMatch(html,/>Part\. 7 よくある質問<|"title":"国税庁 No\.\d+"/);
+});

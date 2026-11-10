@@ -15,6 +15,8 @@ for (const p of paths) {
   await page.waitForTimeout(300);
   // 結果の帯が出る状態にするため、最初の数字の欄に値を入れ、折りたたみを開く
   await page.evaluate(() => {
+    // 株の判定は口座を選んでから有効になる。帯が出せる状態でTabを点検する。
+    document.querySelector('[data-account=withheld]')?.click();
     const i = document.querySelector('input.num, input[inputmode=numeric]');
     if (i && !i.value) { i.value = '4500000'; i.dispatchEvent(new Event('input', { bubbles: true })); }
     document.querySelectorAll('details.more').forEach(d => { d.open = true; });
