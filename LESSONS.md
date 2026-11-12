@@ -13,6 +13,7 @@
 - 失敗:
   - 2026-11-07 テスト:`node tests/site-check.mjs http://localhost:8788 /nenmatsu/` の `/nenmatsu/` が、Git Bash で `C:/Program Files/Git/nenmatsu/` に書き換えられた
   - 2026-11-10 テスト:`MSYS_NO_PATHCONV=1 node tests/shots.mjs ... /c/Users/...` としたため、保存先が C:\c\Users\... という別のフォルダになった(スクリーンショットだけが入っている。消すのは Kens に確認してから)
+  - 2026-11-12 プレビュー確認:curl の `-w "/CLAUDE.md %{http_code}"` の `/CLAUDE.md` が `C:/Program Files/Git/CLAUDE.md` に書き換わった(表示だけで、問い合わせたURLは正しかった。PowerShell の curl.exe でやり直した)
   - 2026-11-10 決まりの節の撮影(2回目):`export MSYS_NO_PATHCONV=1` のまま、node に `/c/Users/...` のスクリプトのパスを渡し、見つからないと止まった
 - 原因:
   - Git Bash(MSYS)は `/` で始まる引数を Windows のパスに変換する
