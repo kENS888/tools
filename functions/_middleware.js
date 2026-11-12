@@ -12,7 +12,9 @@ export async function onRequest(context) {
   try { path = decodeURIComponent(path); } catch (e) {}
   // //CLAUDE.md のようにスラッシュを重ねても配信されるため、1つにまとめてから判定する
   path = path.replace(/\/{2,}/g, '/');
-  if (/^\/(CLAUDE|AGENTS|LESSONS|PRODUCT)\.md\/?$/i.test(path) || /^\/agent-docs(\/|$)/i.test(path)) {
+  // 「.」で始まる名前(.gitignore・.impeccable/ など)と tests/ も公開しない(2026-11-12)。/.well-known/ は外部サービスの確認用なので通す
+  const hidden = /(^|\/)\./.test(path) && !/^\/\.well-known(\/|$)/i.test(path);
+  if (/^\/(CLAUDE|AGENTS|LESSONS|PRODUCT)\.md\/?$/i.test(path) || /^\/(agent-docs|tests)(\/|$)/i.test(path) || hidden) {
     return new Response('404 Not Found', {
       status: 404,
       headers: { 'content-type': 'text/plain; charset=utf-8', 'x-robots-tag': 'noindex' },
