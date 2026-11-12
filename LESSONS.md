@@ -6,7 +6,7 @@
 - 防ぎ方:
   - functions/_middleware.js で CLAUDE.md・AGENTS.md・LESSONS.md・PRODUCT.md・agent-docs/ に 404 を返す。判定の前に URL の %エンコードを戻し、重なったスラッシュを1つにまとめる
   - tests/agent-files-check.mjs で、手元の middleware と、プレビュー・本番のURLの両方を検査する(`node tests/agent-files-check.mjs <URL>`)。main に反映する前と、直下に新しい資料を足した時に走らせる
-  - .gitignore・.impeccable/・tests/・*.md も配信されている。止めるかは Kens が決める(2026-11-12 時点で未決)
+  - 「.」で始まる名前(.gitignore・.impeccable/ など)と tests/ も 404 にした(2026-11-12 Kens 決定。/.well-known/ は通す)。tests/agent-files-check.mjs は git ls-files の全ファイルを「公開する」「公開しない」に分け、どちらでもないファイルを足すと失敗する
 - ルール化したか:した(middleware の遮断と自動テストを追加)
 
 ## 2026-11-07〜11-10 / テスト・撮影 / Git Bash(MSYS)のパス変換で失敗した(3件をまとめた)
